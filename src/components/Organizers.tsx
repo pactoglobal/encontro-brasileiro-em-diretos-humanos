@@ -19,7 +19,8 @@ const ORG_GROUPS: OrgGroup[] = [
     category: "Co-realização",
     color: "var(--color-dhe-green)",
     logos: [
-      { src: "/identity/co-realizacao.png", alt: "Pacto Global Rede Brasil, CERALC, Global Gateway, OIT, OCDE, ACNUDH", className: "h-10 sm:h-12 w-auto max-w-full" },
+      { src: "/identity/co-realizacao.png", alt: "Pacto Global Rede Brasil", className: "h-10 sm:h-12 w-auto max-w-full object-contain" },
+      { src: "/identity/co-realizacao-1.png", alt: "CERALC, Global Gateway, OIT, OCDE, ACNUDH", className: "h-10 sm:h-12 w-auto max-w-full object-contain" },
     ],
   },
   {

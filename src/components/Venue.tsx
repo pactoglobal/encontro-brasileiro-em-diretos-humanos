@@ -66,7 +66,6 @@ export function Venue() {
                 src="/identity/parceiro-cinemateca.png"
                 alt="Cinemateca Brasileira"
                 className="h-10 w-auto object-contain"
-                style={{ filter: "brightness(0.1)" }}
               />
             </div>
 
