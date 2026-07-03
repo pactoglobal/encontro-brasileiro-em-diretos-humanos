@@ -42,7 +42,7 @@
 
   /* Neutros e Backgrounds (Identidade baseada em tons de terra/areia claros) */
   --color-dhe-bg: #F1EFEA;         /* Tom de areia oficial do KV */
-  --color-dhe-bg-alt: #FAF9F6;     /* Creme suave para contraste alternado */
+  --color-dhe-bg-alt: #F1EFEA;     /* Unificado com a cor do KV para remover alternância */
   --color-dhe-card: #FFFFFF;       /* Branco limpo para cards */
   --color-dhe-border: #D8D4C7;     /* Borda terrosa suave */
   --color-dhe-border-hover: #E8187A;
