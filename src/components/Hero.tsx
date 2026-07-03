@@ -76,7 +76,7 @@ export function Hero() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#E8187A]/5 via-[#E05A3A]/5 to-[#4A8C3F]/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Conteúdo Principal */}
-      <div className="relative z-10 dhe-container px-5 sm:px-8">
+      <div className="relative z-10 dhe-container">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -212,7 +212,7 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.93, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 80, damping: 15, delay: 0.2 }}
-              className="relative w-full max-w-[420px] aspect-square rounded-[36px] bg-white border-2 border-[#D8D4C7] shadow-xl overflow-hidden p-6 flex items-center justify-center"
+              className="relative w-full max-w-[320px] sm:max-w-[420px] aspect-square rounded-[36px] bg-white border-2 border-[#D8D4C7] shadow-xl overflow-hidden p-6 flex items-center justify-center"
             >
               {/* Moldura de Fitas Coloridas Cruzadas */}
               <div className="absolute inset-0 bg-cover bg-center opacity-[0.25] bg-[url('/identity/kv-sem-fundo.png')]" />

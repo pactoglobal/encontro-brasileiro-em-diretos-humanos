@@ -217,7 +217,7 @@ export function Agenda() {
 
   return (
     <section id="programacao" className="dhe-section-light relative overflow-hidden">
-      <div className="dhe-container px-5 sm:px-8">
+      <div className="dhe-container">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
           initial={{ opacity: 0, y: 20 }}
@@ -238,8 +238,8 @@ export function Agenda() {
             04 de agosto de 2026 · Cinemateca Brasileira, São Paulo
           </p>
 
-          {/* Tabs */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          {/* Tabs (com scroll horizontal no mobile) */}
+          <div className="flex overflow-x-auto gap-2 pb-2 mb-8 -mx-5 px-5 sm:mx-0 sm:px-0 scroll-smooth" style={{ scrollbarWidth: "none" }}>
             {TABS.map((tab) => {
               const isActive = active === tab.key;
               return (

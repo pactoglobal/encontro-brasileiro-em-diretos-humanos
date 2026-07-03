@@ -43,7 +43,7 @@ export function About() {
       {/* Decorative Blur Orb */}
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-dhe-magenta/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="dhe-container px-5 sm:px-8">
+      <div className="dhe-container">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
           className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start"

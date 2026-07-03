@@ -30,7 +30,7 @@ export function Venue() {
 
   return (
     <section id="local" className="dhe-section-light relative overflow-hidden">
-      <div className="dhe-container px-5 sm:px-8">
+      <div className="dhe-container">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
           className="grid lg:grid-cols-2 gap-12 items-start"

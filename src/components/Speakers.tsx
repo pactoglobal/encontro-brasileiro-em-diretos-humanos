@@ -92,7 +92,7 @@ export function Speakers() {
       {/* Padrão de Fitas do KV de fundo */}
       <div className="absolute inset-y-0 right-0 w-1/4 opacity-[0.03] pointer-events-none hidden lg:block" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }} />
 
-      <div className="dhe-container px-5 sm:px-8">
+      <div className="dhe-container">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
           initial={{ opacity: 0, y: 20 }}

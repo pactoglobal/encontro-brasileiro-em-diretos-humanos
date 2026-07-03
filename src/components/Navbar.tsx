@@ -41,9 +41,9 @@ export function Navbar() {
             : "bg-transparent py-5"
         }`}
       >
-        <nav className="dhe-container flex items-center justify-between px-5 sm:px-8">
+        <nav className="dhe-container flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="shrink-0">
+          <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="shrink-0 py-1">
             <img
               src="/identity/logo-evento.png"
               alt="Encontro DH&E Brasil 2026"
@@ -77,14 +77,14 @@ export function Navbar() {
             Inscreva-se
           </a>
 
-          {/* Hamburger */}
+          {/* Hamburger (Touch target de 44px) */}
           <button
             type="button"
-            className="lg:hidden flex items-center justify-center w-10 h-10 text-dhe-navy"
+            className="lg:hidden flex items-center justify-center w-11 h-11 text-dhe-navy cursor-pointer"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="w-5.5 h-5.5" /> : <Menu className="w-5.5 h-5.5" />}
           </button>
         </nav>
       </header>
@@ -106,7 +106,7 @@ export function Navbar() {
                   <a
                     href={href}
                     onClick={(e) => handleNavClick(e, href)}
-                    className="block py-3 text-sm font-bold uppercase tracking-widest text-dhe-text-main/80 transition-colors hover:text-dhe-magenta"
+                    className="block py-3.5 text-sm font-bold uppercase tracking-widest text-dhe-text-main/80 transition-colors hover:text-dhe-magenta"
                   >
                     {label}
                   </a>
@@ -116,7 +116,7 @@ export function Navbar() {
             <a
               href="#contato"
               onClick={(e) => handleNavClick(e, "#contato")}
-              className="dhe-btn-primary mt-6 w-full justify-center"
+              className="dhe-btn-primary mt-6 w-full justify-center py-3.5"
             >
               Inscreva-se
             </a>

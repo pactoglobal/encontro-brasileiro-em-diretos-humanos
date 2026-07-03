@@ -67,7 +67,7 @@ export function Organizers() {
       {/* Decorative blurry shape */}
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-dhe-green/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="dhe-container px-5 sm:px-8">
+      <div className="dhe-container">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
           initial={{ opacity: 0, y: 20 }}

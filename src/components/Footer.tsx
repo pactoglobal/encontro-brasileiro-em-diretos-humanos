@@ -3,7 +3,7 @@ export function Footer() {
 
   return (
     <footer className="border-t" style={{ borderColor: "#D8D4C7", background: "var(--color-dhe-navy)" }}>
-      <div className="dhe-container px-5 sm:px-8 py-12">
+      <div className="dhe-container py-12">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-4">
