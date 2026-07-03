@@ -1,25 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "../hooks/useInView";
-import { Mail, Phone, CheckCircle } from "lucide-react";
-
-const CONTACTS = [
-  {
-    name: "Ana Urquiza",
-    role: "Gerente de Eventos",
-    org: "Pacto Global — Rede Brasil",
-    email: "ana.urquiza@pactoglobal.org.br",
-    color: "var(--color-dhe-magenta)",
-  },
-  {
-    name: "Luiza Maruche",
-    role: "Produção",
-    org: "Yellow Eventos",
-    email: "producao@pactoglobal.org.br",
-    phone: "+55 21 9856-5276",
-    color: "var(--color-dhe-green)",
-  },
-];
+import { CheckCircle } from "lucide-react";
 
 export function Contact() {
   const [ref, inView] = useInView();
@@ -123,11 +105,8 @@ export function Contact() {
             empresas, movimentos sociais, poder público e academia.
           </p>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-start text-left mb-12">
-            
-            {/* Coluna 1: Formulário com Anotações Declarativas WebMCP (AI-Ready) */}
-            <div className="lg:col-span-7">
-              <div className="dhe-card-editorial p-6 sm:p-8 bg-white/70 backdrop-blur-sm shadow-sm relative">
+          <div className="max-w-2xl mx-auto text-left mb-12">
+            <div className="dhe-card-editorial p-6 sm:p-8 bg-white/70 backdrop-blur-sm shadow-sm relative">
                 
                 <AnimatePresence mode="wait">
                   {!sucesso ? (
@@ -240,48 +219,20 @@ export function Contact() {
                   )}
                 </AnimatePresence>
 
-              </div>
             </div>
 
-            {/* Coluna 2: Cards de contatos adicionais */}
-            <div className="lg:col-span-5 space-y-4">
-              {CONTACTS.map((c) => (
-                <div
-                  key={c.name}
-                  className="dhe-card-editorial p-6 bg-white/60 backdrop-blur-sm shadow-sm"
-                  style={{ borderColor: `${c.color}33` }}
+            {/* Informações adicionais de suporte */}
+            <div className="text-center mt-6">
+              <p className="text-xs text-dhe-text-muted">
+                Dúvidas ou suporte? Entre em contato pelo e-mail oficial:{" "}
+                <a
+                  href="mailto:contato@pactoglobal.org.br"
+                  className="font-bold text-dhe-navy hover:text-dhe-magenta transition-colors underline"
                 >
-                  <p
-                    className="text-[10px] font-black uppercase tracking-[0.24em] mb-2"
-                    style={{ color: c.color }}
-                  >
-                    {c.org}
-                  </p>
-                  <p className="text-base font-bold text-dhe-navy">{c.name}</p>
-                  <p className="text-xs mb-4 text-dhe-text-muted">{c.role}</p>
-
-                  <div className="space-y-2">
-                    <a
-                      href={`mailto:${c.email}`}
-                      className="flex items-center gap-2 text-sm text-dhe-text-muted transition-colors hover:text-dhe-magenta"
-                    >
-                      <Mail className="w-4 h-4 shrink-0" style={{ color: c.color }} />
-                      {c.email}
-                    </a>
-                    {c.phone && (
-                      <a
-                        href={`tel:${c.phone.replace(/\s/g, "")}`}
-                        className="flex items-center gap-2 text-sm text-dhe-text-muted transition-colors hover:text-dhe-magenta"
-                      >
-                        <Phone className="w-4 h-4 shrink-0" style={{ color: c.color }} />
-                        {c.phone}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  contato@pactoglobal.org.br
+                </a>
+              </p>
             </div>
-
           </div>
         </motion.div>
       </div>
