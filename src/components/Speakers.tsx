@@ -65,7 +65,7 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
         className="w-12 h-12 rounded-full flex items-center justify-center font-display font-black text-base text-white shrink-0"
         style={{
           background: `linear-gradient(135deg, ${speaker.accent}, ${speaker.accent}dd)`,
-          border: `2px solid #FAF9F6`,
+          border: `2px solid #F1EFEA`,
           boxShadow: `0 4px 10px ${speaker.accent}25`,
         }}
       >

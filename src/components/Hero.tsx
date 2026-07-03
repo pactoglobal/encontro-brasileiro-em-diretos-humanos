@@ -66,7 +66,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden bg-[#FAF9F6] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24"
+      className="relative min-h-screen overflow-hidden bg-[#F1EFEA] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24"
     >
       {/* Padrão de Fitas do KV nas laterais */}
       <div className="absolute inset-y-0 left-0 w-1/3 opacity-[0.07] pointer-events-none hidden lg:block" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }} />
@@ -169,7 +169,7 @@ export function Hero() {
                   key={label}
                   className={`flex gap-3 items-start ${i < 2 ? "sm:border-r border-[#D8D4C7]/50 pr-4" : ""}`}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FAF9F6] border border-[#D8D4C7]/40 text-dhe-magenta">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1EFEA] border border-[#D8D4C7]/40 text-dhe-magenta">
                     <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
                   </div>
                   <div>

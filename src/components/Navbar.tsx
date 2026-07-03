@@ -37,7 +37,7 @@ export function Navbar() {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "border-b border-[#D8D4C7]/40 bg-[#FAF9F6]/90 backdrop-blur-xl shadow-sm py-2.5"
+            ? "border-b border-[#D8D4C7]/40 bg-[#F1EFEA]/90 backdrop-blur-xl shadow-sm py-2.5"
             : "bg-transparent py-5"
         }`}
       >
@@ -98,7 +98,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-x-0 top-[68px] z-40 border-b border-[#D8D4C7]/50 bg-[#FAF9F6]/98 backdrop-blur-xl px-5 pb-8 pt-4 lg:hidden shadow-lg"
+            className="fixed inset-x-0 top-[68px] z-40 border-b border-[#D8D4C7]/50 bg-[#F1EFEA]/98 backdrop-blur-xl px-5 pb-8 pt-4 lg:hidden shadow-lg"
           >
             <ul className="flex flex-col gap-1">
               {NAV_LINKS.map(({ href, label }) => (
