@@ -95,10 +95,6 @@ export function Hero() {
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green" />
                 Evento Gratuito
               </span>
-              <span className="inline-flex items-center gap-2 border border-dhe-navy/20 bg-dhe-navy/5 text-dhe-navy text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-dhe-navy" />
-                AI-Ready
-              </span>
             </motion.div>
 
             {/* Logo do Evento */}
