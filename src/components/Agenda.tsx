@@ -147,12 +147,12 @@ const TABS: { key: TabKey; label: string; sub?: string }[] = [
 ];
 
 const TYPE_COLORS: Record<string, { border: string; bg: string; label: string; color: string }> = {
-  abertura: { border: "rgba(232,24,122,0.25)", bg: "rgba(232,24,122,0.03)", label: "Abertura", color: "#E8187A" },
-  painel: { border: "rgba(123,45,30,0.25)", bg: "rgba(123,45,30,0.03)", label: "Painel", color: "#7B2D1E" },
-  keynote: { border: "rgba(74,140,63,0.25)", bg: "rgba(74,140,63,0.03)", label: "Keynote", color: "#4A8C3F" },
-  intervalo: { border: "rgba(86,94,100,0.2)", bg: "rgba(86,94,100,0.03)", label: "Intervalo", color: "#565E64" },
-  encerramento: { border: "rgba(204,34,34,0.25)", bg: "rgba(204,34,34,0.03)", label: "Encerramento", color: "#CC2222" },
-  filme: { border: "rgba(139,30,90,0.25)", bg: "rgba(139,30,90,0.03)", label: "Exibição", color: "#8B1E5A" },
+  abertura: { border: "#E8187A", bg: "rgba(232,24,122,0.06)", label: "Abertura", color: "#E8187A" },
+  painel: { border: "#7B2D1E", bg: "rgba(123,45,30,0.06)", label: "Painel", color: "#7B2D1E" },
+  keynote: { border: "#4A8C3F", bg: "rgba(74,140,63,0.06)", label: "Keynote", color: "#4A8C3F" },
+  intervalo: { border: "#565E64", bg: "rgba(86,94,100,0.06)", label: "Intervalo", color: "#565E64" },
+  encerramento: { border: "#CC2222", bg: "rgba(204,34,34,0.06)", label: "Encerramento", color: "#CC2222" },
+  filme: { border: "#E05A3A", bg: "rgba(224,90,58,0.06)", label: "Exibição", color: "#E05A3A" },
 };
 
 function AgendaCard({ item, index }: { item: AgendaItem; index: number }) {
@@ -163,12 +163,13 @@ function AgendaCard({ item, index }: { item: AgendaItem; index: number }) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
       transition={{ type: "spring", stiffness: 100, damping: 18, delay: index * 0.05 }}
-      whileHover={{ y: -2, transition: { duration: 0.1 } }}
-      className="rounded-xl p-5 flex gap-4 border bg-white/60 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow duration-200"
-      style={{ borderColor: tc.border }}
+      className="dhe-card-editorial p-5 flex gap-4 border-2 border-dhe-navy bg-white dhe-shadow-brutal relative overflow-hidden"
     >
+      {/* Linha colorida do tipo */}
+      <div className="absolute top-0 bottom-0 left-0 w-1.5" style={{ backgroundColor: tc.color }} />
+
       {/* Hora */}
-      <div className="shrink-0 flex flex-col items-center gap-1.5 pt-0.5">
+      <div className="shrink-0 flex flex-col items-center gap-1.5 pt-1 pl-1">
         <Clock className="w-3.5 h-3.5 opacity-70" style={{ color: tc.color }} />
         <p className="text-[11px] font-black tabular-nums" style={{ color: tc.color }}>
           {item.time}
@@ -178,8 +179,8 @@ function AgendaCard({ item, index }: { item: AgendaItem; index: number }) {
       <div className="flex-1 min-w-0">
         {item.type && (
           <span
-            className="inline-block mb-2 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-0.5 rounded-full"
-            style={{ background: "rgba(0,0,0,0.03)", color: tc.color, border: `1px solid ${tc.border}` }}
+            className="inline-block mb-2 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-0.5 rounded-md border"
+            style={{ background: tc.bg, color: tc.color, borderColor: tc.border }}
           >
             {tc.label}
           </span>
@@ -238,6 +239,31 @@ export function Agenda() {
             04 de agosto de 2026 · Cinemateca Brasileira, São Paulo
           </p>
 
+          {/* Letreiro Marquee Corrido Infinito (Estilo Coachella/Lollapalooza) */}
+          <div className="w-full overflow-hidden mb-12 -mx-5 px-5 sm:mx-0 sm:px-0">
+            <div className="dhe-ticker-container rounded-2xl border-2 border-dhe-navy shadow-md">
+              <div className="dhe-ticker-content text-white font-display font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] items-center">
+                <span>DIREITOS HUMANOS E EMPRESAS</span>
+                <span className="text-dhe-magenta">★</span>
+                <span>PLURALIDADE QUE CONSTRÓI</span>
+                <span className="text-dhe-green">★</span>
+                <span>04 DE AGOSTO DE 2026</span>
+                <span className="text-dhe-coral">★</span>
+                <span>CINEMATECA BRASILEIRA</span>
+                <span className="text-dhe-magenta">★</span>
+                {/* Duplicado para loop contínuo */}
+                <span>DIREITOS HUMANOS E EMPRESAS</span>
+                <span className="text-dhe-magenta">★</span>
+                <span>PLURALIDADE QUE CONSTRÓI</span>
+                <span className="text-dhe-green">★</span>
+                <span>04 DE AGOSTO DE 2026</span>
+                <span className="text-dhe-coral">★</span>
+                <span>CINEMATECA BRASILEIRA</span>
+                <span className="text-dhe-magenta">★</span>
+              </div>
+            </div>
+          </div>
+
           {/* Tabs (com scroll horizontal no mobile) */}
           <div className="flex overflow-x-auto gap-2 pb-2 mb-8 -mx-5 px-5 sm:mx-0 sm:px-0 scroll-smooth" style={{ scrollbarWidth: "none" }}>
             {TABS.map((tab) => {
@@ -247,9 +273,13 @@ export function Agenda() {
                   key={tab.key}
                   type="button"
                   onClick={() => setActive(tab.key)}
-                  className="relative flex flex-col items-start rounded-xl px-4 py-3 text-left transition-all duration-200 cursor-pointer overflow-hidden border border-[#D8D4C7] bg-[#FAF9F6] text-dhe-text-main"
+                  className="relative flex flex-col items-start rounded-xl px-4 py-3 text-left transition-all duration-200 cursor-pointer overflow-hidden border-2 border-dhe-navy bg-[#FAF9F6] text-dhe-text-main hover:bg-[#FAF9F6]/80"
+                  style={{
+                    boxShadow: isActive ? "3px 3px 0px var(--color-dhe-navy)" : "none",
+                    transform: isActive ? "translate(-1px, -1px)" : "none",
+                  }}
                 >
-                  {/* Fundo animado das abas (KIKK style layout transitions) */}
+                  {/* Fundo animado das abas */}
                   {isActive && (
                     <motion.div
                       layoutId="activeTabBg"

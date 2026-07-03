@@ -257,3 +257,39 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   background-position: right center;
 }
+
+/* Ticker Marquee Infinito (Coachella/Lollapalooza Style) */
+.dhe-ticker-container {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  background-color: var(--color-dhe-navy);
+  border-top: 2px solid var(--color-dhe-magenta);
+  border-bottom: 2px solid var(--color-dhe-magenta);
+  padding: 0.75rem 0;
+}
+
+.dhe-ticker-content {
+  display: flex;
+  white-space: nowrap;
+  gap: 4rem;
+  animation: dhe-marquee 30s linear infinite;
+  min-width: 200%;
+}
+
+@keyframes dhe-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Sombra brutalista rígida do design system */
+.dhe-shadow-brutal {
+  box-shadow: 5px 5px 0px var(--color-dhe-navy);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dhe-shadow-brutal:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 10px 10px 0px var(--color-dhe-navy);
+}
+

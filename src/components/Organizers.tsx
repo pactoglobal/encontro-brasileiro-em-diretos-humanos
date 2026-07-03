@@ -97,8 +97,7 @@ export function Organizers() {
                 initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ type: "spring", stiffness: 70, damping: 15, delay: idx * 0.1 }}
-                className="dhe-card-editorial p-6 bg-white/60 backdrop-blur-sm shadow-sm"
-                style={{ borderColor: `${color}33` }}
+                className="dhe-card-editorial p-6 bg-white border-2 border-dhe-navy dhe-shadow-brutal"
               >
                 <p
                   className="text-[10px] font-black uppercase tracking-[0.24em] mb-3"
@@ -124,8 +123,7 @@ export function Organizers() {
               <motion.div
                 key={group.category}
                 variants={itemVariants}
-                className="dhe-card-editorial p-6 bg-white/60 backdrop-blur-sm shadow-sm"
-                style={{ borderColor: `${group.color}33` }}
+                className="dhe-card-editorial p-6 bg-white border-2 border-dhe-navy dhe-shadow-brutal"
               >
                 <p
                   className="text-[10px] font-black uppercase tracking-[0.28em] mb-5"

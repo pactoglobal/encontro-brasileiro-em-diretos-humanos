@@ -99,7 +99,7 @@ export function About() {
                 <motion.li
                   key={i}
                   variants={listItemVariants}
-                  className="dhe-card-editorial p-4 flex gap-4 items-start"
+                  className="dhe-card-editorial p-4 flex gap-4 items-start border-2 border-dhe-navy bg-white dhe-shadow-brutal"
                 >
                   <span
                     className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black mt-0.5"
@@ -117,7 +117,7 @@ export function About() {
             {/* Público */}
             <motion.div
               variants={listItemVariants}
-              className="mt-6 dhe-card-editorial p-5 border-l-4 border-l-dhe-green"
+              className="mt-6 dhe-card-editorial p-5 border-2 border-dhe-navy border-l-8 border-l-dhe-green bg-white dhe-shadow-brutal"
             >
               <p className="text-[10px] font-black uppercase tracking-[0.24em] mb-2 text-dhe-green">
                 Público-Alvo

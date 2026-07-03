@@ -106,7 +106,7 @@ export function Contact() {
           </p>
 
           <div className="max-w-2xl mx-auto text-left mb-12">
-            <div className="dhe-card-editorial p-6 sm:p-8 bg-white/70 backdrop-blur-sm shadow-sm relative">
+            <div className="dhe-card-editorial p-6 sm:p-8 bg-white/75 backdrop-blur-sm border-2 border-dhe-navy dhe-shadow-brutal relative">
                 
                 <AnimatePresence mode="wait">
                   {!sucesso ? (
