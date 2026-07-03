@@ -188,46 +188,129 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => scrollTo("programacao")}
-                className="dhe-btn-primary"
+                className="dhe-btn-primary cursor-pointer"
               >
                 Ver Programação
               </button>
               <button
                 type="button"
                 onClick={() => scrollTo("contato")}
-                className="dhe-btn-outline"
+                className="dhe-btn-outline cursor-pointer"
               >
                 Inscreva-se
               </button>
             </motion.div>
+
+            {/* Stats Row (Copa BTG / Premium Benchmarking Style) */}
+            <motion.div
+              variants={itemVariants}
+              className="mt-12 pt-8 border-t border-dhe-navy/10 grid grid-cols-3 gap-6"
+            >
+              <div>
+                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-magenta leading-none">30+</p>
+                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">Painelistas</p>
+              </div>
+              <div className="border-l border-dhe-navy/10 pl-6">
+                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-green leading-none">10h+</p>
+                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">De Conteúdo</p>
+              </div>
+              <div className="border-l border-dhe-navy/10 pl-6">
+                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-coral leading-none">100%</p>
+                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">Gratuito</p>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Coluna da Imagem KV (Direita) */}
-          <div className="lg:col-span-5 flex justify-center relative">
+          {/* Coluna da Imagem KV e Elementos Flutuantes (Direita) - Copa BTG Benchmarking */}
+          <div className="lg:col-span-5 flex items-center justify-center relative min-h-[460px] w-full select-none">
+            {/* Grid dot pattern background layer */}
+            <div className="absolute inset-0 bg-[radial-gradient(#D8D4C7_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-40 rounded-3xl" />
+
+            {/* Glowing blur orb behind */}
+            <div className="absolute w-72 h-72 bg-gradient-to-br from-[#E8187A]/10 to-[#E05A3A]/10 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Main Key Visual Card (Tropical Brutalist / Premium Editorial) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.93, rotate: -2 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 80, damping: 15, delay: 0.2 }}
-              className="relative w-full max-w-[320px] sm:max-w-[420px] aspect-square rounded-[36px] bg-white border-2 border-[#D8D4C7] shadow-xl overflow-hidden p-6 flex items-center justify-center"
+              initial={{ opacity: 0, y: 40, rotate: -1 }}
+              animate={{ opacity: 1, y: 0, rotate: 0 }}
+              whileHover={{ y: -4, rotate: 0.5 }}
+              transition={{ type: "spring" as const, stiffness: 100, damping: 18, delay: 0.2 }}
+              className="relative w-full max-w-[310px] sm:max-w-[360px] aspect-[4/5] rounded-3xl bg-white border-[3px] border-dhe-navy shadow-[12px_12px_0px_var(--color-dhe-navy)] overflow-hidden p-5 flex flex-col justify-between z-10"
             >
               {/* Moldura de Fitas Coloridas Cruzadas */}
-              <div className="absolute inset-0 bg-cover bg-center opacity-[0.25] bg-[url('/identity/kv-sem-fundo.png')]" />
-              <img
-                src="/identity/kv-sem-fundo.png"
-                alt="Identidade Visual DH&E"
-                className="w-full h-auto object-contain relative z-10 select-none pointer-events-none"
-              />
+              <div className="absolute inset-0 bg-cover bg-center opacity-[0.15] bg-[url('/identity/kv-sem-fundo.png')]" />
+              
+              <div className="flex justify-between items-start relative z-10">
+                <span className="bg-dhe-magenta text-[9px] font-black text-white px-2.5 py-1 rounded-md uppercase tracking-[0.15em] shadow-sm">
+                  Exclusivo
+                </span>
+                <span className="bg-dhe-green text-[9px] font-black text-white px-2.5 py-1 rounded-md uppercase tracking-[0.15em] shadow-sm">
+                  ADHE & PACTO
+                </span>
+              </div>
+
+              <div className="my-auto py-4 relative z-10 flex items-center justify-center">
+                <img
+                  src="/identity/kv.png"
+                  alt="Key Visual do Evento"
+                  className="w-full h-auto max-h-[220px] object-contain rounded-xl"
+                />
+              </div>
+
+              <div className="border-t-2 border-dhe-navy/10 pt-3 relative z-10 flex items-center justify-between">
+                <div>
+                  <p className="text-[9px] font-black uppercase text-dhe-text-muted tracking-wider">Abertura Credenciamento</p>
+                  <p className="text-xs font-black text-dhe-navy font-mono">04 AGO · 08H30</p>
+                </div>
+                <div className="h-2 w-2 rounded-full bg-dhe-green animate-pulse" />
+              </div>
             </motion.div>
 
-            {/* Detalhe Flutuante */}
+            {/* Floating Card 1: Local do Evento */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 100, damping: 18, delay: 0.35 }}
-              className="absolute -bottom-4 -left-4 bg-white border border-[#D8D4C7] px-5 py-3 rounded-2xl shadow-md hidden sm:block"
+              initial={{ opacity: 0, x: 40, y: -20 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              whileHover={{ y: -4, scale: 1.03 }}
+              transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.4 }}
+              className="absolute top-4 right-0 sm:-right-4 bg-white/90 backdrop-blur-md border-2 border-dhe-navy p-3.5 rounded-2xl shadow-lg flex items-center gap-3 max-w-[210px] z-25"
             >
-              <p className="text-[9px] font-black uppercase tracking-widest text-dhe-magenta">Local do Encontro</p>
-              <p className="text-sm font-bold text-dhe-navy">Cinemateca Brasileira</p>
+              <div className="w-9 h-9 rounded-xl bg-dhe-coral/10 border border-dhe-coral/30 flex items-center justify-center text-dhe-coral shrink-0">
+                <MapPin className="w-4 h-4" strokeWidth={2} />
+              </div>
+              <div>
+                <p className="text-[8px] font-black text-dhe-coral uppercase tracking-wider">Cinemateca</p>
+                <p className="text-[10px] font-black text-dhe-navy leading-tight">Vila Clementino, SP</p>
+                <p className="text-[8px] text-dhe-text-muted">Largo Sen. Raul Cardoso</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Card 2: Programação Confirmada */}
+            <motion.div
+              initial={{ opacity: 0, x: -40, y: 50 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              whileHover={{ y: -4, scale: 1.03 }}
+              transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.5 }}
+              className="absolute bottom-6 -left-4 bg-[#FAF9F6]/90 backdrop-blur-md border-2 border-dhe-navy p-3.5 rounded-2xl shadow-lg flex items-center gap-3 max-w-[210px] z-25"
+            >
+              <div className="w-9 h-9 rounded-xl bg-dhe-green/10 border border-dhe-green/30 flex items-center justify-center text-dhe-green shrink-0 font-display font-black text-xs">
+                30+
+              </div>
+              <div>
+                <p className="text-[8px] font-black text-dhe-green uppercase tracking-wider">Programação</p>
+                <p className="text-[10px] font-black text-dhe-navy leading-tight">Painelistas Confirmados</p>
+                <p className="text-[8px] text-dhe-text-muted">Lideranças & ONU</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Stripe/Badge 3: Gratuito */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: 12 }}
+              animate={{ opacity: 1, scale: 1, rotate: 6 }}
+              whileHover={{ rotate: 3, scale: 1.05 }}
+              transition={{ type: "spring" as const, stiffness: 150, damping: 12, delay: 0.6 }}
+              className="absolute -top-4 -left-6 bg-dhe-magenta text-white font-display font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-lg border-2 border-dhe-navy shadow-md z-25"
+            >
+              100% Presencial e Gratuito
             </motion.div>
           </div>
         </motion.div>
