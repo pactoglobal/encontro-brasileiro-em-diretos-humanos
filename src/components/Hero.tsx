@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, MapPin } from "lucide-react";
+
+const CAROUSEL_IMAGES = [
+  "/identity/bg-carousel-1.jpg",
+  "/identity/bg-carousel-2.jpg",
+  "/identity/bg-carousel-3.jpg",
+];
 
 const EVENT_DETAILS = [
   { icon: Calendar, label: "Data", value: "04 de Agosto de 2026", support: "Terça-feira" },
@@ -13,6 +19,14 @@ const TARGET_DATE = new Date("2026-08-04T09:00:00-03:00");
 
 export function Hero() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
+  const [currentBg, setCurrentBg] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const calculateTime = () => {
@@ -68,12 +82,33 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen overflow-hidden bg-[#F1EFEA] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24"
     >
+      {/* Fluid Background Image Carousel with soft vignette mask */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentBg}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 0.11, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 2.0, ease: "easeInOut" }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${CAROUSEL_IMAGES[currentBg]})`,
+              mixBlendMode: "multiply",
+            }}
+          />
+        </AnimatePresence>
+        {/* Vignette & Radial Gradient overlays for high legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F1EFEA] via-[#F1EFEA]/80 to-[#F1EFEA]/30" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#F1EFEA_85%)]" />
+      </div>
+
       {/* Padrão de Fitas do KV nas laterais */}
-      <div className="absolute inset-y-0 left-0 w-1/3 opacity-[0.07] pointer-events-none hidden lg:block" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }} />
-      <div className="absolute inset-y-0 right-0 w-1/3 opacity-[0.07] pointer-events-none hidden lg:block" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }} />
+      <div className="absolute inset-y-0 left-0 w-1/3 opacity-[0.05] pointer-events-none hidden lg:block z-5" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }} />
+      <div className="absolute inset-y-0 right-0 w-1/3 opacity-[0.05] pointer-events-none hidden lg:block z-5" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }} />
 
       {/* Círculo gradiente suave ao fundo */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#E8187A]/5 via-[#E05A3A]/5 to-[#4A8C3F]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#E8187A]/5 via-[#E05A3A]/5 to-[#4A8C3F]/5 rounded-full blur-3xl pointer-events-none z-5" />
 
       {/* Conteúdo Principal */}
       <div className="relative z-10 dhe-container">
