@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "../hooks/useInView";
-import { Clock } from "lucide-react";
 
 type AgendaItem = {
   time: string;
@@ -29,7 +28,7 @@ const MANHA: AgendaItem[] = [
     time: "10h",
     title: "Empresas e Direitos Humanos em um mundo em profunda transformação",
     speakers: [
-      "Fernanda Hopenhaym — Membro do UN Working Group on Business and Human Rights (TBC)",
+      "Fernanda Hopenhaym — UN Working Group on Business and Human Rights (TBC)",
       "Adriana Marcolino — DIEESE",
       "Camila Zelezoglo — ABIT",
     ],
@@ -139,68 +138,175 @@ const ENCERRAMENTO: AgendaItem[] = [
 
 type TabKey = "manha" | "grande-otelo" | "oscarito" | "encerramento";
 
-const TABS: { key: TabKey; label: string; sub?: string }[] = [
-  { key: "manha", label: "Manhã", sub: "9h – 12h30" },
-  { key: "grande-otelo", label: "Sala Grande Otelo", sub: "14h – 17h" },
-  { key: "oscarito", label: "Sala Oscarito", sub: "14h15 – 17h" },
-  { key: "encerramento", label: "Encerramento", sub: "17h – 19h30" },
+const TABS: {
+  key: TabKey;
+  label: string;
+  sub?: string;
+  accent: string;
+  accentBg: string;
+  icon: string;
+}[] = [
+  { key: "manha", label: "Manhã", sub: "9h – 12h30", accent: "#E8187A", accentBg: "rgba(232,24,122,0.08)", icon: "☀️" },
+  { key: "grande-otelo", label: "Sala Grande Otelo", sub: "14h – 17h", accent: "#7B2D1E", accentBg: "rgba(123,45,30,0.08)", icon: "🎭" },
+  { key: "oscarito", label: "Sala Oscarito", sub: "14h15 – 17h", accent: "#4A8C3F", accentBg: "rgba(74,140,63,0.08)", icon: "🌿" },
+  { key: "encerramento", label: "Encerramento & Filme", sub: "17h – 19h30", accent: "#E05A3A", accentBg: "rgba(224,90,58,0.08)", icon: "🎬" },
 ];
 
-const TYPE_COLORS: Record<string, { border: string; bg: string; label: string; color: string }> = {
-  abertura: { border: "#E8187A", bg: "rgba(232,24,122,0.06)", label: "Abertura", color: "#E8187A" },
-  painel: { border: "#7B2D1E", bg: "rgba(123,45,30,0.06)", label: "Painel", color: "#7B2D1E" },
-  keynote: { border: "#4A8C3F", bg: "rgba(74,140,63,0.06)", label: "Keynote", color: "#4A8C3F" },
-  intervalo: { border: "#565E64", bg: "rgba(86,94,100,0.06)", label: "Intervalo", color: "#565E64" },
-  encerramento: { border: "#CC2222", bg: "rgba(204,34,34,0.06)", label: "Encerramento", color: "#CC2222" },
-  filme: { border: "#E05A3A", bg: "rgba(224,90,58,0.06)", label: "Exibição", color: "#E05A3A" },
+const TYPE_META: Record<string, { label: string; color: string; bg: string }> = {
+  abertura:     { label: "Abertura",   color: "#E8187A", bg: "rgba(232,24,122,0.08)" },
+  painel:       { label: "Painel",     color: "#7B2D1E", bg: "rgba(123,45,30,0.08)" },
+  keynote:      { label: "Keynote",    color: "#4A8C3F", bg: "rgba(74,140,63,0.08)"  },
+  intervalo:    { label: "Intervalo",  color: "#596168", bg: "rgba(89,97,104,0.08)"  },
+  encerramento: { label: "Encerramento", color: "#CC2222", bg: "rgba(204,34,34,0.08)" },
+  filme:        { label: "Exibição",   color: "#E05A3A", bg: "rgba(224,90,58,0.08)"  },
 };
 
-function AgendaCard({ item, index }: { item: AgendaItem; index: number }) {
-  const tc = TYPE_COLORS[item.type ?? "painel"];
+function BentoAgendaGrid({ items, tab }: { items: AgendaItem[]; tab: typeof TABS[0] }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 20 }}
-      transition={{ type: "spring", stiffness: 100, damping: 18, delay: index * 0.05 }}
-      className="dhe-card-editorial p-5 flex gap-4 border-2 border-dhe-navy bg-white dhe-shadow-brutal relative overflow-hidden"
+      key={tab.key}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-auto"
     >
-      {/* Linha colorida do tipo */}
-      <div className="absolute top-0 bottom-0 left-0 w-1.5" style={{ backgroundColor: tc.color }} />
+      {items.map((item, i) => {
+        const meta = TYPE_META[item.type ?? "painel"];
+        const isFeatured = i === 0;
+        const isExpanded = expanded === i;
+        const isBreak = item.type === "intervalo";
 
-      {/* Hora */}
-      <div className="shrink-0 flex flex-col items-center gap-1.5 pt-1 pl-1">
-        <Clock className="w-3.5 h-3.5 opacity-70" style={{ color: tc.color }} />
-        <p className="text-[11px] font-black tabular-nums" style={{ color: tc.color }}>
-          {item.time}
-        </p>
-      </div>
+        if (isBreak) {
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.05 }}
+              className="md:col-span-2 lg:col-span-3 flex items-center gap-4 py-4 px-6 rounded-2xl"
+              style={{ background: meta.bg }}
+            >
+              <div className="flex-1 h-px" style={{ background: meta.color, opacity: 0.3 }} />
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-black" style={{ color: meta.color }}>{item.time}</span>
+                <span className="text-sm text-dhe-text-muted font-medium">{item.title}</span>
+              </div>
+              <div className="flex-1 h-px" style={{ background: meta.color, opacity: 0.3 }} />
+            </motion.div>
+          );
+        }
 
-      <div className="flex-1 min-w-0">
-        {item.type && (
-          <span
-            className="inline-block mb-2 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-0.5 rounded-md border"
-            style={{ background: tc.bg, color: tc.color, borderColor: tc.border }}
+        return (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: "spring", stiffness: 80, damping: 16, delay: i * 0.06 }}
+            onClick={() => setExpanded(isExpanded ? null : i)}
+            className={`
+              relative overflow-hidden rounded-[20px] p-5 cursor-pointer group transition-all duration-300
+              ${isFeatured ? "md:col-span-2 lg:col-span-2 md:row-span-2" : ""}
+              ${item.type === "keynote" ? "lg:col-span-1" : ""}
+            `}
+            style={{
+              background: isFeatured ? tab.accent : "white",
+              boxShadow: isFeatured
+                ? `0 16px 48px ${tab.accent}30`
+                : "0 2px 12px rgba(12,37,64,0.05)",
+              border: isFeatured ? "none" : "1px solid #D8D4C7",
+            }}
+            whileHover={{ y: -3, boxShadow: isFeatured ? `0 24px 64px ${tab.accent}40` : "0 8px 32px rgba(12,37,64,0.09)" }}
           >
-            {tc.label}
-          </span>
-        )}
-        <h3 className="text-base font-bold text-dhe-navy leading-snug mb-2">{item.title}</h3>
-        {item.speakers && item.speakers.length > 0 && (
-          <ul className="space-y-1">
-            {item.speakers.map((s, i) => (
-              <li key={i} className="text-xs leading-relaxed text-dhe-text-muted">
-                · {s}
-              </li>
-            ))}
-          </ul>
-        )}
-        {item.mediator && (
-          <p className="mt-2 text-xs italic text-dhe-text-muted/80">
-            Mediação: {item.mediator}
-          </p>
-        )}
-      </div>
+            {/* Fita KV nos cards destaque */}
+            {isFeatured && (
+              <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
+            )}
+
+            {/* Conteúdo */}
+            <div className="relative z-10 h-full flex flex-col gap-3">
+              {/* Topo: badge + hora */}
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <span
+                  className="text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full"
+                  style={
+                    isFeatured
+                      ? { background: "rgba(255,255,255,0.2)", color: "white" }
+                      : { background: meta.bg, color: meta.color }
+                  }
+                >
+                  {meta.label}
+                </span>
+                <span
+                  className="text-[10px] font-black tabular-nums"
+                  style={{ color: isFeatured ? "rgba(255,255,255,0.7)" : meta.color }}
+                >
+                  {item.time}
+                </span>
+              </div>
+
+              {/* Título */}
+              <h3
+                className={`font-display font-black leading-snug ${isFeatured ? "text-xl text-white" : "text-sm text-dhe-navy"}`}
+              >
+                {item.title}
+              </h3>
+
+              {/* Palestrantes — mostrar se destaque ou expandido */}
+              <AnimatePresence>
+                {(isFeatured || isExpanded) && item.speakers && (
+                  <motion.ul
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="space-y-1.5 overflow-hidden"
+                  >
+                    {item.speakers.map((s, si) => (
+                      <li
+                        key={si}
+                        className="text-xs leading-relaxed flex items-start gap-2"
+                        style={{ color: isFeatured ? "rgba(255,255,255,0.75)" : "#596168" }}
+                      >
+                        <span
+                          className="mt-1.5 w-1 h-1 rounded-full shrink-0"
+                          style={{ background: isFeatured ? "rgba(255,255,255,0.5)" : meta.color }}
+                        />
+                        {s}
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+
+              {/* Mediação */}
+              <AnimatePresence>
+                {(isFeatured || isExpanded) && item.mediator && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-xs italic"
+                    style={{ color: isFeatured ? "rgba(255,255,255,0.55)" : "#596168" }}
+                  >
+                    Mediação: {item.mediator}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              {/* Expand hint em cards não-featured */}
+              {!isFeatured && item.speakers && (
+                <div className="mt-auto pt-2 flex items-center gap-1.5">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-dhe-text-muted/50 group-hover:text-dhe-text-muted/80 transition-colors">
+                    {isExpanded ? "▲ Ocultar" : `▾ ${item.speakers.length} palestrantes`}
+                  </span>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        );
+      })}
     </motion.div>
   );
 }
@@ -215,9 +321,14 @@ const AGENDA_MAP: Record<TabKey, AgendaItem[]> = {
 export function Agenda() {
   const [active, setActive] = useState<TabKey>("manha");
   const [ref, inView] = useInView();
+  const activeTab = TABS.find((t) => t.key === active)!;
 
   return (
     <section id="programacao" className="dhe-section-light relative overflow-hidden">
+      {/* Orb decorativo */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-dhe-magenta/4 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-dhe-green/4 rounded-full blur-3xl pointer-events-none" />
+
       <div className="dhe-container">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -227,45 +338,41 @@ export function Agenda() {
         >
           <p className="dhe-section-label">Programação</p>
           <div className="dhe-stripe-divider">
-            <span />
-            <span />
-            <span />
-            <span />
+            <span /><span /><span /><span />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-3">
+          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-2">
             Agenda do Evento
           </h2>
-          <p className="text-base text-dhe-text-muted mb-8">
+          <p className="text-base text-dhe-text-muted mb-10">
             04 de agosto de 2026 · Cinemateca Brasileira, São Paulo
           </p>
 
-          {/* Letreiro Marquee Corrido Infinito (Estilo Coachella/Lollapalooza) */}
-          <div className="w-full overflow-hidden mb-12 -mx-5 px-5 sm:mx-0 sm:px-0">
-            <div className="dhe-ticker-container rounded-2xl border-2 border-dhe-navy shadow-md">
-              <div className="dhe-ticker-content text-white font-display font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] items-center">
+          {/* Ticker */}
+          <div className="w-full overflow-hidden mb-10 -mx-5 sm:mx-0 rounded-2xl">
+            <div className="dhe-ticker-container rounded-2xl" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+              <div className="dhe-ticker-content text-white font-display font-black text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                 <span>DIREITOS HUMANOS E EMPRESAS</span>
-                <span className="text-dhe-magenta">★</span>
+                <span className="text-dhe-magenta">×</span>
                 <span>PLURALIDADE QUE CONSTRÓI</span>
-                <span className="text-dhe-green">★</span>
+                <span className="text-dhe-green">×</span>
                 <span>04 DE AGOSTO DE 2026</span>
-                <span className="text-dhe-coral">★</span>
-                <span>CINEMATECA BRASILEIRA</span>
-                <span className="text-dhe-magenta">★</span>
-                {/* Duplicado para loop contínuo */}
+                <span className="text-dhe-coral">×</span>
+                <span>CINEMATECA BRASILEIRA · SÃO PAULO</span>
+                <span className="text-dhe-magenta">×</span>
                 <span>DIREITOS HUMANOS E EMPRESAS</span>
-                <span className="text-dhe-magenta">★</span>
+                <span className="text-dhe-magenta">×</span>
                 <span>PLURALIDADE QUE CONSTRÓI</span>
-                <span className="text-dhe-green">★</span>
+                <span className="text-dhe-green">×</span>
                 <span>04 DE AGOSTO DE 2026</span>
-                <span className="text-dhe-coral">★</span>
-                <span>CINEMATECA BRASILEIRA</span>
-                <span className="text-dhe-magenta">★</span>
+                <span className="text-dhe-coral">×</span>
+                <span>CINEMATECA BRASILEIRA · SÃO PAULO</span>
+                <span className="text-dhe-magenta">×</span>
               </div>
             </div>
           </div>
 
-          {/* Tabs (com scroll horizontal no mobile) */}
-          <div className="flex overflow-x-auto gap-2 pb-2 mb-8 -mx-5 px-5 sm:mx-0 sm:px-0 scroll-smooth" style={{ scrollbarWidth: "none" }}>
+          {/* Tabs — Pills premium */}
+          <div className="flex overflow-x-auto gap-2.5 pb-3 mb-8 -mx-5 px-5 sm:mx-0 sm:px-0" style={{ scrollbarWidth: "none" }}>
             {TABS.map((tab) => {
               const isActive = active === tab.key;
               return (
@@ -273,48 +380,39 @@ export function Agenda() {
                   key={tab.key}
                   type="button"
                   onClick={() => setActive(tab.key)}
-                  className="relative flex flex-col items-start rounded-xl px-4 py-3 text-left transition-all duration-200 cursor-pointer overflow-hidden border-2 border-dhe-navy bg-[#FAF9F6] text-dhe-text-main hover:bg-[#FAF9F6]/80"
+                  className="relative flex items-center gap-2 rounded-full px-5 py-2.5 text-left transition-all duration-200 cursor-pointer whitespace-nowrap border"
                   style={{
-                    boxShadow: isActive ? "3px 3px 0px var(--color-dhe-navy)" : "none",
-                    transform: isActive ? "translate(-1px, -1px)" : "none",
+                    background: isActive ? tab.accent : "white",
+                    borderColor: isActive ? tab.accent : "#D8D4C7",
+                    boxShadow: isActive ? `0 4px 20px ${tab.accent}30` : "0 1px 4px rgba(12,37,64,0.05)",
                   }}
                 >
-                  {/* Fundo animado das abas */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabBg"
-                      className="absolute inset-0 bg-gradient-to-tr from-[#E8187A] to-[#E05A3A] z-0"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                  <span className={`text-xs font-bold relative z-10 ${isActive ? "text-white" : "text-dhe-navy"}`}>
-                    {tab.label}
-                  </span>
-                  {tab.sub && (
-                    <span className={`text-[10px] opacity-75 mt-0.5 relative z-10 ${isActive ? "text-white/80" : "text-dhe-text-muted"}`}>
-                      {tab.sub}
+                  <span className="text-base" aria-hidden="true">{tab.icon}</span>
+                  <div className="flex flex-col">
+                    <span
+                      className="text-[11px] font-bold leading-tight"
+                      style={{ color: isActive ? "white" : "#1C2329" }}
+                    >
+                      {tab.label}
                     </span>
-                  )}
+                    {tab.sub && (
+                      <span
+                        className="text-[9px] font-medium leading-tight mt-0.5"
+                        style={{ color: isActive ? "rgba(255,255,255,0.7)" : "#596168" }}
+                      >
+                        {tab.sub}
+                      </span>
+                    )}
+                  </div>
                 </button>
               );
             })}
           </div>
 
-          {/* Items com AnimatePresence para transições super fluidas */}
+          {/* Bento Grid da Agenda */}
           <div className="min-h-[400px]">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.25 }}
-                className="space-y-3"
-              >
-                {AGENDA_MAP[active].map((item, i) => (
-                  <AgendaCard key={`${active}-${i}`} item={item} index={i} />
-                ))}
-              </motion.div>
+              <BentoAgendaGrid key={active} items={AGENDA_MAP[active]} tab={activeTab} />
             </AnimatePresence>
           </div>
         </motion.div>

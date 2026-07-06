@@ -9,6 +9,14 @@ const BULLETS = [
   "Produzir um documento com potencial de contribuição ao debate nacional e ao Fórum Internacional em Genebra",
 ];
 
+const BULLET_COLORS = [
+  { color: "#E8187A", bg: "rgba(232,24,122,0.07)" },
+  { color: "#4A8C3F", bg: "rgba(74,140,63,0.07)" },
+  { color: "#7B2D1E", bg: "rgba(123,45,30,0.07)" },
+  { color: "#E05A3A", bg: "rgba(224,90,58,0.07)" },
+  { color: "#0C2540", bg: "rgba(12,37,64,0.07)" },
+];
+
 export function About() {
   const [ref, inView] = useInView();
 
@@ -25,12 +33,12 @@ export function About() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.09, delayChildren: 0.15 },
     },
   };
 
   const listItemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
@@ -40,8 +48,9 @@ export function About() {
 
   return (
     <section id="sobre" className="dhe-section-alt relative overflow-hidden">
-      {/* Decorative Blur Orb */}
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-dhe-magenta/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Fita KV sutil */}
+      <div className="absolute top-0 right-0 w-64 h-full opacity-[0.04] pointer-events-none hidden lg:block"
+        style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "right top" }} />
 
       <div className="dhe-container">
         <div
@@ -55,14 +64,9 @@ export function About() {
             animate={inView ? "visible" : "hidden"}
           >
             <p className="dhe-section-label">Sobre o Encontro</p>
-
             <div className="dhe-stripe-divider">
-              <span />
-              <span />
-              <span />
-              <span />
+              <span /><span /><span /><span />
             </div>
-
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dhe-navy mb-6 leading-tight">
               Empresas e Direitos Humanos em um mundo em profunda transformação
             </h2>
@@ -99,25 +103,24 @@ export function About() {
                 <motion.li
                   key={i}
                   variants={listItemVariants}
-                  className="dhe-card-editorial p-4 flex gap-4 items-start border-2 border-dhe-navy bg-white dhe-shadow-brutal"
+                  className="dhe-card-editorial p-4 flex gap-4 items-start"
                 >
                   <span
-                    className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black mt-0.5"
-                    style={{ background: "rgba(232,24,122,0.08)", color: "#E8187A", border: "1px solid rgba(232,24,122,0.2)" }}
+                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-black mt-0.5"
+                    style={{ background: BULLET_COLORS[i].bg, color: BULLET_COLORS[i].color }}
                   >
                     {i + 1}
                   </span>
-                  <p className="text-sm leading-relaxed text-dhe-text-muted">
-                    {item}
-                  </p>
+                  <p className="text-sm leading-relaxed text-dhe-text-muted">{item}</p>
                 </motion.li>
               ))}
             </ul>
 
-            {/* Público */}
+            {/* Público-Alvo */}
             <motion.div
               variants={listItemVariants}
-              className="mt-6 dhe-card-editorial p-5 border-2 border-dhe-navy border-l-8 border-l-dhe-green bg-white dhe-shadow-brutal"
+              className="mt-6 p-5 rounded-2xl border-l-4 border-l-dhe-green"
+              style={{ background: "rgba(74,140,63,0.05)", border: "1px solid rgba(74,140,63,0.15)", borderLeft: "4px solid #4A8C3F" }}
             >
               <p className="text-[10px] font-black uppercase tracking-[0.24em] mb-2 text-dhe-green">
                 Público-Alvo

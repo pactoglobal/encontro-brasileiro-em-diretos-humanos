@@ -60,7 +60,7 @@ export function Venue() {
             </p>
 
             {/* Parceiro logo */}
-            <div className="dhe-card-editorial p-5 mb-8 inline-flex flex-col gap-2 border-2 border-dhe-navy border-l-8 border-l-dhe-maroon bg-[#FBF9F6] dhe-shadow-brutal select-none">
+            <div className="p-5 mb-8 inline-flex flex-col gap-2 border-l-4 border-l-dhe-maroon bg-white rounded-2xl shadow-sm select-none" style={{ borderLeft: "4px solid #7B2D1E", border: "1px solid #D8D4C7" }}>
               <p className="text-[10px] font-black uppercase tracking-[0.24em] text-dhe-maroon">Parceiro</p>
               <img
                 src="/identity/parceiro-cinemateca.png"
@@ -81,7 +81,7 @@ export function Venue() {
                   key={label}
                   variants={itemVariants}
                   whileHover={{ y: -2 }}
-                  className="dhe-card-editorial p-4 flex gap-4 items-start border-2 border-dhe-navy bg-white dhe-shadow-brutal"
+                  className="dhe-card-editorial p-4 flex gap-4 items-start"
                 >
                   <div
                     className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center bg-[#FAF9F6] border border-[#D8D4C7]/60 text-dhe-maroon"
@@ -102,7 +102,7 @@ export function Venue() {
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.2 }}
-            className="dhe-card-editorial overflow-hidden aspect-[4/3] border-2 border-dhe-navy dhe-shadow-brutal"
+            className="dhe-card-editorial overflow-hidden aspect-[4/3]"
           >
             <iframe
               title="Mapa Cinemateca Brasileira"

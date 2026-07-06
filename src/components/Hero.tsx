@@ -270,7 +270,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0, rotate: 0 }}
               whileHover={{ y: -4, rotate: 0.5 }}
               transition={{ type: "spring" as const, stiffness: 100, damping: 18, delay: 0.2 }}
-              className="relative w-full max-w-[310px] sm:max-w-[360px] aspect-[4/5] rounded-3xl bg-white border-[3px] border-dhe-navy shadow-[12px_12px_0px_var(--color-dhe-navy)] overflow-hidden p-5 flex flex-col justify-between z-10"
+              className="relative w-full max-w-[310px] sm:max-w-[360px] aspect-[4/5] rounded-3xl bg-white border border-dhe-border shadow-[0_24px_64px_rgba(12,37,64,0.14)] overflow-hidden p-5 flex flex-col justify-between z-10"
             >
               {/* Moldura de Fitas Coloridas Cruzadas */}
               <div className="absolute inset-0 bg-cover bg-center opacity-[0.15] bg-[url('/identity/kv-sem-fundo.png')]" />
@@ -307,7 +307,7 @@ export function Hero() {
               animate={{ opacity: 1, x: 0, y: 0 }}
               whileHover={{ y: -4, scale: 1.03 }}
               transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.4 }}
-              className="absolute top-4 right-0 sm:-right-4 bg-white/90 backdrop-blur-md border-2 border-dhe-navy p-3.5 rounded-2xl shadow-lg flex items-center gap-3 max-w-[210px] z-25"
+              className="absolute top-4 right-0 sm:-right-4 bg-white/95 backdrop-blur-md border border-dhe-border p-3.5 rounded-2xl shadow-[0_8px_32px_rgba(12,37,64,0.1)] flex items-center gap-3 max-w-[210px] z-25"
             >
               <div className="w-9 h-9 rounded-xl bg-dhe-coral/10 border border-dhe-coral/30 flex items-center justify-center text-dhe-coral shrink-0">
                 <MapPin className="w-4 h-4" strokeWidth={2} />
@@ -325,7 +325,7 @@ export function Hero() {
               animate={{ opacity: 1, x: 0, y: 0 }}
               whileHover={{ y: -4, scale: 1.03 }}
               transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.5 }}
-              className="absolute bottom-6 -left-4 bg-[#FAF9F6]/90 backdrop-blur-md border-2 border-dhe-navy p-3.5 rounded-2xl shadow-lg flex items-center gap-3 max-w-[210px] z-25"
+              className="absolute bottom-6 -left-4 bg-[#FAF9F6]/95 backdrop-blur-md border border-dhe-border p-3.5 rounded-2xl shadow-[0_8px_32px_rgba(12,37,64,0.1)] flex items-center gap-3 max-w-[210px] z-25"
             >
               <div className="w-9 h-9 rounded-xl bg-dhe-green/10 border border-dhe-green/30 flex items-center justify-center text-dhe-green shrink-0 font-display font-black text-xs">
                 30+
@@ -343,7 +343,7 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1, rotate: 6 }}
               whileHover={{ rotate: 3, scale: 1.05 }}
               transition={{ type: "spring" as const, stiffness: 150, damping: 12, delay: 0.6 }}
-              className="absolute -top-4 -left-6 bg-dhe-magenta text-white font-display font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-lg border-2 border-dhe-navy shadow-md z-25"
+              className="absolute -top-4 -left-6 bg-dhe-magenta text-white font-display font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md z-25"
             >
               100% Presencial e Gratuito
             </motion.div>
