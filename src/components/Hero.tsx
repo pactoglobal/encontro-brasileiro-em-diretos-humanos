@@ -1,225 +1,255 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 
-const CAROUSEL_IMAGES = [
-  "/identity/bg-carousel-1.jpg",
-  "/identity/bg-carousel-2.jpg",
-  "/identity/bg-carousel-3.jpg",
+// Slides com imagem + caption temático
+const SLIDES = [
+  {
+    src: "/identity/bg-carousel-1.jpg",
+    caption: "Diálogo Multiator",
+    sub: "Empresas, sociedade civil e academia em torno de uma agenda comum",
+  },
+  {
+    src: "/identity/bg-carousel-2.jpg",
+    caption: "Sustentabilidade em Ação",
+    sub: "Práticas responsáveis que transformam negócios e comunidades",
+  },
+  {
+    src: "/identity/bg-carousel-3.jpg",
+    caption: "Pluralidade que Constrói",
+    sub: "Espaço de escuta, debate e construção coletiva de soluções",
+  },
 ];
 
-const EVENT_DETAILS = [
-  { icon: Calendar, label: "Data", value: "04 de Agosto de 2026", support: "Terça-feira" },
-  { icon: Clock, label: "Horário", value: "9h às 19h30", support: "Dia completo" },
-  { icon: MapPin, label: "Local", value: "Cinemateca Brasileira", support: "São Paulo, SP" },
-];
-
-// Target: 04 de agosto de 2026 às 09h00 (Horário de Brasília)
 const TARGET_DATE = new Date("2026-08-04T09:00:00-03:00");
 
+// Ken Burns: cada slide tem sua própria animação de câmera
+const SLIDE_ANIMATIONS = [
+  { initial: { scale: 1.12, x: "2%" },  animate: { scale: 1.0, x: "0%" } },
+  { initial: { scale: 1.08, x: "-2%" }, animate: { scale: 1.0, x: "0%" } },
+  { initial: { scale: 1.10, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
+];
+
 export function Hero() {
+  const [current, setCurrent] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
-  const [currentBg, setCurrentBg] = useState(0);
 
+  // Auto-advance a cada 6s
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
-    }, 7000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => {
+      setCurrent((p) => (p + 1) % SLIDES.length);
+    }, 6000);
+    return () => clearInterval(t);
   }, []);
 
+  // Countdown
   useEffect(() => {
-    const calculateTime = () => {
-      const now = new Date();
-      const difference = TARGET_DATE.getTime() - now.getTime();
-
-      if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: true });
-        return;
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((difference / 1000 / 60) % 60);
-      const seconds = Math.floor((difference / 1000) % 60);
-
-      setTimeLeft({ days, hours, minutes, seconds, expired: false });
+    const calc = () => {
+      const diff = TARGET_DATE.getTime() - Date.now();
+      if (diff <= 0) { setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: true }); return; }
+      setTimeLeft({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff / 3600000) % 24),
+        minutes: Math.floor((diff / 60000) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+        expired: false,
+      });
     };
-
-    calculateTime();
-    const interval = setInterval(calculateTime, 1000);
-    return () => clearInterval(interval);
+    calc();
+    const t = setInterval(calc, 1000);
+    return () => clearInterval(t);
   }, []);
+
+  const goTo = useCallback((idx: number, _dir: number) => {
+    setCurrent(idx);
+  }, []);
+
+  const prev = useCallback(() => goTo((current - 1 + SLIDES.length) % SLIDES.length, -1), [current, goTo]);
+  const next = useCallback(() => goTo((current + 1) % SLIDES.length, 1), [current, goTo]);
 
   const scrollTo = useCallback((id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
   }, []);
 
-  // Framer Motion Spring settings
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring" as const, stiffness: 100, damping: 20 },
-    },
-  };
+  const slideAnim = SLIDE_ANIMATIONS[current];
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen overflow-hidden bg-[#F1EFEA] flex items-center pt-24 pb-16 lg:pt-32 lg:pb-24"
-    >
-      {/* Fluid Background Image Carousel with soft vignette mask */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        <AnimatePresence mode="popLayout">
+    <section id="hero" className="relative min-h-screen overflow-hidden flex flex-col">
+
+      {/* ═══════════════════════════════════════════════════════
+          BACKGROUND SLIDESHOW — fullscreen cinematográfico
+      ═══════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatePresence mode="sync">
           <motion.div
-            key={currentBg}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 0.11, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96 }}
-            transition={{ duration: 2.0, ease: "easeInOut" }}
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${CAROUSEL_IMAGES[currentBg]})`,
-              mixBlendMode: "multiply",
-            }}
-          />
+            key={current}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          >
+            {/* Ken Burns na imagem */}
+            <motion.div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+              style={{ backgroundImage: `url(${SLIDES[current].src})` }}
+              initial={slideAnim.initial}
+              animate={slideAnim.animate}
+              transition={{ duration: 7.5, ease: "linear" }}
+            />
+          </motion.div>
         </AnimatePresence>
-        {/* Vignette & Radial Gradient overlays for high legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F1EFEA] via-[#F1EFEA]/80 to-[#F1EFEA]/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#F1EFEA_85%)]" />
+
+        {/* Overlay em camadas: preserva cor do KV embaixo + escurecimento dramático */}
+        {/* Camada 1: escurecimento geral */}
+        <div className="absolute inset-0 bg-[#0C2540]/65" />
+        {/* Camada 2: gradiente de baixo (onde fica o conteúdo principal) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C2540]/90 via-[#0C2540]/40 to-transparent" />
+        {/* Camada 3: gradiente lateral esquerdo para texto */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C2540]/70 via-transparent to-transparent" />
+        {/* Camada 4: tint de cor do KV — magenta sutil no topo direito */}
+        <div className="absolute inset-0 bg-gradient-to-bl from-[#E8187A]/12 via-transparent to-transparent" />
       </div>
 
-      {/* Padrão de Fitas do KV nas laterais */}
-      <div className="absolute inset-y-0 left-0 w-1/3 opacity-[0.05] pointer-events-none hidden lg:block z-5" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }} />
-      <div className="absolute inset-y-0 right-0 w-1/3 opacity-[0.05] pointer-events-none hidden lg:block z-5" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }} />
+      {/* ═══════════════════════════════════════════════════════
+          FITAS DO KV — overlay sutil nas bordas
+      ═══════════════════════════════════════════════════════ */}
+      <div
+        className="absolute inset-y-0 left-0 w-1/4 opacity-[0.07] pointer-events-none hidden xl:block z-[1]"
+        style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "left center" }}
+      />
 
-      {/* Círculo gradiente suave ao fundo */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#E8187A]/5 via-[#E05A3A]/5 to-[#4A8C3F]/5 rounded-full blur-3xl pointer-events-none z-5" />
+      {/* ═══════════════════════════════════════════════════════
+          CONTROLES DO SLIDESHOW
+      ═══════════════════════════════════════════════════════ */}
+      <div className="absolute inset-y-0 right-4 sm:right-8 z-20 flex flex-col items-center justify-center gap-3 pointer-events-none">
+        {/* Dots */}
+        <div className="flex flex-col gap-2">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goTo(i, i > current ? 1 : -1)}
+              className="pointer-events-auto transition-all duration-300 rounded-full focus:outline-none"
+              style={{
+                width: i === current ? "3px" : "3px",
+                height: i === current ? "28px" : "8px",
+                background: i === current ? "#E8187A" : "rgba(255,255,255,0.35)",
+              }}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
 
-      {/* Conteúdo Principal */}
-      <div className="relative z-10 dhe-container">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center"
-        >
-          {/* Coluna de Texto (Esquerda) */}
-          <div className="lg:col-span-7 text-left">
+      {/* Setas prev/next — visíveis no hover da seção */}
+      <button
+        type="button"
+        onClick={prev}
+        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 focus:outline-none"
+        aria-label="Slide anterior"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        className="absolute right-12 sm:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 focus:outline-none"
+        aria-label="Próximo slide"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* ═══════════════════════════════════════════════════════
+          CONTEÚDO PRINCIPAL
+      ═══════════════════════════════════════════════════════ */}
+      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-32 pb-24 lg:pt-40 lg:pb-32">
+        <div className="flex-1 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+          {/* ── Coluna Esquerda: texto + CTA ── */}
+          <div className="lg:col-span-7 flex flex-col gap-0">
+
             {/* Badges */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 mb-6">
-              <span className="dhe-badge-magenta text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full inline-flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-dhe-magenta" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
+              className="flex flex-wrap gap-2.5 mb-7"
+            >
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white">
+                <span className="w-1.5 h-1.5 rounded-full bg-dhe-magenta animate-pulse" />
                 I Fórum Brasileiro
               </span>
-              <span className="dhe-badge-green text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white">
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green" />
                 Evento Gratuito
               </span>
             </motion.div>
 
-            {/* Logo do Evento */}
-            <motion.div variants={itemVariants} className="mb-6">
+            {/* Logo do evento */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
+              className="mb-5"
+            >
               <img
                 src="/identity/logo-evento.png"
                 alt="I Encontro DH&E Brasil 2026 — Pluralidade que Constrói"
-                className="h-auto w-full max-w-[280px] sm:max-w-[340px] object-contain"
+                className="h-auto w-full max-w-[260px] sm:max-w-[320px] object-contain brightness-0 invert"
               />
             </motion.div>
 
-            {/* Tagline Principal */}
+            {/* Headline */}
             <motion.h1
-              variants={itemVariants}
-              className="text-4xl sm:text-6xl lg:text-7xl font-display font-black text-dhe-navy uppercase leading-[0.95] tracking-tight mb-6"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 80 }}
+              className="font-display font-black text-white uppercase leading-[0.92] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
             >
-              Pluralidade <br />
-              <span className="text-dhe-magenta">que Constrói</span>
+              Pluralidade<br />
+              <span style={{ color: "#E8187A" }}>que Constrói</span>
             </motion.h1>
 
+            {/* Subtítulo */}
             <motion.p
-              variants={itemVariants}
-              className="text-lg sm:text-xl text-dhe-text-muted leading-relaxed mb-8 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28, type: "spring", stiffness: 80 }}
+              className="text-base sm:text-lg text-white/70 leading-relaxed mb-8 max-w-xl"
             >
               O espaço nacional que conecta lideranças empresariais, sociedade civil,
               poder público e academia para debater Empresas e Direitos Humanos orientados à ação.
             </motion.p>
 
-            {/* Countdown Interativo (SP Climate Week style) */}
-            {!timeLeft.expired && (
-              <motion.div
-                variants={itemVariants}
-                className="mb-8 flex items-center gap-3 select-none"
-              >
-                <div className="flex flex-col items-center justify-center bg-white border border-[#D8D4C7] p-3 min-w-[70px] sm:min-w-[85px] rounded-2xl shadow-sm">
-                  <span className="text-2xl sm:text-4xl font-extrabold font-mono text-dhe-navy leading-none">
-                    {timeLeft.days}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-dhe-text-muted mt-1.5 font-bold">dias</span>
-                </div>
-                <div className="text-2xl font-bold text-dhe-navy/40">:</div>
-                <div className="flex flex-col items-center justify-center bg-white border border-[#D8D4C7] p-3 min-w-[70px] sm:min-w-[85px] rounded-2xl shadow-sm">
-                  <span className="text-2xl sm:text-4xl font-extrabold font-mono text-dhe-navy leading-none">
-                    {String(timeLeft.hours).padStart(2, "0")}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-dhe-text-muted mt-1.5 font-bold">horas</span>
-                </div>
-                <div className="text-2xl font-bold text-dhe-navy/40">:</div>
-                <div className="flex flex-col items-center justify-center bg-white border border-[#D8D4C7] p-3 min-w-[70px] sm:min-w-[85px] rounded-2xl shadow-sm">
-                  <span className="text-2xl sm:text-4xl font-extrabold font-mono text-dhe-navy leading-none">
-                    {String(timeLeft.minutes).padStart(2, "0")}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-dhe-text-muted mt-1.5 font-bold">minutos</span>
-                </div>
-                <div className="text-2xl font-bold text-dhe-navy/40">:</div>
-                <div className="flex flex-col items-center justify-center bg-white border border-[#D8D4C7] p-3 min-w-[70px] sm:min-w-[85px] rounded-2xl shadow-sm">
-                  <span className="text-2xl sm:text-4xl font-extrabold font-mono text-dhe-magenta leading-none">
-                    {String(timeLeft.seconds).padStart(2, "0")}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-dhe-magenta mt-1.5 font-bold">segundos</span>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Detalhes do Evento (Grid) */}
+            {/* Event info pill row */}
             <motion.div
-              variants={itemVariants}
-              className="grid sm:grid-cols-3 gap-4 mb-8 bg-white border border-[#D8D4C7] p-5 rounded-2xl shadow-sm"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.34, type: "spring", stiffness: 80 }}
+              className="flex flex-wrap gap-3 mb-8"
             >
-              {EVENT_DETAILS.map(({ icon: Icon, label, value, support }, i) => (
-                <div
-                  key={label}
-                  className={`flex gap-3 items-start ${i < 2 ? "sm:border-r border-[#D8D4C7]/50 pr-4" : ""}`}
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F1EFEA] border border-[#D8D4C7]/40 text-dhe-magenta">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-black uppercase tracking-wider text-dhe-text-muted">
-                      {label}
-                    </p>
-                    <p className="mt-0.5 text-xs font-bold text-dhe-navy leading-snug">{value}</p>
-                    <p className="text-[11px] text-dhe-text-muted">{support}</p>
-                  </div>
-                </div>
+              {[
+                { icon: Calendar, text: "04 de Agosto de 2026" },
+                { icon: Clock, text: "9h às 19h30" },
+                { icon: MapPin, text: "Cinemateca Brasileira · SP" },
+              ].map(({ icon: Icon, text }) => (
+                <span key={text} className="inline-flex items-center gap-2 text-xs font-bold text-white/80 bg-white/8 backdrop-blur-sm border border-white/15 px-3.5 py-2 rounded-full">
+                  <Icon className="w-3.5 h-3.5 text-dhe-magenta shrink-0" strokeWidth={2} />
+                  {text}
+                </span>
               ))}
             </motion.div>
 
-            {/* Botões de Ação */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.40, type: "spring", stiffness: 80 }}
+              className="flex flex-col sm:flex-row gap-3 mb-12"
+            >
               <button
                 type="button"
                 onClick={() => scrollTo("programacao")}
@@ -230,124 +260,202 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => scrollTo("contato")}
-                className="dhe-btn-outline cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 bg-white/8 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-white/15 transition-all duration-200 cursor-pointer"
               >
                 Inscreva-se
               </button>
             </motion.div>
 
-            {/* Stats Row (Copa BTG / Premium Benchmarking Style) */}
+            {/* Stats */}
             <motion.div
-              variants={itemVariants}
-              className="mt-12 pt-8 border-t border-dhe-navy/10 grid grid-cols-3 gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="flex items-center gap-8 pt-6 border-t border-white/10"
             >
-              <div>
-                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-magenta leading-none">30+</p>
-                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">Painelistas</p>
-              </div>
-              <div className="border-l border-dhe-navy/10 pl-6">
-                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-green leading-none">10h+</p>
-                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">De Conteúdo</p>
-              </div>
-              <div className="border-l border-dhe-navy/10 pl-6">
-                <p className="text-2xl sm:text-3xl font-display font-black text-dhe-coral leading-none">100%</p>
-                <p className="text-[10px] font-black text-dhe-text-muted uppercase tracking-wider mt-2">Gratuito</p>
-              </div>
+              {[
+                { value: "30+", label: "Painelistas", color: "#E8187A" },
+                { value: "10h+", label: "De Conteúdo", color: "#4A8C3F" },
+                { value: "100%", label: "Gratuito", color: "#E05A3A" },
+              ].map(({ value, label, color }) => (
+                <div key={label}>
+                  <p className="text-2xl sm:text-3xl font-display font-black leading-none" style={{ color }}>{value}</p>
+                  <p className="text-[10px] font-bold text-white/45 uppercase tracking-wider mt-1.5">{label}</p>
+                </div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Coluna da Imagem KV e Elementos Flutuantes (Direita) - Copa BTG Benchmarking */}
-          <div className="lg:col-span-5 flex items-center justify-center relative min-h-[460px] w-full select-none">
-            {/* Grid dot pattern background layer */}
-            <div className="absolute inset-0 bg-[radial-gradient(#D8D4C7_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-40 rounded-3xl" />
+          {/* ── Coluna Direita: Countdown + Caption do slide ── */}
+          <div className="lg:col-span-5 flex flex-col gap-5 items-start lg:items-end">
 
-            {/* Glowing blur orb behind */}
-            <div className="absolute w-72 h-72 bg-gradient-to-br from-[#E8187A]/10 to-[#E05A3A]/10 rounded-full blur-2xl pointer-events-none" />
+            {/* Countdown */}
+            {!timeLeft.expired && (
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35, type: "spring", stiffness: 70 }}
+                className="w-full"
+              >
+                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-3 lg:text-right">
+                  Faltam para o evento
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {[
+                    { val: timeLeft.days, unit: "dias" },
+                    { val: timeLeft.hours, unit: "horas" },
+                    { val: timeLeft.minutes, unit: "min" },
+                    { val: timeLeft.seconds, unit: "seg" },
+                  ].map(({ val, unit }, i) => (
+                    <div
+                      key={unit}
+                      className="flex flex-col items-center justify-center rounded-2xl py-4 px-2 select-none"
+                      style={{
+                        background: "rgba(255,255,255,0.07)",
+                        backdropFilter: "blur(12px)",
+                        border: "1px solid rgba(255,255,255,0.12)",
+                      }}
+                    >
+                      <AnimatePresence mode="popLayout">
+                        <motion.span
+                          key={`${unit}-${val}`}
+                          initial={{ y: -12, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: 12, opacity: 0 }}
+                          transition={{ duration: 0.22 }}
+                          className="text-2xl sm:text-3xl font-extrabold font-mono leading-none"
+                          style={{ color: i === 3 ? "#E8187A" : "white" }}
+                        >
+                          {String(val).padStart(2, "0")}
+                        </motion.span>
+                      </AnimatePresence>
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 mt-2">{unit}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
 
-            {/* Main Key Visual Card (Tropical Brutalist / Premium Editorial) */}
+            {/* Caption dinâmico do slide atual */}
             <motion.div
-              initial={{ opacity: 0, y: 40, rotate: -1 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
-              whileHover={{ y: -4, rotate: 0.5 }}
-              transition={{ type: "spring" as const, stiffness: 100, damping: 18, delay: 0.2 }}
-              className="relative w-full max-w-[310px] sm:max-w-[360px] aspect-[4/5] rounded-3xl bg-white border border-dhe-border shadow-[0_24px_64px_rgba(12,37,64,0.14)] overflow-hidden p-5 flex flex-col justify-between z-10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, type: "spring", stiffness: 70 }}
+              className="w-full rounded-2xl p-5"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
             >
-              {/* Moldura de Fitas Coloridas Cruzadas */}
-              <div className="absolute inset-0 bg-cover bg-center opacity-[0.15] bg-[url('/identity/kv-sem-fundo.png')]" />
-              
-              <div className="flex justify-between items-start relative z-10">
-                <span className="bg-dhe-magenta text-[9px] font-black text-white px-2.5 py-1 rounded-md uppercase tracking-[0.15em] shadow-sm">
-                  Exclusivo
-                </span>
-                <span className="bg-dhe-green text-[9px] font-black text-white px-2.5 py-1 rounded-md uppercase tracking-[0.15em] shadow-sm">
-                  ADHE & PACTO
-                </span>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-px bg-dhe-magenta" />
+                    <span className="text-[9px] font-black uppercase tracking-[0.22em] text-dhe-magenta">
+                      {SLIDES[current].caption}
+                    </span>
+                  </div>
+                  <p className="text-sm text-white/65 leading-relaxed">
+                    {SLIDES[current].sub}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
 
-              <div className="my-auto py-4 relative z-10 flex items-center justify-center">
-                <img
-                  src="/identity/kv.png"
-                  alt="Key Visual do Evento"
-                  className="w-full h-auto max-h-[220px] object-contain rounded-xl"
+              {/* Progress bar */}
+              <div className="mt-4 h-0.5 bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  key={current}
+                  className="h-full rounded-full bg-dhe-magenta"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 6, ease: "linear" }}
                 />
               </div>
-
-              <div className="border-t-2 border-dhe-navy/10 pt-3 relative z-10 flex items-center justify-between">
-                <div>
-                  <p className="text-[9px] font-black uppercase text-dhe-text-muted tracking-wider">Abertura Credenciamento</p>
-                  <p className="text-xs font-black text-dhe-navy font-mono">04 AGO · 08H30</p>
-                </div>
-                <div className="h-2 w-2 rounded-full bg-dhe-green animate-pulse" />
-              </div>
             </motion.div>
 
-            {/* Floating Card 1: Local do Evento */}
+            {/* Logo Pacto Global */}
             <motion.div
-              initial={{ opacity: 0, x: 40, y: -20 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              whileHover={{ y: -4, scale: 1.03 }}
-              transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.4 }}
-              className="absolute top-4 right-0 sm:-right-4 bg-white/95 backdrop-blur-md border border-dhe-border p-3.5 rounded-2xl shadow-[0_8px_32px_rgba(12,37,64,0.1)] flex items-center gap-3 max-w-[210px] z-25"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55 }}
+              className="flex items-center gap-3 mt-2"
             >
-              <div className="w-9 h-9 rounded-xl bg-dhe-coral/10 border border-dhe-coral/30 flex items-center justify-center text-dhe-coral shrink-0">
-                <MapPin className="w-4 h-4" strokeWidth={2} />
-              </div>
-              <div>
-                <p className="text-[8px] font-black text-dhe-coral uppercase tracking-wider">Cinemateca</p>
-                <p className="text-[10px] font-black text-dhe-navy leading-tight">Vila Clementino, SP</p>
-                <p className="text-[8px] text-dhe-text-muted">Largo Sen. Raul Cardoso</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Card 2: Programação Confirmada */}
-            <motion.div
-              initial={{ opacity: 0, x: -40, y: 50 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              whileHover={{ y: -4, scale: 1.03 }}
-              transition={{ type: "spring" as const, stiffness: 120, damping: 15, delay: 0.5 }}
-              className="absolute bottom-6 -left-4 bg-[#FAF9F6]/95 backdrop-blur-md border border-dhe-border p-3.5 rounded-2xl shadow-[0_8px_32px_rgba(12,37,64,0.1)] flex items-center gap-3 max-w-[210px] z-25"
-            >
-              <div className="w-9 h-9 rounded-xl bg-dhe-green/10 border border-dhe-green/30 flex items-center justify-center text-dhe-green shrink-0 font-display font-black text-xs">
-                30+
-              </div>
-              <div>
-                <p className="text-[8px] font-black text-dhe-green uppercase tracking-wider">Programação</p>
-                <p className="text-[10px] font-black text-dhe-navy leading-tight">Painelistas Confirmados</p>
-                <p className="text-[8px] text-dhe-text-muted">Lideranças & ONU</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Stripe/Badge 3: Gratuito */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: 12 }}
-              animate={{ opacity: 1, scale: 1, rotate: 6 }}
-              whileHover={{ rotate: 3, scale: 1.05 }}
-              transition={{ type: "spring" as const, stiffness: 150, damping: 12, delay: 0.6 }}
-              className="absolute -top-4 -left-6 bg-dhe-magenta text-white font-display font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md z-25"
-            >
-              100% Presencial e Gratuito
+              <img
+                src="/identity/logo-pacto-global.png"
+                alt="Pacto Global ONU"
+                className="h-8 w-auto object-contain brightness-0 invert opacity-60"
+              />
+              <img
+                src="/identity/adhe-logo.png"
+                alt="ADHE"
+                className="h-6 w-auto object-contain brightness-0 invert opacity-60"
+              />
             </motion.div>
           </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════
+          BARRA INFERIOR — slide indicator + número
+      ═══════════════════════════════════════════════════════ */}
+      <div className="relative z-10 dhe-container pb-8 flex items-center justify-between">
+        {/* Número do slide */}
+        <div className="flex items-baseline gap-1.5">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={current}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.2 }}
+              className="text-2xl font-display font-black text-white/30 tabular-nums leading-none"
+            >
+              {String(current + 1).padStart(2, "0")}
+            </motion.span>
+          </AnimatePresence>
+          <span className="text-xs text-white/20 font-bold">/ {String(SLIDES.length).padStart(2, "0")}</span>
+        </div>
+
+        {/* Barra de progresso horizontal */}
+        <div className="flex-1 mx-8 flex gap-1.5">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goTo(i, i > current ? 1 : -1)}
+              className="flex-1 h-0.5 rounded-full overflow-hidden focus:outline-none"
+              style={{ background: "rgba(255,255,255,0.15)" }}
+              aria-label={`Ir para slide ${i + 1}`}
+            >
+              {i === current && (
+                <motion.div
+                  key={current}
+                  className="h-full rounded-full bg-white"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 6, ease: "linear" }}
+                />
+              )}
+              {i < current && <div className="h-full w-full bg-white/60 rounded-full" />}
+            </button>
+          ))}
+        </div>
+
+        {/* Scroll hint */}
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="hidden sm:flex flex-col items-center gap-1.5"
+        >
+          <div className="w-px h-8 bg-gradient-to-b from-transparent to-white/30 rounded-full" />
+          <span className="text-[8px] font-black uppercase tracking-[0.2em] text-white/20 rotate-90 origin-center translate-y-2">scroll</span>
         </motion.div>
       </div>
     </section>
