@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 
-const ABOUT_ADHE = `A Aliança pelos Direitos Humanos e Empresas (ADHE) é uma plataforma multiator dedicada a fortalecer a implementação da agenda de Empresas e Direitos Humanos no Brasil, conectando empresas, organizações da sociedade civil, poder público e academia em torno de práticas responsáveis e do cumprimento de padrões internacionais.`;
+const ABOUT_ADHE = `A Aliança pelos Direitos Humanos e Empresas (ADHE) é uma plataforma multiator dedicada a fortalecer a implementação da agenda de Empresas e Direitos Humanos no Brasil, conectando empresas, organizações da sociedade civil, poder público e academia em torno de práticas responsáveis.`;
 
-const ABOUT_PACTO = `O Pacto Global – Rede Brasil foi criado em 2003 e é a segunda maior rede local do mundo, com mais de 2.000 participantes. Convocação especial do Secretário-Geral da ONU para que empresas de todo o mundo alinhem suas operações a dez princípios universais nas áreas de direitos humanos, trabalho, meio ambiente e anticorrupção.`;
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
 };
 
 const itemVariants = {
@@ -20,7 +19,8 @@ export function Organizers() {
 
   return (
     <section id="organizadores" className="dhe-section-alt relative overflow-hidden">
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-dhe-green/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-dhe-green/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-dhe-magenta/4 rounded-full blur-3xl pointer-events-none" />
 
       <div className="dhe-container">
         <motion.div
@@ -33,117 +33,206 @@ export function Organizers() {
           <div className="dhe-stripe-divider">
             <span /><span /><span /><span />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-10">
+          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-3">
             Organizadores e Parceiros
           </h2>
+          <p className="text-base text-dhe-text-muted mb-10">
+            Instituições que tornam este encontro possível
+          </p>
 
           {inView && (
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-auto gap-5"
+              className="grid grid-cols-1 md:grid-cols-2 gap-5"
             >
-              {/* ADHE — destaque 2×2 */}
+              {/* ─── CARD 1: ADHE — Realização (destaque escuro, col-span 1 full height) ─── */}
               <motion.div
                 variants={itemVariants}
-                whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="lg:col-span-2 lg:row-span-2 relative overflow-hidden bg-dhe-navy rounded-[24px] p-8 flex flex-col justify-between group cursor-default select-none min-h-[280px]"
-                style={{ boxShadow: "0 20px 60px rgba(12,37,64,0.2)" }}
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="md:row-span-2 relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
+                style={{
+                  background: "linear-gradient(145deg, #0C2540 0%, #0E2E50 100%)",
+                  boxShadow: "0 20px 60px rgba(12,37,64,0.22)",
+                  minHeight: "480px",
+                }}
               >
-                <div className="absolute inset-0 opacity-[0.07] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                <div className="absolute inset-0 bg-gradient-to-br from-dhe-magenta/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Fita KV sutil no fundo */}
+                <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
+                {/* Glow magenta no hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  style={{ background: "radial-gradient(ellipse at bottom center, rgba(232,24,122,0.18) 0%, transparent 70%)" }} />
 
+                {/* Topo */}
                 <div className="relative z-10">
-                  <span className="inline-block text-[9px] font-black text-white/50 uppercase tracking-[0.28em] border border-white/15 px-3 py-1 rounded-full mb-6">
+                  <span className="inline-block text-[9px] font-black text-white/50 uppercase tracking-[0.28em] border border-white/12 px-3 py-1.5 rounded-full mb-8">
                     Realização
                   </span>
-                  <img
-                    src="/identity/adhe-logo.png"
-                    alt="ADHE — Aliança pelos Direitos Humanos e Empresas"
-                    className="h-16 w-auto object-contain mb-6 brightness-0 invert"
-                  />
-                  <p className="text-[#FAF9F6]/65 text-sm leading-relaxed max-w-sm">
+
+                  {/* Logo ADHE em destaque */}
+                  <div className="mb-6">
+                    <img
+                      src="/identity/adhe-logo.png"
+                      alt="ADHE — Aliança pelos Direitos Humanos e Empresas"
+                      className="h-20 w-auto object-contain brightness-0 invert"
+                    />
+                  </div>
+
+                  <p className="text-[#FAF9F6]/60 text-sm leading-relaxed">
                     {ABOUT_ADHE}
                   </p>
                 </div>
 
-                <div className="border-t border-white/10 pt-4 relative z-10 flex items-center justify-between mt-6">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-white/30">ADHE</span>
-                  <div className="w-2 h-2 rounded-full bg-dhe-magenta animate-pulse" />
+                {/* Rodapé */}
+                <div className="relative z-10 border-t border-white/10 pt-5 flex items-center justify-between mt-6">
+                  <div className="flex gap-1.5">
+                    {["#E8187A", "#4A8C3F", "#7B2D1E", "#E05A3A"].map((c) => (
+                      <div key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />
+                    ))}
+                  </div>
+                  <span className="text-[9px] font-black uppercase tracking-widest text-white/25">adhe.org.br</span>
                 </div>
               </motion.div>
 
-              {/* Pacto Global — 2 colunas */}
+              {/* ─── CARD 2: Co-realização — AMBOS os logos juntos ─── */}
               <motion.div
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="lg:col-span-2 relative overflow-hidden bg-white rounded-[24px] p-6 flex flex-col justify-between group cursor-default select-none min-h-[160px] dhe-card-editorial"
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col gap-6 cursor-default select-none group"
+                style={{
+                  background: "#FFFFFF",
+                  boxShadow: "0 4px 24px rgba(12,37,64,0.07)",
+                  border: "1px solid #D8D4C7",
+                  minHeight: "220px",
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-dhe-green/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-dhe-green/4 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <div className="relative z-10">
-                  <span className="inline-block text-[9px] font-black uppercase tracking-[0.28em] mb-4 text-dhe-green border border-dhe-green/25 px-3 py-1 rounded-full bg-dhe-green/5">
-                    Co-realização Principal
+                  <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] mb-6 text-dhe-green border border-dhe-green/20 px-3 py-1.5 rounded-full bg-dhe-green/5">
+                    Co-realização
                   </span>
-                  <img src="/identity/co-realizacao.png" alt="Pacto Global Rede Brasil" className="h-12 w-auto object-contain" />
+
+                  {/* Linha de logos — co-realizacao.png e CERALC lado a lado */}
+                  <div className="flex flex-col gap-5">
+                    {/* Pacto Global + parceiros internacionais */}
+                    <div>
+                      <p className="text-[9px] font-bold uppercase tracking-wider text-dhe-text-muted/60 mb-2">
+                        Pacto Global & Parceiros Internacionais
+                      </p>
+                      <img
+                        src="/identity/co-realizacao.png"
+                        alt="Global Gateway · UE · OIT · OCDE · Nações Unidas Direitos Humanos"
+                        className="h-10 w-auto max-w-full object-contain"
+                      />
+                    </div>
+
+                    {/* Divider */}
+                    <div className="h-px bg-dhe-border" />
+
+                    {/* CERALC */}
+                    <div>
+                      <p className="text-[9px] font-bold uppercase tracking-wider text-dhe-text-muted/60 mb-2">
+                        CERALC
+                      </p>
+                      <img
+                        src="/identity/co-realizacao-1.png"
+                        alt="CERALC — Conduta Empresarial Responsável na América Latina e no Caribe"
+                        className="h-12 w-auto max-w-[200px] object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <p className="text-[11px] text-dhe-text-muted leading-relaxed mt-4 relative z-10">
-                  {ABOUT_PACTO.slice(0, 120)}…
-                </p>
               </motion.div>
 
-              {/* Apoio Institucional — 2 colunas */}
+              {/* ─── CARD 3: Patrocínio Petrobras ─── */}
               <motion.div
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="lg:col-span-2 relative overflow-hidden bg-[#F1EFEA] rounded-[24px] p-6 flex flex-col justify-between group cursor-default select-none min-h-[140px] border border-dhe-border"
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
+                style={{
+                  background: "linear-gradient(135deg, #F1EFEA 0%, #E8E4DC 100%)",
+                  border: "1px solid #D8D4C7",
+                  boxShadow: "0 4px 24px rgba(12,37,64,0.06)",
+                  minHeight: "220px",
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-dhe-coral/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#009A44]/5 via-transparent to-[#FFD100]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <div className="relative z-10">
-                  <span className="inline-block text-[9px] font-black uppercase tracking-[0.28em] mb-4 text-dhe-coral border border-dhe-coral/25 px-3 py-1 rounded-full bg-dhe-coral/5">
-                    Apoio Institucional Internacional
-                  </span>
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] text-dhe-maroon border border-dhe-maroon/20 px-3 py-1.5 rounded-full bg-dhe-maroon/5">
+                      Patrocínio
+                    </span>
+                    <div className="w-2 h-2 rounded-full bg-[#009A44]" />
+                  </div>
+
+                  {/* Logo Petrobras em destaque real */}
                   <img
-                    src="/identity/co-realizacao-1.png"
-                    alt="CERALC, Global Gateway, OIT, OCDE, ACNUDH"
-                    className="h-10 w-auto max-w-full object-contain"
+                    src="/identity/petrobras-patrocinio.png"
+                    alt="Petrobras"
+                    className="h-14 w-auto object-contain"
                   />
                 </div>
-              </motion.div>
 
-              {/* Patrocínio — 1 coluna */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -5, rotate: -0.5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="lg:col-span-1 relative overflow-hidden bg-dhe-magenta rounded-[24px] p-6 flex flex-col justify-between group cursor-default select-none min-h-[180px]"
-                style={{ boxShadow: "0 12px 40px rgba(232,24,122,0.2)" }}
-              >
-                <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                <div className="relative z-10">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/55">Patrocínio</p>
-                  <p className="text-xl font-display font-black text-white leading-tight uppercase mt-3 mb-4">
-                    Sustentabilidade em ação
+                <div className="relative z-10 mt-4">
+                  <p className="text-xs text-dhe-text-muted/70 leading-relaxed">
+                    Apoio estratégico para um encontro nacional sobre sustentabilidade empresarial e direitos humanos.
                   </p>
-                  <img src="/identity/petrobras-patrocinio.png" alt="Petrobras" className="h-8 w-auto object-contain brightness-0 invert" />
                 </div>
               </motion.div>
 
-              {/* Parceiro Cinemateca — 1 coluna */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -5, rotate: 0.5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="lg:col-span-1 relative overflow-hidden bg-dhe-maroon rounded-[24px] p-6 flex flex-col justify-between group cursor-default select-none min-h-[180px]"
-                style={{ boxShadow: "0 12px 40px rgba(123,45,30,0.2)" }}
-              >
-                <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                <div className="relative z-10">
-                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white/55">Parceiro</p>
-                  <p className="text-xl font-display font-black text-white leading-tight uppercase mt-3 mb-4">
-                    Local do Encontro
-                  </p>
-                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca Brasileira" className="h-8 w-auto object-contain brightness-0 invert" />
-                </div>
-              </motion.div>
+            </motion.div>
+          )}
+
+          {/* ─── Faixa de parceiro: Cinemateca ─── */}
+          {inView && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 70, damping: 16, delay: 0.35 }}
+              className="mt-5 relative overflow-hidden rounded-[24px] p-6 flex flex-col sm:flex-row items-center gap-6 cursor-default select-none group"
+              style={{
+                background: "linear-gradient(135deg, #7B2D1E 0%, #5C2016 100%)",
+                boxShadow: "0 8px 32px rgba(123,45,30,0.2)",
+              }}
+            >
+              <div className="absolute inset-0 opacity-[0.07] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
+
+              {/* Label */}
+              <div className="relative z-10 shrink-0">
+                <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] text-white/50 border border-white/15 px-3 py-1.5 rounded-full">
+                  Parceiro — Local do Evento
+                </span>
+              </div>
+
+              {/* Divisor vertical */}
+              <div className="hidden sm:block h-10 w-px bg-white/15 shrink-0" />
+
+              {/* Logo Cinemateca — fundo escuro então precisa invert */}
+              <div className="relative z-10 flex items-center gap-4">
+                <img
+                  src="/identity/parceiro-cinemateca.png"
+                  alt="Cinemateca Brasileira"
+                  className="h-10 w-auto object-contain brightness-0 invert opacity-90"
+                />
+              </div>
+
+              {/* Divisor vertical */}
+              <div className="hidden sm:block h-10 w-px bg-white/15 shrink-0" />
+
+              {/* Info de local */}
+              <div className="relative z-10 flex-1">
+                <p className="text-white font-black text-base font-display leading-none">Cinemateca Brasileira</p>
+                <p className="text-white/50 text-xs mt-1">Largo Sen. Raul Cardoso, 207 — Vila Clementino · São Paulo, SP</p>
+              </div>
+
+              {/* Data badge */}
+              <div className="relative z-10 shrink-0 text-right">
+                <p className="text-white/40 text-[9px] font-black uppercase tracking-widest">Data</p>
+                <p className="text-white font-display font-black text-sm">04 AGO 2026</p>
+              </div>
             </motion.div>
           )}
         </motion.div>
