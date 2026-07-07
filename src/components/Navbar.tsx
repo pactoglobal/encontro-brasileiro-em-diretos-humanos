@@ -3,141 +3,193 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#palestrantes", label: "Palestrantes" },
-  { href: "#atracoes", label: "Atrações" },
-  { href: "#programacao", label: "Programação" },
-  { href: "#local", label: "Local" },
-  { href: "#organizadores", label: "Organizadores" },
-  { href: "#contato", label: "Contato" },
+  { id: "sobre", href: "#/sobre", label: "Sobre" },
+  { id: "palestrantes", href: "#/palestrantes", label: "Palestrantes" },
+  { id: "programacao", href: "#/programacao", label: "Programação" },
+  { id: "local", href: "#/local", label: "Local" },
+  { id: "atracoes", href: "#/atracoes", label: "Atrações" },
+  { id: "organizadores", href: "#/organizadores", label: "Organizadores" },
+  { id: "contato", href: "#/contato", label: "Contato" },
 ];
+
+const SECTIONS = NAV_LINKS.map((link) => link.id);
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const handleScroll = useCallback(() => {
+    // Threshold set to 60px for a more natural activation point
+    const currentScroll = window.scrollY;
+    setScrolled(currentScroll > 60);
 
-  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setMenuOpen(false);
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: "smooth" });
+    // Track active section based on proximity to viewport top
+    for (const id of [...SECTIONS].reverse()) {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        // If element top is close to header height (120px)
+        if (rect.top <= 140) {
+          setActiveSection(id);
+          history.replaceState(null, "", `#/${id}`);
+          return;
+        }
+      }
+    }
+
+    // Fallback to hero/top
+    if (currentScroll < 100) {
+      setActiveSection("hero");
+      history.replaceState(null, "", window.location.pathname);
     }
   }, []);
 
+  useEffect(() => {
+    // Delay listener slightly to let hash scrolling complete first
+    const timeout = setTimeout(handleScroll, 800);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+  const scrollTo = useCallback((id: string) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const offset = scrolled ? 90 : 110;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    history.pushState(null, "", `#/${id}`);
+    window.scrollTo({ top, behavior: "smooth" });
+    setActiveSection(id);
+  }, [scrolled]);
+
   return (
     <>
-      <header
-        className="fixed top-0 inset-x-0 z-50 transition-all duration-500"
-        style={{ paddingTop: scrolled ? "0.5rem" : "1rem" }}
+      <motion.header
+        className="fixed top-0 inset-x-0 z-50 pointer-events-none"
+        animate={{
+          y: 0,
+          paddingTop: scrolled ? "12px" : "24px",
+        }}
+        transition={{ type: "spring", stiffness: 180, damping: 24 }}
       >
-        {/* ─── Capsule Container ─── */}
-        <nav
-          className="dhe-container"
-        >
-          <div
-            className="flex items-center justify-between transition-all duration-500 mx-auto"
+        <nav className="dhe-container">
+          <motion.div
+            className="pointer-events-auto flex items-center justify-between mx-auto"
+            animate={{
+              maxWidth: scrolled ? "1040px" : "1180px",
+              padding: scrolled ? "12px 24px" : "18px 36px",
+              borderRadius: scrolled ? "24px" : "9999px",
+              backgroundColor: scrolled ? "rgba(241, 239, 234, 0.94)" : "rgba(255, 255, 255, 0.08)",
+              borderColor: scrolled ? "rgba(216, 212, 199, 0.8)" : "rgba(255, 255, 255, 0.15)",
+              boxShadow: scrolled ? "0 10px 40px rgba(12, 37, 64, 0.06)" : "0 8px 32px rgba(0, 0, 0, 0.12)",
+            }}
+            transition={{ type: "spring", stiffness: 180, damping: 24 }}
             style={{
-              maxWidth: scrolled ? "100%" : "960px",
-              background: scrolled
-                ? "rgba(241,239,234,0.92)"
-                : "rgba(255,255,255,0.08)",
               backdropFilter: "blur(20px) saturate(1.4)",
               WebkitBackdropFilter: "blur(20px) saturate(1.4)",
-              borderRadius: scrolled ? "16px" : "9999px",
-              border: scrolled
-                ? "1px solid rgba(216,212,199,0.6)"
-                : "1px solid rgba(255,255,255,0.15)",
-              boxShadow: scrolled
-                ? "0 4px 24px rgba(12,37,64,0.08)"
-                : "0 4px 32px rgba(0,0,0,0.15)",
-              padding: scrolled ? "0.5rem 1.25rem" : "0.5rem 0.5rem 0.5rem 1.25rem",
+              borderWidth: "1px",
+              borderStyle: "solid",
             }}
           >
             {/* Logo */}
-            <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="shrink-0">
-              <img
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="shrink-0 cursor-pointer flex items-center focus:outline-none"
+            >
+              <motion.img
                 src="/identity/logo-evento.png"
                 alt="Encontro DH&E Brasil 2026"
-                className="w-auto object-contain transition-all duration-500"
+                className="w-auto object-contain transition-all duration-300"
                 style={{
-                  height: scrolled ? "28px" : "26px",
+                  height: scrolled ? "30px" : "33px",
                   filter: scrolled ? "none" : "brightness(0) invert(1)",
                 }}
               />
-            </a>
+            </button>
 
-            {/* Desktop nav links */}
-            <ul className="hidden lg:flex items-center gap-1">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    onClick={(e) => handleNavClick(e, href)}
-                    className="px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] transition-all duration-200"
-                    style={{
-                      color: scrolled ? "rgba(28,35,41,0.7)" : "rgba(255,255,255,0.75)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = scrolled
-                        ? "rgba(12,37,64,0.06)"
-                        : "rgba(255,255,255,0.12)";
-                      e.currentTarget.style.color = scrolled ? "#E8187A" : "#ffffff";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.color = scrolled
-                        ? "rgba(28,35,41,0.7)"
-                        : "rgba(255,255,255,0.75)";
-                    }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
+            {/* Desktop Navigation Links */}
+            <ul className="hidden lg:flex items-center gap-1.5">
+              {NAV_LINKS.map(({ id, label }) => {
+                const isActive = activeSection === id;
+                return (
+                  <li key={id} className="relative">
+                    <button
+                      onClick={() => scrollTo(id)}
+                      className="px-3.5 py-2 rounded-full text-[10px] font-sans font-extrabold uppercase tracking-[0.12em] transition-all duration-300 relative focus:outline-none cursor-pointer"
+                      style={{
+                        color: isActive
+                          ? (scrolled ? "#E8187A" : "#FFFFFF")
+                          : (scrolled ? "rgba(28,35,41,0.6)" : "rgba(255,255,255,0.65)"),
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.color = scrolled ? "#0C2540" : "#FFFFFF";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.color = scrolled
+                            ? "rgba(28,35,41,0.6)"
+                            : "rgba(255,255,255,0.65)";
+                        }
+                      }}
+                    >
+                      {label}
+                      {/* Active Indicator Sliding Highlight (layoutId) */}
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeUnderline"
+                          className="absolute bottom-0 left-3.5 right-3.5 h-0.5 rounded-full"
+                          style={{
+                            backgroundColor: scrolled ? "#E8187A" : "#FFFFFF",
+                          }}
+                          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                        />
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
 
-            {/* CTA button */}
-            <a
-              href="#contato"
-              onClick={(e) => handleNavClick(e, "#contato")}
-              className="hidden lg:inline-flex items-center justify-center text-[10px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300"
+            {/* CTA Button */}
+            <button
+              onClick={() => scrollTo("contato")}
+              className="hidden lg:inline-flex items-center justify-center text-[10px] font-sans font-extrabold uppercase tracking-[0.12em] rounded-full transition-all duration-300 cursor-pointer focus:outline-none hover:shadow-lg"
               style={{
-                padding: "0.5rem 1.25rem",
-                background: "#E8187A",
-                color: "#fff",
-                boxShadow: "0 2px 12px rgba(232,24,122,0.3)",
+                padding: scrolled ? "10px 22px" : "12px 26px",
+                background: scrolled ? "#E8187A" : "#FFFFFF",
+                color: scrolled ? "#FFFFFF" : "#0C2540",
+                boxShadow: scrolled ? "0 4px 14px rgba(232,24,122,0.25)" : "0 4px 14px rgba(255,255,255,0.15)",
               }}
             >
               Inscreva-se
-            </a>
+            </button>
 
-            {/* Mobile hamburger */}
+            {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full cursor-pointer transition-all duration-200"
+              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-full cursor-pointer transition-all duration-300 focus:outline-none"
               style={{
                 background: scrolled ? "rgba(12,37,64,0.06)" : "rgba(255,255,255,0.12)",
-                color: scrolled ? "#0C2540" : "#fff",
+                color: scrolled ? "#0C2540" : "#FFFFFF",
               }}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             >
-              {menuOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-          </div>
+          </motion.div>
         </nav>
-      </header>
+      </motion.header>
 
-      {/* Mobile fullscreen overlay */}
+      {/* Mobile Fullscreen Navigation Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -149,7 +201,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 lg:hidden"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-[#0C2540]/95 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-[#0C2540]/96 backdrop-blur-xl" />
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">
@@ -157,34 +209,38 @@ export function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="flex flex-col items-center gap-2 mb-10"
+                className="flex flex-col items-center gap-1 mb-10 w-full max-w-xs"
               >
-                {NAV_LINKS.map(({ href, label }, i) => (
-                  <li key={href}>
-                    <motion.a
-                      href={href}
-                      onClick={(e) => handleNavClick(e, href)}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + i * 0.04 }}
-                      className="block py-3 text-lg font-display font-black uppercase tracking-widest text-white/80 hover:text-dhe-magenta transition-colors text-center"
-                    >
-                      {label}
-                    </motion.a>
-                  </li>
-                ))}
+                {NAV_LINKS.map(({ id, label }, i) => {
+                  const isActive = activeSection === id;
+                  return (
+                    <li key={id} className="w-full text-center">
+                      <motion.button
+                        onClick={() => scrollTo(id)}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 + i * 0.04 }}
+                        className="w-full py-4 text-base font-display font-black uppercase tracking-widest transition-colors focus:outline-none cursor-pointer"
+                        style={{
+                          color: isActive ? "#E8187A" : "rgba(255, 255, 255, 0.75)",
+                        }}
+                      >
+                        {label}
+                      </motion.button>
+                    </li>
+                  );
+                })}
               </motion.ul>
 
-              <motion.a
-                href="#contato"
-                onClick={(e) => handleNavClick(e, "#contato")}
+              <motion.button
+                onClick={() => scrollTo("contato")}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 }}
-                className="dhe-btn-primary px-10 py-4"
+                className="dhe-btn-primary px-12 py-4 shadow-lg focus:outline-none cursor-pointer"
               >
                 Inscreva-se
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         )}
