@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "../hooks/useInView";
+import { Target, Users, ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 const BULLETS = [
   "Analisar como transformações geopolíticas e econômicas globais incidem sobre empresas e cadeias de valor",
@@ -10,35 +12,54 @@ const BULLETS = [
 ];
 
 const BULLET_COLORS = [
-  { color: "#E8187A", bg: "rgba(232,24,122,0.07)" },
-  { color: "#4A8C3F", bg: "rgba(74,140,63,0.07)" },
-  { color: "#7B2D1E", bg: "rgba(123,45,30,0.07)" },
-  { color: "#E05A3A", bg: "rgba(224,90,58,0.07)" },
-  { color: "#0C2540", bg: "rgba(12,37,64,0.07)" },
+  { color: "#E8187A", bg: "rgba(232,24,122,0.08)" },
+  { color: "#4A8C3F", bg: "rgba(74,140,63,0.08)" },
+  { color: "#7B2D1E", bg: "rgba(123,45,30,0.08)" },
+  { color: "#E05A3A", bg: "rgba(224,90,58,0.08)" },
+  { color: "#0C2540", bg: "rgba(12,37,64,0.08)" },
+];
+
+const CINEMATECA_IMAGES = [
+  "/identity/cinemateca-facade.jpg",
+  "/identity/cinemateca-gardens.jpg",
 ];
 
 export function About() {
   const [ref, inView] = useInView();
+  const [activePhoto, setActivePhoto] = useState(0);
 
-  const textVariants = {
-    hidden: { opacity: 0, x: -30 },
+  // Auto-play the photos every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActivePhoto((prev) => (prev + 1) % CINEMATECA_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextPhoto = useCallback(() => {
+    setActivePhoto((prev) => (prev + 1) % CINEMATECA_IMAGES.length);
+  }, []);
+
+  const prevPhoto = useCallback(() => {
+    setActivePhoto((prev) => (prev - 1 + CINEMATECA_IMAGES.length) % CINEMATECA_IMAGES.length);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      x: 0,
-      transition: { type: "spring" as const, stiffness: 60, damping: 15 },
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 60,
+        damping: 15,
+        staggerChildren: 0.1,
+      },
     },
   };
 
-  const listContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.09, delayChildren: 0.15 },
-    },
-  };
-
-  const listItemVariants = {
-    hidden: { opacity: 0, y: 16 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -47,91 +68,256 @@ export function About() {
   };
 
   return (
-    <section id="sobre" className="dhe-section-alt relative overflow-hidden">
-      {/* Fita KV sutil */}
-      <div className="absolute top-0 right-0 w-64 h-full opacity-[0.04] pointer-events-none hidden lg:block"
-        style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "right top" }} />
+    <section id="sobre" className="dhe-section-light relative overflow-hidden bg-[#F1EFEA] py-20 lg:py-28">
+      {/* Decorative ribbons in background */}
+      <div
+        className="absolute top-0 right-0 w-64 h-full opacity-[0.03] pointer-events-none hidden lg:block"
+        style={{
+          backgroundImage: 'url("/identity/kv-sem-fundo.png")',
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right top",
+        }}
+      />
 
       <div className="dhe-container">
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start"
-        >
-          {/* Texto */}
-          <motion.div
-            variants={textVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <p className="dhe-section-label">Sobre o Encontro</p>
-            <div className="dhe-stripe-divider">
-              <span /><span /><span /><span />
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dhe-navy mb-6 leading-tight">
-              Empresas e Direitos Humanos em um mundo em profunda transformação
-            </h2>
-
-            <div className="space-y-4 text-base leading-relaxed text-dhe-text-muted">
-              <p>
-                Nos últimos anos, sucessivas crises globais têm interrompido e revertido avanços no
-                desenvolvimento sustentável. A pandemia, conflitos armados, mudanças climáticas e a
-                instrumentalização geopolítica da economia criaram um cenário de elevada incerteza e volatilidade.
-              </p>
-              <p>
-                As empresas não operam em um vácuo. A capacidade de enfrentar riscos sistêmicos deixou de ser
-                questão de conformidade ou reputação — passou a integrar estratégias de resiliência e
-                competitividade de longo prazo.
-              </p>
-              <p>
-                Paradoxalmente, é precisamente em cenários de crise que os impactos dos negócios sobre os
-                direitos de trabalhadores, comunidades e territórios se intensificam, tornando a agenda
-                não apenas relevante, mas estratégica e necessária.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Objetivos */}
-          <motion.div
-            variants={listContainerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <p className="dhe-section-label mb-4">Objetivos do Encontro</p>
-
-            <ul className="space-y-3">
-              {BULLETS.map((item, i) => (
-                <motion.li
-                  key={i}
-                  variants={listItemVariants}
-                  className="dhe-card-editorial p-4 flex gap-4 items-start"
-                >
-                  <span
-                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-black mt-0.5"
-                    style={{ background: BULLET_COLORS[i].bg, color: BULLET_COLORS[i].color }}
-                  >
-                    {i + 1}
-                  </span>
-                  <p className="text-sm leading-relaxed text-dhe-text-muted">{item}</p>
-                </motion.li>
-              ))}
-            </ul>
-
-            {/* Público-Alvo */}
-            <motion.div
-              variants={listItemVariants}
-              className="mt-6 p-5 rounded-2xl border-l-4 border-l-dhe-green"
-              style={{ background: "rgba(74,140,63,0.05)", border: "1px solid rgba(74,140,63,0.15)", borderLeft: "4px solid #4A8C3F" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.24em] mb-2 text-dhe-green">
-                Público-Alvo
-              </p>
-              <p className="text-sm leading-relaxed text-dhe-text-muted">
-                Empresas nacionais e multinacionais · Representantes do poder público · Organizações da
-                sociedade civil e movimentos sociais · Academia e centros de pesquisa · Organismos internacionais
-              </p>
-            </motion.div>
-          </motion.div>
+        {/* Section Header */}
+        <div className="mb-12">
+          <p className="dhe-section-label">Sobre o Encontro</p>
+          <div className="dhe-stripe-divider">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dhe-navy max-w-3xl leading-tight">
+            Empresas e Direitos Humanos em um mundo em transformação
+          </h2>
         </div>
+
+        {/* Bento Grid */}
+        <motion.div
+          ref={ref as React.RefObject<HTMLDivElement>}
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {/* Card 1: O Contexto (Spans 2 columns on desktop) */}
+          <motion.div
+            variants={itemVariants}
+            className="md:col-span-2 bg-white border border-[#D8D4C7] rounded-3xl p-8 flex flex-col justify-between shadow-[0_4px_24px_rgba(12,37,64,0.03)] relative overflow-hidden group hover:border-[#B8B2A4] transition-all duration-300"
+          >
+            <div className="absolute top-0 right-0 p-6 text-[#D8D4C7] group-hover:text-dhe-magenta transition-colors duration-300">
+              <ArrowUpRight className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#FAF9F6] border border-[#D8D4C7]/60 text-dhe-navy mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-dhe-green animate-pulse" />
+                Cenário Atual
+              </span>
+              <h3 className="text-2xl font-display font-black text-dhe-navy mb-5 max-w-xl leading-snug">
+                Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
+              </h3>
+              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-dhe-text-muted">
+                <p>
+                  Nos últimos anos, sucessivas crises globais têm interrompido e revertido avanços no
+                  desenvolvimento sustentável. A pandemia, conflitos armados, mudanças climáticas e a
+                  instrumentalização geopolítica da economia criaram um cenário de elevada incerteza e volatilidade.
+                </p>
+                <p>
+                  As empresas não operam em um vácuo. A capacidade de enfrentar riscos sistêmicos deixou de ser
+                  questão de conformidade ou reputação — passou a integrar estratégias de resiliência e
+                  competitividade de longo prazo.
+                </p>
+                <p>
+                  É precisamente em cenários de crise que os impactos dos negócios sobre os direitos de
+                  trabalhadores, comunidades e territórios se intensificam, tornando a agenda
+                  não apenas relevante, mas estratégica e necessária para a liderança empresarial.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Cinemateca Brasileira iOS Premium Slider */}
+          <motion.div
+            variants={itemVariants}
+            className="md:col-span-1 bg-white border border-[#D8D4C7] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(12,37,64,0.03)] flex flex-col justify-between hover:border-[#B8B2A4] transition-all duration-300"
+          >
+            {/* Slider Area */}
+            <div className="relative aspect-[16/10] bg-black overflow-hidden group">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activePhoto}
+                  src={CINEMATECA_IMAGES[activePhoto]}
+                  alt="Cinemateca Brasileira"
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-full h-full object-cover"
+                />
+              </AnimatePresence>
+
+              {/* iOS style overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
+              <span className="absolute top-4 left-4 inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded bg-black/40 backdrop-blur-md text-white border border-white/10">
+                <MapPin className="w-2.5 h-2.5 text-dhe-coral" />
+                Local do Evento
+              </span>
+
+              {/* Slider Controls */}
+              <button
+                type="button"
+                onClick={prevPhoto}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                aria-label="Foto anterior"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={nextPhoto}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                aria-label="Próxima foto"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              {/* Slider Indicator Dots */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                {CINEMATECA_IMAGES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActivePhoto(idx)}
+                    className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+                    style={{
+                      backgroundColor: idx === activePhoto ? "#FFFFFF" : "rgba(255, 255, 255, 0.4)",
+                      width: idx === activePhoto ? "12px" : "6px",
+                    }}
+                    aria-label={`Foto ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Partner/Venue Details Info */}
+            <div className="p-6 flex flex-col justify-between flex-1">
+              <div>
+                <h4 className="text-lg font-display font-black text-dhe-navy leading-tight">
+                  Cinemateca Brasileira
+                </h4>
+                <p className="text-xs text-dhe-text-muted mt-1">
+                  Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
+                </p>
+              </div>
+
+              {/* Partner Logo Card (iOS premium style border and glass highlight) */}
+              <div className="mt-5 pt-4 border-t border-[#D8D4C7]/60 flex items-center justify-between">
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-[0.2em] text-dhe-text-muted">
+                    Co-realização e Apoio
+                  </p>
+                  <p className="text-[10px] font-bold text-dhe-navy mt-0.5">Parceiro Oficial de Espaço</p>
+                </div>
+                <div className="p-2 bg-[#FAF9F6] border border-[#D8D4C7] rounded-xl flex items-center justify-center shadow-sm select-none hover:bg-white transition-colors duration-200">
+                  <img
+                    src="/identity/parceiro-cinemateca.png"
+                    alt="Cinemateca Brasileira Logo"
+                    className="h-7 w-auto object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Público-Alvo (Spans 1 column on desktop) */}
+          <motion.div
+            variants={itemVariants}
+            className="md:col-span-1 bg-[#0C2540] text-white border border-[#0C2540] rounded-3xl p-6 flex flex-col justify-between shadow-[0_4px_24px_rgba(12,37,64,0.05)] hover:border-[#1c3350] transition-all duration-300 relative overflow-hidden"
+          >
+            {/* Background elements */}
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-dhe-magenta/10 rounded-full blur-2xl pointer-events-none" />
+
+            <div>
+              <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-dhe-magenta mb-6">
+                <Users className="w-5 h-5" />
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3 block">
+                Público-Alvo
+              </span>
+              <h3 className="text-xl font-display font-black leading-snug mb-4">
+                Quem participará do Encontro
+              </h3>
+              <p className="text-xs text-white/70 leading-relaxed mb-6">
+                Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
+              </p>
+            </div>
+
+            {/* Target Badges */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Lideranças Corporativas",
+                "Poder Público",
+                "Sociedade Civil",
+                "Academia",
+                "Organismos Internacionais",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[9px] font-bold px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/90 hover:bg-white/10 transition-colors"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Card 4: Objetivos (Spans 2 columns on desktop) */}
+          <motion.div
+            variants={itemVariants}
+            className="md:col-span-2 bg-[#FAF9F6] border border-[#D8D4C7] rounded-3xl p-6 flex flex-col justify-between shadow-[0_4px_24px_rgba(12,37,64,0.03)] hover:border-[#B8B2A4] transition-all duration-300"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-2xl bg-[#E8187A]/10 flex items-center justify-center text-[#E8187A]">
+                  <Target className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta block">
+                    Diretrizes
+                  </span>
+                  <h4 className="text-lg font-display font-black text-dhe-navy">
+                    Objetivos Estratégicos
+                  </h4>
+                </div>
+              </div>
+
+              {/* Objectives List inside Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {BULLETS.map((bullet, i) => (
+                  <div
+                    key={i}
+                    className="p-4 bg-white border border-[#D8D4C7]/60 rounded-2xl flex gap-3.5 items-start hover:border-[#D8D4C7] transition-colors"
+                    style={{
+                      gridColumn: i === 2 ? "span 1 sm:span-2" : "auto", // Center the middle bullet on wide screens
+                    }}
+                  >
+                    <span
+                      className="shrink-0 w-6.5 h-6.5 rounded-xl flex items-center justify-center text-[10px] font-black"
+                      style={{ background: BULLET_COLORS[i].bg, color: BULLET_COLORS[i].color }}
+                    >
+                      {i + 1}
+                    </span>
+                    <p className="text-xs leading-relaxed text-dhe-text-muted">{bullet}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

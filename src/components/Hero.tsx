@@ -192,8 +192,8 @@ export function Hero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
-              className="font-display font-black text-white uppercase leading-[0.92] tracking-tight mb-6"
-              style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)" }}
+              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-6"
+              style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)", color: "#FFFFFF" }}
             >
               Pluralidade<br />
               <span style={{ color: "#E8187A" }}>que Constrói</span>
