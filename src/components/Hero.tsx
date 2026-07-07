@@ -175,7 +175,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
-              className="flex flex-wrap gap-2.5 mb-7"
+              className="flex flex-wrap gap-2.5 mb-8"
             >
               <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white">
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-magenta animate-pulse" />
@@ -187,27 +187,13 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Logo do evento */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
-              className="mb-5"
-            >
-              <img
-                src="/identity/logo-evento.png"
-                alt="I Encontro DH&E Brasil 2026 — Pluralidade que Constrói"
-                className="h-auto w-full max-w-[260px] sm:max-w-[320px] object-contain brightness-0 invert"
-              />
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 80 }}
-              className="font-display font-black text-white uppercase leading-[0.92] tracking-tight mb-5"
-              style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
+              transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
+              className="font-display font-black text-white uppercase leading-[0.92] tracking-tight mb-6"
+              style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)" }}
             >
               Pluralidade<br />
               <span style={{ color: "#E8187A" }}>que Constrói</span>
