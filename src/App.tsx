@@ -65,16 +65,18 @@ function App() {
         {/* ATO 1 — A PROMESSA & APRESENTAÇÃO */}
         <Hero />
         <About />
-        <Speakers />
 
         {/* ATO 2 — CRONOGRAMA & CONTEÚDO */}
         <Agenda />
-        
-        {/* ATO 3 — VIVENCIAL & ATRAÇÕES */}
+
+        {/* ATO 3 — QUEM FAZ ACONTECER */}
+        <Speakers />
+
+        {/* ATO 4 — VIVENCIAL & ATRAÇÕES */}
         <Venue />
         <Attractions />
 
-        {/* ATO 4 — APOIO & CONVERSÃO */}
+        {/* ATO 5 — APOIO & CONVERSÃO */}
         <Organizers />
         <Contact />
       </main>
