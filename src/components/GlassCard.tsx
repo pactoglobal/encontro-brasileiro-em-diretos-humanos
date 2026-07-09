@@ -1,15 +1,17 @@
-import { motion, HTMLMotionProps } from "framer-motion";
-import { ReactNode } from "react";
+import { motion } from "framer-motion";
+import type { ReactNode, CSSProperties } from "react";
 
 // Tipos das variantes de glass
 type GlassVariant = "default" | "highlight" | "dark" | "accent";
 
-interface GlassCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
+interface GlassCardProps {
   children: ReactNode;
   variant?: GlassVariant;
   accentColor?: string;
   showBorder?: boolean;
-  hoverable?: boolean;
+  className?: string;
+  style?: CSSProperties;
+  onClick?: () => void;
 }
 
 // Configuração de variantes com cores ODS
@@ -41,10 +43,9 @@ export function GlassCard({
   variant = "default",
   accentColor,
   showBorder = true,
-  hoverable = false,
   className = "",
   style,
-  ...props
+  onClick,
 }: GlassCardProps) {
   const variantStyle = VARIANT_STYLES[variant];
   const borderColor = accentColor ? `${accentColor}40` : variantStyle.border;
@@ -52,7 +53,8 @@ export function GlassCard({
 
   return (
     <motion.div
-      className={`rounded-2xl p-5 sm:p-6 ${hoverable ? "cursor-default" : ""} ${className}`}
+      className={`rounded-2xl p-5 sm:p-6 ${onClick ? "cursor-pointer" : ""} ${className}`}
+      onClick={onClick}
       style={{
         background: bgColor,
         backdropFilter: "blur(20px)",
@@ -61,18 +63,19 @@ export function GlassCard({
         color: variantStyle.text,
         ...style,
       }}
-      {...props}
     >
       {children}
     </motion.div>
   );
 }
 
-// Componente especializados para bento grid
-interface BentoItemProps extends HTMLMotionProps<"div"> {
+// Componente especializado para bento grid
+interface BentoItemProps {
   children: ReactNode;
   colSpan?: 1 | 2 | 3 | 4;
   accentColor?: string;
+  className?: string;
+  style?: CSSProperties;
 }
 
 export function BentoItem({
@@ -81,7 +84,6 @@ export function BentoItem({
   accentColor,
   className = "",
   style,
-  ...props
 }: BentoItemProps) {
   const colSpanClass = {
     1: "",
@@ -91,7 +93,7 @@ export function BentoItem({
   }[colSpan];
 
   return (
-    <motion.div
+    <div
       className={`rounded-2xl p-4 sm:p-5 ${colSpanClass} ${className}`}
       style={{
         background: accentColor ? `${accentColor}12` : "rgba(255,255,255,0.05)",
@@ -100,10 +102,9 @@ export function BentoItem({
         border: accentColor ? `1px solid ${accentColor}30` : "1px solid rgba(255,255,255,0.08)",
         ...style,
       }}
-      {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
