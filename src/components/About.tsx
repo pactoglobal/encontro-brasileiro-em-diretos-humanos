@@ -76,12 +76,10 @@ export function About() {
     },
   };
 
-  // Shared hover animation: subtle lift + glow
-  const hoverScale = {
-    scale: 1.01,
-    y: -4,
-    boxShadow: "0 12px 40px rgba(12,37,64,0.08)",
-    transition: { type: "spring" as const, stiffness: 300, damping: 20 },
+  // Sem hover scale - apenas transições suaves
+  const hoverStyle = {
+    boxShadow: "0 8px 32px rgba(12,37,64,0.06)",
+    transition: { duration: 0.2 },
   };
 
   return (
@@ -123,8 +121,8 @@ export function About() {
           {/* Card 1: Contexto — bg image + dark overlay, spans 2 cols */}
           <motion.div
             variants={itemVariants}
-            whileHover={hoverScale}
-            className="md:col-span-2 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group cursor-default border border-white/20"
+            whileHover={hoverStyle}
+            className="md:col-span-2 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden border border-white/20"
           >
             {/* Background image */}
             <div
@@ -142,10 +140,10 @@ export function About() {
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green animate-pulse" />
                 Cenário Atual
               </span>
-              <h3 className="text-2xl font-display font-black text-dhe-magenta mb-5 max-w-xl leading-snug">
+              <h3 className="text-xl sm:text-2xl font-display font-black text-dhe-magenta mb-5 max-w-xl leading-snug">
                 Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
               </h3>
-              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/80">
+              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/85">
                 <p>
                   Nos últimos anos, sucessivas crises globais têm interrompido e revertido avanços no
                   desenvolvimento sustentável. A pandemia, conflitos armados, mudanças climáticas e a
@@ -168,8 +166,8 @@ export function About() {
           {/* Card 2: Cinemateca — slider, spans 1 col */}
           <motion.div
             variants={itemVariants}
-            whileHover={hoverScale}
-            className="md:col-span-1 bg-white border border-[#D8D4C7] rounded-3xl overflow-hidden flex flex-col justify-between group cursor-default"
+            whileHover={hoverStyle}
+            className="md:col-span-1 bg-white border border-[#D8D4C7] rounded-3xl overflow-hidden flex flex-col justify-between"
           >
             {/* Slider */}
             <div className="relative aspect-[16/10] bg-black overflow-hidden">
@@ -235,8 +233,8 @@ export function About() {
           {/* Card 3: Público-Alvo — bg image + navy overlay, spans 1 col */}
           <motion.div
             variants={itemVariants}
-            whileHover={hoverScale}
-            className="md:col-span-1 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-default border border-white/20"
+            whileHover={hoverStyle}
+            className="md:col-span-1 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border border-white/20"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -268,8 +266,8 @@ export function About() {
           {/* Card 4: Objetivos — bg image + light overlay, spans 2 cols */}
           <motion.div
             variants={itemVariants}
-            whileHover={hoverScale}
-            className="md:col-span-2 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-default border border-[#D8D4C7]/40"
+            whileHover={hoverStyle}
+            className="md:col-span-2 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border border-[#D8D4C7]/40"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"

@@ -30,6 +30,32 @@ const SLIDE_ANIMATIONS = [
   { initial: { scale: 1.10, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
 ];
 
+// Logos de todas as organizações -ODS palette glassmorphism bento
+const ORGANIZACOES = [
+  // Realização
+  { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
+  // Co-realização
+  { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
+  { name: "CERALC", logo: "/identity/co-realizacao-1.png", tipo: "corealizacao", alt: "Conduta Empresarial Responsável na AL e Caribe" },
+  // Parceiros Internacionais
+  { name: "OIT", logo: "/identity/oit-logo.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
+  { name: "PNUD", logo: "/identity/pnud-logo.png", tipo: "parceiro-int", alt: "Programa das Nações Unidas para o Desenvolvimento" },
+  { name: "OCDE", logo: "/identity/ocde-logo.png", tipo: "parceiro-int", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
+  // Patrocinador
+  { name: "Petrobras", logo: "/identity/petrobras-patrocinio.png", tipo: "patrocinador", alt: "Petrobras" },
+  // Parceiro Local
+  { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira" },
+];
+
+// Mapeamento de cores por tipo (ODS palette)
+const TIPO_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
+  realizacao:    { border: "#E8187A", badge: "rgba(232,24,122,0.15)", badgeText: "#E8187A" },
+  corealizacao:  { border: "#0C2540", badge: "rgba(12,37,64,0.15)",  badgeText: "#0C2540" },
+  parceiro_int:  { border: "#2979FF", badge: "rgba(41,121,255,0.15)", badgeText: "#2979FF" },
+  patrocinador:  { border: "#4A8C3F", badge: "rgba(74,140,63,0.15)",  badgeText: "#4A8C3F" },
+  parceiro_local:{ border: "#7B2D1E", badge: "rgba(123,45,30,0.15)",  badgeText: "#7B2D1E" },
+};
+
 export function Hero() {
   const [current, setCurrent] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
@@ -92,7 +118,7 @@ export function Hero() {
           >
             {/* Ken Burns na imagem */}
             <motion.div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${SLIDES[current].src})` }}
               initial={slideAnim.initial}
               animate={slideAnim.animate}
@@ -133,7 +159,7 @@ export function Hero() {
               onClick={() => goTo(i, i > current ? 1 : -1)}
               className="pointer-events-auto transition-all duration-300 rounded-full focus:outline-none"
               style={{
-                width: i === current ? "3px" : "3px",
+                width: "3px",
                 height: i === current ? "28px" : "8px",
                 background: i === current ? "#E8187A" : "rgba(255,255,255,0.35)",
               }}
@@ -143,11 +169,11 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Setas prev/next — visíveis no hover da seção */}
+      {/* Setas prev/next */}
       <button
         type="button"
         onClick={prev}
-        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 focus:outline-none"
+        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-200 focus:outline-none"
         aria-label="Slide anterior"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -155,7 +181,7 @@ export function Hero() {
       <button
         type="button"
         onClick={next}
-        className="absolute right-12 sm:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 focus:outline-none"
+        className="absolute right-12 sm:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-200 focus:outline-none"
         aria-label="Próximo slide"
       >
         <ChevronRight className="w-5 h-5" />
@@ -164,8 +190,9 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CONTEÚDO PRINCIPAL
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-32 pb-24 lg:pt-40 lg:pb-32">
-        <div className="flex-1 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-28 pb-20 lg:pt-36 lg:pb-28">
+
+        <div className="flex-1 grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
 
           {/* ── Coluna Esquerda: texto + CTA ── */}
           <div className="lg:col-span-7 flex flex-col gap-0">
@@ -175,14 +202,14 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
-              className="flex flex-wrap gap-2.5 mb-8"
+              className="flex flex-wrap gap-2 mb-6"
             >
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-dhe-magenta animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                <span className="w-2 h-2 rounded-full bg-dhe-magenta animate-pulse" />
                 I Fórum Brasileiro
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-dhe-green" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                <span className="w-2 h-2 rounded-full bg-dhe-green" />
                 Evento Gratuito
               </span>
             </motion.div>
@@ -192,25 +219,25 @@ export function Hero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
-              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-6"
-              style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)", color: "#FFFFFF" }}
+              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", color: "#FFFFFF" }}
             >
               Pluralidade<br />
               <span style={{ color: "#E8187A" }}>que Constrói</span>
             </motion.h1>
 
-            {/* Subtítulo */}
+            {/* Subtítulo - TYPOGRAPHY: Increased for readability */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.28, type: "spring", stiffness: 80 }}
-              className="text-base sm:text-lg text-white/70 leading-relaxed mb-8 max-w-xl"
+              className="text-base sm:text-lg text-white/75 leading-relaxed mb-6 max-w-xl"
             >
               O espaço nacional que conecta lideranças empresariais, sociedade civil,
               poder público e academia para debater Empresas e Direitos Humanos orientados à ação.
             </motion.p>
 
-            {/* Event info pill row */}
+            {/* Event info pill row - TYPOGRAPHY: Increased text size */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -222,8 +249,8 @@ export function Hero() {
                 { icon: Clock, text: "9h às 19h30" },
                 { icon: MapPin, text: "Cinemateca Brasileira · SP" },
               ].map(({ icon: Icon, text }) => (
-                <span key={text} className="inline-flex items-center gap-2 text-xs font-bold text-white/80 bg-white/8 backdrop-blur-sm border border-white/15 px-3.5 py-2 rounded-full">
-                  <Icon className="w-3.5 h-3.5 text-dhe-magenta shrink-0" strokeWidth={2} />
+                <span key={text} className="inline-flex items-center gap-2 text-sm font-semibold text-white/85 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-full">
+                  <Icon className="w-4 h-4 text-dhe-magenta shrink-0" strokeWidth={2} />
                   {text}
                 </span>
               ))}
@@ -234,7 +261,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.40, type: "spring", stiffness: 80 }}
-              className="flex flex-col sm:flex-row gap-3 mb-12"
+              className="flex flex-col sm:flex-row gap-3 mb-10"
             >
               <button
                 type="button"
@@ -246,18 +273,18 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => scrollTo("contato")}
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 bg-white/8 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-white/15 transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-sm font-bold uppercase tracking-[0.08em] transition-all duration-200 cursor-pointer"
               >
                 Inscreva-se
               </button>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats - TYPOGRAPHY: Increased sizes */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="flex items-center gap-8 pt-6 border-t border-white/10"
+              className="flex items-center gap-10 pt-6 border-t border-white/10"
             >
               {[
                 { value: "30+", label: "Painelistas", color: "#E8187A" },
@@ -265,17 +292,17 @@ export function Hero() {
                 { value: "100%", label: "Gratuito", color: "#E05A3A" },
               ].map(({ value, label, color }) => (
                 <div key={label}>
-                  <p className="text-2xl sm:text-3xl font-display font-black leading-none" style={{ color }}>{value}</p>
-                  <p className="text-[10px] font-bold text-white/45 uppercase tracking-wider mt-1.5">{label}</p>
+                  <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
+                  <p className="text-xs font-bold text-white/50 uppercase tracking-wider mt-2">{label}</p>
                 </div>
               ))}
             </motion.div>
           </div>
 
-          {/* ── Coluna Direita: Countdown + Caption do slide ── */}
+          {/* ── Coluna Direita: Countdown + Caption + Logos ── */}
           <div className="lg:col-span-5 flex flex-col gap-5 items-start lg:items-end">
 
-            {/* Countdown */}
+            {/* Countdown - TYPOGRAPHY: Increased numbers */}
             {!timeLeft.expired && (
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
@@ -283,7 +310,7 @@ export function Hero() {
                 transition={{ delay: 0.35, type: "spring", stiffness: 70 }}
                 className="w-full"
               >
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-3 lg:text-right">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/40 mb-3 lg:text-right">
                   Faltam para o evento
                 </p>
                 <div className="grid grid-cols-4 gap-2">
@@ -295,10 +322,10 @@ export function Hero() {
                   ].map(({ val, unit }, i) => (
                     <div
                       key={unit}
-                      className="flex flex-col items-center justify-center rounded-2xl py-4 px-2 select-none"
+                      className="flex flex-col items-center justify-center rounded-2xl py-4 px-2"
                       style={{
-                        background: "rgba(255,255,255,0.07)",
-                        backdropFilter: "blur(12px)",
+                        background: "rgba(255,255,255,0.08)",
+                        backdropFilter: "blur(16px)",
                         border: "1px solid rgba(255,255,255,0.12)",
                       }}
                     >
@@ -309,29 +336,29 @@ export function Hero() {
                           animate={{ y: 0, opacity: 1 }}
                           exit={{ y: 12, opacity: 0 }}
                           transition={{ duration: 0.22 }}
-                          className="text-2xl sm:text-3xl font-extrabold font-mono leading-none"
+                          className="text-2xl sm:text-3xl font-extrabold leading-none"
                           style={{ color: i === 3 ? "#E8187A" : "white" }}
                         >
                           {String(val).padStart(2, "0")}
                         </motion.span>
                       </AnimatePresence>
-                      <span className="text-[8px] font-bold uppercase tracking-widest text-white/40 mt-2">{unit}</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-white/40 mt-2">{unit}</span>
                     </div>
                   ))}
                 </div>
               </motion.div>
             )}
 
-            {/* Caption dinâmico do slide atual */}
+            {/* Caption dinâmico do slide atual - GLASSMORPHISM */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, type: "spring", stiffness: 70 }}
               className="w-full rounded-2xl p-5"
               style={{
-                background: "rgba(255,255,255,0.06)",
-                backdropFilter: "blur(16px)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.08)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.12)",
               }}
             >
               <AnimatePresence mode="wait">
@@ -344,11 +371,11 @@ export function Hero() {
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-6 h-px bg-dhe-magenta" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.22em] text-dhe-magenta">
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-dhe-magenta">
                       {SLIDES[current].caption}
                     </span>
                   </div>
-                  <p className="text-sm text-white/65 leading-relaxed">
+                  <p className="text-sm text-white/70 leading-relaxed">
                     {SLIDES[current].sub}
                   </p>
                 </motion.div>
@@ -366,23 +393,63 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* Logo Pacto Global */}
+            {/* ── BENTO GRID: Todos os Logos GLASSMORPHISM ── */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.55 }}
-              className="flex items-center gap-3 mt-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.55, type: "spring", stiffness: 70 }}
+              className="w-full rounded-2xl p-4"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
             >
-              <img
-                src="/identity/logo-pacto-global.png"
-                alt="Pacto Global ONU"
-                className="h-8 w-auto object-contain brightness-0 invert opacity-60"
-              />
-              <img
-                src="/identity/adhe-logo.png"
-                alt="ADHE"
-                className="h-6 w-auto object-contain brightness-0 invert opacity-60"
-              />
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3 lg:text-right">
+                Realização · Co-realização · Parceiros
+              </p>
+
+              {/* Bento Grid responsivo - 3 colunas em desktop, 2 em mobile */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                {ORGANIZACOES.map((org) => {
+                  const colors = TIPO_COLORS[org.tipo] || TIPO_COLORS.parceiro_int;
+                  return (
+                    <div
+                      key={org.name}
+                      className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-xl transition-all duration-200"
+                      style={{
+                        background: colors.badge,
+                        borderBottom: `2px solid ${colors.border}`,
+                      }}
+                      title={org.alt}
+                    >
+                      <img
+                        src={org.logo}
+                        alt={org.alt}
+                        className="h-6 sm:h-8 w-auto object-contain mb-1"
+                        style={{ filter: "brightness(0) invert(1)" }}
+                        onError={(e) => {
+                          // Fallback: mostrar iniciais
+                          e.currentTarget.style.display = "none";
+                          e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                        }}
+                      />
+                      {/* Fallback para logos não encontrados */}
+                      <span className="hidden text-[8px] font-bold text-white/60 text-center">
+                        {org.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Labels de categoria */}
+              <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-white/10">
+                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(232,24,122,0.2)", color: "#E8187A" }}>Realização</span>
+                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(12,37,64,0.3)", color: "#FAF9F6" }}>Co-realização</span>
+                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(41,121,255,0.2)", color: "#2979FF" }}>Parceiros Int.</span>
+                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(74,140,63,0.2)", color: "#4A8C3F" }}>Patrocínio</span>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -391,7 +458,7 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           BARRA INFERIOR — slide indicator + número
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 dhe-container pb-8 flex items-center justify-between">
+      <div className="relative z-10 dhe-container pb-6 flex items-center justify-between">
         {/* Número do slide */}
         <div className="flex items-baseline gap-1.5">
           <AnimatePresence mode="wait">
@@ -410,7 +477,7 @@ export function Hero() {
         </div>
 
         {/* Barra de progresso horizontal */}
-        <div className="flex-1 mx-8 flex gap-1.5">
+        <div className="flex-1 mx-6 sm:mx-8 flex gap-1.5">
           {SLIDES.map((_, i) => (
             <button
               key={i}
