@@ -140,7 +140,7 @@ export function About() {
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green animate-pulse" />
                 Cenário Atual
               </span>
-              <h3 className="text-xl sm:text-2xl font-display font-black text-dhe-magenta mb-5 max-w-xl leading-snug">
+              <h3 className="text-xl sm:text-2xl font-display font-black text-white mb-5 max-w-xl leading-snug">
                 Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
               </h3>
               <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/85">
@@ -248,7 +248,7 @@ export function About() {
                   <Users className="w-5 h-5" />
                 </div>
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3 block">Público-Alvo</span>
-                <h3 className="text-xl font-display font-black text-dhe-magenta leading-snug mb-4">Quem participará do Encontro</h3>
+                <h3 className="text-xl font-display font-black text-white leading-snug mb-4">Quem participará do Encontro</h3>
                 <p className="text-xs text-white/70 leading-relaxed mb-6">
                   Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                 </p>
@@ -297,7 +297,7 @@ export function About() {
                     >
                       {i + 1}
                     </span>
-                    <p className="text-xs leading-relaxed text-dhe-text-muted">{bullet}</p>
+                    <p className="text-sm leading-relaxed text-dhe-text-muted">{bullet}</p>
                   </div>
                 ))}
               </div>
