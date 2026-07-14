@@ -105,8 +105,8 @@ export function About() {
             <span />
             <span />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white max-w-3xl leading-tight">
-            Empresas e Direitos Humanos em um <span className="text-[#E8187A]">mundo em transformação</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black max-w-3xl leading-tight" style={{ color: "#FFFFFF" }}>
+            Empresas e Direitos Humanos em um <span style={{ color: "#E8187A" }}>mundo em transformação</span>
           </h2>
         </div>
 
@@ -140,7 +140,7 @@ export function About() {
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green animate-pulse" />
                 Cenário Atual
               </span>
-              <h3 className="text-xl sm:text-2xl font-display font-black text-white mb-5 max-w-xl leading-snug">
+              <h3 className="text-xl sm:text-2xl font-display font-black mb-5 max-w-xl leading-snug" style={{ color: "#FFFFFF" }}>
                 Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
               </h3>
               <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/85">
@@ -213,7 +213,7 @@ export function About() {
             </div>
             <div className="p-6 flex flex-col justify-between flex-1">
               <div>
-                <h4 className="text-lg font-display font-black text-[#E8187A] leading-tight">Cinemateca Brasileira</h4>
+                <h4 className="text-lg font-display font-black leading-tight" style={{ color: "#E8187A" }}>Cinemateca Brasileira</h4>
                 <p className="text-xs text-dhe-text-muted mt-1">
                   Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
                 </p>
@@ -248,7 +248,7 @@ export function About() {
                   <Users className="w-5 h-5" />
                 </div>
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3 block">Público-Alvo</span>
-                <h3 className="text-xl font-display font-black text-white leading-snug mb-4">Quem participará do Encontro</h3>
+                <h3 className="text-xl font-display font-black leading-snug mb-4" style={{ color: "#FFFFFF" }}>Quem participará do Encontro</h3>
                 <p className="text-xs text-white/70 leading-relaxed mb-6">
                   Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                 </p>
@@ -281,7 +281,7 @@ export function About() {
                 </div>
                 <div>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta block">Diretrizes</span>
-                  <h4 className="text-lg font-display font-black text-[#E8187A]">Objetivos Estratégicos</h4>
+                  <h4 className="text-lg font-display font-black" style={{ color: "#E8187A" }}>Objetivos Estratégicos</h4>
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
