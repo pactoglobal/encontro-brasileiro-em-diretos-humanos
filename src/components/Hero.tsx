@@ -36,24 +36,28 @@ const ORGANIZACOES = [
   { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
   // Co-realização
   { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
-  { name: "CERALC", logo: "/identity/co-realizacao-1.png", tipo: "corealizacao", alt: "Conduta Empresarial Responsável na AL e Caribe" },
+  // lightBg: arquivo já vem com fundo/marca em cor sólida (não é um ícone
+  // transparente) — inverter para branco vira um bloco ilegível, então
+  // exibimos em um chip branco em vez de aplicar o filtro monocromático
+  { name: "CERALC", logo: "/identity/co-realizacao-1.png", tipo: "corealizacao", alt: "Conduta Empresarial Responsável na AL e Caribe", lightBg: true },
   // Parceiros Internacionais
   { name: "OIT", logo: "/identity/oit-logo.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
-  { name: "PNUD", logo: "/identity/pnud-logo.png", tipo: "parceiro-int", alt: "Programa das Nações Unidas para o Desenvolvimento" },
+  // PNUD: sem logo em alta resolução disponível ainda — exibe badge textual até receber o arquivo do time de design
+  { name: "PNUD", logo: null, tipo: "parceiro-int", alt: "Programa das Nações Unidas para o Desenvolvimento" },
   { name: "OCDE", logo: "/identity/ocde-logo.png", tipo: "parceiro-int", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
   // Patrocinador
   { name: "Petrobras", logo: "/identity/petrobras-patrocinio.png", tipo: "patrocinador", alt: "Petrobras" },
   // Parceiro Local
-  { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira" },
+  { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira", lightBg: true },
 ];
 
 // Mapeamento de cores por tipo (ODS palette)
 const TIPO_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
   realizacao:    { border: "#E8187A", badge: "rgba(232,24,122,0.15)", badgeText: "#E8187A" },
   corealizacao:  { border: "#0C2540", badge: "rgba(12,37,64,0.15)",  badgeText: "#0C2540" },
-  parceiro_int:  { border: "#2979FF", badge: "rgba(41,121,255,0.15)", badgeText: "#2979FF" },
+  "parceiro-int":  { border: "#2979FF", badge: "rgba(41,121,255,0.15)", badgeText: "#2979FF" },
   patrocinador:  { border: "#4A8C3F", badge: "rgba(74,140,63,0.15)",  badgeText: "#4A8C3F" },
-  parceiro_local:{ border: "#7B2D1E", badge: "rgba(123,45,30,0.15)",  badgeText: "#7B2D1E" },
+  "parceiro-local":{ border: "#7B2D1E", badge: "rgba(123,45,30,0.15)",  badgeText: "#7B2D1E" },
 };
 
 export function Hero() {
@@ -149,31 +153,43 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CONTROLES DO SLIDESHOW
       ═══════════════════════════════════════════════════════ */}
-      <div className="absolute inset-y-0 right-4 sm:right-8 z-20 flex flex-col items-center justify-center gap-3 pointer-events-none">
-        {/* Dots */}
-        <div className="flex flex-col gap-2">
+      {/*
+        Controles manuais só no desktop (lg+): abaixo de 1024px o conteúdo
+        empilhado ocupa quase toda a primeira tela, então qualquer ancoragem
+        absoluta (mesmo em vh) sobrepõe texto/CTA real. No mobile/tablet o
+        autoplay (6s) já conduz o slideshow — sem controles flutuando por cima
+        do conteúdo. No desktop a section tem ~1 viewport de altura, então
+        vh continua correto e mais robusto que top-1/2 caso o conteúdo cresça.
+      */}
+      <div className="hidden lg:flex absolute top-[46vh] -translate-y-1/2 right-2 sm:right-6 z-20 flex-col items-center gap-1 pointer-events-none">
+        {/* Dots — alvo de toque de 44px mesmo com indicador visual fino */}
+        <div className="flex flex-col">
           {SLIDES.map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => goTo(i, i > current ? 1 : -1)}
-              className="pointer-events-auto transition-all duration-300 rounded-full focus:outline-none"
-              style={{
-                width: "3px",
-                height: i === current ? "28px" : "8px",
-                background: i === current ? "#E8187A" : "rgba(255,255,255,0.35)",
-              }}
+              className="pointer-events-auto flex items-center justify-center w-11 h-11 focus:outline-none"
               aria-label={`Slide ${i + 1}`}
-            />
+            >
+              <span
+                className="block rounded-full transition-all duration-300"
+                style={{
+                  width: "3px",
+                  height: i === current ? "28px" : "8px",
+                  background: i === current ? "#E8187A" : "rgba(255,255,255,0.35)",
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Setas prev/next */}
+      {/* Setas prev/next — só desktop; 44px (mínimo recomendado de área de toque) */}
       <button
         type="button"
         onClick={prev}
-        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-200 focus:outline-none"
+        className="hidden lg:flex absolute left-4 sm:left-6 top-[46vh] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white transition-all duration-200 focus:outline-none"
         aria-label="Slide anterior"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -181,7 +197,7 @@ export function Hero() {
       <button
         type="button"
         onClick={next}
-        className="absolute right-12 sm:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-200 focus:outline-none"
+        className="hidden lg:flex absolute right-14 sm:right-16 top-[46vh] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white transition-all duration-200 focus:outline-none"
         aria-label="Próximo slide"
       >
         <ChevronRight className="w-5 h-5" />
@@ -284,14 +300,14 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="flex items-center gap-10 pt-6 border-t border-white/10"
+              className="flex flex-wrap items-center gap-6 sm:gap-10 pt-6 border-t border-white/10"
             >
               {[
                 { value: "30+", label: "Painelistas", color: "#E8187A" },
                 { value: "10h+", label: "De Conteúdo", color: "#4A8C3F" },
                 { value: "100%", label: "Gratuito", color: "#E05A3A" },
               ].map(({ value, label, color }) => (
-                <div key={label}>
+                <div key={label} className="min-w-0">
                   <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
                   <p className="text-xs font-bold text-white/50 uppercase tracking-wider mt-2">{label}</p>
                 </div>
@@ -310,7 +326,7 @@ export function Hero() {
                 transition={{ delay: 0.35, type: "spring", stiffness: 70 }}
                 className="w-full"
               >
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/40 mb-3 lg:text-right">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/65 mb-3 lg:text-right">
                   Faltam para o evento
                 </p>
                 <div className="grid grid-cols-4 gap-2">
@@ -342,7 +358,7 @@ export function Hero() {
                           {String(val).padStart(2, "0")}
                         </motion.span>
                       </AnimatePresence>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-white/40 mt-2">{unit}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/65 mt-2">{unit}</span>
                     </div>
                   ))}
                 </div>
@@ -405,14 +421,14 @@ export function Hero() {
                 border: "1px solid rgba(255,255,255,0.1)",
               }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3 lg:text-right">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65 mb-3 lg:text-right">
                 Realização · Co-realização · Parceiros
               </p>
 
               {/* Bento Grid responsivo - 3 colunas em desktop, 2 em mobile */}
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {ORGANIZACOES.map((org) => {
-                  const colors = TIPO_COLORS[org.tipo] || TIPO_COLORS.parceiro_int;
+                  const colors = TIPO_COLORS[org.tipo] || TIPO_COLORS["parceiro-int"];
                   return (
                     <div
                       key={org.name}
@@ -423,19 +439,38 @@ export function Hero() {
                       }}
                       title={org.alt}
                     >
-                      <img
-                        src={org.logo}
-                        alt={org.alt}
-                        className="h-6 sm:h-8 w-auto object-contain mb-1"
-                        style={{ filter: "brightness(0) invert(1)" }}
-                        onError={(e) => {
-                          // Fallback: mostrar iniciais
-                          e.currentTarget.style.display = "none";
-                          e.currentTarget.nextElementSibling?.classList.remove("hidden");
-                        }}
-                      />
-                      {/* Fallback para logos não encontrados */}
-                      <span className="hidden text-[8px] font-bold text-white/60 text-center">
+                      {org.logo ? (
+                        org.lightBg ? (
+                          <div className="bg-white rounded-md px-2 py-1.5 mb-1 flex items-center justify-center">
+                            <img
+                              src={org.logo}
+                              alt={org.alt}
+                              width={96}
+                              height={32}
+                              className="h-5 sm:h-6 w-auto object-contain"
+                              onError={(e) => {
+                                e.currentTarget.parentElement!.style.display = "none";
+                                e.currentTarget.closest("div.flex.flex-col")?.querySelector(".org-fallback")?.classList.remove("hidden");
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          <img
+                            src={org.logo}
+                            alt={org.alt}
+                            width={96}
+                            height={32}
+                            className="h-6 sm:h-8 w-auto object-contain mb-1"
+                            style={{ filter: "brightness(0) invert(1)" }}
+                            onError={(e) => {
+                              e.currentTarget.style.display = "none";
+                              e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                            }}
+                          />
+                        )
+                      ) : null}
+                      {/* Badge textual: usado quando não há logo (org.logo === null) ou se a imagem falhar ao carregar */}
+                      <span className={`org-fallback ${org.logo ? "hidden" : ""} text-[9px] font-bold text-white/70 text-center leading-tight`}>
                         {org.name}
                       </span>
                     </div>
@@ -458,7 +493,9 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           BARRA INFERIOR — slide indicator + número
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 dhe-container pb-6 flex items-center justify-between">
+      {/* Só desktop, mesmo motivo dos controles acima — no mobile o conteúdo
+          real ocupa essa faixa de altura da tela. */}
+      <div className="hidden lg:flex absolute top-[92vh] inset-x-0 z-10 dhe-container pb-6 items-center justify-between">
         {/* Número do slide */}
         <div className="flex items-baseline gap-1.5">
           <AnimatePresence mode="wait">
@@ -468,12 +505,12 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.2 }}
-              className="text-2xl font-display font-black text-white/30 tabular-nums leading-none"
+              className="text-2xl font-display font-black text-white/50 tabular-nums leading-none"
             >
               {String(current + 1).padStart(2, "0")}
             </motion.span>
           </AnimatePresence>
-          <span className="text-xs text-white/20 font-bold">/ {String(SLIDES.length).padStart(2, "0")}</span>
+          <span className="text-xs text-white/40 font-bold">/ {String(SLIDES.length).padStart(2, "0")}</span>
         </div>
 
         {/* Barra de progresso horizontal */}
@@ -508,7 +545,7 @@ export function Hero() {
           className="hidden sm:flex flex-col items-center gap-1.5"
         >
           <div className="w-px h-8 bg-gradient-to-b from-transparent to-white/30 rounded-full" />
-          <span className="text-[8px] font-black uppercase tracking-[0.2em] text-white/20 rotate-90 origin-center translate-y-2">scroll</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/45 rotate-90 origin-center translate-y-2">scroll</span>
         </motion.div>
       </div>
     </section>

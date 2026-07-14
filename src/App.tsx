@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -58,7 +59,10 @@ function App() {
   useHashScroll();
 
   return (
-    <>
+    // reducedMotion="user": respeita prefers-reduced-motion do sistema em todo
+    // motion.* da árvore (springs, hover, Ken Burns, flip do countdown) sem
+    // precisar tocar cada componente individualmente.
+    <MotionConfig reducedMotion="user">
       <CustomCursor />
       <Navbar />
       <main>
@@ -81,7 +85,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }
 

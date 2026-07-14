@@ -75,6 +75,8 @@ export function Organizers() {
                     <img
                       src="/identity/adhe-logo.png"
                       alt="ADHE — Aliança pelos Direitos Humanos e Empresas"
+                      width={269}
+                      height={95}
                       className="h-20 w-auto object-contain brightness-0 invert"
                     />
                   </div>
@@ -91,7 +93,7 @@ export function Organizers() {
                       <div key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />
                     ))}
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-white/25">adhe.org.br</span>
+                  <span className="text-[9px] font-black uppercase tracking-widest text-white/50">adhe.org.br</span>
                 </div>
               </motion.div>
 
@@ -124,6 +126,8 @@ export function Organizers() {
                       <img
                         src="/identity/co-realizacao.png"
                         alt="Global Gateway · UE · OIT · OCDE · Nações Unidas Direitos Humanos"
+                        width={558}
+                        height={90}
                         className="h-10 w-auto max-w-full object-contain"
                       />
                     </div>
@@ -139,6 +143,8 @@ export function Organizers() {
                       <img
                         src="/identity/co-realizacao-1.png"
                         alt="CERALC — Conduta Empresarial Responsável na América Latina e no Caribe"
+                        width={210}
+                        height={115}
                         className="h-12 w-auto max-w-[200px] object-contain"
                       />
                     </div>
@@ -172,6 +178,8 @@ export function Organizers() {
                   <img
                     src="/identity/petrobras-patrocinio.png"
                     alt="Petrobras"
+                    width={214}
+                    height={64}
                     className="h-14 w-auto object-contain"
                   />
                 </div>
@@ -215,6 +223,8 @@ export function Organizers() {
                 <img
                   src="/identity/parceiro-cinemateca.png"
                   alt="Cinemateca Brasileira"
+                  width={109}
+                  height={68}
                   className="h-10 w-auto object-contain brightness-0 invert opacity-90"
                 />
               </div>
@@ -230,7 +240,7 @@ export function Organizers() {
 
               {/* Data badge */}
               <div className="relative z-10 shrink-0 text-right">
-                <p className="text-white/40 text-[9px] font-black uppercase tracking-widest">Data</p>
+                <p className="text-white/60 text-[9px] font-black uppercase tracking-widest">Data</p>
                 <p className="text-white font-display font-black text-sm">04 AGO 2026</p>
               </div>
             </motion.div>

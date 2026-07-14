@@ -170,7 +170,7 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
 
           {/* Linha divisória */}
           <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/30">
+            <span className="text-[9px] font-black uppercase tracking-widest text-white/55">
               04 AGO 2026
             </span>
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: attraction.themeColor }} />

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const EDITABLE_SELECTOR = "input, textarea";
+
 export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
+  const [overEditable, setOverEditable] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -20,6 +23,9 @@ export function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+      // Sobre input/textarea, cede o lugar ao cursor de texto (I-beam) nativo
+      const target = e.target as HTMLElement | null;
+      setOverEditable(!!target?.closest(EDITABLE_SELECTOR));
     };
 
     window.addEventListener("mousemove", moveCursor);
@@ -29,7 +35,7 @@ export function CustomCursor() {
     };
   }, [cursorX, cursorY]);
 
-  if (!isVisible) return null;
+  if (!isVisible || overEditable) return null;
 
   return (
     <motion.div

@@ -2,10 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Ordem alinhada ao DOM real em App.tsx (Sobre → Programação → Palestrantes → Local → Atrações → Organizadores → Contato)
 const NAV_LINKS = [
   { id: "sobre", href: "#/sobre", label: "Sobre" },
-  { id: "palestrantes", href: "#/palestrantes", label: "Palestrantes" },
   { id: "programacao", href: "#/programacao", label: "Programação" },
+  { id: "palestrantes", href: "#/palestrantes", label: "Palestrantes" },
   { id: "local", href: "#/local", label: "Local" },
   { id: "atracoes", href: "#/atracoes", label: "Atrações" },
   { id: "organizadores", href: "#/organizadores", label: "Organizadores" },
@@ -78,7 +79,7 @@ export function Navbar() {
         }}
         transition={{ type: "spring", stiffness: 180, damping: 24 }}
       >
-        <nav className="dhe-container">
+        <nav className="dhe-container" aria-label="Navegação principal">
           <motion.div
             className="pointer-events-auto flex items-center justify-between mx-auto"
             animate={{
@@ -105,6 +106,8 @@ export function Navbar() {
               <motion.img
                 src="/identity/logo-evento.png"
                 alt="Encontro DH&E Brasil 2026"
+                width={625}
+                height={429}
                 className="w-auto object-contain transition-all duration-300"
                 style={{
                   height: scrolled ? "30px" : "33px",

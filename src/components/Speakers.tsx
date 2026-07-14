@@ -132,7 +132,7 @@ export function Speakers() {
                 </p>
               </div>
               <div className="border-t border-[#FAF9F6]/10 pt-4 relative z-10 flex items-center justify-between">
-                <span className="text-[10px] font-black tracking-widest text-[#FAF9F6]/40 uppercase">ONU</span>
+                <span className="text-[10px] font-black tracking-widest text-[#FAF9F6]/60 uppercase">ONU</span>
                 <div className="h-10 w-10 rounded-full bg-dhe-magenta/20 border border-dhe-magenta/40 flex items-center justify-center font-display font-black text-white text-xs">
                   FH
                 </div>

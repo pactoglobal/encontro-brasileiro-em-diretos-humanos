@@ -64,6 +64,11 @@
 
 html { scroll-behavior: smooth; }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .dhe-ticker-content { animation: none; }
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-dhe-bg);
@@ -72,9 +77,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Ocultar cursor padrão em telas com hover para usar cursor customizado */
+/* Ocultar cursor padrão em telas com hover para usar cursor customizado.
+   input/textarea ficam de fora: precisam do cursor de texto (I-beam) nativo
+   para indicar que o campo é editável (ver CustomCursor.tsx, que se oculta
+   sobre esses elementos para não sobrepor o I-beam). */
 @media (pointer: fine) {
-  body, a, button, select, input, textarea {
+  body, a, button, select {
     cursor: none !important;
   }
 }

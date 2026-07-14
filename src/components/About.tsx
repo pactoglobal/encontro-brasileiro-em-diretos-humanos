@@ -224,7 +224,7 @@ export function About() {
                   <p className="text-[10px] font-bold text-dhe-navy mt-0.5">Parceiro Oficial de Espaço</p>
                 </div>
                 <div className="p-2 bg-[#FAF9F6] border border-[#D8D4C7] rounded-xl flex items-center justify-center shadow-sm">
-                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca Brasileira Logo" className="h-7 w-auto object-contain" />
+                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca Brasileira Logo" width={109} height={68} className="h-7 w-auto object-contain" />
                 </div>
               </div>
             </div>

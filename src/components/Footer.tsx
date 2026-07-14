@@ -10,6 +10,8 @@ export function Footer() {
             <img
               src="/identity/logo-evento.png"
               alt="Encontro DH&E Brasil 2026"
+              width={625}
+              height={429}
               className="h-10 w-auto object-contain opacity-95"
               style={{ filter: "brightness(0) invert(1)" }} /* Inverte para branco sobre fundo escuro */
             />

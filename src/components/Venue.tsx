@@ -65,6 +65,8 @@ export function Venue() {
               <img
                 src="/identity/parceiro-cinemateca.png"
                 alt="Cinemateca Brasileira"
+                width={109}
+                height={68}
                 className="h-10 w-auto object-contain"
               />
             </div>
