@@ -267,23 +267,28 @@ export function Hero() {
               </button>
             </motion.div>
 
-            {/* Stats - TYPOGRAPHY: Increased sizes */}
+            {/* Stats - Glassmorphism Bento Card */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-wrap items-center gap-6 sm:gap-10 pt-6 border-t border-white/10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 70 }}
+              className="w-full rounded-2xl p-6 backdrop-blur-md mt-6 shadow-lg border border-white/10"
+              style={{
+                background: "rgba(255, 255, 255, 0.06)",
+              }}
             >
-              {[
-                { value: "30+", label: "Painelistas", color: "#E8187A" },
-                { value: "10h+", label: "De Conteúdo", color: "#4A8C3F" },
-                { value: "100%", label: "Gratuito", color: "#E05A3A" },
-              ].map(({ value, label, color }) => (
-                <div key={label} className="min-w-0">
-                  <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
-                  <p className="text-xs font-bold text-white/50 uppercase tracking-wider mt-2">{label}</p>
-                </div>
-              ))}
+              <div className="grid grid-cols-3 gap-3 sm:gap-6 text-center sm:text-left divide-x divide-white/10">
+                {[
+                  { value: "30+", label: "Painelistas", color: "#E8187A", pl: "pl-0" },
+                  { value: "10h+", label: "De Conteúdo", color: "#4A8C3F", pl: "pl-3 sm:pl-6" },
+                  { value: "100%", label: "Gratuito", color: "#E05A3A", pl: "pl-3 sm:pl-6" },
+                ].map(({ value, label, color, pl }) => (
+                  <div key={label} className={`flex flex-col justify-center ${pl}`}>
+                    <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
+                    <p className="text-[10px] sm:text-xs font-bold text-white/60 uppercase tracking-wider mt-2">{label}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
 
@@ -395,59 +400,67 @@ export function Hero() {
               }}
             >
               {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal */}
-              <div className="w-full relative overflow-hidden bg-[#D3D1C4] flex items-center justify-center border-b border-[#D8D4C7]/55 max-h-[130px] sm:max-h-[150px] aspect-[1983/1156]">
+              <div className="w-full relative overflow-hidden aspect-[1983/1156] border-b border-[#D8D4C7]/55">
                 <img
                   src="/identity/kv.png"
                   alt="Key Visual Encontro DH&E 2026"
-                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-[1.01]"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.01]"
                 />
               </div>
 
-              {/* Bloco Inferior: Sequência de blocos verticalizada para evitar vazamento */}
-              <div className="w-full p-4 flex flex-col divide-y divide-[#D8D4C7]/55 text-[#0C2540] bg-white/20">
-                
-                {/* 1. Realização */}
-                <div className="flex items-center justify-between gap-3 py-2.5">
-                  <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Realização</span>
-                  <img src="/identity/adhe-logo.png" alt="ADHE" className="h-6.5 w-auto object-contain" />
-                </div>
-
-                {/* 2. Co-realização */}
-                <div className="flex flex-col gap-2 py-3">
-                  <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-0.5">
-                    <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-5.5 w-auto object-contain" />
-                    <div className="flex items-center gap-0.5 h-5.5" title="Global Gateway">
-                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
-                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+              {/* Bloco Inferior: Sequência de subdivisões em grid espaçoso */}
+              <div className="w-full p-5 flex flex-col gap-4 text-[#0C2540] bg-white/20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                  
+                  {/* Realização */}
+                  <div className="flex flex-col gap-1 pb-3 border-b border-[#D8D4C7]/40 sm:border-b-0 sm:pb-0">
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-magenta">Realização</span>
+                    <div className="flex items-center h-8 mt-1">
+                      <img src="/identity/adhe-logo.png" alt="ADHE" className="h-6.5 w-auto object-contain" />
                     </div>
-                    <img src="/identity/direitos-humanos-onu.png" alt="ONU" className="h-6.5 w-auto object-contain" />
-                    <img src="/identity/oit-logo-new.png" alt="OIT" className="h-5.5 w-auto object-contain" />
-                    <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-5.5 w-auto object-contain" />
                   </div>
-                </div>
 
-                {/* 3. Patrocínio */}
-                <div className="flex items-center justify-between gap-3 py-2.5">
-                  <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-navy shrink-0">Patrocínio</span>
-                  <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-5.5 w-auto object-contain" />
-                </div>
-
-                {/* 4. Apoio */}
-                <div className="flex items-center justify-between gap-3 py-2.5">
-                  <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Apoio</span>
-                  <div className="flex items-center gap-4">
-                    <img src="/identity/rede-mulher.png" alt="RME" className="h-5.5 w-auto object-contain" />
-                    <img src="/identity/refugiados.png" alt="Refugiados" className="h-5.5 w-auto object-contain" />
+                  {/* Patrocínio */}
+                  <div className="flex flex-col gap-1 pb-3 border-b border-[#D8D4C7]/40 sm:border-b-0 sm:pb-0">
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-navy">Patrocínio</span>
+                    <div className="flex items-center h-8 mt-1">
+                      <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-6 w-auto object-contain" />
+                    </div>
                   </div>
-                </div>
 
-                {/* 5. Parceiro */}
-                <div className="flex items-center justify-between gap-3 py-2.5">
-                  <span className="text-[7.5px] font-black uppercase tracking-wider text-[#7B2D1E] shrink-0">Parceiro</span>
-                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-6.5 w-auto object-contain" />
-                </div>
+                  {/* Co-realização - Spans full width for maximum space */}
+                  <div className="flex flex-col gap-1.5 pb-3 border-b border-[#D8D4C7]/40 sm:col-span-2">
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
+                      <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-6 w-auto object-contain" />
+                      <div className="flex items-center gap-1 h-6" title="Global Gateway">
+                        <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
+                        <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                      </div>
+                      <img src="/identity/direitos-humanos-onu.png" alt="ONU" className="h-6.5 w-auto object-contain" />
+                      <img src="/identity/oit-logo-new.png" alt="OIT" className="h-6 w-auto object-contain" />
+                      <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-6 w-auto object-contain" />
+                    </div>
+                  </div>
 
+                  {/* Apoio */}
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-magenta">Apoio</span>
+                    <div className="flex items-center gap-3.5 h-8 mt-1">
+                      <img src="/identity/rede-mulher.png" alt="RME" className="h-6 w-auto object-contain" />
+                      <img src="/identity/refugiados.png" alt="Refugiados" className="h-6 w-auto object-contain" />
+                    </div>
+                  </div>
+
+                  {/* Parceiro */}
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-[#7B2D1E]">Parceiro</span>
+                    <div className="flex items-center h-8 mt-1">
+                      <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-6.5 w-auto object-contain" />
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </motion.div>
           </div>
