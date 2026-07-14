@@ -116,8 +116,8 @@ export function Organizers() {
                     Co-realização
                   </span>
 
-                  {/* Grid de parceiros individuais */}
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 items-center justify-items-center mt-2">
+                  {/* Grid de parceiros individuais sem cards, direto no fundo do bloco */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-8 gap-y-6 items-center justify-items-center mt-4">
                     {[
                       { src: "/identity/logo-pacto-global.png", alt: "Pacto Global" },
                       { src: "/identity/co-realizacao-1.png", alt: "CERALC" },
@@ -129,17 +129,13 @@ export function Organizers() {
                       { src: "/identity/global-gateway-2.png", alt: "Global Gateway" },
                       { src: "/identity/rede-mulher.png", alt: "Rede Mulher" },
                     ].map((logo, idx) => (
-                      <div
+                      <img
                         key={idx}
-                        className="p-2.5 bg-[#FAF9F6] border border-[#D8D4C7]/60 rounded-xl flex items-center justify-center shadow-sm w-full h-14 hover:bg-white hover:border-[#D8D4C7] transition-all duration-200"
+                        src={logo.src}
+                        alt={logo.alt}
+                        className="h-9 sm:h-10 w-auto max-w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
                         title={logo.alt}
-                      >
-                        <img
-                          src={logo.src}
-                          alt={logo.alt}
-                          className="h-full w-auto max-w-full object-contain"
-                        />
-                      </div>
+                      />
                     ))}
                   </div>
                 </div>
