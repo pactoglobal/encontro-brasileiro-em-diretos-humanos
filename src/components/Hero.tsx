@@ -290,6 +290,51 @@ export function Hero() {
                 ))}
               </div>
             </motion.div>
+
+            {/* Marcadores de Slide alinhados exatamente aos limites dos dados acima */}
+            <div className="mt-5 flex items-center justify-between w-full">
+              {/* Número do slide */}
+              <div className="flex items-baseline gap-1.5 shrink-0">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={current}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-xl font-display font-black text-white/55 tabular-nums leading-none"
+                  >
+                    {String(current + 1).padStart(2, "0")}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="text-xs text-white/40 font-bold">/ {String(SLIDES.length).padStart(2, "0")}</span>
+              </div>
+
+              {/* Barra de progresso horizontal que termina no limite de 'Gratuito' */}
+              <div className="flex-1 ml-6 flex gap-1.5">
+                {SLIDES.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => goTo(i, i > current ? 1 : -1)}
+                    className="flex-1 h-0.5 rounded-full overflow-hidden focus:outline-none cursor-pointer"
+                    style={{ background: "rgba(255,255,255,0.15)" }}
+                    aria-label={`Ir para slide ${i + 1}`}
+                  >
+                    {i === current && (
+                      <motion.div
+                        key={current}
+                        className="h-full rounded-full bg-white"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 6, ease: "linear" }}
+                      />
+                    )}
+                    {i < current && <div className="h-full w-full bg-white/60 rounded-full" />}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* ── Coluna Direita: Countdown + Caption + Logos ── */}
@@ -468,53 +513,9 @@ export function Hero() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════
-          BARRA INFERIOR — slide indicator + número
+          BARRA INFERIOR — Scroll hint apenas
       ═══════════════════════════════════════════════════════ */}
-      {/* Só desktop, mesmo motivo dos controles acima — no mobile o conteúdo
-          real ocupa essa faixa de altura da tela. */}
-      <div className="hidden lg:flex absolute top-[92vh] inset-x-0 z-10 dhe-container pb-6 items-center justify-between">
-        {/* Número do slide */}
-        <div className="flex items-baseline gap-1.5">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={current}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              className="text-2xl font-display font-black text-white/50 tabular-nums leading-none"
-            >
-              {String(current + 1).padStart(2, "0")}
-            </motion.span>
-          </AnimatePresence>
-          <span className="text-xs text-white/40 font-bold">/ {String(SLIDES.length).padStart(2, "0")}</span>
-        </div>
-
-        {/* Barra de progresso horizontal */}
-        <div className="flex-1 mx-6 sm:mx-8 flex gap-1.5">
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => goTo(i, i > current ? 1 : -1)}
-              className="flex-1 h-0.5 rounded-full overflow-hidden focus:outline-none"
-              style={{ background: "rgba(255,255,255,0.15)" }}
-              aria-label={`Ir para slide ${i + 1}`}
-            >
-              {i === current && (
-                <motion.div
-                  key={current}
-                  className="h-full rounded-full bg-white"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 6, ease: "linear" }}
-                />
-              )}
-              {i < current && <div className="h-full w-full bg-white/60 rounded-full" />}
-            </button>
-          ))}
-        </div>
-
+      <div className="hidden lg:flex absolute top-[92vh] inset-x-0 z-10 dhe-container pb-6 items-center justify-end">
         {/* Scroll hint */}
         <motion.div
           animate={{ y: [0, 6, 0] }}
