@@ -30,25 +30,7 @@ const SLIDE_ANIMATIONS = [
   { initial: { scale: 1.10, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
 ];
 
-// Logos de todas as organizações -ODS palette glassmorphism bento
-const ORGANIZACOES = [
-  // Realização
-  { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
-  // Co-realização
-  { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
-  { name: "Global Gateway 1", logo: "/identity/global-gateway-1.png", tipo: "corealizacao", alt: "Global Gateway" },
-  { name: "Global Gateway 2", logo: "/identity/global-gateway-2.png", tipo: "corealizacao", alt: "Global Gateway" },
-  { name: "Direitos Humanos ONU", logo: "/identity/direitos-humanos-onu.png", tipo: "corealizacao", alt: "Nações Unidas Direitos Humanos" },
-  { name: "OIT", logo: "/identity/oit-logo-new.png", tipo: "corealizacao", alt: "Organização Internacional do Trabalho" },
-  { name: "OCDE", logo: "/identity/ocde-logo-new.png", tipo: "corealizacao", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
-  // Patrocinador
-  { name: "Petrobras", logo: "/identity/petrobras-logo-new.png", tipo: "patrocinador", alt: "Petrobras" },
-  // Apoio
-  { name: "Rede Mulher", logo: "/identity/rede-mulher.png", tipo: "apoio", alt: "Rede Mulher" },
-  { name: "ACNUR Refugiados", logo: "/identity/refugiados.png", tipo: "apoio", alt: "ACNUR Refugiados" },
-  // Parceiro
-  { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira", lightBg: true },
-];
+
 
 export function Hero() {
   const [current, setCurrent] = useState(0);
@@ -400,46 +382,70 @@ export function Hero() {
             </motion.div>
 
             {/* ── BENTO GRID: Todos os Logos ── */}
+            {/* ── BENTO GRID: Todos os Logos Subdivided com KV ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-6"
+              className="w-full rounded-2xl p-5 relative overflow-hidden"
               style={{
                 background: "#F1EFEA",
                 border: "1px solid #D8D4C7",
               }}
             >
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0C2540]/85 mb-4 lg:text-right">
-                Realização · Co-realização · Patrocínio · Apoio · Parceiro
-              </p>
+              {/* KV Image as background watermark */}
+              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
 
-              {/* Grid de logos em cor original direto no fundo areia do bento */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-5 gap-y-4 items-center justify-items-center">
-                {ORGANIZACOES.map((org) => {
-                  if (!org.logo) return null;
+              <div className="relative z-10 space-y-3.5 divide-y divide-[#D8D4C7]/65">
+                
+                {/* 1. Realização */}
+                <div className="flex items-center justify-between gap-4 pt-0">
+                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Realização</span>
+                  <div className="flex-1 flex justify-end">
+                    <img src="/identity/adhe-logo.png" alt="ADHE" className="h-6 w-auto object-contain" />
+                  </div>
+                </div>
 
-                  if (org.name === "Global Gateway 2") return null;
+                {/* 2. Co-realização */}
+                <div className="flex flex-col gap-2 pt-3">
+                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
+                  <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-3">
+                    <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-5 w-auto object-contain" />
+                    <div className="flex items-center gap-1 h-5 w-auto" title="Global Gateway">
+                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
+                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                    </div>
+                    <img src="/identity/direitos-humanos-onu.png" alt="Nações Unidas" className="h-6 w-auto object-contain" />
+                    <img src="/identity/oit-logo-new.png" alt="OIT" className="h-5 w-auto object-contain" />
+                    <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-5 w-auto object-contain" />
+                  </div>
+                </div>
 
-                  if (org.name === "Global Gateway 1") {
-                    return (
-                      <div key={org.name} className="h-7 w-auto flex items-center gap-1 opacity-90 hover:opacity-100 transition-opacity duration-200" title="Global Gateway">
-                        <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
-                        <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
-                      </div>
-                    );
-                  }
+                {/* 3. Patrocínio */}
+                <div className="flex items-center justify-between gap-4 pt-3">
+                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-navy shrink-0">Patrocínio</span>
+                  <div className="flex-1 flex justify-end">
+                    <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-5 w-auto object-contain" />
+                  </div>
+                </div>
 
-                  return (
-                    <img
-                      key={org.name}
-                      src={org.logo}
-                      alt={org.alt}
-                      className="h-8 sm:h-9 w-auto max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
-                      title={org.alt}
-                    />
-                  );
-                })}
+                {/* 4. Apoio */}
+                <div className="flex items-center justify-between gap-4 pt-3">
+                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Apoio</span>
+                  <div className="flex flex-wrap items-center justify-end gap-4">
+                    <img src="/identity/rede-mulher.png" alt="RME" className="h-5 w-auto object-contain" />
+                    <img src="/identity/refugiados.png" alt="Refugiados" className="h-5 w-auto object-contain" />
+                  </div>
+                </div>
+
+                {/* 5. Parceiro */}
+                <div className="flex items-center justify-between gap-4 pt-3">
+                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-maroon shrink-0">Parceiro</span>
+                  <div className="flex-1 flex justify-end">
+                    <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-5.5 w-auto object-contain" />
+                  </div>
+                </div>
+
               </div>
             </motion.div>
           </div>
