@@ -36,7 +36,6 @@ const ORGANIZACOES = [
   { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
   // Co-realização
   { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
-  { name: "CERALC", logo: "/identity/co-realizacao-1.png", tipo: "corealizacao", alt: "Conduta Empresarial Responsável na AL e Caribe", lightBg: true },
   { name: "Direitos Humanos ONU", logo: "/identity/direitos-humanos-onu.png", tipo: "corealizacao", alt: "Nações Unidas Direitos Humanos" },
   // Parceiros Internacionais
   { name: "OIT", logo: "/identity/oit-logo-new.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
