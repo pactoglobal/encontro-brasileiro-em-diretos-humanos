@@ -77,16 +77,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Ocultar cursor padrão em telas com hover para usar cursor customizado.
-   input/textarea ficam de fora: precisam do cursor de texto (I-beam) nativo
-   para indicar que o campo é editável (ver CustomCursor.tsx, que se oculta
-   sobre esses elementos para não sobrepor o I-beam). */
-@media (pointer: fine) {
-  body, a, button, select {
-    cursor: none !important;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 900;

@@ -8,9 +8,9 @@ import { Attractions } from "./components/Attractions";
 import { Agenda } from "./components/Agenda";
 import { Venue } from "./components/Venue";
 import { Organizers } from "./components/Organizers";
+import { Sponsorship } from "./components/Sponsorship";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
-import { CustomCursor } from "./components/CustomCursor";
 
 // Robust routing support for hash URLs on initial load (like /#/sobre)
 function useHashScroll() {
@@ -63,7 +63,6 @@ function App() {
     // motion.* da árvore (springs, hover, Ken Burns, flip do countdown) sem
     // precisar tocar cada componente individualmente.
     <MotionConfig reducedMotion="user">
-      <CustomCursor />
       <Navbar />
       <main>
         {/* ATO 1 — A PROMESSA & APRESENTAÇÃO */}
@@ -82,6 +81,7 @@ function App() {
 
         {/* ATO 5 — APOIO & CONVERSÃO */}
         <Organizers />
+        <Sponsorship />
         <Contact />
       </main>
       <Footer />

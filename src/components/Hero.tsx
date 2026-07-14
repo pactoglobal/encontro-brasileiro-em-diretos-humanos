@@ -291,7 +291,7 @@ export function Hero() {
                 onClick={() => scrollTo("contato")}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-sm font-bold uppercase tracking-[0.08em] transition-all duration-200 cursor-pointer"
               >
-                Inscreva-se
+                Tenho interesse
               </button>
             </motion.div>
 

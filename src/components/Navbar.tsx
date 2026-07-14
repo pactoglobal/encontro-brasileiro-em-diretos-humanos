@@ -172,7 +172,7 @@ export function Navbar() {
                 boxShadow: scrolled ? "0 4px 14px rgba(232,24,122,0.25)" : "0 4px 14px rgba(255,255,255,0.15)",
               }}
             >
-              Inscreva-se
+              Tenho interesse
             </button>
 
             {/* Mobile Hamburger Button */}
@@ -242,7 +242,7 @@ export function Navbar() {
                 transition={{ delay: 0.4 }}
                 className="dhe-btn-primary px-12 py-4 shadow-lg focus:outline-none cursor-pointer"
               >
-                Inscreva-se
+                Tenho interesse
               </motion.button>
             </div>
           </motion.div>
