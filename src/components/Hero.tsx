@@ -381,69 +381,70 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* ── BENTO GRID: Todos os Logos ── */}
-            {/* ── BENTO GRID: Todos os Logos Subdivided com KV ── */}
+            {/* ── BENTO CARD: KV + Logos ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-5 relative overflow-hidden"
+              className="w-full rounded-2xl overflow-hidden flex"
               style={{
                 background: "#F1EFEA",
                 border: "1px solid #D8D4C7",
+                minHeight: "180px",
               }}
             >
-              {/* KV Image as background watermark */}
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+              {/* LEFT: KV na íntegra */}
+              <div className="w-[42%] shrink-0 relative overflow-hidden border-r border-[#D8D4C7]/70">
+                <img
+                  src="/identity/kv.png"
+                  alt="Key Visual DHE 2026"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                />
+              </div>
 
-              <div className="relative z-10 space-y-3.5 divide-y divide-[#D8D4C7]/65">
-                
-                {/* 1. Realização */}
-                <div className="flex items-center justify-between gap-4 pt-0">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Realização</span>
-                  <div className="flex-1 flex justify-end">
-                    <img src="/identity/adhe-logo.png" alt="ADHE" className="h-6 w-auto object-contain" />
-                  </div>
+              {/* RIGHT: Logos por categoria */}
+              <div className="flex-1 flex flex-col divide-y divide-[#D8D4C7]/65 text-[#0C2540]">
+
+                {/* Realização */}
+                <div className="flex items-center gap-2 px-4 py-2.5">
+                  <span className="text-[7px] font-black uppercase tracking-wider text-dhe-magenta w-16 shrink-0">Realização</span>
+                  <img src="/identity/adhe-logo.png" alt="ADHE" className="h-5 w-auto object-contain" />
                 </div>
 
-                {/* 2. Co-realização */}
-                <div className="flex flex-col gap-2 pt-3">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
-                  <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-3">
-                    <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-5 w-auto object-contain" />
-                    <div className="flex items-center gap-1 h-5 w-auto" title="Global Gateway">
+                {/* Co-realização */}
+                <div className="flex items-start gap-2 px-4 py-2.5">
+                  <span className="text-[7px] font-black uppercase tracking-wider text-dhe-green w-16 shrink-0 pt-0.5">Co-realização</span>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-4 w-auto object-contain" />
+                    <div className="flex items-center gap-1 h-4" title="Global Gateway">
                       <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
                       <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
                     </div>
-                    <img src="/identity/direitos-humanos-onu.png" alt="Nações Unidas" className="h-6 w-auto object-contain" />
-                    <img src="/identity/oit-logo-new.png" alt="OIT" className="h-5 w-auto object-contain" />
-                    <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-5 w-auto object-contain" />
+                    <img src="/identity/direitos-humanos-onu.png" alt="ONU" className="h-4 w-auto object-contain" />
+                    <img src="/identity/oit-logo-new.png" alt="OIT" className="h-4 w-auto object-contain" />
+                    <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-4 w-auto object-contain" />
                   </div>
                 </div>
 
-                {/* 3. Patrocínio */}
-                <div className="flex items-center justify-between gap-4 pt-3">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-navy shrink-0">Patrocínio</span>
-                  <div className="flex-1 flex justify-end">
-                    <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-5 w-auto object-contain" />
+                {/* Patrocínio */}
+                <div className="flex items-center gap-2 px-4 py-2.5">
+                  <span className="text-[7px] font-black uppercase tracking-wider text-dhe-navy w-16 shrink-0">Patrocínio</span>
+                  <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-4 w-auto object-contain" />
+                </div>
+
+                {/* Apoio */}
+                <div className="flex items-center gap-2 px-4 py-2.5">
+                  <span className="text-[7px] font-black uppercase tracking-wider text-dhe-magenta w-16 shrink-0">Apoio</span>
+                  <div className="flex items-center gap-3">
+                    <img src="/identity/rede-mulher.png" alt="RME" className="h-4 w-auto object-contain" />
+                    <img src="/identity/refugiados.png" alt="Refugiados" className="h-4 w-auto object-contain" />
                   </div>
                 </div>
 
-                {/* 4. Apoio */}
-                <div className="flex items-center justify-between gap-4 pt-3">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Apoio</span>
-                  <div className="flex flex-wrap items-center justify-end gap-4">
-                    <img src="/identity/rede-mulher.png" alt="RME" className="h-5 w-auto object-contain" />
-                    <img src="/identity/refugiados.png" alt="Refugiados" className="h-5 w-auto object-contain" />
-                  </div>
-                </div>
-
-                {/* 5. Parceiro */}
-                <div className="flex items-center justify-between gap-4 pt-3">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-maroon shrink-0">Parceiro</span>
-                  <div className="flex-1 flex justify-end">
-                    <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-5.5 w-auto object-contain" />
-                  </div>
+                {/* Parceiro */}
+                <div className="flex items-center gap-2 px-4 py-2.5">
+                  <span className="text-[7px] font-black uppercase tracking-wider text-[#7B2D1E] w-16 shrink-0">Parceiro</span>
+                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-4 w-auto object-contain" />
                 </div>
 
               </div>
