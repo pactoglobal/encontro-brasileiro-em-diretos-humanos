@@ -52,16 +52,6 @@ const ORGANIZACOES = [
   { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira", lightBg: true },
 ];
 
-// Mapeamento de cores por tipo (ODS palette)
-const TIPO_COLORS: Record<string, { border: string; badge: string; badgeText: string }> = {
-  realizacao:    { border: "#E8187A", badge: "rgba(232,24,122,0.15)", badgeText: "#E8187A" },
-  corealizacao:  { border: "#0C2540", badge: "rgba(12,37,64,0.15)",  badgeText: "#0C2540" },
-  "parceiro-int":  { border: "#2979FF", badge: "rgba(41,121,255,0.15)", badgeText: "#2979FF" },
-  patrocinador:  { border: "#4A8C3F", badge: "rgba(74,140,63,0.15)",  badgeText: "#4A8C3F" },
-  "parceiro-local":{ border: "#7B2D1E", badge: "rgba(123,45,30,0.15)",  badgeText: "#7B2D1E" },
-  apoio:           { border: "#E8187A", badge: "rgba(232,24,122,0.15)", badgeText: "#E8187A" },
-};
-
 export function Hero() {
   const [current, setCurrent] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
@@ -411,81 +401,47 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* ── BENTO GRID: Todos os Logos GLASSMORPHISM ── */}
+            {/* ── BENTO GRID: Todos os Logos ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-4"
+              className="w-full rounded-2xl p-6"
               style={{
-                background: "rgba(255,255,255,0.06)",
-                backdropFilter: "blur(20px)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "#F1EFEA",
+                border: "1px solid #D8D4C7",
               }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65 mb-3 lg:text-right">
-                Realização · Co-realização · Parceiros
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0C2540]/85 mb-4 lg:text-right">
+                Realização · Co-realização · Apoio · Parceiros
               </p>
 
-              {/* Bento Grid responsivo - 3 colunas em desktop, 2 em mobile */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+              {/* Grid de logos em cor original direto no fundo areia do bento */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-5 gap-y-4 items-center justify-items-center">
                 {ORGANIZACOES.map((org) => {
-                  const colors = TIPO_COLORS[org.tipo] || TIPO_COLORS["parceiro-int"];
+                  if (!org.logo) return null;
+
+                  if (org.name === "Global Gateway 2") return null;
+
+                  if (org.name === "Global Gateway 1") {
+                    return (
+                      <div key={org.name} className="h-7 w-auto flex items-center gap-1 opacity-90 hover:opacity-100 transition-opacity duration-200" title="Global Gateway">
+                        <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
+                        <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                      </div>
+                    );
+                  }
+
                   return (
-                    <div
+                    <img
                       key={org.name}
-                      className="flex flex-col items-center justify-center p-2 sm:p-3 rounded-xl transition-all duration-200"
-                      style={{
-                        background: colors.badge,
-                        borderBottom: `2px solid ${colors.border}`,
-                      }}
+                      src={org.logo}
+                      alt={org.alt}
+                      className="h-8 sm:h-9 w-auto max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
                       title={org.alt}
-                    >
-                      {org.logo ? (
-                        org.lightBg ? (
-                          <div className="bg-white rounded-md px-2 py-1.5 mb-1 flex items-center justify-center">
-                            <img
-                              src={org.logo}
-                              alt={org.alt}
-                              width={96}
-                              height={32}
-                              className="h-5 sm:h-6 w-auto object-contain"
-                              onError={(e) => {
-                                e.currentTarget.parentElement!.style.display = "none";
-                                e.currentTarget.closest("div.flex.flex-col")?.querySelector(".org-fallback")?.classList.remove("hidden");
-                              }}
-                            />
-                          </div>
-                        ) : (
-                          <img
-                            src={org.logo}
-                            alt={org.alt}
-                            width={96}
-                            height={32}
-                            className="h-6 sm:h-8 w-auto object-contain mb-1"
-                            style={{ filter: "brightness(0) invert(1)" }}
-                            onError={(e) => {
-                              e.currentTarget.style.display = "none";
-                              e.currentTarget.nextElementSibling?.classList.remove("hidden");
-                            }}
-                          />
-                        )
-                      ) : null}
-                      {/* Badge textual: usado quando não há logo (org.logo === null) ou se a imagem falhar ao carregar */}
-                      <span className={`org-fallback ${org.logo ? "hidden" : ""} text-[9px] font-bold text-white/70 text-center leading-tight`}>
-                        {org.name}
-                      </span>
-                    </div>
+                    />
                   );
                 })}
-              </div>
-
-              {/* Labels de categoria */}
-              <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-white/10">
-                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(232,24,122,0.2)", color: "#E8187A" }}>Realização</span>
-                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(12,37,64,0.3)", color: "#FAF9F6" }}>Co-realização</span>
-                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(41,121,255,0.2)", color: "#2979FF" }}>Parceiros Int.</span>
-                <span className="text-[8px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style={{ background: "rgba(74,140,63,0.2)", color: "#4A8C3F" }}>Patrocínio</span>
               </div>
             </motion.div>
           </div>
