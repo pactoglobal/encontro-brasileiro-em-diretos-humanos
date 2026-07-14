@@ -116,38 +116,31 @@ export function Organizers() {
                     Co-realização
                   </span>
 
-                  {/* Linha de logos — co-realizacao.png e CERALC lado a lado */}
-                  <div className="flex flex-col gap-5">
-                    {/* Pacto Global + parceiros internacionais */}
-                    <div>
-                      <p className="text-[9px] font-bold uppercase tracking-wider text-dhe-text-muted/60 mb-2">
-                        Pacto Global & Parceiros Internacionais
-                      </p>
-                      <img
-                        src="/identity/co-realizacao.png"
-                        alt="Global Gateway · UE · OIT · OCDE · Nações Unidas Direitos Humanos"
-                        width={558}
-                        height={90}
-                        className="h-10 w-auto max-w-full object-contain"
-                      />
-                    </div>
-
-                    {/* Divider */}
-                    <div className="h-px bg-dhe-border" />
-
-                    {/* CERALC */}
-                    <div>
-                      <p className="text-[9px] font-bold uppercase tracking-wider text-dhe-text-muted/60 mb-2">
-                        CERALC
-                      </p>
-                      <img
-                        src="/identity/co-realizacao-1.png"
-                        alt="CERALC — Conduta Empresarial Responsável na América Latina e no Caribe"
-                        width={210}
-                        height={115}
-                        className="h-12 w-auto max-w-[200px] object-contain"
-                      />
-                    </div>
+                  {/* Grid de parceiros individuais */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 items-center justify-items-center mt-2">
+                    {[
+                      { src: "/identity/logo-pacto-global.png", alt: "Pacto Global" },
+                      { src: "/identity/co-realizacao-1.png", alt: "CERALC" },
+                      { src: "/identity/direitos-humanos-onu.png", alt: "Nações Unidas Direitos Humanos" },
+                      { src: "/identity/oit-logo-new.png", alt: "OIT" },
+                      { src: "/identity/ocde-logo-new.png", alt: "OCDE" },
+                      { src: "/identity/refugiados.png", alt: "ACNUR Refugiados" },
+                      { src: "/identity/global-gateway-1.png", alt: "Global Gateway EU" },
+                      { src: "/identity/global-gateway-2.png", alt: "Global Gateway" },
+                      { src: "/identity/rede-mulher.png", alt: "Rede Mulher" },
+                    ].map((logo, idx) => (
+                      <div
+                        key={idx}
+                        className="p-2.5 bg-[#FAF9F6] border border-[#D8D4C7]/60 rounded-xl flex items-center justify-center shadow-sm w-full h-14 hover:bg-white hover:border-[#D8D4C7] transition-all duration-200"
+                        title={logo.alt}
+                      >
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="h-full w-auto max-w-full object-contain"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -176,7 +169,7 @@ export function Organizers() {
 
                   {/* Logo Petrobras em destaque real */}
                   <img
-                    src="/identity/petrobras-patrocinio.png"
+                    src="/identity/petrobras-logo-new.png"
                     alt="Petrobras"
                     width={214}
                     height={64}

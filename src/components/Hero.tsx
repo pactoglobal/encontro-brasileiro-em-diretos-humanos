@@ -36,17 +36,18 @@ const ORGANIZACOES = [
   { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
   // Co-realização
   { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
-  // lightBg: arquivo já vem com fundo/marca em cor sólida (não é um ícone
-  // transparente) — inverter para branco vira um bloco ilegível, então
-  // exibimos em um chip branco em vez de aplicar o filtro monocromático
   { name: "CERALC", logo: "/identity/co-realizacao-1.png", tipo: "corealizacao", alt: "Conduta Empresarial Responsável na AL e Caribe", lightBg: true },
+  { name: "Direitos Humanos ONU", logo: "/identity/direitos-humanos-onu.png", tipo: "corealizacao", alt: "Nações Unidas Direitos Humanos" },
   // Parceiros Internacionais
-  { name: "OIT", logo: "/identity/oit-logo.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
-  // PNUD: sem logo em alta resolução disponível ainda — exibe badge textual até receber o arquivo do time de design
+  { name: "OIT", logo: "/identity/oit-logo-new.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
   { name: "PNUD", logo: null, tipo: "parceiro-int", alt: "Programa das Nações Unidas para o Desenvolvimento" },
-  { name: "OCDE", logo: "/identity/ocde-logo.png", tipo: "parceiro-int", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
+  { name: "OCDE", logo: "/identity/ocde-logo-new.png", tipo: "parceiro-int", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
+  { name: "Global Gateway 1", logo: "/identity/global-gateway-1.png", tipo: "parceiro-int", alt: "Global Gateway" },
+  { name: "Global Gateway 2", logo: "/identity/global-gateway-2.png", tipo: "parceiro-int", alt: "Global Gateway" },
+  { name: "ACNUR Refugiados", logo: "/identity/refugiados.png", tipo: "parceiro-int", alt: "ACNUR Refugiados" },
+  { name: "Rede Mulher", logo: "/identity/rede-mulher.png", tipo: "parceiro-int", alt: "Rede Mulher" },
   // Patrocinador
-  { name: "Petrobras", logo: "/identity/petrobras-patrocinio.png", tipo: "patrocinador", alt: "Petrobras" },
+  { name: "Petrobras", logo: "/identity/petrobras-logo-new.png", tipo: "patrocinador", alt: "Petrobras" },
   // Parceiro Local
   { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira", lightBg: true },
 ];
