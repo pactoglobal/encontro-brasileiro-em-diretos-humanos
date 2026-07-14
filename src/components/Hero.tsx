@@ -59,6 +59,7 @@ const TIPO_COLORS: Record<string, { border: string; badge: string; badgeText: st
   "parceiro-int":  { border: "#2979FF", badge: "rgba(41,121,255,0.15)", badgeText: "#2979FF" },
   patrocinador:  { border: "#4A8C3F", badge: "rgba(74,140,63,0.15)",  badgeText: "#4A8C3F" },
   "parceiro-local":{ border: "#7B2D1E", badge: "rgba(123,45,30,0.15)",  badgeText: "#7B2D1E" },
+  apoio:           { border: "#E8187A", badge: "rgba(232,24,122,0.15)", badgeText: "#E8187A" },
 };
 
 export function Hero() {

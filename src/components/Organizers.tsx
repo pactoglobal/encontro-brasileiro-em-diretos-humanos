@@ -47,97 +47,106 @@ export function Organizers() {
               animate="visible"
               className="grid grid-cols-1 md:grid-cols-2 gap-5"
             >
-              {/* ─── CARD 1: ADHE — Realização (destaque escuro, col-span 1 full height) ─── */}
+              {/* ─── CARD 1: ADHE — Realização ─── */}
               <motion.div
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                className="md:row-span-2 relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
+                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
                 style={{
                   background: "linear-gradient(145deg, #0C2540 0%, #0E2E50 100%)",
-                  boxShadow: "0 20px 60px rgba(12,37,64,0.22)",
-                  minHeight: "480px",
+                  boxShadow: "0 12px 40px rgba(12,37,64,0.15)",
+                  minHeight: "260px",
                 }}
               >
-                {/* Fita KV sutil no fundo */}
                 <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                {/* Glow magenta no hover */}
                 <div className="absolute bottom-0 left-0 right-0 h-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   style={{ background: "radial-gradient(ellipse at bottom center, rgba(232,24,122,0.18) 0%, transparent 70%)" }} />
 
-                {/* Topo */}
                 <div className="relative z-10">
-                  <span className="inline-block text-[9px] font-black text-white/50 uppercase tracking-[0.28em] border border-white/12 px-3 py-1.5 rounded-full mb-8">
+                  <span className="inline-block text-[9px] font-black text-white/50 uppercase tracking-[0.28em] border border-white/12 px-3 py-1.5 rounded-full mb-6">
                     Realização
                   </span>
 
-                  {/* Logo ADHE em destaque */}
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <img
                       src="/identity/adhe-logo.png"
                       alt="ADHE — Aliança pelos Direitos Humanos e Empresas"
-                      width={269}
-                      height={95}
-                      className="h-20 w-auto object-contain brightness-0 invert"
+                      width={220}
+                      height={78}
+                      className="h-14 w-auto object-contain brightness-0 invert"
                     />
                   </div>
 
-                  <p className="text-[#FAF9F6]/60 text-sm leading-relaxed">
+                  <p className="text-[#FAF9F6]/70 text-xs leading-relaxed max-w-md">
                     {ABOUT_ADHE}
                   </p>
                 </div>
 
-                {/* Rodapé */}
-                <div className="relative z-10 border-t border-white/10 pt-5 flex items-center justify-between mt-6">
+                <div className="relative z-10 border-t border-white/10 pt-4 flex items-center justify-between mt-6">
                   <div className="flex gap-1.5">
                     {["#E8187A", "#4A8C3F", "#7B2D1E", "#E05A3A"].map((c) => (
-                      <div key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />
+                      <div key={c} className="w-1.5 h-1.5 rounded-full" style={{ background: c }} />
                     ))}
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-widest text-white/50">adhe.org.br</span>
                 </div>
               </motion.div>
 
-              {/* ─── CARD 2: Co-realização — AMBOS os logos juntos ─── */}
+              {/* ─── CARD 2: Co-realização ─── */}
               <motion.div
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col gap-6 cursor-default select-none group"
+                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
                 style={{
                   background: "#FFFFFF",
                   boxShadow: "0 4px 24px rgba(12,37,64,0.07)",
                   border: "1px solid #D8D4C7",
-                  minHeight: "220px",
+                  minHeight: "260px",
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-dhe-green/4 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative z-10">
-                  <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] mb-6 text-dhe-green border border-dhe-green/20 px-3 py-1.5 rounded-full bg-dhe-green/5">
+                <div className="relative z-10 w-full">
+                  <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] mb-4 text-dhe-green border border-dhe-green/20 px-3 py-1.5 rounded-full bg-dhe-green/5">
                     Co-realização
                   </span>
 
-                  {/* Grid de parceiros individuais sem cards, direto no fundo do bloco */}
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-x-8 gap-y-6 items-center justify-items-center mt-4">
-                    {[
-                      { src: "/identity/logo-pacto-global.png", alt: "Pacto Global" },
-                      { src: "/identity/co-realizacao-1.png", alt: "CERALC" },
-                      { src: "/identity/direitos-humanos-onu.png", alt: "Nações Unidas Direitos Humanos" },
-                      { src: "/identity/oit-logo-new.png", alt: "OIT" },
-                      { src: "/identity/ocde-logo-new.png", alt: "OCDE" },
-                      { src: "/identity/refugiados.png", alt: "ACNUR Refugiados" },
-                      { src: "/identity/global-gateway-1.png", alt: "Global Gateway EU" },
-                      { src: "/identity/global-gateway-2.png", alt: "Global Gateway" },
-                      { src: "/identity/rede-mulher.png", alt: "Rede Mulher" },
-                    ].map((logo, idx) => (
-                      <img
-                        key={idx}
-                        src={logo.src}
-                        alt={logo.alt}
-                        className="h-9 sm:h-10 w-auto max-w-full object-contain opacity-85 hover:opacity-100 transition-opacity duration-300"
-                        title={logo.alt}
-                      />
-                    ))}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-5 items-center justify-items-start mt-2">
+                    <img
+                      src="/identity/logo-pacto-global.png"
+                      alt="Pacto Global Rede Brasil"
+                      className="h-7 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
+                    
+                    <div className="flex items-center gap-1.5 h-7 w-auto opacity-95 hover:opacity-100 transition-opacity" title="Global Gateway">
+                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
+                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                    </div>
+
+                    <img
+                      src="/identity/direitos-humanos-onu.png"
+                      alt="Nações Unidas Direitos Humanos"
+                      className="h-8 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
+
+                    <img
+                      src="/identity/oit-logo-new.png"
+                      alt="Organização Internacional do Trabalho (OIT)"
+                      className="h-8 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
+
+                    <img
+                      src="/identity/ocde-logo-new.png"
+                      alt="OCDE"
+                      className="h-7 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
                   </div>
+                </div>
+
+                <div className="relative z-10 mt-6 pt-3 border-t border-dhe-border">
+                  <p className="text-[10px] text-dhe-text-muted/60 uppercase font-bold tracking-wider">
+                    Parcerias Estratégicas e Cooperação Internacional
+                  </p>
                 </div>
               </motion.div>
 
@@ -156,26 +165,67 @@ export function Organizers() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#009A44]/5 via-transparent to-[#FFD100]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start justify-between mb-4">
                     <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] text-dhe-maroon border border-dhe-maroon/20 px-3 py-1.5 rounded-full bg-dhe-maroon/5">
                       Patrocínio
                     </span>
-                    <div className="w-2 h-2 rounded-full bg-[#009A44]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#009A44]" />
                   </div>
 
-                  {/* Logo Petrobras em destaque real */}
                   <img
                     src="/identity/petrobras-logo-new.png"
                     alt="Petrobras"
-                    width={214}
-                    height={64}
-                    className="h-14 w-auto object-contain"
+                    width={180}
+                    height={54}
+                    className="h-10 w-auto object-contain mt-2"
                   />
                 </div>
 
                 <div className="relative z-10 mt-4">
                   <p className="text-xs text-dhe-text-muted/70 leading-relaxed">
-                    Apoio estratégico para um encontro nacional sobre sustentabilidade empresarial e direitos humanos.
+                    Apoio financeiro indispensável para viabilização e resiliência deste fórum nacional.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* ─── CARD 4: Apoio ─── */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="relative overflow-hidden rounded-[24px] p-8 flex flex-col justify-between cursor-default select-none group"
+                style={{
+                  background: "#FFFFFF",
+                  boxShadow: "0 4px 24px rgba(12,37,64,0.07)",
+                  border: "1px solid #D8D4C7",
+                  minHeight: "220px",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-dhe-magenta/4 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="inline-block text-[9px] font-black uppercase tracking-[0.24em] text-dhe-magenta border border-dhe-magenta/20 px-3 py-1.5 rounded-full bg-dhe-magenta/5">
+                      Apoio
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-6 mt-4">
+                    <img
+                      src="/identity/rede-mulher.png"
+                      alt="RME — Rede Mulher Empreendedora"
+                      className="h-8 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
+                    <img
+                      src="/identity/refugiados.png"
+                      alt="Fórum Empresas com Refugiados"
+                      className="h-8 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                    />
+                  </div>
+                </div>
+
+                <div className="relative z-10 mt-4">
+                  <p className="text-xs text-dhe-text-muted/70 leading-relaxed">
+                    Organizações aliadas com foco em diversidade, equidade de gênero e empreendedorismo social.
                   </p>
                 </div>
               </motion.div>
