@@ -83,7 +83,7 @@ export function About() {
   };
 
   return (
-    <section id="sobre" className="dhe-section-light relative overflow-hidden bg-[#F1EFEA] py-20 lg:py-28">
+    <section id="sobre" className="dhe-section-light relative overflow-hidden bg-[#0C2540] py-20 lg:py-28 text-white">
       {/* Decorative ribbon */}
       <div
         className="absolute top-0 right-0 w-64 h-full opacity-[0.03] pointer-events-none hidden lg:block"
@@ -105,8 +105,8 @@ export function About() {
             <span />
             <span />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dhe-navy max-w-3xl leading-tight">
-            Empresas e Direitos Humanos em um mundo em transformação
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white max-w-3xl leading-tight">
+            Empresas e Direitos Humanos em um <span className="text-[#E8187A]">mundo em transformação</span>
           </h2>
         </div>
 
@@ -213,7 +213,7 @@ export function About() {
             </div>
             <div className="p-6 flex flex-col justify-between flex-1">
               <div>
-                <h4 className="text-lg font-display font-black text-dhe-navy leading-tight">Cinemateca Brasileira</h4>
+                <h4 className="text-lg font-display font-black text-[#E8187A] leading-tight">Cinemateca Brasileira</h4>
                 <p className="text-xs text-dhe-text-muted mt-1">
                   Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
                 </p>
@@ -281,7 +281,7 @@ export function About() {
                 </div>
                 <div>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta block">Diretrizes</span>
-                  <h4 className="text-lg font-display font-black text-dhe-navy">Objetivos Estratégicos</h4>
+                  <h4 className="text-lg font-display font-black text-[#E8187A]">Objetivos Estratégicos</h4>
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
