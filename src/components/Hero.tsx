@@ -36,18 +36,17 @@ const ORGANIZACOES = [
   { name: "ADHE", logo: "/identity/adhe-logo.png", tipo: "realizacao", alt: "Aliança pelos Direitos Humanos e Empresas" },
   // Co-realização
   { name: "Pacto Global ONU", logo: "/identity/logo-pacto-global.png", tipo: "corealizacao", alt: "Pacto Global Rede Brasil" },
+  { name: "Global Gateway 1", logo: "/identity/global-gateway-1.png", tipo: "corealizacao", alt: "Global Gateway" },
+  { name: "Global Gateway 2", logo: "/identity/global-gateway-2.png", tipo: "corealizacao", alt: "Global Gateway" },
   { name: "Direitos Humanos ONU", logo: "/identity/direitos-humanos-onu.png", tipo: "corealizacao", alt: "Nações Unidas Direitos Humanos" },
-  // Parceiros Internacionais
-  { name: "OIT", logo: "/identity/oit-logo-new.png", tipo: "parceiro-int", alt: "Organização Internacional do Trabalho" },
-  { name: "PNUD", logo: null, tipo: "parceiro-int", alt: "Programa das Nações Unidas para o Desenvolvimento" },
-  { name: "OCDE", logo: "/identity/ocde-logo-new.png", tipo: "parceiro-int", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
-  { name: "Global Gateway 1", logo: "/identity/global-gateway-1.png", tipo: "parceiro-int", alt: "Global Gateway" },
-  { name: "Global Gateway 2", logo: "/identity/global-gateway-2.png", tipo: "parceiro-int", alt: "Global Gateway" },
-  { name: "ACNUR Refugiados", logo: "/identity/refugiados.png", tipo: "parceiro-int", alt: "ACNUR Refugiados" },
-  { name: "Rede Mulher", logo: "/identity/rede-mulher.png", tipo: "parceiro-int", alt: "Rede Mulher" },
+  { name: "OIT", logo: "/identity/oit-logo-new.png", tipo: "corealizacao", alt: "Organização Internacional do Trabalho" },
+  { name: "OCDE", logo: "/identity/ocde-logo-new.png", tipo: "corealizacao", alt: "Organização para Cooperação e Desenvolvimento Econômico" },
   // Patrocinador
   { name: "Petrobras", logo: "/identity/petrobras-logo-new.png", tipo: "patrocinador", alt: "Petrobras" },
-  // Parceiro Local
+  // Apoio
+  { name: "Rede Mulher", logo: "/identity/rede-mulher.png", tipo: "apoio", alt: "Rede Mulher" },
+  { name: "ACNUR Refugiados", logo: "/identity/refugiados.png", tipo: "apoio", alt: "ACNUR Refugiados" },
+  // Parceiro
   { name: "Cinemateca", logo: "/identity/parceiro-cinemateca.png", tipo: "parceiro-local", alt: "Cinemateca Brasileira", lightBg: true },
 ];
 
@@ -412,7 +411,7 @@ export function Hero() {
               }}
             >
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0C2540]/85 mb-4 lg:text-right">
-                Realização · Co-realização · Apoio · Parceiros
+                Realização · Co-realização · Patrocínio · Apoio · Parceiro
               </p>
 
               {/* Grid de logos em cor original direto no fundo areia do bento */}
