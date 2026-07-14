@@ -83,7 +83,7 @@ export function About() {
   };
 
   return (
-    <section id="sobre" className="dhe-section-light relative overflow-hidden bg-[#0C2540] py-20 lg:py-28 text-white">
+    <section id="sobre" className="dhe-section-light relative overflow-hidden bg-[#F1EFEA] py-20 lg:py-28">
       {/* Decorative ribbon */}
       <div
         className="absolute top-0 right-0 w-64 h-full opacity-[0.03] pointer-events-none hidden lg:block"
@@ -105,7 +105,7 @@ export function About() {
             <span />
             <span />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black max-w-3xl leading-tight" style={{ color: "#FFFFFF" }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black max-w-3xl leading-tight" style={{ color: "#0C2540" }}>
             Empresas e Direitos Humanos em um <span style={{ color: "#E8187A" }}>mundo em transformação</span>
           </h2>
         </div>
