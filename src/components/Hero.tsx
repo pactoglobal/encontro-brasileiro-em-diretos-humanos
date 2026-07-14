@@ -381,12 +381,12 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* ── BENTO CARD: KV + Logos Glassmorphism ── */}
+            {/* ── BENTO CARD: KV + Logos Stacked Glassmorphism ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl overflow-hidden flex flex-col sm:flex-row shadow-xl backdrop-blur-md"
+              className="w-full rounded-3xl overflow-hidden flex flex-col shadow-xl backdrop-blur-md"
               style={{
                 background: "rgba(248, 246, 242, 0.78)",
                 border: "1px solid rgba(216, 212, 199, 0.65)",
@@ -394,60 +394,68 @@ export function Hero() {
                 WebkitBackdropFilter: "blur(20px)",
               }}
             >
-              {/* LEFT: KV na íntegra */}
-              <div className="w-full sm:w-[50%] shrink-0 bg-white/35 flex items-center justify-center p-4 border-b sm:border-b-0 sm:border-r border-[#D8D4C7]/55">
+              {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal */}
+              <div className="w-full relative overflow-hidden aspect-[1983/1156] border-b border-[#D8D4C7]/55">
                 <img
                   src="/identity/kv.png"
-                  alt="Key Visual DHE 2026"
-                  className="w-full h-auto object-contain rounded-xl shadow-md transition-transform duration-300 hover:scale-[1.015]"
+                  alt="Key Visual Encontro DH&E 2026"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.01]"
                 />
               </div>
 
-              {/* RIGHT: Logos por categoria */}
-              <div className="w-full sm:w-[50%] flex flex-col justify-between divide-y divide-[#D8D4C7]/55 text-[#0C2540] p-1.5">
-
-                {/* Realização */}
-                <div className="flex items-center justify-between gap-3 px-4 py-2.5">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Realização</span>
-                  <img src="/identity/adhe-logo.png" alt="ADHE" className="h-6 w-auto object-contain" />
-                </div>
-
-                {/* Co-realização */}
-                <div className="flex flex-col gap-2 px-4 py-2.5">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
-                  <div className="flex flex-wrap items-center justify-start gap-x-4 gap-y-2.5">
-                    <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-5 w-auto object-contain" />
-                    <div className="flex items-center gap-1 h-5" title="Global Gateway">
-                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
-                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+              {/* Bloco Inferior: Sequência de blocos e subdivisões */}
+              <div className="w-full p-4 flex flex-col gap-4 text-[#0C2540] bg-white/20">
+                <div className="flex flex-col sm:flex-row sm:items-stretch gap-4 sm:gap-0 divide-y sm:divide-y-0 sm:divide-x divide-[#D8D4C7]/60">
+                  
+                  {/* Realização */}
+                  <div className="flex flex-col gap-1 sm:pr-4 justify-between min-w-[70px]">
+                    <span className="text-[7px] font-black uppercase tracking-wider text-dhe-magenta">Realização</span>
+                    <div className="flex items-center h-7 mt-1">
+                      <img src="/identity/adhe-logo.png" alt="ADHE" className="h-5.5 w-auto object-contain" />
                     </div>
-                    <img src="/identity/direitos-humanos-onu.png" alt="ONU" className="h-6 w-auto object-contain" />
-                    <img src="/identity/oit-logo-new.png" alt="OIT" className="h-5 w-auto object-contain" />
-                    <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-5 w-auto object-contain" />
                   </div>
-                </div>
 
-                {/* Patrocínio */}
-                <div className="flex items-center justify-between gap-3 px-4 py-2.5">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-navy shrink-0">Patrocínio</span>
-                  <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-5 w-auto object-contain" />
-                </div>
-
-                {/* Apoio */}
-                <div className="flex items-center justify-between gap-3 px-4 py-2.5">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-dhe-magenta shrink-0">Apoio</span>
-                  <div className="flex items-center gap-4">
-                    <img src="/identity/rede-mulher.png" alt="RME" className="h-5 w-auto object-contain" />
-                    <img src="/identity/refugiados.png" alt="Refugiados" className="h-5 w-auto object-contain" />
+                  {/* Co-realização */}
+                  <div className="flex flex-col gap-1.5 pt-3 sm:pt-0 sm:px-4 justify-between flex-1">
+                    <span className="text-[7px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
+                      <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-4.5 w-auto object-contain" />
+                      <div className="flex items-center gap-1 h-4.5" title="Global Gateway">
+                        <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
+                        <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                      </div>
+                      <img src="/identity/direitos-humanos-onu.png" alt="ONU" className="h-5.5 w-auto object-contain" />
+                      <img src="/identity/oit-logo-new.png" alt="OIT" className="h-4.5 w-auto object-contain" />
+                      <img src="/identity/ocde-logo-new.png" alt="OCDE" className="h-4.5 w-auto object-contain" />
+                    </div>
                   </div>
-                </div>
 
-                {/* Parceiro */}
-                <div className="flex items-center justify-between gap-3 px-4 py-2.5">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-[#7B2D1E] shrink-0">Parceiro</span>
-                  <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-6 w-auto object-contain" />
-                </div>
+                  {/* Patrocínio */}
+                  <div className="flex flex-col gap-1 pt-3 sm:pt-0 sm:px-4 justify-between min-w-[80px]">
+                    <span className="text-[7px] font-black uppercase tracking-wider text-dhe-navy">Patrocínio</span>
+                    <div className="flex items-center h-7 mt-1">
+                      <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-4.5 w-auto object-contain" />
+                    </div>
+                  </div>
 
+                  {/* Apoio */}
+                  <div className="flex flex-col gap-1 pt-3 sm:pt-0 sm:px-4 justify-between min-w-[80px]">
+                    <span className="text-[7px] font-black uppercase tracking-wider text-dhe-magenta">Apoio</span>
+                    <div className="flex items-center gap-2 mt-1 h-7">
+                      <img src="/identity/rede-mulher.png" alt="RME" className="h-4.5 w-auto object-contain" />
+                      <img src="/identity/refugiados.png" alt="Refugiados" className="h-4.5 w-auto object-contain" />
+                    </div>
+                  </div>
+
+                  {/* Parceiro */}
+                  <div className="flex flex-col gap-1 pt-3 sm:pt-0 sm:pl-4 justify-between min-w-[80px]">
+                    <span className="text-[7px] font-black uppercase tracking-wider text-[#7B2D1E]">Parceiro</span>
+                    <div className="flex items-center h-7 mt-1">
+                      <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-5.5 w-auto object-contain" />
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </motion.div>
           </div>
