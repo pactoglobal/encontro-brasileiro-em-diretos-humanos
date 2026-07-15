@@ -178,7 +178,7 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CONTEÚDO PRINCIPAL
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-20 pb-8 lg:pt-24 lg:pb-8">
+      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-24 pb-12 lg:pt-32 lg:pb-12">
 
         <div className="flex-1 grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
@@ -207,7 +207,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
-              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-3"
+              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-5"
               style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", color: "#FFFFFF" }}
             >
               Pluralidade<br />
@@ -219,7 +219,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.28, type: "spring", stiffness: 80 }}
-              className="text-base sm:text-lg text-white/75 leading-relaxed mb-4 max-w-xl"
+              className="text-base sm:text-lg text-white/75 leading-relaxed mb-6 max-w-xl"
             >
               O espaço nacional que conecta lideranças empresariais, sociedade civil,
               poder público e academia para debater Empresas e Direitos Humanos orientados à ação.
@@ -444,8 +444,8 @@ export function Hero() {
                 WebkitBackdropFilter: "blur(20px)",
               }}
             >
-              {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal (aspect horizontal compacto) */}
-              <div className="w-full relative overflow-hidden aspect-[2.35/1] border-b border-[#D8D4C7]/55">
+              {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal (scale para borda infinita) */}
+              <div className="w-full relative overflow-hidden aspect-[1983/1156] border-b border-[#D8D4C7]/55">
                 <img
                   src="/identity/kv.png"
                   alt="Key Visual Encontro DH&E 2026"
@@ -453,9 +453,9 @@ export function Hero() {
                 />
               </div>
 
-              {/* Bloco Inferior: Sequência de subdivisões em grid compacto */}
-              <div className="w-full p-4 flex flex-col gap-2.5 text-[#0C2540] bg-white/20">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
+              {/* Bloco Inferior: Sequência de subdivisões em grid espaçoso */}
+              <div className="w-full p-5 flex flex-col gap-4 text-[#0C2540] bg-white/20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                   
                   {/* Realização */}
                   <div className="flex flex-col gap-1 pb-3 border-b border-[#D8D4C7]/40 sm:border-b-0 sm:pb-0">
