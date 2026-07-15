@@ -105,7 +105,7 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-2 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden border border-white/20"
+            className="md:col-span-2 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border border-white/20"
           >
             {/* Background image */}
             <div
@@ -113,27 +113,27 @@ export function About() {
               style={{ backgroundImage: `url(${CARD_BG.contexto})` }}
             />
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0C2540]/90 via-[#0C2540]/75 to-[#0C2540]/60" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0C2540]/90 via-[#0C2540]/80 to-[#0C2540]/70" />
             {/* Content */}
             <div className="relative z-10">
-              <div className="absolute top-0 right-0 p-6 text-white/60 group-hover:text-white/90 transition-colors duration-300">
+              <div className="absolute top-0 right-0 p-4 text-white group-hover:text-white transition-colors duration-300">
                 <ArrowUpRight className="w-6 h-6" />
               </div>
-              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-white mb-6">
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-dhe-green animate-pulse" />
                 Cenário Atual
               </span>
-              <h3 className="text-xl sm:text-2xl font-display font-black mb-5 max-w-xl leading-snug" style={{ color: "#FFFFFF" }}>
+              <h3 className="text-xl sm:text-2xl font-display font-black mb-4 max-w-xl leading-snug text-white">
                 Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
               </h3>
-              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/85">
+              <div className="space-y-3 text-sm sm:text-base leading-relaxed text-white font-medium">
                 <p>
                   Nos últimos anos, sucessivas crises globais têm interrompido e revertido avanços no
                   desenvolvimento sustentável. A pandemia, conflitos armados, mudanças climáticas e a
                   instrumentalização geopolítica da economia criaram um cenário de elevada incerteza e volatilidade.
                 </p>
                 <p>
-                  As empresas não operam em um vácuo. A capacidade de enfrentar riscos sistêmicos deixou de ser
+                  As empresas não operam em um vácuo. A capacidade de enfrentar risks sistêmicos deixou de ser
                   questão de conformidade ou reputação — passou a integrar estratégias de resiliência e
                   competitividade de longo prazo.
                 </p>
@@ -194,14 +194,14 @@ export function About() {
                 ))}
               </div>
             </div>
-            <div className="p-6 flex flex-col justify-between flex-1">
+            <div className="p-5 flex flex-col justify-between flex-1">
               <div>
                 <h4 className="text-lg font-display font-black leading-tight" style={{ color: "#E8187A" }}>Cinemateca Brasileira</h4>
                 <p className="text-sm text-dhe-text-muted mt-1.5">
                   Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
                 </p>
               </div>
-              <div className="mt-5 pt-4 border-t border-[#D8D4C7]/60 flex items-center justify-between">
+              <div className="mt-4 pt-3 border-t border-[#D8D4C7]/60 flex items-center justify-between">
                 <div>
                   <p className="text-[8px] font-black uppercase tracking-[0.2em] text-dhe-text-muted">Co-realização e Apoio</p>
                   <p className="text-[10px] font-bold text-dhe-navy mt-0.5">Parceiro Oficial de Espaço</p>
@@ -223,22 +223,22 @@ export function About() {
               className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
               style={{ backgroundImage: `url(${CARD_BG.publicoAlvo})` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0C2540]/85 via-[#0C2540]/80 to-[#0C2540]/95" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0C2540]/90 via-[#0C2540]/85 to-[#0C2540]/95" />
             <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-dhe-magenta/10 rounded-full blur-2xl pointer-events-none" />
             <div className="relative z-10 flex flex-col justify-between flex-1">
               <div>
-                <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-dhe-magenta mb-6">
+                <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-4">
                   <Users className="w-5 h-5" />
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3 block">Público-Alvo</span>
-                <h3 className="text-xl font-display font-black leading-snug mb-4" style={{ color: "#FFFFFF" }}>Quem participará do Encontro</h3>
-                <p className="text-sm text-white/80 leading-relaxed mb-6">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white mb-2 block">Público-Alvo</span>
+                <h3 className="text-xl font-display font-black leading-snug mb-3 text-white">Quem participará</h3>
+                <p className="text-sm text-white leading-relaxed mb-4">
                   Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {PUBLICO_TAGS.map((tag) => (
-                  <span key={tag} className="text-[9px] font-bold px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/90 group-hover:bg-white/10 transition-colors">
+                  <span key={tag} className="text-[9px] font-bold px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white group-hover:bg-white/20 transition-colors">
                     {tag}
                   </span>
                 ))}
@@ -251,18 +251,20 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-2 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B]"
-            style={{ minHeight: "260px" }}
+            className="md:col-span-2 rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B]"
+            style={{ minHeight: "170px" }}
           >
             <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
-            <div>
-              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
-                1
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex items-center justify-between w-full">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md border border-white/25 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-sm">
+                  1
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white">
+                  Geopolítica & Valor
+                </span>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
-                Geopolítica & Valor
-              </span>
-              <h3 className="text-xl sm:text-2xl font-display font-black leading-snug text-white mt-3">
+              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-4">
                 Analisar como transformações geopolíticas e econômicas globais incidem sobre empresas e cadeias de valor.
               </h3>
             </div>
@@ -272,18 +274,20 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032]"
-            style={{ minHeight: "260px" }}
+            className="md:col-span-1 rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032]"
+            style={{ minHeight: "170px" }}
           >
             <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
-            <div>
-              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
-                2
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex items-center justify-between w-full">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md border border-white/25 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-sm">
+                  2
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white">
+                  Estratégia & Incerteza
+                </span>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
-                Estratégia & Incerteza
-              </span>
-              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+              <h3 className="text-sm sm:text-base font-display font-black leading-snug text-white mt-4">
                 Debater se, e por que, a agenda de Empresas e Direitos Humanos segue estratégica em um contexto de incerteza.
               </h3>
             </div>
@@ -293,18 +297,20 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525]"
-            style={{ minHeight: "260px" }}
+            className="md:col-span-1 rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525]"
+            style={{ minHeight: "170px" }}
           >
             <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
-            <div>
-              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
-                3
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex items-center justify-between w-full">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md border border-white/25 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-sm">
+                  3
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white">
+                  Espaço Multiator
+                </span>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
-                Espaço Multiator
-              </span>
-              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+              <h3 className="text-sm sm:text-base font-display font-black leading-snug text-white mt-4">
                 Garantir um espaço multiator com participação efetiva de titulares de direitos, empresas, poder público, sociedade civil e academia.
               </h3>
             </div>
@@ -314,18 +320,20 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E]"
-            style={{ minHeight: "260px" }}
+            className="md:col-span-1 rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E]"
+            style={{ minHeight: "170px" }}
           >
             <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
-            <div>
-              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
-                4
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex items-center justify-between w-full">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md border border-white/25 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-sm">
+                  4
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white">
+                  Transparência
+                </span>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
-                Transparência & Prática
-              </span>
-              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+              <h3 className="text-sm sm:text-base font-display font-black leading-snug text-white mt-4">
                 Superar abordagens baseadas apenas em boas práticas, incorporando lições aprendidas, dilemas e falhas reais.
               </h3>
             </div>
@@ -335,18 +343,20 @@ export function About() {
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-3 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116]"
-            style={{ minHeight: "200px" }}
+            className="md:col-span-3 rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden border border-white/15 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116]"
+            style={{ minHeight: "130px" }}
           >
             <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
-            <div>
-              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
-                5
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex items-center justify-between w-full">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-md border border-white/25 rounded-xl flex items-center justify-center text-white text-sm font-black shadow-sm">
+                  5
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white">
+                  Legado & Contribuição
+                </span>
               </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
-                Legado & Contribuição
-              </span>
-              <h3 className="text-xl sm:text-2xl font-display font-black leading-snug text-white mt-3">
+              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
                 Produzir um documento com potencial de contribuição ao debate nacional e ao Fórum Internacional em Genebra.
               </h3>
             </div>
