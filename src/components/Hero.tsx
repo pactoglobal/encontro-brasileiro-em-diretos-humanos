@@ -178,7 +178,7 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CONTEÚDO PRINCIPAL
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-20 pb-12 lg:pt-26 lg:pb-12">
+      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-24 pb-12 lg:pt-32 lg:pb-12">
 
         <div className="flex-1 grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
@@ -444,12 +444,12 @@ export function Hero() {
                 WebkitBackdropFilter: "blur(20px)",
               }}
             >
-              {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal */}
+              {/* Bloco Superior: KV inteiro de ponta a ponta na horizontal (scale para borda infinita) */}
               <div className="w-full relative overflow-hidden aspect-[1983/1156] border-b border-[#D8D4C7]/55">
                 <img
                   src="/identity/kv.png"
                   alt="Key Visual Encontro DH&E 2026"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.01]"
+                  className="w-full h-full object-cover scale-[1.075] origin-center transition-transform duration-500 hover:scale-[1.10]"
                 />
               </div>
 
