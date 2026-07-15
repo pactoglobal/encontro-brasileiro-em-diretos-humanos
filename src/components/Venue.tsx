@@ -91,8 +91,8 @@ export function Venue() {
                     <Icon className="w-4 h-4" strokeWidth={1.8} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-dhe-navy">{label}</p>
-                    <p className="text-xs mt-0.5 text-dhe-text-muted">{desc}</p>
+                    <p className="text-sm font-bold text-dhe-navy">{label}</p>
+                    <p className="text-sm mt-0.5 text-dhe-text-muted">{desc}</p>
                   </div>
                 </motion.div>
               ))}

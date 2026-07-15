@@ -163,10 +163,10 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
           <h3 className={`font-display font-black text-white leading-tight mb-1 ${isFeatured ? "text-2xl" : "text-xl"}`}>
             {attraction.name}
           </h3>
-          <p className="text-xs font-bold mb-1" style={{ color: attraction.themeColor }}>
+          <p className="text-sm font-bold mb-1" style={{ color: attraction.themeColor }}>
             {attraction.role}
           </p>
-          <p className="text-[11px] text-white/60 leading-snug">{attraction.org}</p>
+          <p className="text-xs text-white/70 leading-snug">{attraction.org}</p>
 
           {/* Linha divisória */}
           <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">

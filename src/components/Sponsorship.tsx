@@ -46,7 +46,7 @@ export function Sponsorship() {
                     </div>
                     <div>
                       <p className="font-display font-black text-sm uppercase tracking-wide text-white">{title}</p>
-                      <p className="mt-1 text-xs text-white/60 leading-relaxed">{desc}</p>
+                      <p className="mt-1 text-sm text-white/85 leading-relaxed">{desc}</p>
                     </div>
                   </div>
                 );
@@ -79,7 +79,7 @@ export function Sponsorship() {
                 <h3 className="text-2xl font-display font-black leading-tight text-white mb-2">
                   Rafael Carmo
                 </h3>
-                <p className="text-xs text-white/65 leading-relaxed mb-6">
+                <p className="text-sm text-white/85 leading-relaxed mb-6">
                   Fale com o coordenador comercial para receber o portfólio de patrocínios, cotas de apoio e conhecer todas as contrapartidas estruturadas.
                 </p>
               </div>
@@ -99,7 +99,7 @@ export function Sponsorship() {
 
             <div className="bg-white/3 border border-white/5 rounded-2xl p-5 flex items-start gap-4">
               <Info size={16} className="text-[#E8187A] shrink-0 mt-0.5" />
-              <p className="text-[11px] leading-relaxed text-white/50">
+              <p className="text-xs leading-relaxed text-white/70">
                 Cada cota de patrocínio oferece contrapartidas exclusivas em exposição de marca na Cinemateca Brasileira, relacionamento institucional de alto nível e conteúdos conjuntos.
               </p>
             </div>

@@ -62,7 +62,7 @@ export function Organizers() {
                       className="h-10 w-auto object-contain"
                     />
                   </div>
-                  <p className="text-[10px] text-dhe-text-muted/70 leading-relaxed mt-2">
+                  <p className="text-xs text-dhe-text-muted/85 leading-relaxed mt-2">
                     Aliança pelos Direitos Humanos e Empresas
                   </p>
                 </div>
@@ -146,7 +146,7 @@ export function Organizers() {
                     />
                   </div>
                   <div className="mt-1 leading-tight">
-                    <p className="text-[9px] font-bold text-dhe-navy">Cinemateca Brasileira</p>
+                    <p className="text-xs font-bold text-dhe-navy">Cinemateca Brasileira</p>
                   </div>
                 </div>
 

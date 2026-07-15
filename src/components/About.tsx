@@ -214,7 +214,7 @@ export function About() {
             <div className="p-6 flex flex-col justify-between flex-1">
               <div>
                 <h4 className="text-lg font-display font-black leading-tight" style={{ color: "#E8187A" }}>Cinemateca Brasileira</h4>
-                <p className="text-xs text-dhe-text-muted mt-1">
+                <p className="text-sm text-dhe-text-muted mt-1.5">
                   Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
                 </p>
               </div>
@@ -249,7 +249,7 @@ export function About() {
                 </div>
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3 block">Público-Alvo</span>
                 <h3 className="text-xl font-display font-black leading-snug mb-4" style={{ color: "#FFFFFF" }}>Quem participará do Encontro</h3>
-                <p className="text-xs text-white/70 leading-relaxed mb-6">
+                <p className="text-sm text-white/80 leading-relaxed mb-6">
                   Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                 </p>
               </div>
@@ -297,7 +297,7 @@ export function About() {
                     >
                       {i + 1}
                     </span>
-                    <p className="text-sm leading-relaxed text-dhe-text-muted">{bullet}</p>
+                    <p className="text-base leading-relaxed text-dhe-text-muted">{bullet}</p>
                   </div>
                 ))}
               </div>

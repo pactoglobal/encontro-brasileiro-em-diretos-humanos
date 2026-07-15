@@ -266,7 +266,7 @@ function BentoAgendaGrid({ items, tab }: { items: AgendaItem[]; tab: typeof TABS
                     {item.speakers.map((s, si) => (
                       <li
                         key={si}
-                        className="text-xs leading-relaxed flex items-start gap-2"
+                        className="text-sm leading-relaxed flex items-start gap-2"
                         style={{ color: isFeatured ? "rgba(255,255,255,0.75)" : "#596168" }}
                       >
                         <span
@@ -287,7 +287,7 @@ function BentoAgendaGrid({ items, tab }: { items: AgendaItem[]; tab: typeof TABS
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-xs italic"
+                    className="text-sm italic"
                     style={{ color: isFeatured ? "rgba(255,255,255,0.55)" : "#596168" }}
                   >
                     Mediação: {item.mediator}
