@@ -1,23 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "../hooks/useInView";
-import { Target, Users, ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-
-const BULLETS = [
-  "Analisar como transformações geopolíticas e econômicas globais incidem sobre empresas e cadeias de valor",
-  "Debater se, e por que, a agenda de Empresas e Direitos Humanos segue estratégica em um contexto de incerteza",
-  "Garantir um espaço multiator, com participação efetiva de titulares de direitos, empresas, poder público, sociedade civil e academia",
-  "Superar abordagens centradas exclusivamente em boas práticas, incorporando lições aprendidas, dilemas e falhas",
-  "Produzir um documento com potencial de contribuição ao debate nacional e ao Fórum Internacional em Genebra",
-];
-
-const BULLET_COLORS = [
-  { color: "#E8187A", bg: "rgba(232,24,122,0.15)" },
-  { color: "#4A8C3F", bg: "rgba(74,140,63,0.15)" },
-  { color: "#7B2D1E", bg: "rgba(123,45,30,0.15)" },
-  { color: "#E05A3A", bg: "rgba(224,90,58,0.15)" },
-  { color: "#0C2540", bg: "rgba(12,37,64,0.15)" },
-];
+import { Users, ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 const CINEMATECA_IMAGES = [
   "/identity/cinemateca-facade.jpg",
@@ -28,7 +12,6 @@ const CINEMATECA_IMAGES = [
 const CARD_BG = {
   contexto: "/identity/bg-carousel-1.jpg",
   publicoAlvo: "/identity/bg-carousel-2.jpg",
-  objetivos: "/identity/bg-carousel-3.jpg",
 };
 
 const PUBLICO_TAGS = [
@@ -263,44 +246,109 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Card 4: Objetivos — bg image + light overlay, spans 2 cols */}
+          {/* Objetivos Estratégicos — 5 Bento Cards coloridos com aspecto iOS e glassmorphism */}
+          {/* Card 1: Geopolítica & Valor (spans 2 cols) */}
           <motion.div
             variants={itemVariants}
             whileHover={hoverStyle}
-            className="md:col-span-2 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden border border-[#D8D4C7]/40"
+            className="md:col-span-2 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B]"
+            style={{ minHeight: "260px" }}
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-              style={{ backgroundImage: `url(${CARD_BG.objetivos})` }}
-            />
-            <div className="absolute inset-0 bg-[#FAF9F6]/92 backdrop-blur-[2px]" />
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-2xl bg-[#E8187A]/10 flex items-center justify-center text-[#E8187A]">
-                  <Target className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta block">Diretrizes</span>
-                  <h4 className="text-lg font-display font-black" style={{ color: "#E8187A" }}>Objetivos Estratégicos</h4>
-                </div>
+            <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+            <div>
+              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
+                1
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {BULLETS.map((bullet, i) => (
-                  <div
-                    key={i}
-                    className="p-4 bg-white/80 backdrop-blur-sm border border-[#D8D4C7]/60 rounded-2xl flex gap-3.5 items-start group-hover:bg-white group-hover:border-[#D8D4C7] transition-colors"
-                    style={{ gridColumn: i === 2 ? "span 1 sm:span-2" : "auto" }}
-                  >
-                    <span
-                      className="shrink-0 w-6.5 h-6.5 rounded-xl flex items-center justify-center text-[10px] font-black"
-                      style={{ background: BULLET_COLORS[i].bg, color: BULLET_COLORS[i].color }}
-                    >
-                      {i + 1}
-                    </span>
-                    <p className="text-base leading-relaxed text-dhe-text-muted">{bullet}</p>
-                  </div>
-                ))}
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
+                Geopolítica & Valor
+              </span>
+              <h3 className="text-xl sm:text-2xl font-display font-black leading-snug text-white mt-3">
+                Analisar como transformações geopolíticas e econômicas globais incidem sobre empresas e cadeias de valor.
+              </h3>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Estratégia & Incerteza (spans 1 col) */}
+          <motion.div
+            variants={itemVariants}
+            whileHover={hoverStyle}
+            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032]"
+            style={{ minHeight: "260px" }}
+          >
+            <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+            <div>
+              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
+                2
               </div>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
+                Estratégia & Incerteza
+              </span>
+              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+                Debater se, e por que, a agenda de Empresas e Direitos Humanos segue estratégica em um contexto de incerteza.
+              </h3>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Espaço Multiator (spans 1 col) */}
+          <motion.div
+            variants={itemVariants}
+            whileHover={hoverStyle}
+            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525]"
+            style={{ minHeight: "260px" }}
+          >
+            <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+            <div>
+              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
+                3
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
+                Espaço Multiator
+              </span>
+              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+                Garantir um espaço multiator com participação efetiva de titulares de direitos, empresas, poder público, sociedade civil e academia.
+              </h3>
+            </div>
+          </motion.div>
+
+          {/* Card 4: Transparência & Prática (spans 1 col) */}
+          <motion.div
+            variants={itemVariants}
+            whileHover={hoverStyle}
+            className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E]"
+            style={{ minHeight: "260px" }}
+          >
+            <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+            <div>
+              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
+                4
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
+                Transparência & Prática
+              </span>
+              <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+                Superar abordagens baseadas apenas em boas práticas, incorporando lições aprendidas, dilemas e falhas reais.
+              </h3>
+            </div>
+          </motion.div>
+
+          {/* Card 5: Legado & Contribuição (spans 3 cols) */}
+          <motion.div
+            variants={itemVariants}
+            whileHover={hoverStyle}
+            className="md:col-span-3 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116]"
+            style={{ minHeight: "200px" }}
+          >
+            <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+            <div>
+              <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
+                5
+              </div>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white/60 mt-6 block">
+                Legado & Contribuição
+              </span>
+              <h3 className="text-xl sm:text-2xl font-display font-black leading-snug text-white mt-3">
+                Produzir um documento com potencial de contribuição ao debate nacional e ao Fórum Internacional em Genebra.
+              </h3>
             </div>
           </motion.div>
         </motion.div>
