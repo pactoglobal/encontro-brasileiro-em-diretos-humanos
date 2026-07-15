@@ -233,7 +233,7 @@ export function About() {
                     <Users className="w-5.5 h-5.5" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-2 block">Público-Alvo</span>
-                  <h3 className="text-2xl font-display font-black leading-snug mb-3 text-white">Quem participará do Encontro</h3>
+                  <h3 className="text-2xl font-display font-black leading-snug mb-3" style={{ color: '#ffffff' }}>Quem participará do Encontro</h3>
                   <p className="text-sm text-white/80 leading-relaxed">
                     Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                   </p>
