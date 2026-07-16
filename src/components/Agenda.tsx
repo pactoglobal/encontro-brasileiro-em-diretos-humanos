@@ -50,7 +50,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     time: "9h",
     title: "Atração Artística",
     description: "Banda dos Curumins",
-    avatar: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=120&h=120",
+    avatar: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -116,7 +116,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     time: "14h",
     title: "Intervenção Artística",
     description: "Intervenção Artística Especial",
-    avatar: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&q=80&w=120&h=120",
+    avatar: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -206,7 +206,9 @@ const TARDE_FOYER: AgendaItem[] = [
 const ENCERRAMENTO: AgendaItem[] = [
   {
     time: "17h20 – 19h20",
-    title: 'Exibição do Filme: "A Melhor Mãe do Mundo"',
+    title: "Exibição do Filme",
+    description: '"A Melhor Mãe do Mundo"',
+    avatar: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=120&h=120",
     type: "filme",
   },
   {
@@ -470,12 +472,12 @@ function TimelineItem({
           </h3>
 
           {/* Descrição */}
-          {item.description && item.type !== "artistica" && (
+          {item.description && item.type !== "artistica" && item.type !== "filme" && (
             <p className="text-xs leading-relaxed text-white/85">{item.description}</p>
           )}
 
           {/* Foto/Perfil da atração artística diretamente no corpo do card */}
-          {item.type === "artistica" && item.avatar && (
+          {(item.type === "artistica" || item.type === "filme") && item.avatar && (
             <div className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] mt-3.5 max-w-xs hover:bg-white/[0.04] transition-all duration-200">
               <SpeakerAvatar name={item.description || item.title} avatar={item.avatar} accent={accent} />
               <div className="min-w-0">
@@ -483,7 +485,7 @@ function TimelineItem({
                   {item.description || "Atração Convidada"}
                 </span>
                 <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5">
-                  Apresentação Cultural
+                  {item.type === "filme" ? "Exibição Cinematográfica" : "Apresentação Cultural"}
                 </span>
               </div>
             </div>
