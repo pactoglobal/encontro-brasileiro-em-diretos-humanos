@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 import { 
-  ChevronDown, 
-  ChevronUp,
+  ChevronLeft, 
+  ChevronRight,
   MapPin
 } from "lucide-react";
 
@@ -181,10 +181,15 @@ const cardVariants = {
 
 export function EntrepreneurArea() {
   const [ref, inView] = useInView();
-  const [showAll, setShowAll] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Exibir 6 inicialmente, expandir para as 9
-  const displayedInitiatives = showAll ? INITIATIVES : INITIATIVES.slice(0, 6);
+  const scroll = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const cardWidth = 380 + 24; // Card width + gap
+      const offset = direction === "left" ? -cardWidth : cardWidth;
+      carouselRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="empreendedores" className="dhe-section-light relative overflow-hidden bg-[#FAF9F6] border-t border-[#D8D4C7]/55 py-20 lg:py-24">
@@ -194,46 +199,81 @@ export function EntrepreneurArea() {
 
       <div className="dhe-container" ref={ref as React.RefObject<HTMLDivElement>}>
         
-        {/* ── Header da Seção ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ type: "spring", stiffness: 60, damping: 15 }}
-          className="mb-12"
-        >
-          <p className="dhe-section-label">Área Empreendedora</p>
-          <div className="dhe-stripe-divider">
-            <span style={{ backgroundColor: "#E8187A" }} />
-            <span style={{ backgroundColor: "#7B2D1E" }} />
-            <span style={{ backgroundColor: "#4A8C3F" }} />
-            <span style={{ backgroundColor: "#E05A3A" }} />
-          </div>
-          
-          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-4">
-            Conheça os empreendedores de Impacto
-          </h2>
-          <p className="text-base text-dhe-text-muted max-w-4xl leading-relaxed">
-            A Área de Empreendedores reúne 9 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
-          </p>
-        </motion.div>
-
-        {/* ── Bento Grid de Iniciativas ── */}
-        {inView && (
+        {/* ── Header da Seção + Controls ── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ type: "spring", stiffness: 60, damping: 15 }}
+            className="max-w-4xl"
           >
-            <AnimatePresence mode="popLayout">
-              {displayedInitiatives.map((ini) => {
+            <p className="dhe-section-label">Área Empreendedora</p>
+            <div className="dhe-stripe-divider">
+              <span style={{ backgroundColor: "#E8187A" }} />
+              <span style={{ backgroundColor: "#7B2D1E" }} />
+              <span style={{ backgroundColor: "#4A8C3F" }} />
+              <span style={{ backgroundColor: "#E05A3A" }} />
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-4">
+              Conheça os empreendedores de Impacto
+            </h2>
+            <p className="text-base text-dhe-text-muted leading-relaxed">
+              A Área de Empreendedores reúne 9 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
+            </p>
+          </motion.div>
+          
+          {/* Carousel Arrows Controls */}
+          {inView && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="flex gap-2.5 shrink-0"
+            >
+              <button 
+                onClick={() => scroll("left")}
+                aria-label="Anterior"
+                className="w-11 h-11 rounded-full border border-dhe-navy/15 bg-white flex items-center justify-center text-dhe-navy hover:bg-[#FAF9F6] active:scale-95 hover:border-dhe-navy/30 transition-all cursor-pointer focus:outline-none shadow-sm"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => scroll("right")}
+                aria-label="Próximo"
+                className="w-11 h-11 rounded-full border border-dhe-navy/15 bg-white flex items-center justify-center text-dhe-navy hover:bg-[#FAF9F6] active:scale-95 hover:border-dhe-navy/30 transition-all cursor-pointer focus:outline-none shadow-sm"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </motion.div>
+          )}
+        </div>
+
+        {/* ── Carrossel Horizontal de Iniciativas ── */}
+        {inView && (
+          <div className="relative w-full">
+            {/* Sombras de fade nas laterais para indicar continuidade no desktop */}
+            <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#FAF9F6] to-transparent z-10 pointer-events-none hidden md:block" />
+            <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#FAF9F6] to-transparent z-10 pointer-events-none hidden md:block" />
+            
+            <motion.div
+              ref={carouselRef}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-dhe-navy/10 scrollbar-track-transparent"
+              style={{
+                scrollbarWidth: "thin",
+                msOverflowStyle: "none",
+              }}
+            >
+              {INITIATIVES.map((ini) => {
                 return (
                   <motion.div
                     key={ini.name}
                     variants={cardVariants}
-                    layout
                     whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                    className="rounded-[24px] p-6 border border-[#D8D4C7]/65 flex flex-col justify-between dhe-glow-hover bg-white select-none shadow-sm"
+                    className="snap-start shrink-0 w-[290px] sm:w-[340px] md:w-[380px] rounded-[24px] p-6 border border-[#D8D4C7]/65 flex flex-col justify-between dhe-glow-hover bg-white select-none shadow-sm"
                   >
                     <div>
                       {/* Top Row: Avatar Photo + Info next to it */}
@@ -269,7 +309,7 @@ export function EntrepreneurArea() {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-xs text-dhe-text-muted leading-relaxed mb-4 font-medium">
+                      <p className="text-xs text-dhe-text-muted leading-relaxed mb-4 font-medium h-[72px] overflow-hidden line-clamp-4">
                         {ini.description}
                       </p>
                       
@@ -314,29 +354,9 @@ export function EntrepreneurArea() {
                   </motion.div>
                 );
               })}
-            </AnimatePresence>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
-
-        {/* ── Expand Button ── */}
-        <div className="mt-12 flex justify-center">
-          <button
-            onClick={() => setShowAll((v) => !v)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-dhe-navy/20 hover:border-dhe-navy/40 bg-white text-dhe-navy font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm cursor-pointer hover:shadow-md focus:outline-none"
-          >
-            {showAll ? (
-              <>
-                Recolher lista
-                <ChevronUp className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                Ver todas as 9 iniciativas
-                <ChevronDown className="w-4 h-4" />
-              </>
-            )}
-          </button>
-        </div>
       </div>
     </section>
   );
