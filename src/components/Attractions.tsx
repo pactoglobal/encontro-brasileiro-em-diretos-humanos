@@ -127,21 +127,18 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
         style={{ backgroundImage: `url(${attraction.bgImage})` }}
       />
-      {/* Overlay gradiente de baixo para cima */}
-      <div
-        className="absolute inset-0 bg-[#0C2540]/60 transition-opacity duration-300 group-hover:bg-[#0C2540]/50"
-      />
+      {/* Overlay gradiente de baixo para cima — suave, dando 100% de visibilidade para a foto no topo */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, rgba(12,37,64,0.98) 0%, rgba(12,37,64,0.7) 50%, rgba(12,37,64,0.1) 100%)`,
+          background: `linear-gradient(to top, rgba(7, 24, 40, 0.96) 0%, rgba(7, 24, 40, 0.75) 35%, rgba(7, 24, 40, 0.15) 70%, transparent 100%)`,
         }}
       />
-      {/* Tint colorido no topo */}
+      {/* Tint colorido muito sutil no topo */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: `linear-gradient(to bottom, ${brightColor}30 0%, transparent 40%)`,
+          background: `linear-gradient(to bottom, ${brightColor}12 0%, transparent 35%)`,
         }}
       />
 
