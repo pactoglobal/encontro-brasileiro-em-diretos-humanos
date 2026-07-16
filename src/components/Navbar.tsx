@@ -84,7 +84,7 @@ export function Navbar() {
             className="pointer-events-auto flex items-center justify-between mx-auto"
             animate={{
               maxWidth: scrolled ? "1040px" : "1180px",
-              padding: scrolled ? "12px 24px" : "18px 36px",
+              padding: scrolled ? "10px 20px" : "14px 28px",
               borderRadius: scrolled ? "24px" : "9999px",
               backgroundColor: scrolled ? "rgba(241, 239, 234, 0.94)" : "rgba(255, 255, 255, 0.05)",
               borderColor: scrolled ? "rgba(216, 212, 199, 0.8)" : "rgba(255, 255, 255, 0.1)",

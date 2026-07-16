@@ -178,7 +178,7 @@ export function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CONTEÚDO PRINCIPAL
       ═══════════════════════════════════════════════════════ */}
-      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-24 pb-12 lg:pt-32 lg:pb-12">
+      <div className="relative z-10 flex-1 flex flex-col dhe-container pt-36 sm:pt-36 lg:pt-32 pb-12 lg:pb-12">
 
         <div className="flex-1 grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
@@ -190,7 +190,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
-              className="flex flex-wrap gap-2 mb-6"
+              className="flex flex-wrap gap-2 mb-8 lg:mb-6"
             >
               <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
                 <span className="w-2 h-2 rounded-full bg-dhe-magenta animate-pulse" />
@@ -207,7 +207,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 80 }}
-              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-5"
+              className="font-display font-black uppercase leading-[0.92] tracking-tight mb-6 lg:mb-5"
               style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", color: "#FFFFFF" }}
             >
               Pluralidade<br />

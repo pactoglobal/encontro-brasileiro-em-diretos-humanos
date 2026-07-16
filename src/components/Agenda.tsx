@@ -663,7 +663,7 @@ export function Agenda() {
                 <div className="flex flex-wrap items-center gap-5">
                   <div className="flex items-center gap-2">
                     <Sun className="w-4 h-4 text-white/30" />
-                    <span className="text-sm text-white/50">04 de agosto de 2026 · 9h às 20h</span>
+                    <span className="text-sm text-white/50">04 de agosto de 2026 · 09h00 às 20h00</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-white/30" />
