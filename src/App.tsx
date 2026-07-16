@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Speakers } from "./components/Speakers";
+import { EntrepreneurArea } from "./components/EntrepreneurArea";
 import { Attractions } from "./components/Attractions";
 import { Agenda } from "./components/Agenda";
 import { Venue } from "./components/Venue";
@@ -74,6 +75,7 @@ function App() {
 
         {/* ATO 3 — QUEM FAZ ACONTECER */}
         <Speakers />
+        <EntrepreneurArea />
 
         {/* ATO 4 — VIVENCIAL & ATRAÇÕES */}
         <Venue />

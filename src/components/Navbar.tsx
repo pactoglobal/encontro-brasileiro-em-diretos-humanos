@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { id: "sobre", href: "#/sobre", label: "Sobre" },
   { id: "programacao", href: "#/programacao", label: "Programação" },
   { id: "palestrantes", href: "#/palestrantes", label: "Palestrantes" },
+  { id: "empreendedores", href: "#/empreendedores", label: "Empreendedores" },
   { id: "local", href: "#/local", label: "Local" },
   { id: "atracoes", href: "#/atracoes", label: "Atrações" },
   { id: "organizadores", href: "#/organizadores", label: "Organizadores" },
