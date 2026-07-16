@@ -23,6 +23,7 @@ type Initiative = {
   category: string;
   description: string;
   ods: string;
+  odsLogo: string;
   location: string;
   color: string;
   bg: string;
@@ -38,6 +39,7 @@ const INITIATIVES: Initiative[] = [
     category: "Artista Plástico",
     description: "Artista plástico congolês radicado em São Paulo, cuja produção artística e performances dialogam com a memória, a ancestralidade e a diáspora africana.",
     ods: "ODS 10 · Redução das Desigualdades",
+    odsLogo: "/ods/ods-10.jpg",
     location: "São Paulo, SP",
     color: "#E8187A",
     bg: "rgba(232, 24, 122, 0.06)",
@@ -51,6 +53,7 @@ const INITIATIVES: Initiative[] = [
     category: "Mochilas e Bolsas Handmade",
     description: "Mochilas e bolsas artesanais, sustentáveis e veganas, criadas por um artesão afegão refugiado no Brasil, promovendo design autoral e consciência ecológica.",
     ods: "ODS 12 · Consumo e Produção Responsáveis",
+    odsLogo: "/ods/ods-12.jpg",
     location: "São Paulo, SP",
     color: "#4A8C3F",
     bg: "rgba(74, 140, 63, 0.06)",
@@ -64,6 +67,7 @@ const INITIATIVES: Initiative[] = [
     category: "Fragrâncias e Perfumaria",
     description: "Fragrâncias e perfumes artesanais inspirados na rica tradição da perfumaria árabe, produzidos com óleos essenciais exclusivos por um empreendedor sírio.",
     ods: "ODS 8 · Trabalho Decente",
+    odsLogo: "/ods/ods-8.jpg",
     location: "São Paulo, SP",
     color: "#0C2540",
     bg: "rgba(12, 37, 64, 0.06)",
@@ -77,6 +81,7 @@ const INITIATIVES: Initiative[] = [
     category: "Bonecas e Bichinhos",
     description: "Confecção artesanal de bonecas de pano e bichinhos decorativos lúdicos feitos à mão, celebrando a infância, a diversidade cultural e a representatividade.",
     ods: "ODS 10 · Redução das Desigualdades",
+    odsLogo: "/ods/ods-10.jpg",
     location: "São Paulo, SP",
     color: "#7B2D1E",
     bg: "rgba(123, 45, 30, 0.06)",
@@ -89,20 +94,22 @@ const INITIATIVES: Initiative[] = [
     org: "Gabriel Bernardes",
     category: "Brigadeiros Gourmet",
     description: "Deliciosos brigadeiros artesanais levados na tradicional foodbike por Gabriel Bernardes, mostrando o poder da inclusão ativa de pessoas com síndrome de Down.",
-    ods: "ODS 8 · Crescimento Econômico",
+    ods: "ODS 10 · Redução das Desigualdades",
+    odsLogo: "/ods/ods-10.jpg",
     location: "São Paulo, SP",
     color: "#E05A3A",
     bg: "rgba(224, 90, 58, 0.06)",
     instagram: "https://www.instagram.com/downlicia_oficial/",
     image: downliciaImg,
-    partner: "Foodbike"
+    partner: "Empreendedor"
   },
   {
-    name: "GLEICE Aromas",
-    org: "GLEICE Soares Miranda",
+    name: "Gleice Aromas",
+    org: "Gleice Soares Miranda",
     category: "Aromas Artesanais",
     description: "Velas aromáticas e aromatizadores de ambientes produzidos de forma artesanal com cera vegetal e essências finas, promovendo bem-estar e aconchego.",
     ods: "ODS 12 · Produção Sustentável",
+    odsLogo: "/ods/ods-12.jpg",
     location: "São Paulo, SP",
     color: "#4A8C3F",
     bg: "rgba(74, 140, 63, 0.06)",
@@ -116,6 +123,7 @@ const INITIATIVES: Initiative[] = [
     category: "Moda & Decoração Afetiva",
     description: "Peças exclusivas de vestuário e decoração tecidas manualmente através de nós de macramê, resgatando técnicas ancestrais com design moderno.",
     ods: "ODS 5 · Igualdade de Gênero",
+    odsLogo: "/ods/ods-5.jpg",
     location: "São Paulo, SP",
     color: "#E8187A",
     bg: "rgba(232, 24, 122, 0.06)",
@@ -129,6 +137,7 @@ const INITIATIVES: Initiative[] = [
     category: "Moda Afro",
     description: "Marca autoral de moda afro que exalta a identidade, o orgulho e as cores da cultura negra através de roupas estampadas e acessórios cheios de estilo.",
     ods: "ODS 10 · Redução das Desigualdades",
+    odsLogo: "/ods/ods-10.jpg",
     location: "São Paulo, SP",
     color: "#CC2222",
     bg: "rgba(204, 34, 34, 0.06)",
@@ -142,6 +151,7 @@ const INITIATIVES: Initiative[] = [
     category: "Alimentação Saudável",
     description: "Queijos, pastas e doces 100% à base de plantas e artesanais, preparados com receitas exclusivas para alimentar com saúde, sabor e ética.",
     ods: "ODS 12 · Consumo Responsável",
+    odsLogo: "/ods/ods-12.jpg",
     location: "São Paulo, SP",
     color: "#7B2D1E",
     bg: "rgba(123, 45, 30, 0.06)",
@@ -281,12 +291,15 @@ export function EntrepreneurArea() {
                     </div>
 
                     {/* Footer Row: ODS + Location */}
-                    <div className="pt-4 border-t border-[#D8D4C7]/45 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <span 
-                          className="w-1.5 h-1.5 rounded-full shrink-0 animate-pulse" 
-                          style={{ backgroundColor: ini.color }}
-                        />
+                    <div className="pt-4 border-t border-[#D8D4C7]/45 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        {ini.odsLogo && (
+                          <img 
+                            src={ini.odsLogo} 
+                            alt={ini.ods} 
+                            className="w-6 h-6 rounded-md object-contain shrink-0 shadow-sm" 
+                          />
+                        )}
                         <span className="text-[9px] font-bold text-dhe-text-muted truncate">
                           {ini.ods}
                         </span>
