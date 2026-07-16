@@ -74,18 +74,15 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
       { name: "Adriana Marcolino", role: "DIEESE", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
     ],
-    mediator: { name: "Edilene Lopes", role: "Jornalista CNN (TBC)", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
   {
     time: "11h15",
     title: "O que a agenda significa hoje, para quem faz sentido e como vem sendo implementada",
     type: "painel",
     speakers: [
-      { name: "Victoriana Leonora", role: "(TBC)", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Sue Wolter", role: "Petrobras", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Julia Neiva", role: "Conectas", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Leticia Pantoja", role: "MDH (TBC)", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
     ],
     mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
   },
@@ -117,7 +114,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h",
     title: "Intervenção Artística",
-    description: "Heloísa Perissé, atriz (TBC)",
+    description: "Intervenção Artística Especial",
     type: "artistica",
   },
   {
@@ -141,9 +138,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
       { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Gilson Camboim", role: "Presidente da Coogavepe", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Natalia Souza", role: "CEERT (TBC)", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Miguel Castro-Riberos", role: "OCDE", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Christianne Canavero", role: "Head Global de Sustentabilidade — CBMN (TBC)", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
@@ -163,7 +158,6 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Andrea Bolzon", role: "PNUD", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Representante Globo", role: "(TBC)", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
     ],
     mediator: { name: "Flávia Scabin", role: "FGV", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
@@ -175,7 +169,6 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Gabriel Bezerra", role: "Presidente da CONTAR", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Irina Bacci", role: "PADF", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
       { name: "Marcos Antônio Matos", role: "Diretor Cecafe", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Danielle Pamplona", role: "(TBC)", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
     ],
     mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
@@ -219,13 +212,6 @@ const ENCERRAMENTO: AgendaItem[] = [
     title: "Bate Papo: Economia Circular, Direitos Humanos e Autonomia das Mulheres",
     description: "Construindo cadeias produtivas livres de violência e exclusão",
     type: "batepapo",
-    speakers: [
-      { name: "Tarciana Medeiros", role: "Presidenta do Banco do Brasil (TBC)", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Seu Jorge", role: "Cantor, ator e produtor cultural (TBC)", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Dona Carmen Silva", role: "Liderança do MSTC, da Ocupação 9 de Julho e da Casa Verbo (TBC)", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Shirley Cruz", role: "Artista e liderança (TBC)", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
-    ],
-    mediator: { name: "Paulo Vieira", role: "(TBC)", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
   },
 ];
 
