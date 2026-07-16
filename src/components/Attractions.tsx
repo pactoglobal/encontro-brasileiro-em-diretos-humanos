@@ -3,186 +3,112 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "../hooks/useInView";
 
-type Attraction = {
+import guilherme from "../assets/painelistas/guilherme-xavier.jpg";
+import camila from "../assets/painelistas/camila-zelezoglo.jpg";
+import jandyra from "../assets/painelistas/jandyra-uehara.jpg";
+import josefa from "../assets/painelistas/josefa-camara.jpg";
+import uine from "../assets/painelistas/uine-lopes.jpg";
+import maryellen from "../assets/painelistas/maryellen-crisostomo.jpg";
+import gilson from "../assets/painelistas/gilson-camboim.jpg";
+import pedro from "../assets/painelistas/pedro-villela.jpg";
+import thalita from "../assets/painelistas/thalita-silva.jpg";
+import luiz from "../assets/painelistas/luiz-henrique-ramos.jpg";
+import simone from "../assets/painelistas/simone-rocha.jpg";
+import gabriel from "../assets/painelistas/gabriel-bezerra.jpg";
+import irina from "../assets/painelistas/irina-bacci.jpg";
+import marcos from "../assets/painelistas/marcos-antonio-matos.jpg";
+import joao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
+import larissa from "../assets/painelistas/larissa-rodrigues.jpg";
+import victoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
+
+type Confirmado = {
   name: string;
   role: string;
   org: string;
-  theme: string;
-  themeColor: string;
-  themeBg: string;
-  bgImage: string;
-  initials: string;
-  highlight?: string;
+  photo: string;
+  accent: string;
 };
 
-const ATTRACTIONS: Attraction[] = [
-  {
-    name: "Fernanda Hopenhaym",
-    role: "Keynote Speaker",
-    org: "UN Working Group on Business & Human Rights",
-    theme: "Agenda Global ONU",
-    themeColor: "#E8187A",
-    themeBg: "rgba(232,24,122,0.12)",
-    bgImage: "/identity/bg-carousel-1.jpg",
-    initials: "FH",
-    highlight: "Convidada Especial",
-  },
-  {
-    name: "Vinicius Pinheiro",
-    role: "Diretor OIT no Brasil",
-    org: "Organização Internacional do Trabalho",
-    theme: "Trabalho Decente",
-    themeColor: "#4A8C3F",
-    themeBg: "rgba(74,140,63,0.12)",
-    bgImage: "/identity/bg-carousel-2.jpg",
-    initials: "VP",
-  },
-  {
-    name: "Luiz Henrique Ramos",
-    role: "Secretário de Inspeção do Trabalho",
-    org: "Ministério do Trabalho e Emprego",
-    theme: "Política Pública",
-    themeColor: "#0C2540",
-    themeBg: "rgba(12,37,64,0.12)",
-    bgImage: "/identity/bg-carousel-3.jpg",
-    initials: "LR",
-  },
-  {
-    name: "Flávia Scabin",
-    role: "Professora e Pesquisadora",
-    org: "FGV — Fundação Getúlio Vargas",
-    theme: "Pesquisa & Academia",
-    themeColor: "#7B2D1E",
-    themeBg: "rgba(123,45,30,0.12)",
-    bgImage: "/identity/bg-carousel-1.jpg",
-    initials: "FS",
-  },
-  {
-    name: "Josefa Oliveira",
-    role: "Representante",
-    org: "Conselho Ribeirinho",
-    theme: "Territórios & CLPI",
-    themeColor: "#4A8C3F",
-    themeBg: "rgba(74,140,63,0.12)",
-    bgImage: "/identity/bg-carousel-2.jpg",
-    initials: "JO",
-  },
-  {
-    name: "Andrea Bolzon",
-    role: "Especialista",
-    org: "PNUD — Programa das Nações Unidas",
-    theme: "Desenvolvimento",
-    themeColor: "#E05A3A",
-    themeBg: "rgba(224,90,58,0.12)",
-    bgImage: "/identity/bg-carousel-3.jpg",
-    initials: "AB",
-  },
-  {
-    name: "Miguel Castro-Riberos",
-    role: "Especialista",
-    org: "OCDE",
-    theme: "Diretrizes Internacionais",
-    themeColor: "#E8187A",
-    themeBg: "rgba(232,24,122,0.12)",
-    bgImage: "/identity/bg-carousel-1.jpg",
-    initials: "MC",
-  },
-  {
-    name: "Adriana Marcolino",
-    role: "Especialista",
-    org: "DIEESE",
-    theme: "Relações de Trabalho",
-    themeColor: "#CC2222",
-    themeBg: "rgba(204,34,34,0.12)",
-    bgImage: "/identity/bg-carousel-2.jpg",
-    initials: "AM",
-  },
+// Cores da paleta da marca (com contraste alto sobre o card escuro)
+const MAGENTA = "#E8187A";
+const GREEN = "#4A8C3F";
+const CORAL = "#E05A3A";
+const BLUE = "#38BDF8";
+
+// Palestrantes confirmados via formulário oficial (planilha de confirmação).
+const CONFIRMADOS: Confirmado[] = [
+  { name: "Guilherme Xavier", role: "Diretor Executivo", org: "Pacto Global da ONU — Rede Brasil", photo: guilherme, accent: MAGENTA },
+  { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos", org: "CUT Nacional", photo: jandyra, accent: GREEN },
+  { name: "Maryellen Crisóstomo", role: "Coletivo de Mulheres", org: "CONAQ", photo: maryellen, accent: CORAL },
+  { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação", org: "ABIT", photo: camila, accent: BLUE },
+  { name: "Uine Lopes", role: "Pescador e Professor", org: "Mov. dos Pescadores e Pescadoras Artesanais", photo: uine, accent: MAGENTA },
+  { name: "Josefa Camara", role: "Educadora Popular Beiradeira", org: "Conselho Ribeirinho", photo: josefa, accent: GREEN },
+  { name: "Simone Rocha", role: "Sócia — Direitos Humanos e Impacto Social", org: "ERM América Latina", photo: simone, accent: CORAL },
+  { name: "Larissa Rodrigues", role: "Diretora de Pesquisa", org: "Instituto Escolhas", photo: larissa, accent: BLUE },
+  { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social", org: "Axia Energia", photo: pedro, accent: MAGENTA },
+  { name: "Thalita Silva", role: "Defensora Pública", org: "Defensoria Pública do Estado de SP", photo: thalita, accent: GREEN },
+  { name: "Gilson Camboim", role: "Coordenador Nacional do Cooperativismo", org: "Fecomin", photo: gilson, accent: CORAL },
+  { name: "Irina Bacci", role: "Diretora Técnica", org: "PADF", photo: irina, accent: BLUE },
+  { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho", org: "Ministério do Trabalho e Emprego", photo: luiz, accent: MAGENTA },
+  { name: "Gabriel Bezerra", role: "Presidente", org: "CONTAR", photo: gabriel, accent: GREEN },
+  { name: "Marcos Matos", role: "Diretor Geral", org: "CECAFÉ", photo: marcos, accent: CORAL },
+  { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral", org: "Ministério de Minas e Energia", photo: joao, accent: BLUE },
+  { name: "Victoriana Leonora C. Gonzaga", role: "Diretora Executiva", org: "ESG Novas Gerações", photo: victoriana, accent: MAGENTA },
 ];
 
-function AttractionCard({ attraction, index }: { attraction: Attraction; index: number }) {
-  const isFeatured = index === 0;
-
-  // Helper to ensure colors have high contrast on the dark background
-  const getBrightThemeColor = (color: string) => {
-    if (color === "#0C2540") return "#38BDF8"; // Navy to light blue
-    if (color === "#7B2D1E") return "#FF8A71"; // Maroon to light maroon/coral
-    return color;
-  };
-
-  const brightColor = getBrightThemeColor(attraction.themeColor);
-
+function ConfirmadoCard({ person, index }: { person: Confirmado; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.06 }}
+      transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.05 }}
       whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-      className={`relative overflow-hidden rounded-[24px] flex-shrink-0 select-none cursor-default group dhe-glow-hover shadow-[0_16px_36px_rgba(0,0,0,0.35)] border border-white/5
-        ${isFeatured ? "w-[340px] sm:w-[400px]" : "w-[280px] sm:w-[320px]"}
-      `}
-      style={{ minHeight: isFeatured ? "480px" : "380px" }}
+      className="group relative overflow-hidden rounded-[22px] flex-shrink-0 select-none w-[248px] sm:w-[280px] shadow-[0_16px_36px_rgba(0,0,0,0.35)] border border-white/5"
+      style={{ minHeight: "372px" }}
     >
-      {/* Foto de fundo com overlay escuro */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-        style={{ backgroundImage: `url(${attraction.bgImage})` }}
+      {/* Foto de rosto — quadro cheio */}
+      <img
+        src={person.photo}
+        alt={person.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
       />
-      {/* Overlay gradiente de baixo para cima — suave, dando 100% de visibilidade para a foto no topo */}
+      {/* Gradiente para leitura do texto */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, rgba(7, 24, 40, 0.96) 0%, rgba(7, 24, 40, 0.75) 35%, rgba(7, 24, 40, 0.15) 70%, transparent 100%)`,
+          background:
+            "linear-gradient(to top, rgba(7,24,40,0.97) 0%, rgba(7,24,40,0.78) 28%, rgba(7,24,40,0.18) 58%, transparent 100%)",
         }}
       />
-      {/* Tint colorido muito sutil no topo */}
+      {/* Tint sutil no topo */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(to bottom, ${brightColor}12 0%, transparent 35%)`,
-        }}
+        style={{ background: `linear-gradient(to bottom, ${person.accent}14 0%, transparent 30%)` }}
       />
 
-      {/* Conteúdo */}
-      <div className="relative z-10 h-full flex flex-col justify-between p-6">
-        {/* Topo */}
-        <div className="flex items-start justify-between">
+      <div className="relative z-10 h-full flex flex-col justify-between p-5">
+        <div>
           <span
-            className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full dhe-glass"
-            style={{ color: brightColor, backgroundColor: `${brightColor}15`, border: `1px solid ${brightColor}35` }}
+            className="inline-flex items-center gap-1.5 text-[8px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full dhe-glass"
+            style={{ color: "#fff", backgroundColor: `${person.accent}59`, border: `1px solid ${person.accent}80` }}
           >
-            {attraction.theme}
+            <span className="w-1 h-1 rounded-full" style={{ background: "#fff" }} />
+            Confirmado
           </span>
-          {attraction.highlight && (
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/95">
-              {attraction.highlight}
-            </span>
-          )}
         </div>
 
-        {/* Base */}
         <div>
-          {/* Avatar tipográfico */}
-          <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-black text-lg text-white mb-4 dhe-glass"
-            style={{ backgroundColor: `${brightColor}70`, border: `1px solid ${brightColor}50` }}
-          >
-            {attraction.initials}
-          </div>
-
-          <h3 className={`font-display font-black leading-tight mb-1 ${isFeatured ? "text-2xl" : "text-xl"}`} style={{ color: "#ffffff" }}>
-            {attraction.name}
+          <h3 className="font-display font-black leading-tight text-lg mb-1" style={{ color: "#ffffff" }}>
+            {person.name}
           </h3>
-          <p className="text-sm font-bold mb-1" style={{ color: brightColor }}>
-            {attraction.role}
+          <p className="text-[13px] font-bold leading-snug mb-1" style={{ color: person.accent === BLUE ? "#7DD3FC" : person.accent }}>
+            {person.role}
           </p>
-          <p className="text-xs text-white/95 leading-snug">{attraction.org}</p>
-
-          {/* Linha divisória */}
-          <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/90">
-              04 AGO 2026
-            </span>
-            <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: brightColor }} />
+          <p className="text-[11px] text-white/85 leading-snug">{person.org}</p>
+          <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between">
+            <span className="text-[8px] font-black uppercase tracking-widest text-white/85">04 AGO 2026</span>
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: person.accent }} />
           </div>
         </div>
       </div>
@@ -206,8 +132,7 @@ export function Attractions() {
   const scroll = useCallback((dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const amount = 360;
-    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
+    el.scrollBy({ left: dir === "left" ? -320 : 320, behavior: "smooth" });
   }, []);
 
   return (
@@ -227,15 +152,15 @@ export function Attractions() {
           className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-6"
         >
           <div>
-            <p className="dhe-section-label">Atrações Confirmadas</p>
+            <p className="dhe-section-label">Palestrantes Confirmados</p>
             <div className="dhe-stripe-divider">
               <span /><span /><span /><span />
             </div>
             <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy">
-              Quem vai estar lá
+              Quem já confirmou presença
             </h2>
             <p className="text-base text-dhe-text-muted mt-2 max-w-lg">
-              Especialistas internacionais, lideranças nacionais e representantes da sociedade civil
+              Lideranças do setor privado, poder público, sociedade civil e organismos internacionais que sobem ao palco em 04 de agosto.
             </p>
           </div>
 
@@ -267,7 +192,7 @@ export function Attractions() {
         </motion.div>
       </div>
 
-      {/* Carrossel com scroll horizontal drag */}
+      {/* Carrossel com scroll horizontal */}
       <AnimatePresence>
         {inView && (
           <motion.div
@@ -279,10 +204,7 @@ export function Attractions() {
             {/* Fade esquerda */}
             <div
               className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none transition-opacity duration-300"
-              style={{
-                background: "linear-gradient(to right, #F1EFEA, transparent)",
-                opacity: canScrollLeft ? 1 : 0,
-              }}
+              style={{ background: "linear-gradient(to right, #F1EFEA, transparent)", opacity: canScrollLeft ? 1 : 0 }}
             />
             {/* Fade direita */}
             <div
@@ -293,18 +215,16 @@ export function Attractions() {
             <div
               ref={scrollRef}
               onScroll={updateScrollState}
-              className="flex gap-5 overflow-x-auto pb-6 dhe-scroll-snap"
+              className="flex gap-4 overflow-x-auto pb-6 dhe-scroll-snap"
               style={{ paddingLeft: "calc(max(1.25rem, (100vw - 80rem) / 2 + 1.25rem))", paddingRight: "calc(max(1.25rem, (100vw - 80rem) / 2 + 1.25rem))" }}
             >
-              {ATTRACTIONS.map((a, i) => (
-                <AttractionCard key={a.name} attraction={a} index={i} />
+              {CONFIRMADOS.map((p, i) => (
+                <ConfirmadoCard key={p.name} person={p} index={i} />
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-
     </section>
   );
 }

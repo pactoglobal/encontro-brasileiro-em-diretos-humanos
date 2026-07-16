@@ -16,6 +16,56 @@ import {
   MapPin,
 } from "lucide-react";
 
+// Fotos oficiais dos palestrantes confirmados (planilha de confirmação + acervo).
+import pGuilherme from "../assets/painelistas/guilherme-xavier.jpg";
+import pCamila from "../assets/painelistas/camila-zelezoglo.jpg";
+import pJandyra from "../assets/painelistas/jandyra-uehara.jpg";
+import pJosefa from "../assets/painelistas/josefa-camara.jpg";
+import pUine from "../assets/painelistas/uine-lopes.jpg";
+import pMaryellen from "../assets/painelistas/maryellen-crisostomo.jpg";
+import pGilson from "../assets/painelistas/gilson-camboim.jpg";
+import pPedro from "../assets/painelistas/pedro-villela.jpg";
+import pThalita from "../assets/painelistas/thalita-silva.jpg";
+import pLuiz from "../assets/painelistas/luiz-henrique-ramos.jpg";
+import pSimone from "../assets/painelistas/simone-rocha.jpg";
+import pGabriel from "../assets/painelistas/gabriel-bezerra.jpg";
+import pIrina from "../assets/painelistas/irina-bacci.jpg";
+import pMarcos from "../assets/painelistas/marcos-antonio-matos.jpg";
+import pJoao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
+
+// Normaliza nomes (minúsculo, sem acentos, espaços colapsados) para casar
+// variações de grafia entre a agenda e os nomes de arquivo.
+function normalizeName(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const SPEAKER_PHOTOS: Record<string, string> = {
+  "guilherme xavier": pGuilherme,
+  "camila zelezoglo": pCamila,
+  "jandyra uehara": pJandyra,
+  "josefa camara": pJosefa,
+  "uine lopes": pUine,
+  "maryellen crisostomo": pMaryellen,
+  "gilson camboim": pGilson,
+  "pedro villela": pPedro,
+  "thalita silva": pThalita,
+  "luiz henrique ramos": pLuiz,
+  "simone rocha": pSimone,
+  "gabriel bezerra": pGabriel,
+  "irina bacci": pIrina,
+  "marcos antonio matos": pMarcos,
+  "joao marcos pires camargo": pJoao,
+};
+
+function photoFor(name: string): string | undefined {
+  return SPEAKER_PHOTOS[normalizeName(name)];
+}
+
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
 type ItemType =
@@ -50,7 +100,6 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     time: "09h00",
     title: "Atração Artística",
     description: "Banda dos Curumins",
-    avatar: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -58,11 +107,11 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     title: "Abertura Institucional e Boas-vindas",
     type: "abertura",
     speakers: [
-      { name: "Guilherme Xavier", role: "Diretor Executivo — Pacto Global Rede Brasil", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Ângela Pires", role: "ACNUDH", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Miguel Castro-Riberos", role: "OCDE", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Igor Garafulic", role: "Coordenador Residente da ONU no Brasil (vídeo)", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Guilherme Xavier", role: "Diretor Executivo — Pacto Global Rede Brasil" },
+      { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
+      { name: "Ângela Pires", role: "ACNUDH" },
+      { name: "Miguel Castro-Riberos", role: "OCDE" },
+      { name: "Igor Garafulic", role: "Coordenador Residente da ONU no Brasil (vídeo)" },
     ],
   },
   {
@@ -70,10 +119,10 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     title: "Empresas e Direitos Humanos em um mundo em profunda transformação",
     type: "painel",
     speakers: [
-      { name: "Fernanda Hopenhaym", role: "Membro do UN Working Group on Business and Human Rights (Vídeo)", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Flavia Scabin", role: "Diretora do FGV CeDHE", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Adriana Marcolino", role: "DIEESE", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Fernanda Hopenhaym", role: "Membro do UN Working Group on Business and Human Rights (Vídeo)" },
+      { name: "Flavia Scabin", role: "Diretora do FGV CeDHE" },
+      { name: "Adriana Marcolino", role: "DIEESE" },
+      { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT" },
     ],
   },
   {
@@ -81,11 +130,11 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     title: "O que a agenda significa hoje, para quem faz sentido e como vem sendo implementada",
     type: "painel",
     speakers: [
-      { name: "Sue Wolter", role: "Petrobras", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Julia Neiva", role: "Conectas", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Sue Wolter", role: "Petrobras" },
+      { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional" },
+      { name: "Julia Neiva", role: "Conectas" },
     ],
-    mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
+    mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
   },
   {
     time: "12h30 – 14h00",
@@ -116,7 +165,6 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     time: "14h00",
     title: "Intervenção Artística",
     description: "Intervenção Artística Especial",
-    avatar: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -124,25 +172,25 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     title: "Consentimento Livre, Prévio e Informado (CLPI) na prática",
     type: "painel",
     speakers: [
-      { name: "Hernan Coronado", role: "Especialista Regional Pueblos Indígenas — OIT", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Uine Lopes", role: "Pescador e Professor — Movimento dos Pescadores Artesanais", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social — Axia Energia", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Thalita Silva", role: "Defensora Pública do Estado de São Paulo", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Josefa Camara", role: "Educadora Popular Beiradeira — Conselho Ribeirinho", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Hernan Coronado", role: "Especialista Regional Pueblos Indígenas — OIT" },
+      { name: "Uine Lopes", role: "Pescador e Professor — Movimento dos Pescadores Artesanais" },
+      { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social — Axia Energia" },
+      { name: "Thalita Silva", role: "Defensora Pública do Estado de São Paulo" },
+      { name: "Josefa Camara", role: "Educadora Popular Beiradeira — Conselho Ribeirinho" },
     ],
-    mediator: { name: "Ângela Pires", role: "ACNUDH", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
+    mediator: { name: "Ângela Pires", role: "ACNUDH" },
   },
   {
     time: "15h30",
     title: "Mineração para a transição energética: terras raras, minerais críticos e responsabilidade",
     type: "painel",
     speakers: [
-      { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Gilson Camboim", role: "Presidente da Coogavepe", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Miguel Castro-Riberos", role: "OCDE", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)" },
+      { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
+      { name: "Gilson Camboim", role: "Presidente da Coogavepe" },
+      { name: "Miguel Castro-Riberos", role: "OCDE" },
     ],
-    mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
+    mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
   },
   {
     time: "17h00",
@@ -157,22 +205,22 @@ const TARDE_OSCARITO: AgendaItem[] = [
     title: "Com quais instrumentos a agenda responde (ou não) ao contexto atual?",
     type: "painel",
     speakers: [
-      { name: "Andrea Bolzon", role: "PNUD", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Andrea Bolzon", role: "PNUD" },
+      { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE" },
+      { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis" },
     ],
-    mediator: { name: "Flávia Scabin", role: "FGV", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
+    mediator: { name: "Flávia Scabin", role: "FGV" },
   },
   {
     time: "15h30",
     title: "Agroindústria, direitos humanos e cadeias de valor: responsabilidade e desafios",
     type: "painel",
     speakers: [
-      { name: "Gabriel Bezerra", role: "Presidente da CONTAR", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Irina Bacci", role: "PADF", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120" },
-      { name: "Marcos Antônio Matos", role: "Diretor Cecafe", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120&h=120" },
+      { name: "Gabriel Bezerra", role: "Presidente da CONTAR" },
+      { name: "Irina Bacci", role: "PADF" },
+      { name: "Marcos Antônio Matos", role: "Diretor Cecafe" },
     ],
-    mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
+    mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global" },
   },
   {
     time: "17h00",
@@ -208,7 +256,6 @@ const ENCERRAMENTO: AgendaItem[] = [
     time: "17h20 – 19h20",
     title: "Exibição do Filme",
     description: '"A Melhor Mãe do Mundo"',
-    avatar: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=120&h=120",
     type: "filme",
   },
   {
@@ -519,7 +566,7 @@ function TimelineItem({
                       }}
                       className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.04] transition-all duration-200"
                     >
-                      <SpeakerAvatar name={s.name} avatar={s.avatar} accent={accent} />
+                      <SpeakerAvatar name={s.name} avatar={photoFor(s.name)} accent={accent} />
                       <div className="min-w-0">
                         <span className="text-xs font-bold text-white block leading-snug truncate">{s.name}</span>
                         <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5 line-clamp-2">{s.role}</span>
@@ -538,7 +585,7 @@ function TimelineItem({
                   >
                     <span className="text-[8px] font-black uppercase tracking-widest text-white/60 block mb-2">Mediação</span>
                     <div className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] max-w-sm hover:bg-white/[0.04] transition-all duration-200">
-                      <SpeakerAvatar name={item.mediator.name} avatar={item.mediator.avatar} accent={accent} />
+                      <SpeakerAvatar name={item.mediator.name} avatar={photoFor(item.mediator.name)} accent={accent} />
                       <div className="min-w-0">
                         <span className="text-xs font-bold text-white block leading-snug truncate">{item.mediator.name}</span>
                         <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5 line-clamp-2">{item.mediator.role}</span>
@@ -570,8 +617,8 @@ function TimelineItem({
                     className="w-5.5 h-5.5 rounded-full border overflow-hidden shrink-0"
                     style={{ borderColor: "#071828" }}
                   >
-                    {s.avatar ? (
-                      <img src={s.avatar} alt={s.name} className="w-full h-full object-cover" />
+                    {photoFor(s.name) ? (
+                      <img src={photoFor(s.name)} alt={s.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-[6px] font-black text-white" style={{ background: accent }}>
                         {s.name.split(" ").map(n => n[0]).slice(0,2).join("").toUpperCase()}
