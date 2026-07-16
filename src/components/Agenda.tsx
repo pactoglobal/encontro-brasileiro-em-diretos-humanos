@@ -247,6 +247,7 @@ type Tab = {
   period: "Manhã" | "Tarde" | "Encerramento";
   time: string;
   accent: string;
+  textAccent: string;
   items: AgendaItem[];
 };
 
@@ -258,6 +259,7 @@ const TABS: Tab[] = [
     period: "Manhã",
     time: "9h – 12h30",
     accent: "#E8187A",
+    textAccent: "#FF5DAB",
     items: MANHA_GRANDE_OTELO,
   },
   {
@@ -267,6 +269,7 @@ const TABS: Tab[] = [
     period: "Manhã",
     time: "10h – 12h",
     accent: "#7B2D1E",
+    textAccent: "#FF8A71",
     items: MANHA_FOYER,
   },
   {
@@ -276,6 +279,7 @@ const TABS: Tab[] = [
     period: "Tarde",
     time: "14h – 17h",
     accent: "#4A8C3F",
+    textAccent: "#84E079",
     items: TARDE_GRANDE_OTELO,
   },
   {
@@ -285,6 +289,7 @@ const TABS: Tab[] = [
     period: "Tarde",
     time: "14h15 – 17h",
     accent: "#0C2540",
+    textAccent: "#38BDF8",
     items: TARDE_OSCARITO,
   },
   {
@@ -294,6 +299,7 @@ const TABS: Tab[] = [
     period: "Tarde",
     time: "13h – 16h20",
     accent: "#E05A3A",
+    textAccent: "#FF9E85",
     items: TARDE_FOYER,
   },
   {
@@ -303,6 +309,7 @@ const TABS: Tab[] = [
     period: "Encerramento",
     time: "17h20 – 20h",
     accent: "#596168",
+    textAccent: "#CBD5E1",
     items: ENCERRAMENTO,
   },
 ];
@@ -633,7 +640,7 @@ export function Agenda() {
                               <div className="flex items-center gap-1.5">
                                 <span
                                   className="text-[9px] font-medium"
-                                  style={{ color: isActive ? tab.accent : "rgba(255,255,255,0.45)" }}
+                                  style={{ color: isActive ? tab.textAccent : "rgba(255,255,255,0.45)" }}
                                 >
                                   {tab.sala}
                                 </span>
@@ -663,10 +670,10 @@ export function Agenda() {
                 >
                   {/* Indicador de contexto */}
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-6 h-px" style={{ background: activeTab.accent }} />
+                    <div className="w-6 h-px" style={{ background: activeTab.textAccent }} />
                     <span
                       className="text-[9px] font-black uppercase tracking-[0.25em]"
-                      style={{ color: activeTab.accent }}
+                      style={{ color: activeTab.textAccent }}
                     >
                       {activeTab.period}
                     </span>
@@ -684,7 +691,7 @@ export function Agenda() {
                         key={i}
                         item={item}
                         index={i}
-                        accent={activeTab.accent}
+                        accent={activeTab.textAccent}
                         isLast={i === activeTab.items.length - 1}
                       />
                     ))}
