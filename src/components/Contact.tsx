@@ -3,8 +3,7 @@ import { useInView } from "../hooks/useInView";
 import { ArrowUpRight, CalendarDays, MapPin, Users, Sparkles } from "lucide-react";
 
 // ── URL da Landing Page de Inscrição ──────────────────────────────────────────
-// Substitua pela URL real quando a LP estiver no ar
-const LP_URL = "#";
+const LP_URL = "https://go.pactoglobal.org.br/interesse-encontrobrasileiro-dhempresas2026";
 
 export function Contact() {
   const [ref, inView] = useInView();
