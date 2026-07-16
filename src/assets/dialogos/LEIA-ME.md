@@ -1,48 +1,45 @@
 # Fotos dos Diálogos de DH e DEI (seção "Nossa Trajetória")
 
-✅ Concluído em 2026-07-16. Alimenta o componente `Dialogues.tsx`, inserido no
-`App.tsx` logo após o "About" (fim do Ato 1), antes da Agenda — a ideia é
-mostrar a trajetória da área de Direitos Humanos (os Diálogos regionais e
-nacional) antes de entrar na programação deste Encontro específico.
+✅ Atualizado em 2026-07-16. Alimenta `Dialogues.tsx`, inserido no `App.tsx`
+logo após o "About", antes da Agenda. A seção mostra a trajetória da área de
+Direitos Humanos (os Diálogos regionais + o nacional) antes de entrar na
+programação deste Encontro específico — reforço de credibilidade.
 
-| Pasta | Cidade | Cover usado no site | Fotos extras disponíveis |
+## Layout
+
+Seletor de "rota" em abas, **Encontro Nacional primeiro**, seguido das cinco
+regiões. Cada aba abre uma galeria com foto em destaque (quadro 3:2 horizontal,
+sem cortes) + miniaturas, e um lightbox (clique para ampliar) que mostra a foto
+inteira. Título e nomes em branco.
+
+## Fotos por etapa
+
+| Pasta | Cidade | Nº de fotos | Destaque (foto-1) |
 |---|---|---|---|
-| `sudeste/` | São Paulo | `foto-2.jpg` | `foto-1.jpg`, `foto-3.jpg` |
-| `centro-oeste/` | Brasília | `foto-3.jpg` | `foto-1.jpg`, `foto-2.jpg` |
-| `sul/` | Curitiba | `foto-1.jpg` | `foto-2.jpg`, `foto-3.jpg` |
-| `norte/` | Manaus | `foto-1.jpg` | `foto-2.jpg`, `foto-3.jpg` |
-| `nacional/` | São Paulo | `foto-1.jpg` | `foto-2.jpg` |
+| `nacional/` | São Paulo | 5 | Abertura com duas palestrantes + tela |
+| `sudeste/` | São Paulo | 3 | Palestrante com marca "Diálogos" + cubos ODS |
+| `centro-oeste/` | Brasília | 3 | Palestrante com tela de bioeconomia |
+| `sul/` | Curitiba | 3 | Palestrante com painel de ODS |
+| `norte/` | Manaus | 3 | Palestrante — "Justiça Climática e Bioeconomia" |
+| `nordeste/` | Recife | 3 | Foto de grupo com banners "Diálogos" |
 
-Cada uma foi selecionada de pastas com 73 a 517 fotos brutas (originais de
-1-14MB), redimensionada para 1600px de largura e comprimida para JPEG
-qualidade 76 (~150-200KB cada). Critério: plano aberto mostrando o formato
-world café (mesas redondas, trabalho em grupo), branding "Diálogos de DH e
-DEI" visível quando possível, evitar retrato solo em primeiro plano.
+**20 fotos no total** (3,4MB). Todas 1600×1067 (3:2), JPEG q78, com rotação
+EXIF corrigida — originais de 1–24MB.
 
-## Pendência: Nordeste (Recife)
+## Curadoria com foco em diversidade
 
-**Nenhuma foto foi enviada para o Diálogo Nordeste/Recife.** O card
-correspondente no site aparece com um selo "Em breve" no lugar da foto — não
-inventei nem usei foto de outra região para representá-lo. Assim que houver
-fotos do encontro de Recife, me avise para eu curar e adicionar.
+Seleção revista para refletir a pauta de Diversidade, Equidade e Inclusão:
+priorizadas fotos com protagonismo de mulheres negras como palestrantes,
+apresentação cultural afro-brasileira (Congada/Maracatu) no encontro nacional,
+contexto amazônico/bioeconomia no Norte, e mesas de trabalho (world café) com
+grupos diversos. As três fotos do Nordeste foram enviadas pela organização.
 
-## Sobre o acervo bruto (6,3GB / ~1.460 fotos)
+## Acervo bruto
 
-As pastas originais com todas as fotos de cada Diálogo (Nacional,
-Centro-Oeste, Norte, Sudeste, Sul) foram **movidas para fora do repositório**,
-para `../dialogos-fotos-originais-nao-usadas/` (um nível acima da pasta do
-projeto, ainda no seu Google Drive — nada foi apagado permanentemente).
-Isso porque:
-
-1. 6,3GB nunca deveriam entrar no Git — travaria o repositório para sempre.
-2. Eu não apago arquivos de forma permanente automaticamente, mesmo quando
-   solicitado — prefiro mover para um lugar reversível. Se quiser mesmo
-   descartar o que não foi usado, meu clean-up já reduziu a bagunça: agora é
-   uma única pasta fora do projeto, fácil de revisar e mandar para a lixeira
-   você mesmo, se confirmar que não vai precisar mais.
-
-Se quiser que eu curadoria mais fotos por região no futuro (por exemplo, para
-uma galeria expandida ou lightbox), o acervo completo segue lá.
+As pastas originais (~1.460 fotos + a pasta `Fotos Diálogo Nordeste`) ficam em
+`../dialogos-fotos-originais-nao-usadas/`, fora do controle de versão. Nada foi
+apagado permanentemente — o acervo segue disponível para nova curadoria (ex.:
+galeria expandida). Ver aviso em `../hero/LEIA-ME.md`.
 
 ---
 Nota: elaborado com apoio de IA, revisar antes de finalizar.

@@ -1,76 +1,189 @@
-import { useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, MapPin, Globe2 } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { MapPin, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "../hooks/useInView";
 
-import sudesteImg from "../assets/dialogos/sudeste/foto-2.jpg";
-import centroOesteImg from "../assets/dialogos/centro-oeste/foto-3.jpg";
-import sulImg from "../assets/dialogos/sul/foto-1.jpg";
-import norteImg from "../assets/dialogos/norte/foto-1.jpg";
-import nacionalImg from "../assets/dialogos/nacional/foto-1.jpg";
+// Nacional
+import nac1 from "../assets/dialogos/nacional/foto-1.jpg";
+import nac2 from "../assets/dialogos/nacional/foto-2.jpg";
+import nac3 from "../assets/dialogos/nacional/foto-3.jpg";
+import nac4 from "../assets/dialogos/nacional/foto-4.jpg";
+import nac5 from "../assets/dialogos/nacional/foto-5.jpg";
+// Sudeste
+import se1 from "../assets/dialogos/sudeste/foto-1.jpg";
+import se2 from "../assets/dialogos/sudeste/foto-2.jpg";
+import se3 from "../assets/dialogos/sudeste/foto-3.jpg";
+// Centro-Oeste
+import co1 from "../assets/dialogos/centro-oeste/foto-1.jpg";
+import co2 from "../assets/dialogos/centro-oeste/foto-2.jpg";
+import co3 from "../assets/dialogos/centro-oeste/foto-3.jpg";
+// Sul
+import sul1 from "../assets/dialogos/sul/foto-1.jpg";
+import sul2 from "../assets/dialogos/sul/foto-2.jpg";
+import sul3 from "../assets/dialogos/sul/foto-3.jpg";
+// Norte
+import nor1 from "../assets/dialogos/norte/foto-1.jpg";
+import nor2 from "../assets/dialogos/norte/foto-2.jpg";
+import nor3 from "../assets/dialogos/norte/foto-3.jpg";
+// Nordeste
+import ne1 from "../assets/dialogos/nordeste/foto-1.jpg";
+import ne2 from "../assets/dialogos/nordeste/foto-2.jpg";
+import ne3 from "../assets/dialogos/nordeste/foto-3.jpg";
 
-type Stop = {
-  region: string;
+type Region = {
+  key: string;
+  label: string;
   city: string;
-  image?: string;
+  tag: string;
   note: string;
+  photos: string[];
 };
 
-const STOPS: Stop[] = [
-  { region: "Sudeste", city: "São Paulo", image: sudesteImg, note: "Diálogo regional em formato world café" },
-  { region: "Centro-Oeste", city: "Brasília", image: centroOesteImg, note: "Sessão de trabalho entre empresas e sociedade civil" },
-  { region: "Sul", city: "Curitiba", image: sulImg, note: "Discussão em mesas temáticas de DH e DEI" },
-  { region: "Norte", city: "Manaus", image: norteImg, note: "Diálogo regional durante a Bioeconomy Amazon Summit" },
-  { region: "Nordeste", city: "Recife", note: "Próxima etapa da rota — em preparação" },
-  { region: "Encontro Nacional", city: "São Paulo", image: nacionalImg, note: "Síntese das cinco rodadas regionais" },
+const REGIONS: Region[] = [
+  {
+    key: "nacional",
+    label: "Encontro Nacional",
+    city: "São Paulo",
+    tag: "Síntese nacional",
+    note: "A rodada que reuniu as contribuições das cinco regiões em um só palco.",
+    photos: [nac1, nac2, nac3, nac4, nac5],
+  },
+  {
+    key: "sudeste",
+    label: "Sudeste",
+    city: "São Paulo",
+    tag: "Etapa regional",
+    note: "Profissionais de DH e DEI em mesas de trabalho no formato world café.",
+    photos: [se1, se2, se3],
+  },
+  {
+    key: "centro-oeste",
+    label: "Centro-Oeste",
+    city: "Brasília",
+    tag: "Etapa regional",
+    note: "Empresas, poder público e sociedade civil construindo estratégias juntos.",
+    photos: [co1, co2, co3],
+  },
+  {
+    key: "sul",
+    label: "Sul",
+    city: "Curitiba",
+    tag: "Etapa regional",
+    note: "Discussões temáticas conectando a agenda de DH & DEI aos ODS.",
+    photos: [sul1, sul2, sul3],
+  },
+  {
+    key: "norte",
+    label: "Norte",
+    city: "Manaus",
+    tag: "Etapa regional",
+    note: "Diálogo sobre justiça climática e bioeconomia no coração da Amazônia.",
+    photos: [nor1, nor2, nor3],
+  },
+  {
+    key: "nordeste",
+    label: "Nordeste",
+    city: "Recife",
+    tag: "Etapa regional",
+    note: "O encontro que fechou o ciclo das cinco regiões.",
+    photos: [ne1, ne2, ne3],
+  },
 ];
 
-function StopCard({ stop, index }: { stop: Stop; index: number }) {
+const STATS = [
+  { value: "6", label: "encontros" },
+  { value: "5", label: "regiões" },
+  { value: "World café", label: "formato" },
+  { value: "2030", label: "horizonte" },
+];
+
+function Lightbox({
+  region,
+  index,
+  onClose,
+  onNav,
+}: {
+  region: Region;
+  index: number;
+  onClose: () => void;
+  onNav: (dir: 1 | -1) => void;
+}) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onNav(1);
+      if (e.key === "ArrowLeft") onNav(-1);
+    };
+    window.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, onNav]);
+
+  const multiple = region.photos.length > 1;
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.06 }}
-      whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-      className="relative overflow-hidden rounded-[24px] flex-shrink-0 select-none w-[280px] sm:w-[320px] shadow-[0_16px_36px_rgba(0,0,0,0.35)] border border-white/5"
-      style={{ minHeight: "380px" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050f1a]/95 backdrop-blur-sm p-4 sm:p-8"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Foto do Diálogo ${region.label}`}
     >
-      {stop.image ? (
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-          style={{ backgroundImage: `url(${stop.image})` }}
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#0C2540]" style={{ backgroundImage: "repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 12px)" }}>
-          <Globe2 className="w-12 h-12 text-white/15" strokeWidth={1.5} />
-        </div>
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors"
+        aria-label="Fechar"
+      >
+        <X className="w-5 h-5" />
+      </button>
+
+      {multiple && (
+        <>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onNav(-1); }}
+            className="absolute left-3 sm:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors z-10"
+            aria-label="Foto anterior"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onNav(1); }}
+            className="absolute right-3 sm:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors z-10"
+            aria-label="Próxima foto"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
       )}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: stop.image
-            ? "linear-gradient(to top, rgba(7,24,40,0.95) 0%, rgba(7,24,40,0.55) 40%, rgba(7,24,40,0.1) 70%, transparent 100%)"
-            : "linear-gradient(to top, rgba(7,24,40,0.4) 0%, transparent 60%)",
-        }}
-      />
 
-      <div className="relative z-10 h-full flex flex-col justify-between p-6">
-        <div className="flex items-start justify-between">
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full dhe-glass text-dhe-magenta"
-            style={{ backgroundColor: "rgba(232,24,122,0.15)", border: "1px solid rgba(232,24,122,0.35)" }}>
-            {stop.region}
+      <div className="max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
+        <motion.img
+          key={region.photos[index]}
+          src={region.photos[index]}
+          alt={`${region.label} — ${region.city}`}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25 }}
+          className="w-full max-h-[80vh] object-contain rounded-xl shadow-2xl"
+        />
+        <div className="flex items-center justify-between mt-4 text-white/80">
+          <span className="text-sm font-bold">
+            {region.label} · {region.city}
           </span>
-          {!stop.image && (
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/70">Em breve</span>
+          {multiple && (
+            <span className="text-xs font-black tracking-widest tabular-nums">
+              {index + 1} / {region.photos.length}
+            </span>
           )}
-        </div>
-
-        <div>
-          <div className="flex items-center gap-1.5 text-white/80 mb-2">
-            <MapPin className="w-3.5 h-3.5" />
-            <span className="text-[10px] font-black uppercase tracking-widest">{stop.city}</span>
-          </div>
-          <p className="text-sm text-white leading-snug font-medium">{stop.note}</p>
         </div>
       </div>
     </motion.div>
@@ -79,114 +192,221 @@ function StopCard({ stop, index }: { stop: Stop; index: number }) {
 
 export function Dialogues() {
   const [ref, inView] = useInView();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeKey, setActiveKey] = useState(REGIONS[0].key);
+  const [featured, setFeatured] = useState(0);
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const updateScrollState = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 10);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  const active = REGIONS.find((r) => r.key === activeKey) ?? REGIONS[0];
+
+  const selectRegion = useCallback((key: string) => {
+    setActiveKey(key);
+    setFeatured(0);
   }, []);
 
-  const scroll = useCallback((dir: "left" | "right") => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir === "left" ? -360 : 360, behavior: "smooth" });
-  }, []);
+  const navLightbox = useCallback(
+    (dir: 1 | -1) => {
+      setLightbox((prev) => {
+        if (prev === null) return prev;
+        const n = active.photos.length;
+        return (prev + dir + n) % n;
+      });
+    },
+    [active.photos.length]
+  );
 
   return (
-    <section id="dialogos" className="relative overflow-hidden py-20 lg:py-24" style={{ backgroundColor: "#0C2540" }}>
+    <section id="dialogos" className="relative overflow-hidden py-20 lg:py-28" style={{ backgroundColor: "#0C2540" }}>
+      {/* Atmosfera */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-dhe-magenta/10 rounded-full blur-3xl" />
-        <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-dhe-green/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-[520px] h-[520px] bg-dhe-magenta/10 rounded-full blur-3xl" />
+        <div className="absolute -top-24 -right-24 w-[360px] h-[360px] bg-dhe-green/10 rounded-full blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: "460px", backgroundRepeat: "no-repeat", backgroundPosition: "right -80px top -40px" }}
+        />
       </div>
 
       <div className="dhe-container relative z-10" ref={ref as React.RefObject<HTMLDivElement>}>
+        {/* ── Cabeçalho editorial ─────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: "spring", stiffness: 60, damping: 15 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-6"
         >
-          <div className="max-w-2xl">
-            <p className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: "#E8187A" }}>
-              Nossa Trajetória
-            </p>
-            <div className="dhe-stripe-divider">
-              <span /><span /><span /><span />
+          <p className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: "#E8187A" }}>
+            Nossa Trajetória
+          </p>
+          <div className="dhe-stripe-divider">
+            <span /><span /><span /><span />
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black leading-[1.05] max-w-3xl" style={{ color: "#FFFFFF" }}>
+            Antes do Encontro:<br className="hidden sm:block" /> os Diálogos de DH e DEI
+          </h2>
+
+          {/* Texto quebrado estrategicamente: narrativa + objetivo destacado */}
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-8 lg:gap-12 mt-8 items-start">
+            <div className="space-y-4 max-w-2xl">
+              <p className="text-base sm:text-lg text-white/85 leading-relaxed">
+                Com início na <strong className="text-white font-bold">69ª CSW da ONU</strong>, em Nova York, a Rede
+                Brasil do Pacto Global percorreu o país para explorar, construir e aprofundar estratégias concretas
+                de Direitos Humanos sob a lupa da Diversidade, Equidade e Inclusão.
+              </p>
+              <p className="text-base text-white/70 leading-relaxed">
+                Foram <strong className="text-white/90 font-bold">cinco encontros regionais</strong> em formato{" "}
+                <em>world café</em> — reunindo profissionais de DH e DEI, empresas, consultorias e organizações da
+                sociedade civil — mais um <strong className="text-white/90 font-bold">encontro nacional</strong> em
+                São Paulo.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-display font-black text-white mb-3">
-              Antes do Encontro: os Diálogos de DH e DEI
-            </h2>
-            <p className="text-base text-white/70 leading-relaxed">
-              Desde o pontapé inicial na 69ª CSW, em Nova York, a Rede Brasil do Pacto Global vem
-              percorrendo o país com os Diálogos de Direitos Humanos e Diversidade, Equidade e Inclusão:
-              cinco encontros regionais em formato <em>world café</em> — Sudeste, Centro-Oeste, Sul, Norte
-              e Nordeste — mais um Encontro Nacional em São Paulo. O objetivo é debater estratégias
-              resilientes e conectadas aos ODS, e reunir direcionamentos para o Guia Orientador de
-              Estratégias de DH &amp; DEI para empresas, com 2030 como horizonte.
-            </p>
+
+            {/* Callout do objetivo */}
+            <div className="rounded-2xl p-6 border border-white/10 bg-white/[0.04] backdrop-blur-sm relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-dhe-magenta" />
+              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3">O objetivo</p>
+              <p className="text-sm text-white/85 leading-relaxed">
+                Debater estratégias resilientes, sustentáveis e conectadas aos ODS — e reunir direcionamentos para o{" "}
+                <strong className="text-white font-bold">Guia Orientador de Estratégias de DH &amp; DEI</strong> para
+                empresas, tendo <strong className="text-white font-bold">2030</strong> como horizonte.
+              </p>
+            </div>
           </div>
 
-          <div className="flex gap-3 shrink-0">
-            <motion.button
-              type="button"
-              onClick={() => scroll("left")}
-              disabled={!canScrollLeft}
-              whileHover={canScrollLeft ? { scale: 1.08 } : {}}
-              whileTap={canScrollLeft ? { scale: 0.95 } : {}}
-              className="w-11 h-11 rounded-full flex items-center justify-center border border-white/15 bg-white/5 shadow-sm transition-all duration-200 disabled:opacity-30"
-              aria-label="Anterior"
-            >
-              <ChevronLeft className="w-5 h-5 text-white" strokeWidth={2} />
-            </motion.button>
-            <motion.button
-              type="button"
-              onClick={() => scroll("right")}
-              disabled={!canScrollRight}
-              whileHover={canScrollRight ? { scale: 1.08 } : {}}
-              whileTap={canScrollRight ? { scale: 0.95 } : {}}
-              className="w-11 h-11 rounded-full flex items-center justify-center bg-dhe-magenta text-white shadow-sm transition-all duration-200 disabled:opacity-30"
-              aria-label="Próximo"
-            >
-              <ChevronRight className="w-5 h-5" strokeWidth={2} />
-            </motion.button>
+          {/* Métricas */}
+          <div className="flex flex-wrap gap-x-8 gap-y-4 mt-8 pt-6 border-t border-white/10">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <span className="text-2xl font-display font-black text-white">{s.value}</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">{s.label}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
-      </div>
 
-      <AnimatePresence>
-        {inView && (
+        {/* ── Seletor de rota (Nacional primeiro) ─────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 15, delay: 0.1 }}
+          className="mt-12 -mx-5 px-5 overflow-x-auto dhe-scroll-snap"
+          role="tablist"
+          aria-label="Etapas dos Diálogos"
+        >
+          <div className="flex gap-2.5 min-w-max pb-1">
+            {REGIONS.map((r) => {
+              const isActive = r.key === activeKey;
+              return (
+                <button
+                  key={r.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => selectRegion(r.key)}
+                  className={`group flex flex-col items-start text-left rounded-2xl px-5 py-3 border transition-all duration-300 ${
+                    isActive
+                      ? "bg-dhe-magenta border-dhe-magenta shadow-[0_10px_30px_rgba(232,24,122,0.35)]"
+                      : "bg-white/[0.04] border-white/10 hover:bg-white/[0.08] hover:border-white/20"
+                  }`}
+                >
+                  <span className={`text-[8px] font-black uppercase tracking-[0.18em] ${isActive ? "text-white/80" : "text-white/40"}`}>
+                    {r.tag}
+                  </span>
+                  <span className={`text-sm font-display font-black leading-tight ${isActive ? "text-white" : "text-white/85"}`}>
+                    {r.label}
+                  </span>
+                  <span className={`flex items-center gap-1 text-[10px] font-bold mt-0.5 ${isActive ? "text-white/85" : "text-white/45"}`}>
+                    <MapPin className="w-2.5 h-2.5" />
+                    {r.city}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* ── Galeria da etapa ativa ──────────────────────────── */}
+        {/* Keyed remount (sem AnimatePresence mode=wait) para evitar deadlock
+            de exit com o AnimatePresence aninhado da foto em destaque. */}
+        <div className="mt-6">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative"
+            key={active.key}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 items-start"
           >
-            <div
-              className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none transition-opacity duration-300"
-              style={{ background: "linear-gradient(to right, #0C2540, transparent)", opacity: canScrollLeft ? 1 : 0 }}
-            />
-            <div
-              className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
-              style={{ background: "linear-gradient(to left, #0C2540, transparent)" }}
-            />
+            {/* Meta da etapa */}
+            <div className="lg:pt-2">
+              <h3 className="text-2xl font-display font-black leading-tight" style={{ color: "#FFFFFF" }}>{active.label}</h3>
+              <div className="flex items-center gap-1.5 text-dhe-magenta mt-1.5">
+                <MapPin className="w-3.5 h-3.5" />
+                <span className="text-xs font-black uppercase tracking-widest">{active.city}</span>
+              </div>
+              <p className="text-sm text-white/65 leading-relaxed mt-4 max-w-xs">{active.note}</p>
+            </div>
 
-            <div
-              ref={scrollRef}
-              onScroll={updateScrollState}
-              className="flex gap-5 overflow-x-auto pb-6 dhe-scroll-snap"
-              style={{ paddingLeft: "calc(max(1.25rem, (100vw - 80rem) / 2 + 1.25rem))", paddingRight: "calc(max(1.25rem, (100vw - 80rem) / 2 + 1.25rem))" }}
-            >
-              {STOPS.map((s, i) => (
-                <StopCard key={`${s.region}-${s.city}`} stop={s} index={i} />
-              ))}
+            {/* Fotos — quadro horizontal, sem cortes */}
+            <div>
+              {/* Foto em destaque */}
+              <button
+                type="button"
+                onClick={() => setLightbox(featured)}
+                className="group relative w-full block rounded-[20px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                aria-label="Ampliar foto"
+              >
+                <div className="aspect-[3/2] bg-black/40">
+                  <motion.img
+                    key={active.photos[featured]}
+                    src={active.photos[featured]}
+                    alt={`Diálogo ${active.label} — ${active.city}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07182a]/70 via-transparent to-transparent pointer-events-none" />
+                <span className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/15 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <Maximize2 className="w-4 h-4" />
+                </span>
+              </button>
+
+              {/* Miniaturas — mostra todas as fotos da etapa em quadro cheio */}
+              {active.photos.length > 1 && (
+                <div className="flex gap-3 mt-3 overflow-x-auto pb-1 dhe-scroll-snap">
+                  {active.photos.map((p, i) => {
+                    const isSel = i === featured;
+                    return (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setFeatured(i)}
+                        className={`relative shrink-0 w-28 sm:w-32 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                          isSel ? "border-dhe-magenta" : "border-transparent opacity-60 hover:opacity-100"
+                        }`}
+                        aria-label={`Ver foto ${i + 1} de ${active.label}`}
+                        aria-pressed={isSel}
+                      >
+                        <div className="aspect-[3/2]">
+                          <img src={p} alt="" className="w-full h-full object-cover" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </div>
+
+      {lightbox !== null && (
+        <Lightbox
+          region={active}
+          index={lightbox}
+          onClose={() => setLightbox(null)}
+          onNav={navLightbox}
+        />
+      )}
     </section>
   );
 }
