@@ -4,13 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Ordem alinhada ao DOM real em App.tsx (Sobre → Programação → Palestrantes → Local → Atrações → Organizadores → Contato)
 const NAV_LINKS = [
-  { id: "sobre", href: "#/sobre", label: "Sobre" },
   { id: "programacao", href: "#/programacao", label: "Programação" },
   { id: "palestrantes", href: "#/palestrantes", label: "Palestrantes" },
   { id: "empreendedores", href: "#/empreendedores", label: "Empreendedores" },
   { id: "local", href: "#/local", label: "Local" },
   { id: "atracoes", href: "#/atracoes", label: "Atrações" },
-  { id: "organizadores", href: "#/organizadores", label: "Organizadores" },
   { id: "contato", href: "#/contato", label: "Contato" },
 ];
 
