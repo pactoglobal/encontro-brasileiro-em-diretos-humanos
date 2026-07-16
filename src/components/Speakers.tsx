@@ -1,30 +1,39 @@
 import { motion } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 
+import camilaImg from "../assets/painelistas/camila-zelezoglo.jpg";
+import jandyraImg from "../assets/painelistas/jandyra-uehara.jpg";
+import luizImg from "../assets/painelistas/luiz-henrique-ramos.jpg";
+import josefaImg from "../assets/painelistas/josefa-camara.jpg";
+import gilsonImg from "../assets/painelistas/gilson-camboim.jpg";
+import larissaImg from "../assets/painelistas/larissa-rodrigues.jpg";
+import thalitaImg from "../assets/painelistas/thalita-silva.jpg";
+
 type Speaker = {
   name: string;
   role: string;
   org: string;
   accent: string;
   bg: string;
+  photo?: string;
 };
 
 const SPEAKERS: Speaker[] = [
   { name: "Fernanda Hopenhaym", role: "Membro", org: "UN Working Group on Business and Human Rights", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
   { name: "Vinicius Pinheiro", role: "Diretor", org: "OIT no Brasil", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
   { name: "Adriana Marcolino", role: "Especialista", org: "DIEESE", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
-  { name: "Camila Zelezoglo", role: "Representante", org: "ABIT", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
-  { name: "Jandyra Uehara", role: "Representante", org: "CUT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
+  { name: "Camila Zelezoglo", role: "Representante", org: "ABIT", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: camilaImg },
+  { name: "Jandyra Uehara", role: "Representante", org: "CUT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: jandyraImg },
   { name: "Juliana Neiva", role: "Especialista", org: "Conectas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
   { name: "Andrea Bolzon", role: "Especialista", org: "PNUD", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
-  { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho", org: "Ministério do Trabalho", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
+  { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho", org: "Ministério do Trabalho", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: luizImg },
   { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global – Rede Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
-  { name: "Josefa Oliveira", role: "Representante", org: "Conselho Ribeirinho", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
-  { name: "Gilson Camboim", role: "Presidente", org: "Coogavepe", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
-  { name: "Larissa Rodrigues", role: "Especialista", org: "Instituto Escolhas", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
+  { name: "Josefa Camara", role: "Representante", org: "Conselho Ribeirinho", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: josefaImg },
+  { name: "Gilson Camboim", role: "Presidente", org: "Coogavepe", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: gilsonImg },
+  { name: "Larissa Rodrigues", role: "Especialista", org: "Instituto Escolhas", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: larissaImg },
   { name: "Miguel Castro-Riberos", role: "Especialista", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
   { name: "Hernan Coronado", role: "Especialista de normas da AL", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
-  { name: "Thalita V. Gonçalves", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
+  { name: "Thalita Silva", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: thalitaImg },
   { name: "Flávia Scabin", role: "Professora e Pesquisadora", org: "FGV", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
 ];
 
@@ -55,16 +64,29 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 18 } }}
       className="dhe-card-editorial p-5 flex flex-col gap-3 select-none"
     >
-      <motion.div
-        whileHover={{ scale: 1.08, rotate: 8 }}
-        transition={{ type: "spring", stiffness: 300 }}
-        className="w-11 h-11 rounded-full flex items-center justify-center font-display font-black text-sm text-white shrink-0"
-        style={{
-          background: `linear-gradient(135deg, ${speaker.accent}, ${speaker.accent}cc)`,
-        }}
-      >
-        {initials}
-      </motion.div>
+      {speaker.photo ? (
+        <div 
+          className="w-11 h-11 rounded-full overflow-hidden shrink-0 border-2 shadow-sm"
+          style={{ borderColor: speaker.accent }}
+        >
+          <img 
+            src={speaker.photo} 
+            alt={speaker.name} 
+            className="w-full h-full object-cover" 
+          />
+        </div>
+      ) : (
+        <motion.div
+          whileHover={{ scale: 1.08, rotate: 8 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          className="w-11 h-11 rounded-full flex items-center justify-center font-display font-black text-sm text-white shrink-0"
+          style={{
+            background: `linear-gradient(135deg, ${speaker.accent}, ${speaker.accent}cc)`,
+          }}
+        >
+          {initials}
+        </motion.div>
+      )}
       <div>
         <p className="text-sm font-bold text-dhe-navy leading-snug">{speaker.name}</p>
         <p className="text-sm font-bold mt-0.5" style={{ color: speaker.accent }}>
