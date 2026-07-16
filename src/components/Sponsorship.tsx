@@ -76,7 +76,7 @@ export function Sponsorship() {
                 <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#E8187A] mb-2">
                   Parcerias e Apoio
                 </p>
-                <h3 className="text-2xl font-display font-black leading-tight text-white mb-2">
+                <h3 className="text-2xl font-display font-black leading-tight mb-2" style={{ color: "#ffffff" }}>
                   Rafael Carmo
                 </h3>
                 <p className="text-sm text-white/95 leading-relaxed mb-6">
