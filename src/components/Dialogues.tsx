@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "../hooks/useInView";
@@ -13,18 +13,26 @@ import nac5 from "../assets/dialogos/nacional/foto-5.jpg";
 import se1 from "../assets/dialogos/sudeste/foto-1.jpg";
 import se2 from "../assets/dialogos/sudeste/foto-2.jpg";
 import se3 from "../assets/dialogos/sudeste/foto-3.jpg";
+import se4 from "../assets/dialogos/sudeste/foto-4.jpg";
+import se5 from "../assets/dialogos/sudeste/foto-5.jpg";
 // Centro-Oeste
 import co1 from "../assets/dialogos/centro-oeste/foto-1.jpg";
 import co2 from "../assets/dialogos/centro-oeste/foto-2.jpg";
 import co3 from "../assets/dialogos/centro-oeste/foto-3.jpg";
+import co4 from "../assets/dialogos/centro-oeste/foto-4.jpg";
+import co5 from "../assets/dialogos/centro-oeste/foto-5.jpg";
 // Sul
 import sul1 from "../assets/dialogos/sul/foto-1.jpg";
 import sul2 from "../assets/dialogos/sul/foto-2.jpg";
 import sul3 from "../assets/dialogos/sul/foto-3.jpg";
+import sul4 from "../assets/dialogos/sul/foto-4.jpg";
+import sul5 from "../assets/dialogos/sul/foto-5.jpg";
 // Norte
 import nor1 from "../assets/dialogos/norte/foto-1.jpg";
 import nor2 from "../assets/dialogos/norte/foto-2.jpg";
 import nor3 from "../assets/dialogos/norte/foto-3.jpg";
+import nor4 from "../assets/dialogos/norte/foto-4.jpg";
+import nor5 from "../assets/dialogos/norte/foto-5.jpg";
 // Nordeste
 import ne1 from "../assets/dialogos/nordeste/foto-1.jpg";
 import ne2 from "../assets/dialogos/nordeste/foto-2.jpg";
@@ -54,7 +62,7 @@ const REGIONS: Region[] = [
     city: "São Paulo",
     tag: "Etapa regional",
     note: "Profissionais de DH e DEI em mesas de trabalho no formato world café.",
-    photos: [se1, se2, se3],
+    photos: [se1, se2, se3, se4, se5],
   },
   {
     key: "centro-oeste",
@@ -62,7 +70,7 @@ const REGIONS: Region[] = [
     city: "Brasília",
     tag: "Etapa regional",
     note: "Empresas, poder público e sociedade civil construindo estratégias juntos.",
-    photos: [co1, co2, co3],
+    photos: [co1, co2, co3, co4, co5],
   },
   {
     key: "sul",
@@ -70,7 +78,7 @@ const REGIONS: Region[] = [
     city: "Curitiba",
     tag: "Etapa regional",
     note: "Discussões temáticas conectando a agenda de DH & DEI aos ODS.",
-    photos: [sul1, sul2, sul3],
+    photos: [sul1, sul2, sul3, sul4, sul5],
   },
   {
     key: "norte",
@@ -78,7 +86,7 @@ const REGIONS: Region[] = [
     city: "Manaus",
     tag: "Etapa regional",
     note: "Diálogo sobre justiça climática e bioeconomia no coração da Amazônia.",
-    photos: [nor1, nor2, nor3],
+    photos: [nor1, nor2, nor3, nor4, nor5],
   },
   {
     key: "nordeste",
@@ -195,6 +203,7 @@ export function Dialogues() {
   const [activeKey, setActiveKey] = useState(REGIONS[0].key);
   const [featured, setFeatured] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const active = REGIONS.find((r) => r.key === activeKey) ?? REGIONS[0];
 
@@ -233,52 +242,57 @@ export function Dialogues() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: "spring", stiffness: 60, damping: 15 }}
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: "#E8187A" }}>
+          <p className="dhe-section-label">
             Nossa Trajetória
           </p>
           <div className="dhe-stripe-divider">
             <span /><span /><span /><span />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black leading-[1.05] max-w-3xl" style={{ color: "#FFFFFF" }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black leading-[1.05] max-w-3xl mb-8" style={{ color: "#FFFFFF" }}>
             Antes do Encontro:<br className="hidden sm:block" /> os Diálogos de DH e DEI
           </h2>
 
-          {/* Texto quebrado estrategicamente: narrativa + objetivo destacado */}
-          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-8 lg:gap-12 mt-8 items-start">
-            <div className="space-y-4 max-w-2xl">
-              <p className="text-base sm:text-lg text-white/85 leading-relaxed">
-                Com início na <strong className="text-white font-bold">69ª CSW da ONU</strong>, em Nova York, a Rede
-                Brasil do Pacto Global percorreu o país para explorar, construir e aprofundar estratégias concretas
-                de Direitos Humanos sob a lupa da Diversidade, Equidade e Inclusão.
-              </p>
-              <p className="text-base text-white/70 leading-relaxed">
-                Foram <strong className="text-white/90 font-bold">cinco encontros regionais</strong> em formato{" "}
-                <em>world café</em> — reunindo profissionais de DH e DEI, empresas, consultorias e organizações da
-                sociedade civil — mais um <strong className="text-white/90 font-bold">encontro nacional</strong> em
-                São Paulo.
-              </p>
-            </div>
-
-            {/* Callout do objetivo */}
-            <div className="rounded-2xl p-6 border border-white/10 bg-white/[0.04] backdrop-blur-sm relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-dhe-magenta" />
-              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-3">O objetivo</p>
-              <p className="text-sm text-white/85 leading-relaxed">
-                Debater estratégias resilientes, sustentáveis e conectadas aos ODS — e reunir direcionamentos para o{" "}
-                <strong className="text-white font-bold">Guia Orientador de Estratégias de DH &amp; DEI</strong> para
-                empresas, tendo <strong className="text-white font-bold">2030</strong> como horizonte.
-              </p>
-            </div>
-          </div>
-
-          {/* Métricas */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 mt-8 pt-6 border-t border-white/10">
-            {STATS.map((s) => (
-              <div key={s.label} className="flex items-baseline gap-2">
-                <span className="text-2xl font-display font-black text-white">{s.value}</span>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-white/50">{s.label}</span>
+          {/* Bento Grid layout de informações */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            {/* Card 1: A Jornada (Contexto) */}
+            <div className="lg:col-span-2 rounded-3xl p-8 border border-white/10 bg-white/[0.02] backdrop-blur-md shadow-xl flex flex-col justify-between">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#E8187A] mb-3">A Jornada</p>
+                <p className="text-base sm:text-lg text-white/90 leading-relaxed font-light">
+                  Com início na <strong className="text-white font-bold">69ª CSW da ONU</strong> em Nova York, a Rede Brasil do Pacto Global percorreu o país para desenhar estratégias robustas de Direitos Humanos sob a lente de Diversidade, Equidade e Inclusão.
+                </p>
+                <p className="text-sm text-white/70 leading-relaxed mt-4">
+                  Foram cinco encontros regionais em formato <em className="text-white">world café</em>, além do grande encontro de síntese nacional realizado em São Paulo.
+                </p>
               </div>
-            ))}
+            </div>
+
+            {/* Card 2: O Objetivo (Glassmorphism Bento) */}
+            <div className="rounded-3xl p-8 border border-white/15 bg-gradient-to-br from-white/[0.08] to-white/[0.01] backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-dhe-magenta/10 rounded-full blur-2xl pointer-events-none" />
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider bg-dhe-magenta/20 text-dhe-magenta border border-dhe-magenta/30 mb-5">
+                  O Objetivo
+                </span>
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed font-medium">
+                  Debater estratégias resilientes e conectadas aos ODS, resultando nas diretrizes do <strong className="text-white font-bold">Guia Orientador de DH &amp; DEI</strong> corporativo rumo a <strong className="text-white font-bold">2030</strong>.
+                </p>
+              </div>
+              <div className="mt-6 border-t border-white/10 pt-4 flex items-center justify-between">
+                <span className="text-[10px] font-black tracking-widest text-white/40 uppercase">Pacto Global</span>
+                <div className="w-2 h-2 rounded-full bg-dhe-magenta animate-pulse" />
+              </div>
+            </div>
+
+            {/* Card 3: Métricas (Bento Row) */}
+            <div className="lg:col-span-3 rounded-3xl p-8 border border-white/5 bg-white/[0.01] backdrop-blur-sm grid grid-cols-2 sm:grid-cols-4 gap-6 items-center">
+              {STATS.map((s) => (
+                <div key={s.label} className="text-center sm:text-left border-l border-white/10 pl-4 first:border-none">
+                  <p className="text-3xl sm:text-4xl font-display font-black text-white leading-none mb-1">{s.value}</p>
+                  <p className="text-[10px] font-black uppercase tracking-wider text-white/40">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -324,8 +338,6 @@ export function Dialogues() {
         </motion.div>
 
         {/* ── Galeria da etapa ativa ──────────────────────────── */}
-        {/* Keyed remount (sem AnimatePresence mode=wait) para evitar deadlock
-            de exit com o AnimatePresence aninhado da foto em destaque. */}
         <div className="mt-6">
           <motion.div
             key={active.key}
@@ -372,7 +384,10 @@ export function Dialogues() {
 
               {/* Miniaturas — mostra todas as fotos da etapa em quadro cheio */}
               {active.photos.length > 1 && (
-                <div className="flex gap-3 mt-3 overflow-x-auto pb-1 dhe-scroll-snap">
+                <div 
+                  ref={scrollRef}
+                  className="flex gap-3 mt-3 overflow-x-auto pb-1 dhe-scroll-snap scroll-smooth scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+                >
                   {active.photos.map((p, i) => {
                     const isSel = i === featured;
                     return (

@@ -48,9 +48,8 @@ export function Contact() {
 
           {/* Descrição */}
           <p className="text-base sm:text-lg text-dhe-text-muted leading-relaxed mb-10 max-w-2xl mx-auto">
-            O I Encontro Brasileiro de Direitos Humanos e Empresas é{" "}
-            <strong className="text-dhe-navy font-black">gratuito e credenciado</strong> para
-            empresas, movimentos sociais, poder público e academia.
+            O I Encontro Brasileiro de Direitos Humanos e Empresas é um evento gratuito e{" "}
+            <strong className="text-dhe-navy font-black">exclusivo para convidados</strong>, direcionado a representantes de empresas, movimentos sociais, poder público e academia.
           </p>
 
           {/* Pills de Informação */}
@@ -58,7 +57,7 @@ export function Contact() {
             {[
               { Icon: CalendarDays, text: "04 de agosto de 2026" },
               { Icon: MapPin,       text: "Cinemateca Brasileira — São Paulo" },
-              { Icon: Users,        text: "Entrada gratuita e credenciada" },
+              { Icon: Users,        text: "Exclusivo para convidados" },
               { Icon: Sparkles,     text: "30+ painelistas confirmados" },
             ].map(({ Icon, text }) => (
               <span

@@ -203,7 +203,7 @@ export function Hero() {
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
                 <span className="w-2 h-2 rounded-full bg-dhe-green" />
-                Evento Gratuito
+                Exclusivo para Convidados
               </span>
             </motion.div>
 
@@ -283,7 +283,7 @@ export function Hero() {
                 {[
                   { value: "30+", label: "Painelistas", color: "#E8187A", pl: "pl-0" },
                   { value: "10h+", label: "De Conteúdo", color: "#4A8C3F", pl: "pl-3 sm:pl-6" },
-                  { value: "100%", label: "Gratuito", color: "#E05A3A", pl: "pl-3 sm:pl-6" },
+                  { value: "Exclusivo", label: "Para Convidados", color: "#E05A3A", pl: "pl-3 sm:pl-6" },
                 ].map(({ value, label, color, pl }) => (
                   <div key={label} className={`flex flex-col justify-center ${pl}`}>
                     <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>

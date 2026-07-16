@@ -698,9 +698,12 @@ export function Agenda() {
         >
           {/* ── Header ── */}
           <div className="mb-12">
-            <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">
+            <p className="dhe-section-label" style={{ color: "#ffffff", opacity: 0.85 }}>
               Programação
             </p>
+            <div className="dhe-stripe-divider">
+              <span /><span /><span /><span />
+            </div>
             <div className="flex items-end justify-between flex-wrap gap-6">
               <div>
                 <h2 className="text-4xl sm:text-5xl font-display font-black leading-none mb-4" style={{ color: "#ffffff" }}>
