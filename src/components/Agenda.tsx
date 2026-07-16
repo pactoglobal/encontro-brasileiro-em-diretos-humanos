@@ -370,12 +370,12 @@ function TimelineItem({
             <div className="absolute top-3 left-1/2 -translate-x-1/2 w-px h-10 bg-white/8" />
           )}
         </div>
-        <div className="flex items-center gap-3 flex-1 py-2 px-4 rounded-xl" style={{ background: "rgba(255,255,255,0.04)" }}>
-          <meta.Icon className="w-3.5 h-3.5 shrink-0" style={{ color: "rgba(255,255,255,0.3)" }} />
-          <span className="text-[10px] font-black tabular-nums text-white/30">{item.time}</span>
-          <span className="text-xs text-white/40 font-medium">{item.title}</span>
+        <div className="flex items-center gap-3 flex-1 py-2 px-4 rounded-xl" style={{ background: "rgba(255,255,255,0.06)" }}>
+          <meta.Icon className="w-3.5 h-3.5 shrink-0" style={{ color: accent }} />
+          <span className="text-[10px] font-black tabular-nums" style={{ color: accent }}>{item.time}</span>
+          <span className="text-xs text-white font-black">{item.title}</span>
           {item.description && (
-            <span className="text-[10px] text-white/25 italic">{item.description}</span>
+            <span className="text-[10px] text-white/60 italic font-medium">{item.description}</span>
           )}
         </div>
       </motion.div>
@@ -446,7 +446,7 @@ function TimelineItem({
 
           {/* Descrição */}
           {item.description && (
-            <p className="text-xs leading-relaxed text-white/50">{item.description}</p>
+            <p className="text-xs leading-relaxed text-white/85">{item.description}</p>
           )}
 
           {/* Palestrantes — expandível */}
@@ -461,10 +461,10 @@ function TimelineItem({
                 <ul className="mt-4 space-y-3 pt-3 border-t border-white/8">
                   {item.speakers!.map((s, si) => (
                     <li key={si} className="flex items-start gap-2.5">
-                      <Users className="w-3 h-3 mt-[2px] shrink-0 text-white/30" />
+                      <Users className="w-3.5 h-3.5 mt-[2.5px] shrink-0" style={{ color: accent }} />
                       <div>
-                        <span className="text-xs font-bold text-white/85 block leading-tight">{s.name}</span>
-                        <span className="text-[10px] text-white/40 leading-tight">{s.role}</span>
+                        <span className="text-xs font-bold text-white block leading-tight">{s.name}</span>
+                        <span className="text-[10.5px] text-white/75 font-medium leading-tight block mt-0.5">{s.role}</span>
                       </div>
                     </li>
                   ))}
@@ -473,11 +473,11 @@ function TimelineItem({
                 {/* Mediação */}
                 {item.mediator && (
                   <div className="mt-3 flex items-start gap-2.5 pt-3 border-t border-white/8">
-                    <Mic2 className="w-3 h-3 mt-[2px] shrink-0 text-white/30" />
+                    <Mic2 className="w-3.5 h-3.5 mt-[2.5px] shrink-0" style={{ color: accent }} />
                     <div>
-                      <span className="text-[8px] font-black uppercase tracking-widest text-white/30 block mb-0.5">Mediação</span>
-                      <span className="text-xs font-bold text-white/75">{item.mediator.name}</span>
-                      <span className="text-[10px] text-white/40 block">{item.mediator.role}</span>
+                      <span className="text-[8px] font-black uppercase tracking-widest text-white/60 block mb-0.5">Mediação</span>
+                      <span className="text-xs font-bold text-white block">{item.mediator.name}</span>
+                      <span className="text-[10.5px] text-white/75 font-medium block mt-0.5">{item.mediator.role}</span>
                     </div>
                   </div>
                 )}
@@ -496,12 +496,12 @@ function TimelineItem({
               background: open ? "rgba(255,255,255,0.03)" : "transparent",
             }}
           >
-            <span className="text-[8px] font-black uppercase tracking-[0.18em] text-white/30 group-hover:text-white/50 transition-colors">
+            <span className="text-[8px] font-black uppercase tracking-[0.18em] text-white/70 group-hover:text-white/95 transition-colors">
               {open ? "Ocultar" : `${item.speakers!.length} palestrantes`}
             </span>
             {open
-              ? <ChevronUp className="w-3 h-3 text-white/30" />
-              : <ChevronDown className="w-3 h-3 text-white/30" />
+              ? <ChevronUp className="w-3.5 h-3.5 text-white/70" />
+              : <ChevronDown className="w-3.5 h-3.5 text-white/70" />
             }
           </button>
         )}
@@ -599,11 +599,11 @@ export function Agenda() {
                       <div className="flex items-center gap-2 mb-3">
                         <PIcon
                           className="w-3.5 h-3.5"
-                          style={{ color: isPeriodActive ? "#E8187A" : "rgba(255,255,255,0.2)" }}
+                          style={{ color: isPeriodActive ? "#E8187A" : "rgba(255,255,255,0.45)" }}
                         />
                         <span
                           className="text-[9px] font-black uppercase tracking-[0.25em]"
-                          style={{ color: isPeriodActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)" }}
+                          style={{ color: isPeriodActive ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.45)" }}
                         >
                           {label}
                         </span>
@@ -626,19 +626,19 @@ export function Agenda() {
                             >
                               <div
                                 className="text-xs font-bold leading-tight block mb-0.5"
-                                style={{ color: isActive ? "white" : "rgba(255,255,255,0.4)" }}
+                                style={{ color: isActive ? "white" : "rgba(255,255,255,0.65)" }}
                               >
                                 {tab.label}
                               </div>
                               <div className="flex items-center gap-1.5">
                                 <span
                                   className="text-[9px] font-medium"
-                                  style={{ color: isActive ? tab.accent : "rgba(255,255,255,0.2)" }}
+                                  style={{ color: isActive ? tab.accent : "rgba(255,255,255,0.45)" }}
                                 >
                                   {tab.sala}
                                 </span>
-                                <span className="text-[8px] text-white/15">·</span>
-                                <span className="text-[9px] text-white/20">{tab.time}</span>
+                                <span className="text-[8px] text-white/30">·</span>
+                                <span className="text-[9px] text-white/50">{tab.time}</span>
                               </div>
                             </button>
                           );
@@ -670,11 +670,11 @@ export function Agenda() {
                     >
                       {activeTab.period}
                     </span>
-                    <span className="text-[9px] text-white/20 font-black uppercase tracking-widest">
+                    <span className="text-[9px] text-white/70 font-black uppercase tracking-widest">
                       {activeTab.label}
                     </span>
-                    <span className="text-[9px] text-white/15">·</span>
-                    <span className="text-[9px] text-white/20">{activeTab.time}</span>
+                    <span className="text-[9px] text-white/30">·</span>
+                    <span className="text-[9px] text-white/60">{activeTab.time}</span>
                   </div>
 
                   {/* Lista de itens em timeline */}

@@ -29,7 +29,7 @@ export function Sponsorship() {
               <span style={{ backgroundColor: "#E05A3A" }} />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-display font-black leading-tight mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl font-display font-black leading-tight mb-6" style={{ color: "#ffffff" }}>
               Quer ser um patrocinador?
             </h2>
             <p className="text-sm sm:text-base text-white/95 leading-relaxed mb-8 max-w-xl">
