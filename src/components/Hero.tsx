@@ -1,21 +1,26 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import heroSlide1 from "../assets/hero/hero-slide-1.jpg";
+import heroSlide2 from "../assets/hero/hero-slide-2.jpg";
+import heroSlide3 from "../assets/hero/hero-slide-3.jpg";
 
 // Slides com imagem + caption temático
+// Fotos reais dos Diálogos de Direitos Humanos e DEI (Diálogo Nacional),
+// usadas para transmitir a trajetória da área antes do Encontro de 2026.
 const SLIDES = [
   {
-    src: "/identity/bg-carousel-1.jpg",
+    src: heroSlide1,
     caption: "Diálogo Multiator",
     sub: "Empresas, sociedade civil e academia em torno de uma agenda comum",
   },
   {
-    src: "/identity/bg-carousel-2.jpg",
+    src: heroSlide3,
     caption: "Sustentabilidade em Ação",
     sub: "Práticas responsáveis que transformam negócios e comunidades",
   },
   {
-    src: "/identity/bg-carousel-3.jpg",
+    src: heroSlide2,
     caption: "Pluralidade que Constrói",
     sub: "Espaço de escuta, debate e construção coletiva de soluções",
   },
