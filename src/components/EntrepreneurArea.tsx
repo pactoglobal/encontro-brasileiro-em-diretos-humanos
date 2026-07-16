@@ -2,143 +2,153 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 import { 
-  Sparkles, 
-  ShoppingBag, 
-  Leaf, 
-  Cpu, 
-  Coffee, 
-  Scissors, 
-  Sun, 
-  Heart, 
-  Package, 
-  Layers, 
   ChevronDown, 
   ChevronUp,
   MapPin
 } from "lucide-react";
 
+import shambuyiImg from "../assets/empreendedores/shambuyiwetu.jpg";
+import esmatImg from "../assets/empreendedores/esmatwear.jpg";
+import perfumesImg from "../assets/empreendedores/perfumesaldomari.jpg";
+import renabesImg from "../assets/empreendedores/renabesartes.jpg";
+import downliciaImg from "../assets/empreendedores/downlicia_oficial.jpg";
+import gleiceImg from "../assets/empreendedores/gleicemirandaaromas.jpg";
+import ninaImg from "../assets/empreendedores/ninabarbosamacrame.jpg";
+import santaImg from "../assets/empreendedores/santatherezadesign.jpg";
+import veganoImg from "../assets/empreendedores/veganoeh.jpg";
+
 type Initiative = {
   name: string;
+  org: string;
   category: string;
   description: string;
   ods: string;
   location: string;
   color: string;
   bg: string;
-  Icon: React.FC<{ className?: string }>;
+  instagram: string;
+  image: string;
+  partner?: string;
 };
 
 const INITIATIVES: Initiative[] = [
   {
-    name: "Mãos da Terra",
-    category: "Artesanato & Renda",
-    description: "Cooperativa de artesanato sustentável feito com fibras naturais de bananeira e capim-dourado por mulheres da periferia de São Paulo, gerando autonomia e renda qualificada.",
+    name: "Shambuyi Wetu",
+    org: "Shambuyi Wetu",
+    category: "Artista Plástico",
+    description: "Artista plástico congolês radicado em São Paulo, cuja produção artística e performances dialogam com a memória, a ancestralidade e a diáspora africana.",
+    ods: "ODS 10 · Redução das Desigualdades",
+    location: "São Paulo, SP",
+    color: "#E8187A",
+    bg: "rgba(232, 24, 122, 0.06)",
+    instagram: "https://www.instagram.com/shambuyiwetu/",
+    image: shambuyiImg,
+    partner: "ACNUR"
+  },
+  {
+    name: "Esmat Wear",
+    org: "Esmatullah Mohsini",
+    category: "Mochilas e Bolsas Handmade",
+    description: "Mochilas e bolsas artesanais, sustentáveis e veganas, criadas por um artesão afegão refugiado no Brasil, promovendo design autoral e consciência ecológica.",
+    ods: "ODS 12 · Consumo e Produção Responsáveis",
+    location: "São Paulo, SP",
+    color: "#4A8C3F",
+    bg: "rgba(74, 140, 63, 0.06)",
+    instagram: "https://www.instagram.com/esmatwear/",
+    image: esmatImg,
+    partner: "ACNUR"
+  },
+  {
+    name: "Perfumes Al Domari",
+    org: "Anas Obaid",
+    category: "Fragrâncias e Perfumaria",
+    description: "Fragrâncias e perfumes artesanais inspirados na rica tradição da perfumaria árabe, produzidos com óleos essenciais exclusivos por um empreendedor sírio.",
+    ods: "ODS 8 · Trabalho Decente",
+    location: "São Paulo, SP",
+    color: "#0C2540",
+    bg: "rgba(12, 37, 64, 0.06)",
+    instagram: "https://www.instagram.com/perfumesaldomari/",
+    image: perfumesImg,
+    partner: "ACNUR"
+  },
+  {
+    name: "Renabes Artes",
+    org: "Renee Abegail Ross Londja",
+    category: "Bonecas e Bichinhos",
+    description: "Confecção artesanal de bonecas de pano e bichinhos decorativos lúdicos feitos à mão, celebrando a infância, a diversidade cultural e a representatividade.",
+    ods: "ODS 10 · Redução das Desigualdades",
+    location: "São Paulo, SP",
+    color: "#7B2D1E",
+    bg: "rgba(123, 45, 30, 0.06)",
+    instagram: "https://www.instagram.com/renabesartes",
+    image: renabesImg,
+    partner: "ACNUR"
+  },
+  {
+    name: "Downlícia",
+    org: "Gabriel Bernardes",
+    category: "Brigadeiros Gourmet",
+    description: "Deliciosos brigadeiros artesanais levados na tradicional foodbike por Gabriel Bernardes, mostrando o poder da inclusão ativa de pessoas com síndrome de Down.",
+    ods: "ODS 8 · Crescimento Econômico",
+    location: "São Paulo, SP",
+    color: "#E05A3A",
+    bg: "rgba(224, 90, 58, 0.06)",
+    instagram: "https://www.instagram.com/downlicia_oficial/",
+    image: downliciaImg,
+    partner: "Foodbike"
+  },
+  {
+    name: "GLEICE Aromas",
+    org: "GLEICE Soares Miranda",
+    category: "Aromas Artesanais",
+    description: "Velas aromáticas e aromatizadores de ambientes produzidos de forma artesanal com cera vegetal e essências finas, promovendo bem-estar e aconchego.",
+    ods: "ODS 12 · Produção Sustentável",
+    location: "São Paulo, SP",
+    color: "#4A8C3F",
+    bg: "rgba(74, 140, 63, 0.06)",
+    instagram: "https://www.instagram.com/gleicemirandaaromas/",
+    image: gleiceImg,
+    partner: "RME"
+  },
+  {
+    name: "Nina Barbosa Macramê",
+    org: "Nina Barbosa",
+    category: "Moda & Decoração Afetiva",
+    description: "Peças exclusivas de vestuário e decoração tecidas manualmente através de nós de macramê, resgatando técnicas ancestrais com design moderno.",
     ods: "ODS 5 · Igualdade de Gênero",
     location: "São Paulo, SP",
     color: "#E8187A",
     bg: "rgba(232, 24, 122, 0.06)",
-    Icon: ShoppingBag,
+    instagram: "https://www.instagram.com/ninabarbosamacrame/",
+    image: ninaImg,
+    partner: "RME"
   },
   {
-    name: "Ciclo Orgânico",
-    category: "Economia Circular",
-    description: "Iniciativa de coleta de resíduos orgânicos residenciais de bicicleta, transformando toneladas de lixo em adubo de alta qualidade para agricultura familiar.",
-    ods: "ODS 12 · Consumo e Produção Responsáveis",
-    location: "Campinas, SP",
-    color: "#4A8C3F",
-    bg: "rgba(74, 140, 63, 0.06)",
-    Icon: Leaf,
-  },
-  {
-    name: "Recicla Tech",
-    category: "Inclusão Digital",
-    description: "Recondicionamento de resíduos eletrônicos para doação a escolas públicas, oferecendo capacitação em robótica e montagem de computadores para jovens em vulnerabilidade.",
-    ods: "ODS 8 · Trabalho Decente",
-    location: "Valinhos, SP",
-    color: "#0C2540",
-    bg: "rgba(12, 37, 64, 0.06)",
-    Icon: Cpu,
-  },
-  {
-    name: "Café da Mata",
-    category: "Agroecologia",
-    description: "Produção agroecológica e comércio justo de café especial cultivado por comunidades quilombolas do Vale do Ribeira, preservando a biodiversidade local.",
-    ods: "ODS 15 · Vida Terrestre",
-    location: "Registro, SP",
-    color: "#7B2D1E",
-    bg: "rgba(123, 45, 30, 0.06)",
-    Icon: Coffee,
-  },
-  {
-    name: "Costura Cidadã",
-    category: "Moda Circular",
-    description: "Marca coletiva de upcycling que transforma retalhos descartados por indústrias têxteis em bolsas e acessórios de design autoral desenvolvidos por imigrantes e refugiados.",
+    name: "Santa Thereza Design",
+    org: "Fa Thereza Silva",
+    category: "Moda Afro",
+    description: "Marca autoral de moda afro que exalta a identidade, o orgulho e as cores da cultura negra através de roupas estampadas e acessórios cheios de estilo.",
     ods: "ODS 10 · Redução das Desigualdades",
     location: "São Paulo, SP",
-    color: "#E05A3A",
-    bg: "rgba(224, 90, 58, 0.06)",
-    Icon: Scissors,
+    color: "#CC2222",
+    bg: "rgba(204, 34, 34, 0.06)",
+    instagram: "https://www.instagram.com/santatherezadesign/",
+    image: santaImg,
+    partner: "RME"
   },
   {
-    name: "Luz do Sertão",
-    category: "Energia Renovável",
-    description: "Sistemas modulares de energia solar montados e instalados de forma comunitária em assentamentos rurais, garantindo acesso à eletricidade e bombeamento de água.",
-    ods: "ODS 7 · Energia Limpa",
-    location: "Petrolina, PE",
-    color: "#FFD700",
-    bg: "rgba(255, 215, 0, 0.08)",
-    Icon: Sun,
-  },
-  {
-    name: "Sabores da Amazônia",
-    category: "Extrativismo Sustentável",
-    description: "Produção de geleias e doces artesanais a partir de frutas nativas da floresta por cooperativas tradicionais ribeirinhas, promovendo o desenvolvimento sustentável.",
-    ods: "ODS 12 · Produção Sustentável",
-    location: "Manaus, AM",
-    color: "#4A8C3F",
-    bg: "rgba(74, 140, 63, 0.06)",
-    Icon: Sparkles,
-  },
-  {
-    name: "Mosaico Social",
-    category: "Design Inclusivo",
-    description: "Estúdio de artes gráficas e papelaria corporativa ecológica que atua na inserção profissional e desenvolvimento social de jovens adultos no espectro autista.",
-    ods: "ODS 8 · Crescimento Econômico",
-    location: "Santos, SP",
-    color: "#0C2540",
-    bg: "rgba(12, 37, 64, 0.06)",
-    Icon: Layers,
-  },
-  {
-    name: "Tijolo Verde",
-    category: "Eco-Construção",
-    description: "Fabricação de tijolos e blocos modulares ecológicos sem queima de combustível fóssil, incorporando resíduos industriais reciclados na matéria-prima.",
-    ods: "ODS 11 · Cidades Sustentáveis",
-    location: "Sorocaba, SP",
+    name: "É vegano?",
+    org: "Araci Pereira Santos",
+    category: "Alimentação Saudável",
+    description: "Queijos, pastas e doces 100% à base de plantas e artesanais, preparados com receitas exclusivas para alimentar com saúde, sabor e ética.",
+    ods: "ODS 12 · Consumo Responsável",
+    location: "São Paulo, SP",
     color: "#7B2D1E",
     bg: "rgba(123, 45, 30, 0.06)",
-    Icon: Package,
-  },
-  {
-    name: "Nutri Acolher",
-    category: "Alimentação Saudável",
-    description: "Cozinha social que distribui refeições nutritivas com insumos da agricultura familiar a preços simbólicos, gerando emprego local para cozinheiras de baixa renda.",
-    ods: "ODS 2 · Fome Zero",
-    location: "Guarulhos, SP",
-    color: "#E8187A",
-    bg: "rgba(232, 24, 122, 0.06)",
-    Icon: Heart,
-  },
-  {
-    name: "BioPoli",
-    category: "Biomateriais",
-    description: "Startup que desenvolve embalagens descartáveis biodegradáveis e compostáveis a partir de resíduos do processamento da mandioca e cana-de-açúcar.",
-    ods: "ODS 13 · Ação Contra o Clima",
-    location: "Piracicaba, SP",
-    color: "#E05A3A",
-    bg: "rgba(224, 90, 58, 0.06)",
-    Icon: Leaf,
-  },
+    instagram: "https://www.instagram.com/veganoeh/",
+    image: veganoImg,
+    partner: "RME"
+  }
 ];
 
 const containerVariants = {
@@ -163,7 +173,7 @@ export function EntrepreneurArea() {
   const [ref, inView] = useInView();
   const [showAll, setShowAll] = useState(false);
 
-  // Exibir 6 inicialmente, expandir para as 11
+  // Exibir 6 inicialmente, expandir para as 9
   const displayedInitiatives = showAll ? INITIATIVES : INITIATIVES.slice(0, 6);
 
   return (
@@ -193,7 +203,7 @@ export function EntrepreneurArea() {
             Conheça os empreendedores de Impacto
           </h2>
           <p className="text-base text-dhe-text-muted max-w-4xl leading-relaxed">
-            A Área de Empreendedores reúne 11 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
+            A Área de Empreendedores reúne 9 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
           </p>
         </motion.div>
 
@@ -207,7 +217,6 @@ export function EntrepreneurArea() {
           >
             <AnimatePresence mode="popLayout">
               {displayedInitiatives.map((ini) => {
-                const Icon = ini.Icon;
                 return (
                   <motion.div
                     key={ini.name}
@@ -217,38 +226,58 @@ export function EntrepreneurArea() {
                     className="rounded-[24px] p-6 border border-[#D8D4C7]/65 flex flex-col justify-between dhe-glow-hover bg-white select-none shadow-sm"
                   >
                     <div>
-                      {/* Top Row: Icon + Category tag */}
-                      <div className="flex items-center justify-between gap-3 mb-5">
+                      {/* Top Row: Avatar Photo + Info next to it */}
+                      <div className="flex gap-4 items-center mb-5">
                         <div 
-                          className="w-11 h-11 rounded-xl flex items-center justify-center border text-white"
-                          style={{
-                            background: `linear-gradient(135deg, ${ini.color}, ${ini.color}cc)`,
-                            borderColor: `${ini.color}40`
-                          }}
+                          className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 shadow-sm"
+                          style={{ borderColor: ini.color }}
                         >
-                          <Icon className="w-5 h-5" />
+                          <img 
+                            src={ini.image} 
+                            alt={ini.org} 
+                            className="w-full h-full object-cover" 
+                          />
                         </div>
-                        <span 
-                          className="text-[8px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border"
-                          style={{
-                            backgroundColor: ini.bg,
-                            borderColor: `${ini.color}30`,
-                            color: ini.color
-                          }}
-                        >
-                          {ini.category}
-                        </span>
+                        <div className="min-w-0">
+                          <p className="text-sm font-bold text-dhe-navy truncate">
+                            {ini.org}
+                          </p>
+                          <p className="text-[10px] font-black uppercase tracking-wider truncate" style={{ color: ini.color }}>
+                            {ini.category}
+                          </p>
+                          {ini.partner && (
+                            <span className="inline-block text-[8px] font-black uppercase bg-[#0C2540]/5 text-dhe-navy px-1.5 py-0.5 rounded mt-1 border border-[#0C2540]/10">
+                              {ini.partner}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
-                      {/* Title / Name */}
-                      <h3 className="text-lg font-display font-black text-dhe-navy mb-2.5">
+                      {/* Brand Title / Name */}
+                      <h3 className="text-lg font-display font-black text-dhe-navy mb-2">
                         {ini.name}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-xs text-dhe-text-muted leading-relaxed mb-6 font-medium">
+                      <p className="text-xs text-dhe-text-muted leading-relaxed mb-4 font-medium">
                         {ini.description}
                       </p>
+                      
+                      {/* Instagram Link */}
+                      {ini.instagram && (
+                        <a 
+                          href={ini.instagram} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider hover:underline mb-4 transition-colors"
+                          style={{ color: ini.color }}
+                        >
+                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                          </svg>
+                          Instagram
+                        </a>
+                      )}
                     </div>
 
                     {/* Footer Row: ODS + Location */}
@@ -289,7 +318,7 @@ export function EntrepreneurArea() {
               </>
             ) : (
               <>
-                Ver todas as 11 iniciativas
+                Ver todas as 9 iniciativas
                 <ChevronDown className="w-4 h-4" />
               </>
             )}
