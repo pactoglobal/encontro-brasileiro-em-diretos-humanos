@@ -47,14 +47,14 @@ type IconComponent = React.FC<{ className?: string; style?: React.CSSProperties 
 
 const MANHA_GRANDE_OTELO: AgendaItem[] = [
   {
-    time: "9h",
+    time: "09h00",
     title: "Atração Artística",
     description: "Banda dos Curumins",
     avatar: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
-    time: "9h15",
+    time: "09h15",
     title: "Abertura Institucional e Boas-vindas",
     type: "abertura",
     speakers: [
@@ -88,7 +88,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120" },
   },
   {
-    time: "12h30 – 14h",
+    time: "12h30 – 14h00",
     title: "Almoço",
     type: "intervalo",
   },
@@ -96,14 +96,14 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
 
 const MANHA_FOYER: AgendaItem[] = [
   {
-    time: "10h – 10h50",
+    time: "10h00 – 10h50",
     title: "Diversidade, Equidade e Inclusão (DEI)",
     description:
       "O futuro da agenda de DEI no Brasil: desaceleração ou transformação em um novo contexto geopolítico?",
     type: "roda",
   },
   {
-    time: "11h10 – 12h",
+    time: "11h10 – 12h00",
     title: "Justiça Climática para Povos Indígenas e Comunidades Tradicionais",
     description:
       "O que as experiências e perspectivas de povos indígenas e comunidades tradicionais nos ensinam sobre resiliência e ações de enfrentamento à crise climática de forma justa e equitativa?",
@@ -113,7 +113,7 @@ const MANHA_FOYER: AgendaItem[] = [
 
 const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
-    time: "14h",
+    time: "14h00",
     title: "Intervenção Artística",
     description: "Intervenção Artística Especial",
     avatar: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=120&h=120",
@@ -145,7 +145,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
   {
-    time: "17h",
+    time: "17h00",
     title: "Encerramento das palestras",
     type: "encerramento",
   },
@@ -175,7 +175,7 @@ const TARDE_OSCARITO: AgendaItem[] = [
     mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
   },
   {
-    time: "17h",
+    time: "17h00",
     title: "Encerramento das palestras",
     type: "encerramento",
   },
@@ -183,7 +183,7 @@ const TARDE_OSCARITO: AgendaItem[] = [
 
 const TARDE_FOYER: AgendaItem[] = [
   {
-    time: "13h – 13h50",
+    time: "13h00 – 13h50",
     title: "Para além do Discurso: Como evitar o Washing?",
     type: "roda",
   },
@@ -212,7 +212,7 @@ const ENCERRAMENTO: AgendaItem[] = [
     type: "filme",
   },
   {
-    time: "19h20 – 20h",
+    time: "19h20 – 20h00",
     title: "Bate Papo: Economia Circular, Direitos Humanos e Autonomia das Mulheres",
     description: "Construindo cadeias produtivas livres de violência e exclusão",
     type: "batepapo",
@@ -246,7 +246,7 @@ const TABS: Tab[] = [
     label: "Sala Grande Otelo",
     sala: "Plenária",
     period: "Manhã",
-    time: "9h – 12h30",
+    time: "09h00 – 12h30",
     accent: "#E8187A",
     textAccent: "#FF5DAB",
     items: MANHA_GRANDE_OTELO,
@@ -256,7 +256,7 @@ const TABS: Tab[] = [
     label: "Foyer Grande Otelo",
     sala: "Rodas de Conversa",
     period: "Manhã",
-    time: "10h – 12h",
+    time: "10h00 – 12h00",
     accent: "#7B2D1E",
     textAccent: "#FF8A71",
     items: MANHA_FOYER,
@@ -266,7 +266,7 @@ const TABS: Tab[] = [
     label: "Sala Grande Otelo",
     sala: "Painéis Simultâneos",
     period: "Tarde",
-    time: "14h – 17h",
+    time: "14h00 – 17h00",
     accent: "#4A8C3F",
     textAccent: "#84E079",
     items: TARDE_GRANDE_OTELO,
@@ -276,7 +276,7 @@ const TABS: Tab[] = [
     label: "Sala Oscarito",
     sala: "Painéis Simultâneos",
     period: "Tarde",
-    time: "14h15 – 17h",
+    time: "14h15 – 17h00",
     accent: "#0C2540",
     textAccent: "#38BDF8",
     items: TARDE_OSCARITO,
@@ -286,7 +286,7 @@ const TABS: Tab[] = [
     label: "Foyer Grande Otelo",
     sala: "Rodas de Conversa",
     period: "Tarde",
-    time: "13h – 16h20",
+    time: "13h00 – 16h20",
     accent: "#E05A3A",
     textAccent: "#FF9E85",
     items: TARDE_FOYER,
@@ -296,7 +296,7 @@ const TABS: Tab[] = [
     label: "Encerramento",
     sala: "Filme e Debate",
     period: "Encerramento",
-    time: "17h20 – 20h",
+    time: "17h20 – 20h00",
     accent: "#596168",
     textAccent: "#CBD5E1",
     items: ENCERRAMENTO,

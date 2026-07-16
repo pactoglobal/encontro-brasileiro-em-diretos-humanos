@@ -62,7 +62,7 @@ export function Venue() {
               <span />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-display font-black text-white mb-3">
+            <h2 className="text-3xl sm:text-4xl font-display font-black mb-3" style={{ color: "#ffffff" }}>
               Cinemateca Brasileira
             </h2>
             <p className="text-sm sm:text-base text-white/80 font-medium">
@@ -128,13 +128,13 @@ export function Venue() {
             <div className="flex items-center justify-between p-4.5 rounded-2xl border border-white/8 bg-white/[0.02] backdrop-blur-md">
               <div>
                 <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#E8187A]">Parceiro de Espaço</p>
-                <p className="text-xs font-bold text-white mt-1">Cinemateca Brasileira</p>
+                <p className="text-xs font-bold mt-1" style={{ color: "#ffffff" }}>Cinemateca Brasileira</p>
               </div>
-              <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center">
+              <div className="px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center">
                 <img
                   src="/identity/parceiro-cinemateca.png"
                   alt="Cinemateca Brasileira"
-                  className="h-9 w-auto object-contain brightness-0 invert opacity-90"
+                  className="h-16 w-auto object-contain brightness-0 invert opacity-95"
                 />
               </div>
             </div>
