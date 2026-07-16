@@ -142,7 +142,7 @@ export function Organizers() {
                     <img
                       src="/identity/parceiro-cinemateca.png"
                       alt="Cinemateca Brasileira"
-                      className="h-8 w-auto object-contain"
+                      className="h-11 w-auto object-contain"
                     />
                   </div>
                   <div className="mt-1 leading-tight">

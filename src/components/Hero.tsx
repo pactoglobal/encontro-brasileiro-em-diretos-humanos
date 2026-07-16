@@ -500,8 +500,8 @@ export function Hero() {
                   {/* Parceiro */}
                   <div className="flex flex-col gap-1">
                     <span className="text-[7.5px] font-black uppercase tracking-wider text-[#7B2D1E]">Parceiro</span>
-                    <div className="flex items-center h-8 mt-1">
-                      <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-6.5 w-auto object-contain" />
+                    <div className="flex items-center h-10 mt-1">
+                      <img src="/identity/parceiro-cinemateca.png" alt="Cinemateca" className="h-8.5 w-auto object-contain" />
                     </div>
                   </div>
 
