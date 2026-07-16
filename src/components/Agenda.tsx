@@ -440,7 +440,7 @@ function TimelineItem({
           </div>
 
           {/* Título */}
-          <h3 className="text-sm font-display font-black leading-snug text-white mb-2">
+          <h3 className="text-sm font-display font-black leading-snug mb-2" style={{ color: "#ffffff" }}>
             {item.title}
           </h3>
 
@@ -558,7 +558,7 @@ export function Agenda() {
             </p>
             <div className="flex items-end justify-between flex-wrap gap-6">
               <div>
-                <h2 className="text-4xl sm:text-5xl font-display font-black text-white leading-none mb-4">
+                <h2 className="text-4xl sm:text-5xl font-display font-black leading-none mb-4" style={{ color: "#ffffff" }}>
                   Agenda<br />
                   <span style={{ color: "#E8187A" }}>do Evento</span>
                 </h2>
