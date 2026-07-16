@@ -44,8 +44,7 @@ export function Organizers() {
                 border: "1px solid #D8D4C7",
               }}
             >
-              {/* Subtle background ribbon decoration */}
-              <div className="absolute inset-0 opacity-[0.03] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
+
 
               {/* Responsive Layout: grid on mobile, flex on desktop for organic flow */}
               <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-8 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[#D8D4C7]/60">
