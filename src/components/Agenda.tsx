@@ -323,195 +323,6 @@ const TYPE_META: Record<
   batepapo:     { label: "Bate Papo",       color: "#E8187A", bg: "rgba(232,24,122,0.10)", Icon: MessageCircle },
 };
 
-// ─── Card de Item da Agenda ───────────────────────────────────────────────────
-
-function AgendaCard({
-  item,
-  index,
-  accent,
-  featured,
-}: {
-  item: AgendaItem;
-  index: number;
-  accent: string;
-  featured?: boolean;
-}) {
-  const [open, setOpen] = useState(false);
-  const meta = TYPE_META[item.type];
-  const hasSpeakers = item.speakers && item.speakers.length > 0;
-  const isBreak = item.type === "intervalo";
-  const isArtistic = item.type === "artistica";
-
-  // Break / Artistic — linha horizontal discreta
-  if (isBreak || isArtistic) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.04 }}
-        className="flex items-center gap-4 py-3 px-5 rounded-2xl"
-        style={{ background: meta.bg }}
-      >
-        <meta.Icon className="w-4 h-4 shrink-0" style={{ color: meta.color }} />
-        <span className="text-xs font-black tabular-nums" style={{ color: meta.color }}>
-          {item.time}
-        </span>
-        <div className="flex-1 h-px opacity-30" style={{ background: meta.color }} />
-        <div className="text-right">
-          <span className="text-xs font-bold" style={{ color: meta.color }}>
-            {item.title}
-          </span>
-          {item.description && (
-            <p className="text-[10px] opacity-70 mt-0.5" style={{ color: meta.color }}>
-              {item.description}
-            </p>
-          )}
-        </div>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.06 }}
-      className={`rounded-[20px] overflow-hidden border transition-all duration-200 ${featured ? "md:col-span-2" : ""}`}
-      style={{
-        background: featured ? accent : "white",
-        borderColor: featured ? "transparent" : "#D8D4C7",
-        boxShadow: featured
-          ? `0 16px 48px ${accent}30`
-          : "0 2px 10px rgba(12,37,64,0.05)",
-      }}
-    >
-      {/* Header do card */}
-      <div className="p-5 pb-4">
-        {/* Badge + hora */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span
-            className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full"
-            style={
-              featured
-                ? { background: "rgba(255,255,255,0.18)", color: "white" }
-                : { background: meta.bg, color: meta.color }
-            }
-          >
-            <meta.Icon className="w-3 h-3" />
-            {meta.label}
-          </span>
-          <span
-            className="text-[10px] font-black tabular-nums shrink-0"
-            style={{ color: featured ? "rgba(255,255,255,0.7)" : meta.color }}
-          >
-            {item.time}
-          </span>
-        </div>
-
-        {/* Título */}
-        <h3
-          className={`font-display font-black leading-snug ${featured ? "text-lg text-white" : "text-sm"}`}
-          style={featured ? {} : { color: "#0C2540" }}
-        >
-          {item.title}
-        </h3>
-
-        {/* Descrição */}
-        {item.description && (
-          <p
-            className="text-xs leading-relaxed mt-2"
-            style={{ color: featured ? "rgba(255,255,255,0.75)" : "#596168" }}
-          >
-            {item.description}
-          </p>
-        )}
-
-        {/* Palestrantes — featured mostra sempre, outros accordion */}
-        {hasSpeakers && (featured ? true : open) && (
-          <motion.ul
-            initial={featured ? {} : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mt-4 space-y-2"
-          >
-            {item.speakers!.map((s, si) => (
-              <li key={si} className="flex items-start gap-2">
-                <Users
-                  className="w-3 h-3 mt-[3px] shrink-0"
-                  style={{ color: featured ? "rgba(255,255,255,0.5)" : meta.color }}
-                />
-                <div>
-                  <span
-                    className="text-xs font-bold leading-tight block"
-                    style={{ color: featured ? "white" : "#0C2540" }}
-                  >
-                    {s.name}
-                  </span>
-                  <span
-                    className="text-[10px] leading-tight"
-                    style={{ color: featured ? "rgba(255,255,255,0.6)" : "#596168" }}
-                  >
-                    {s.role}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </motion.ul>
-        )}
-
-        {/* Mediação */}
-        {item.mediator && (featured ? true : open) && (
-          <div
-            className="mt-3 flex items-start gap-2 pt-3"
-            style={{ borderTop: featured ? "1px solid rgba(255,255,255,0.15)" : "1px solid #E5E2DA" }}
-          >
-            <Mic2
-              className="w-3 h-3 mt-[3px] shrink-0"
-              style={{ color: featured ? "rgba(255,255,255,0.5)" : meta.color }}
-            />
-            <div>
-              <span
-                className="text-[9px] font-black uppercase tracking-widest block mb-0.5"
-                style={{ color: featured ? "rgba(255,255,255,0.5)" : "#596168" }}
-              >
-                Mediação
-              </span>
-              <span
-                className="text-xs font-bold"
-                style={{ color: featured ? "rgba(255,255,255,0.85)" : "#0C2540" }}
-              >
-                {item.mediator.name}
-              </span>
-              <span
-                className="text-[10px] block"
-                style={{ color: featured ? "rgba(255,255,255,0.6)" : "#596168" }}
-              >
-                {item.mediator.role}
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Botão expandir — só nos não-featured com palestrantes */}
-      {!featured && hasSpeakers && (
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="w-full flex items-center justify-between px-5 py-3 text-[9px] font-black uppercase tracking-widest cursor-pointer transition-colors"
-          style={{
-            background: open ? "rgba(12,37,64,0.03)" : "transparent",
-            color: meta.color,
-            borderTop: "1px solid #E5E2DA",
-          }}
-        >
-          <span>{open ? "Ocultar palestrantes" : `Ver ${item.speakers!.length} palestrantes`}</span>
-          {open ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-        </button>
-      )}
-    </motion.div>
-  );
-}
-
 // ─── Grupos de tabs por período ───────────────────────────────────────────────
 
 const PERIODS = [
@@ -519,6 +330,185 @@ const PERIODS = [
   { label: "Tarde", keys: ["tarde-grande", "tarde-oscarito", "tarde-foyer"] as TabKey[], Icon: Leaf },
   { label: "Encerramento", keys: ["encerramento"] as TabKey[], Icon: Film },
 ];
+
+// ─── Timeline Item ────────────────────────────────────────────────────────────
+
+function TimelineItem({
+  item,
+  index,
+  accent,
+  isLast,
+}: {
+  item: AgendaItem;
+  index: number;
+  accent: string;
+  isLast: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const meta = TYPE_META[item.type];
+  const hasSpeakers = item.speakers && item.speakers.length > 0;
+  const isBreak = item.type === "intervalo";
+  const isArtistic = item.type === "artistica";
+  const isClosing = item.type === "encerramento";
+
+  // ── Evento especial (intervalo / artística / encerramento) — linha discreta
+  if (isBreak || isArtistic || isClosing) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, x: -8 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.05 }}
+        className="flex items-center gap-4 py-3"
+      >
+        {/* Dot na linha do tempo */}
+        <div className="relative flex-shrink-0 w-5 flex flex-col items-center">
+          <div
+            className="w-2 h-2 rounded-full border border-white/20"
+            style={{ background: "rgba(255,255,255,0.12)" }}
+          />
+          {!isLast && (
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-px h-10 bg-white/8" />
+          )}
+        </div>
+        <div className="flex items-center gap-3 flex-1 py-2 px-4 rounded-xl" style={{ background: "rgba(255,255,255,0.04)" }}>
+          <meta.Icon className="w-3.5 h-3.5 shrink-0" style={{ color: "rgba(255,255,255,0.3)" }} />
+          <span className="text-[10px] font-black tabular-nums text-white/30">{item.time}</span>
+          <span className="text-xs text-white/40 font-medium">{item.title}</span>
+          {item.description && (
+            <span className="text-[10px] text-white/25 italic">{item.description}</span>
+          )}
+        </div>
+      </motion.div>
+    );
+  }
+
+  // ── Card principal ──
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 70, damping: 16, delay: index * 0.07 }}
+      className="flex gap-4 group"
+    >
+      {/* Coluna da timeline */}
+      <div className="relative flex-shrink-0 w-5 flex flex-col items-center pt-5">
+        <motion.div
+          className="w-2.5 h-2.5 rounded-full shrink-0 z-10"
+          style={{
+            background: accent,
+            outline: `2px solid ${accent}`,
+            outlineOffset: "2px",
+          }}
+          whileHover={{ scale: 1.4 }}
+        />
+        {!isLast && (
+          <div
+            className="absolute top-8 left-1/2 -translate-x-1/2 w-px flex-1 bottom-0"
+            style={{ background: `linear-gradient(to bottom, ${accent}40, transparent)` }}
+          />
+        )}
+      </div>
+
+      {/* Card */}
+      <div
+        className="flex-1 mb-6 rounded-2xl overflow-hidden border border-white/8 transition-all duration-300 group-hover:border-white/15"
+        style={{
+          background: "rgba(255,255,255,0.04)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
+        }}
+      >
+        {/* Header do card */}
+        <div className="p-5 pb-4">
+          {/* Badge + hora */}
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <span
+              className="inline-flex items-center gap-1.5 text-[8px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border"
+              style={{
+                background: `${accent}18`,
+                color: accent,
+                borderColor: `${accent}30`,
+              }}
+            >
+              <meta.Icon className="w-2.5 h-2.5" />
+              {meta.label}
+            </span>
+            <span className="text-[11px] font-black tabular-nums" style={{ color: accent }}>
+              {item.time}
+            </span>
+          </div>
+
+          {/* Título */}
+          <h3 className="text-sm font-display font-black leading-snug text-white mb-2">
+            {item.title}
+          </h3>
+
+          {/* Descrição */}
+          {item.description && (
+            <p className="text-xs leading-relaxed text-white/50">{item.description}</p>
+          )}
+
+          {/* Palestrantes — expandível */}
+          <AnimatePresence>
+            {open && hasSpeakers && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <ul className="mt-4 space-y-3 pt-3 border-t border-white/8">
+                  {item.speakers!.map((s, si) => (
+                    <li key={si} className="flex items-start gap-2.5">
+                      <Users className="w-3 h-3 mt-[2px] shrink-0 text-white/30" />
+                      <div>
+                        <span className="text-xs font-bold text-white/85 block leading-tight">{s.name}</span>
+                        <span className="text-[10px] text-white/40 leading-tight">{s.role}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Mediação */}
+                {item.mediator && (
+                  <div className="mt-3 flex items-start gap-2.5 pt-3 border-t border-white/8">
+                    <Mic2 className="w-3 h-3 mt-[2px] shrink-0 text-white/30" />
+                    <div>
+                      <span className="text-[8px] font-black uppercase tracking-widest text-white/30 block mb-0.5">Mediação</span>
+                      <span className="text-xs font-bold text-white/75">{item.mediator.name}</span>
+                      <span className="text-[10px] text-white/40 block">{item.mediator.role}</span>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Footer — expand button */}
+        {hasSpeakers && (
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-5 py-2.5 cursor-pointer transition-all duration-200"
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              background: open ? "rgba(255,255,255,0.03)" : "transparent",
+            }}
+          >
+            <span className="text-[8px] font-black uppercase tracking-[0.18em] text-white/30 group-hover:text-white/50 transition-colors">
+              {open ? "Ocultar" : `${item.speakers!.length} palestrantes`}
+            </span>
+            {open
+              ? <ChevronUp className="w-3 h-3 text-white/30" />
+              : <ChevronDown className="w-3 h-3 text-white/30" />
+            }
+          </button>
+        )}
+      </div>
+    </motion.div>
+  );
+}
 
 // ─── Componente principal ─────────────────────────────────────────────────────
 
@@ -529,170 +519,179 @@ export function Agenda() {
   const activeTab = TABS.find((t) => t.key === active)!;
 
   return (
-    <section id="programacao" className="dhe-section-light relative overflow-hidden">
-      {/* Orbs decorativos */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-dhe-magenta/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-dhe-green/5 rounded-full blur-3xl pointer-events-none" />
+    <section
+      id="programacao"
+      className="relative overflow-hidden py-20 lg:py-28"
+      style={{ background: "#071828" }}
+    >
+      {/* Gradientes de fundo */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
+          style={{ background: "radial-gradient(circle, #E8187A 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-10"
+          style={{ background: "radial-gradient(circle, #4A8C3F 0%, transparent 70%)" }}
+        />
+        {/* Grade sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
 
-      <div className="dhe-container">
+      <div className="dhe-container relative z-10">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ type: "spring", stiffness: 60, damping: 15 }}
         >
-          {/* Header da seção */}
-          <p className="dhe-section-label">Programação</p>
-          <div className="dhe-stripe-divider">
-            <span /><span /><span /><span />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-black text-dhe-navy mb-2">
-            Agenda do Evento
-          </h2>
-          <div className="flex flex-wrap items-center gap-4 mb-10">
-            <div className="flex items-center gap-1.5 text-sm text-dhe-text-muted">
-              <Sun className="w-4 h-4 text-dhe-magenta" />
-              <span>04 de agosto de 2026 · 9h às 20h</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-sm text-dhe-text-muted">
-              <MapPin className="w-4 h-4 text-dhe-magenta" />
-              <span>Cinemateca Brasileira, São Paulo</span>
-            </div>
-          </div>
-
-          {/* Ticker */}
-          <div className="w-full overflow-hidden mb-10 -mx-5 sm:mx-0 rounded-2xl">
-            <div
-              className="dhe-ticker-container rounded-2xl"
-              style={{
-                borderTop: "1px solid rgba(255,255,255,0.1)",
-                borderBottom: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <div className="dhe-ticker-content text-white font-display font-black text-[10px] sm:text-xs uppercase tracking-[0.2em]">
-                {[
-                  "DIREITOS HUMANOS E EMPRESAS",
-                  "PLURALIDADE QUE CONSTRÓI",
-                  "04 DE AGOSTO DE 2026",
-                  "CINEMATECA BRASILEIRA · SÃO PAULO",
-                  "PAINEL PLENÁRIO",
-                  "RODAS DE CONVERSA",
-                  "EXIBIÇÃO DE FILME",
-                ]
-                  .flatMap((t, i) => [
-                    <span key={`t${i}`}>{t}</span>,
-                    <span key={`x${i}`} className="text-dhe-magenta">×</span>,
-                  ])}
+          {/* ── Header ── */}
+          <div className="mb-12">
+            <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">
+              Programação
+            </p>
+            <div className="flex items-end justify-between flex-wrap gap-6">
+              <div>
+                <h2 className="text-4xl sm:text-5xl font-display font-black text-white leading-none mb-4">
+                  Agenda<br />
+                  <span style={{ color: "#E8187A" }}>do Evento</span>
+                </h2>
+                <div className="flex flex-wrap items-center gap-5">
+                  <div className="flex items-center gap-2">
+                    <Sun className="w-4 h-4 text-white/30" />
+                    <span className="text-sm text-white/50">04 de agosto de 2026 · 9h às 20h</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-white/30" />
+                    <span className="text-sm text-white/50">Cinemateca Brasileira, São Paulo</span>
+                  </div>
+                </div>
+              </div>
+              {/* Pill de data em destaque */}
+              <div
+                className="hidden lg:flex flex-col items-center justify-center px-8 py-4 rounded-2xl border border-white/10"
+                style={{ background: "rgba(255,255,255,0.04)" }}
+              >
+                <span className="text-3xl font-display font-black text-white leading-none">04</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-white/40">AGO 2026</span>
               </div>
             </div>
           </div>
 
-          {/* ── Navegação por Período e Sala ── */}
-          <div className="space-y-3 mb-8">
-            {PERIODS.map(({ label, keys, Icon: PIcon }) => {
-              const periodTabs = TABS.filter((t) => keys.includes(t.key));
-              return (
-                <div key={label}>
-                  {/* Label do período */}
-                  <div className="flex items-center gap-2 mb-2">
-                    <PIcon className="w-3.5 h-3.5 text-dhe-text-muted" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-text-muted">
-                      {label}
-                    </span>
-                    <div className="flex-1 h-px bg-dhe-text-muted/10" />
-                  </div>
-                  {/* Pills da sala */}
-                  <div className="flex flex-wrap gap-2 pl-5">
-                    {periodTabs.map((tab) => {
-                      const isActive = active === tab.key;
-                      return (
-                        <button
-                          key={tab.key}
-                          type="button"
-                          onClick={() => setActive(tab.key)}
-                          className="flex flex-col gap-0.5 rounded-2xl px-4 py-2.5 text-left transition-all duration-200 cursor-pointer border"
-                          style={{
-                            background: isActive ? tab.accent : "white",
-                            borderColor: isActive ? tab.accent : "#D8D4C7",
-                            boxShadow: isActive
-                              ? `0 4px 18px ${tab.accent}28`
-                              : "0 1px 4px rgba(12,37,64,0.05)",
-                          }}
-                        >
-                          <div className="flex items-center gap-1.5">
-                            <MapPin
-                              className="w-3 h-3"
-                              style={{ color: isActive ? "rgba(255,255,255,0.7)" : tab.accent }}
-                            />
-                            <span
-                              className="text-[10px] font-bold whitespace-nowrap"
-                              style={{ color: isActive ? "white" : "#1C2329" }}
-                            >
-                              {tab.label}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2 pl-4">
-                            <span
-                              className="text-[8px] font-medium whitespace-nowrap"
-                              style={{ color: isActive ? "rgba(255,255,255,0.6)" : "#596168" }}
-                            >
-                              {tab.sala}
-                            </span>
-                            <span
-                              className="text-[8px] font-medium whitespace-nowrap"
-                              style={{ color: isActive ? "rgba(255,255,255,0.5)" : "#9CA3AF" }}
-                            >
-                              {tab.time}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {/* ── Layout em duas colunas: nav esquerda + timeline direita ── */}
+          <div className="flex flex-col lg:flex-row gap-10">
 
-          {/* ── Grid da Agenda ── */}
-          <div className="min-h-[380px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.22 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
-              >
-                {/* Indicador de sala ativa */}
-                <div className="md:col-span-2 flex items-center gap-3 mb-1">
-                  <div
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ background: activeTab.accent }}
-                  />
-                  <span className="text-xs font-black uppercase tracking-widest" style={{ color: activeTab.accent }}>
-                    {activeTab.period} · {activeTab.label}
-                  </span>
-                  <span className="text-[10px] text-dhe-text-muted">— {activeTab.time}</span>
-                </div>
-
-                {activeTab.items.map((item, i) => {
-                  // Abertura e primeiro painel são featured (full width)
-                  const featured =
-                    i === 0 && (item.type === "abertura" || item.type === "filme");
+            {/* ── Sidebar de Navegação ── */}
+            <aside className="lg:w-56 xl:w-64 flex-shrink-0">
+              <div className="lg:sticky lg:top-24 space-y-6">
+                {PERIODS.map(({ label, keys, Icon: PIcon }) => {
+                  const periodTabs = TABS.filter((t) => keys.includes(t.key));
+                  const isPeriodActive = keys.includes(active);
                   return (
-                    <AgendaCard
-                      key={i}
-                      item={item}
-                      index={i}
-                      accent={activeTab.accent}
-                      featured={featured}
-                    />
+                    <div key={label}>
+                      {/* Cabeçalho do período */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <PIcon
+                          className="w-3.5 h-3.5"
+                          style={{ color: isPeriodActive ? "#E8187A" : "rgba(255,255,255,0.2)" }}
+                        />
+                        <span
+                          className="text-[9px] font-black uppercase tracking-[0.25em]"
+                          style={{ color: isPeriodActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)" }}
+                        >
+                          {label}
+                        </span>
+                      </div>
+
+                      {/* Botões de sala */}
+                      <div className="space-y-1.5 pl-5">
+                        {periodTabs.map((tab) => {
+                          const isActive = active === tab.key;
+                          return (
+                            <button
+                              key={tab.key}
+                              type="button"
+                              onClick={() => setActive(tab.key)}
+                              className="w-full text-left px-3.5 py-3 rounded-xl transition-all duration-200 cursor-pointer border"
+                              style={{
+                                background: isActive ? `${tab.accent}18` : "transparent",
+                                borderColor: isActive ? `${tab.accent}40` : "transparent",
+                              }}
+                            >
+                              <div
+                                className="text-xs font-bold leading-tight block mb-0.5"
+                                style={{ color: isActive ? "white" : "rgba(255,255,255,0.4)" }}
+                              >
+                                {tab.label}
+                              </div>
+                              <div className="flex items-center gap-1.5">
+                                <span
+                                  className="text-[9px] font-medium"
+                                  style={{ color: isActive ? tab.accent : "rgba(255,255,255,0.2)" }}
+                                >
+                                  {tab.sala}
+                                </span>
+                                <span className="text-[8px] text-white/15">·</span>
+                                <span className="text-[9px] text-white/20">{tab.time}</span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   );
                 })}
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </aside>
+
+            {/* ── Timeline de Itens ── */}
+            <div className="flex-1 min-w-0">
+              {/* Cabeçalho da aba ativa */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {/* Indicador de contexto */}
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-6 h-px" style={{ background: activeTab.accent }} />
+                    <span
+                      className="text-[9px] font-black uppercase tracking-[0.25em]"
+                      style={{ color: activeTab.accent }}
+                    >
+                      {activeTab.period}
+                    </span>
+                    <span className="text-[9px] text-white/20 font-black uppercase tracking-widest">
+                      {activeTab.label}
+                    </span>
+                    <span className="text-[9px] text-white/15">·</span>
+                    <span className="text-[9px] text-white/20">{activeTab.time}</span>
+                  </div>
+
+                  {/* Lista de itens em timeline */}
+                  <div>
+                    {activeTab.items.map((item, i) => (
+                      <TimelineItem
+                        key={i}
+                        item={item}
+                        index={i}
+                        accent={activeTab.accent}
+                        isLast={i === activeTab.items.length - 1}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </div>
