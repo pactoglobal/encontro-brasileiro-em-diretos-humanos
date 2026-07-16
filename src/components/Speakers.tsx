@@ -180,9 +180,7 @@ export function Speakers() {
           </motion.div>
         )}
 
-        <p className="mt-8 text-xs text-center text-dhe-text-muted">
-          * Lista parcial. TBC = a confirmar.
-        </p>
+
       </div>
     </section>
   );

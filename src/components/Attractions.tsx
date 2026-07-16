@@ -102,13 +102,22 @@ const ATTRACTIONS: Attraction[] = [
 function AttractionCard({ attraction, index }: { attraction: Attraction; index: number }) {
   const isFeatured = index === 0;
 
+  // Helper to ensure colors have high contrast on the dark background
+  const getBrightThemeColor = (color: string) => {
+    if (color === "#0C2540") return "#38BDF8"; // Navy to light blue
+    if (color === "#7B2D1E") return "#FF8A71"; // Maroon to light maroon/coral
+    return color;
+  };
+
+  const brightColor = getBrightThemeColor(attraction.themeColor);
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.06 }}
       whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-      className={`relative overflow-hidden rounded-[24px] flex-shrink-0 select-none cursor-default group dhe-glow-hover
+      className={`relative overflow-hidden rounded-[24px] flex-shrink-0 select-none cursor-default group dhe-glow-hover shadow-[0_16px_36px_rgba(0,0,0,0.35)] border border-white/5
         ${isFeatured ? "w-[340px] sm:w-[400px]" : "w-[280px] sm:w-[320px]"}
       `}
       style={{ minHeight: isFeatured ? "480px" : "380px" }}
@@ -120,16 +129,19 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
       />
       {/* Overlay gradiente de baixo para cima */}
       <div
+        className="absolute inset-0 bg-[#0C2540]/60 transition-opacity duration-300 group-hover:bg-[#0C2540]/50"
+      />
+      <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, rgba(12,37,64,0.92) 0%, rgba(12,37,64,0.55) 50%, rgba(12,37,64,0.2) 100%)`,
+          background: `linear-gradient(to top, rgba(12,37,64,0.98) 0%, rgba(12,37,64,0.7) 50%, rgba(12,37,64,0.1) 100%)`,
         }}
       />
       {/* Tint colorido no topo */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to bottom, ${attraction.themeColor}40 0%, transparent 40%)`,
+          background: `linear-gradient(to bottom, ${brightColor}30 0%, transparent 40%)`,
         }}
       />
 
@@ -139,7 +151,7 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
         <div className="flex items-start justify-between">
           <span
             className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full dhe-glass"
-            style={{ color: attraction.themeColor, backgroundColor: `${attraction.themeColor}20`, border: `1px solid ${attraction.themeColor}40` }}
+            style={{ color: brightColor, backgroundColor: `${brightColor}15`, border: `1px solid ${brightColor}35` }}
           >
             {attraction.theme}
           </span>
@@ -155,15 +167,15 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
           {/* Avatar tipográfico */}
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-black text-lg text-white mb-4 dhe-glass"
-            style={{ backgroundColor: `${attraction.themeColor}80`, border: `1px solid ${attraction.themeColor}60` }}
+            style={{ backgroundColor: `${brightColor}70`, border: `1px solid ${brightColor}50` }}
           >
             {attraction.initials}
           </div>
 
-          <h3 className={`font-display font-black text-white leading-tight mb-1 ${isFeatured ? "text-2xl" : "text-xl"}`}>
+          <h3 className={`font-display font-black leading-tight mb-1 ${isFeatured ? "text-2xl" : "text-xl"}`} style={{ color: "#ffffff" }}>
             {attraction.name}
           </h3>
-          <p className="text-sm font-bold mb-1" style={{ color: attraction.themeColor }}>
+          <p className="text-sm font-bold mb-1" style={{ color: brightColor }}>
             {attraction.role}
           </p>
           <p className="text-xs text-white/95 leading-snug">{attraction.org}</p>
@@ -173,7 +185,7 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
             <span className="text-[9px] font-black uppercase tracking-widest text-white/90">
               04 AGO 2026
             </span>
-            <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: attraction.themeColor }} />
+            <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: brightColor }} />
           </div>
         </div>
       </div>
@@ -295,17 +307,7 @@ export function Attractions() {
         )}
       </AnimatePresence>
 
-      {/* Ticker de rodapé */}
-      <div className="dhe-container mt-10">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-xs text-center text-dhe-text-muted"
-        >
-          * Lista parcial. Confirmações em andamento. TBC = a confirmar.
-        </motion.p>
-      </div>
+
     </section>
   );
 }
