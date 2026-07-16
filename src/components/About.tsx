@@ -60,10 +60,11 @@ export function About() {
     },
   };
 
-  // Sem hover scale - apenas transições suaves
+  // Usar class dhe-glow-hover via CSS para consistência de design system
   const hoverStyle = {
-    boxShadow: "0 8px 32px rgba(12,37,64,0.06)",
-    transition: { duration: 0.2 },
+    y: -4,
+    boxShadow: "0 16px 40px rgba(12,37,64,0.08)",
+    transition: { duration: 0.3 },
   };
 
   return (
@@ -275,7 +276,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B]"
+              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B] transition-transform duration-300"
               style={{ minHeight: "240px" }}
             >
               <div>
@@ -295,7 +296,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032]"
+              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032] transition-transform duration-300"
               style={{ minHeight: "240px" }}
             >
               <div>
@@ -315,7 +316,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525]"
+              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525] transition-transform duration-300"
               style={{ minHeight: "240px" }}
             >
               <div>
@@ -335,7 +336,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="md:col-span-2 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E]"
+              className="md:col-span-2 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E] transition-transform duration-300"
               style={{ minHeight: "220px" }}
             >
               <div>
@@ -355,7 +356,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116]"
+              className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116] transition-transform duration-300"
               style={{ minHeight: "220px" }}
             >
               <div>

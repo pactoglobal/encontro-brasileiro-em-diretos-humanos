@@ -59,7 +59,7 @@ export function Organizers() {
                     <img
                       src="/identity/adhe-logo.png"
                       alt="ADHE"
-                      className="h-10 w-auto object-contain"
+                      className="h-10 w-auto object-contain dhe-sponsor-logo"
                     />
                   </div>
                   <p className="text-xs text-dhe-text-muted/85 leading-relaxed mt-2">
@@ -76,26 +76,26 @@ export function Organizers() {
                     <img
                       src="/identity/logo-pacto-global.png"
                       alt="Pacto Global"
-                      className="h-7 w-auto object-contain"
+                      className="h-7 w-auto object-contain dhe-sponsor-logo"
                     />
                     <div className="flex items-center gap-1.5 h-7 w-auto" title="Global Gateway">
-                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain" />
-                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain" />
+                      <img src="/identity/global-gateway-1.png" alt="Global Gateway" className="h-full w-auto object-contain dhe-sponsor-logo" />
+                      <img src="/identity/global-gateway-2.png" alt="União Europeia" className="h-full w-auto object-contain dhe-sponsor-logo" />
                     </div>
                     <img
                       src="/identity/direitos-humanos-onu.png"
                       alt="Direitos Humanos ONU"
-                      className="h-8 w-auto object-contain"
+                      className="h-8 w-auto object-contain dhe-sponsor-logo"
                     />
                     <img
                       src="/identity/oit-logo-new.png"
                       alt="OIT"
-                      className="h-8 w-auto object-contain"
+                      className="h-8 w-auto object-contain dhe-sponsor-logo"
                     />
                     <img
                       src="/identity/ocde-logo-new.png"
                       alt="OCDE"
-                      className="h-7 w-auto object-contain"
+                      className="h-7 w-auto object-contain dhe-sponsor-logo"
                     />
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export function Organizers() {
                     <img
                       src="/identity/petrobras-logo-new.png"
                       alt="Petrobras"
-                      className="h-8 w-auto object-contain"
+                      className="h-8 w-auto object-contain dhe-sponsor-logo"
                     />
                   </div>
                 </div>
@@ -123,12 +123,12 @@ export function Organizers() {
                     <img
                       src="/identity/rede-mulher.png"
                       alt="Rede Mulher Empreendedora"
-                      className="h-7 w-auto object-contain"
+                      className="h-7 w-auto object-contain dhe-sponsor-logo"
                     />
                     <img
                       src="/identity/refugiados.png"
                       alt="Fórum Empresas com Refugiados"
-                      className="h-7 w-auto object-contain"
+                      className="h-7 w-auto object-contain dhe-sponsor-logo"
                     />
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export function Organizers() {
                     <img
                       src="/identity/parceiro-cinemateca.png"
                       alt="Cinemateca Brasileira"
-                      className="h-11 w-auto object-contain"
+                      className="h-11 w-auto object-contain dhe-sponsor-logo"
                     />
                   </div>
                   <div className="mt-1 leading-tight">

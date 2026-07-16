@@ -278,3 +278,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dhe-scroll-snap::-webkit-scrollbar { display: none; }
 .dhe-scroll-snap > * { scroll-snap-align: start; }
+
+/* ============================================================
+   PADRÃO OURO - UTILITIES
+   ============================================================ */
+
+/* Glassmorphism avançado */
+.dhe-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dhe-glass-dark {
+  background: rgba(12, 37, 64, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Hover com brilho sutil */
+.dhe-glow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dhe-glow-hover:hover {
+  box-shadow: 0 0 20px rgba(232, 24, 122, 0.15), 0 0 40px rgba(232, 24, 122, 0.05);
+  border-color: rgba(232, 24, 122, 0.3);
+}
+
+/* Animação suave para sponsor grayscale -> color */
+.dhe-sponsor-logo {
+  filter: grayscale(100%) opacity(0.6);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+.dhe-sponsor-logo:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.05);
+}

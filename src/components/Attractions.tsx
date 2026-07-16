@@ -108,7 +108,7 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: "spring", stiffness: 80, damping: 16, delay: index * 0.06 }}
       whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-      className={`relative overflow-hidden rounded-[24px] flex-shrink-0 select-none cursor-default group
+      className={`relative overflow-hidden rounded-[24px] flex-shrink-0 select-none cursor-default group dhe-glow-hover
         ${isFeatured ? "w-[340px] sm:w-[400px]" : "w-[280px] sm:w-[320px]"}
       `}
       style={{ minHeight: isFeatured ? "480px" : "380px" }}
@@ -138,8 +138,8 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
         {/* Topo */}
         <div className="flex items-start justify-between">
           <span
-            className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full"
-            style={{ background: attraction.themeBg, color: attraction.themeColor, backdropFilter: "blur(8px)", backgroundColor: `${attraction.themeColor}20`, border: `1px solid ${attraction.themeColor}30` }}
+            className="text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full dhe-glass"
+            style={{ color: attraction.themeColor, backgroundColor: `${attraction.themeColor}20`, border: `1px solid ${attraction.themeColor}40` }}
           >
             {attraction.theme}
           </span>
@@ -154,8 +154,8 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
         <div>
           {/* Avatar tipográfico */}
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-black text-lg text-white mb-4"
-            style={{ background: `${attraction.themeColor}80`, backdropFilter: "blur(8px)", border: `1px solid ${attraction.themeColor}60` }}
+            className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-black text-lg text-white mb-4 dhe-glass"
+            style={{ backgroundColor: `${attraction.themeColor}80`, border: `1px solid ${attraction.themeColor}60` }}
           >
             {attraction.initials}
           </div>

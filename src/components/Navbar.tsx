@@ -86,14 +86,14 @@ export function Navbar() {
               maxWidth: scrolled ? "1040px" : "1180px",
               padding: scrolled ? "12px 24px" : "18px 36px",
               borderRadius: scrolled ? "24px" : "9999px",
-              backgroundColor: scrolled ? "rgba(241, 239, 234, 0.94)" : "rgba(255, 255, 255, 0.08)",
-              borderColor: scrolled ? "rgba(216, 212, 199, 0.8)" : "rgba(255, 255, 255, 0.15)",
-              boxShadow: scrolled ? "0 10px 40px rgba(12, 37, 64, 0.06)" : "0 8px 32px rgba(0, 0, 0, 0.12)",
+              backgroundColor: scrolled ? "rgba(241, 239, 234, 0.94)" : "rgba(255, 255, 255, 0.05)",
+              borderColor: scrolled ? "rgba(216, 212, 199, 0.8)" : "rgba(255, 255, 255, 0.1)",
+              boxShadow: scrolled ? "0 10px 40px rgba(12, 37, 64, 0.06)" : "0 8px 32px rgba(0, 0, 0, 0.08)",
             }}
             transition={{ type: "spring", stiffness: 180, damping: 24 }}
             style={{
-              backdropFilter: "blur(20px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+              backdropFilter: "blur(24px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(24px) saturate(1.4)",
               borderWidth: "1px",
               borderStyle: "solid",
             }}
@@ -223,7 +223,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 lg:hidden"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-[#0C2540]/96 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-[#0C2540]/80 backdrop-blur-2xl" />
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">

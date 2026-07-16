@@ -23,11 +23,11 @@ const SLIDES = [
 
 const TARGET_DATE = new Date("2026-08-04T09:00:00-03:00");
 
-// Ken Burns: cada slide tem sua própria animação de câmera
+// Ken Burns: animação mais cinematográfica e ampla
 const SLIDE_ANIMATIONS = [
-  { initial: { scale: 1.12, x: "2%" },  animate: { scale: 1.0, x: "0%" } },
-  { initial: { scale: 1.08, x: "-2%" }, animate: { scale: 1.0, x: "0%" } },
-  { initial: { scale: 1.10, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
+  { initial: { scale: 1.15, x: "2%" },  animate: { scale: 1.0, x: "0%" } },
+  { initial: { scale: 1.12, x: "-2%" }, animate: { scale: 1.0, x: "0%" } },
+  { initial: { scale: 1.15, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
 ];
 
 
@@ -254,14 +254,14 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => scrollTo("programacao")}
-                className="dhe-btn-primary cursor-pointer"
+                className="dhe-btn-primary dhe-glow-hover cursor-pointer"
               >
                 Ver Programação
               </button>
               <button
                 type="button"
                 onClick={() => scrollTo("contato")}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-sm font-bold uppercase tracking-[0.08em] transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-sm font-bold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-white/20 hover:border-white/50 cursor-pointer"
               >
                 Tenho interesse
               </button>
@@ -272,10 +272,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-6 backdrop-blur-md mt-6 shadow-lg border border-white/10"
-              style={{
-                background: "rgba(255, 255, 255, 0.06)",
-              }}
+              className="w-full rounded-2xl p-6 shadow-lg dhe-glass"
             >
               <div className="grid grid-cols-3 gap-3 sm:gap-6 text-center sm:text-left divide-x divide-white/10">
                 {[
@@ -392,12 +389,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-5"
-              style={{
-                background: "rgba(255,255,255,0.08)",
-                backdropFilter: "blur(20px)",
-                border: "1px solid rgba(255,255,255,0.12)",
-              }}
+              className="w-full rounded-2xl p-5 dhe-glass"
             >
               <AnimatePresence mode="wait">
                 <motion.div

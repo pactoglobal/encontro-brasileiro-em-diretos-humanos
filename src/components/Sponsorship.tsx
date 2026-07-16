@@ -65,7 +65,7 @@ export function Sponsorship() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
-              className="bg-white/5 border border-white/10 rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.15)] backdrop-blur-md relative overflow-hidden flex flex-col justify-between"
+              className="rounded-3xl p-8 shadow-[0_12px_40px_rgba(0,0,0,0.15)] relative overflow-hidden flex flex-col justify-between dhe-glass dhe-glow-hover"
               style={{ minHeight: "340px" }}
             >
               <div>
@@ -97,7 +97,7 @@ export function Sponsorship() {
               </div>
             </motion.div>
 
-            <div className="bg-white/3 border border-white/5 rounded-2xl p-5 flex items-start gap-4">
+            <div className="rounded-2xl p-5 flex items-start gap-4 dhe-glass">
               <Info size={16} className="text-[#E8187A] shrink-0 mt-0.5" />
               <p className="text-xs leading-relaxed text-white/90">
                 Cada cota de patrocínio oferece contrapartidas exclusivas em exposição de marca na Cinemateca Brasileira, relacionamento institucional de alto nível e conteúdos conjuntos.

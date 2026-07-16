@@ -13,7 +13,6 @@ import {
   Globe,
   Clapperboard,
   ChevronDown,
-  ChevronUp,
   MapPin,
 } from "lucide-react";
 
@@ -37,6 +36,7 @@ type AgendaItem = {
   description?: string;
   speakers?: Speaker[];
   mediator?: Speaker;
+  avatar?: string;
   type: ItemType;
 };
 
@@ -50,6 +50,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     time: "9h",
     title: "Atração Artística",
     description: "Banda dos Curumins",
+    avatar: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -115,6 +116,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     time: "14h",
     title: "Intervenção Artística",
     description: "Intervenção Artística Especial",
+    avatar: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&q=80&w=120&h=120",
     type: "artistica",
   },
   {
@@ -331,7 +333,8 @@ function SpeakerAvatar({ name, avatar, accent }: { name: string; avatar?: string
       <img
         src={avatar}
         alt={name}
-        className="w-7 h-7 rounded-full object-cover shrink-0 mt-0.5 border border-white/10"
+        className="w-11 h-11 rounded-full object-cover shrink-0 border-2"
+        style={{ borderColor: "rgba(255,255,255,0.12)" }}
       />
     );
   }
@@ -343,8 +346,11 @@ function SpeakerAvatar({ name, avatar, accent }: { name: string; avatar?: string
     .toUpperCase();
   return (
     <div
-      className="w-7 h-7 rounded-full flex items-center justify-center font-display font-black text-[9px] text-white shrink-0 mt-0.5"
-      style={{ background: `${accent}bb` }}
+      className="w-11 h-11 rounded-full flex items-center justify-center font-display font-black text-xs text-white shrink-0 border-2"
+      style={{
+        background: `linear-gradient(135deg, ${accent}dd, ${accent}77)`,
+        borderColor: "rgba(255,255,255,0.12)",
+      }}
     >
       {initials}
     </div>
@@ -368,11 +374,10 @@ function TimelineItem({
   const meta = TYPE_META[item.type];
   const hasSpeakers = item.speakers && item.speakers.length > 0;
   const isBreak = item.type === "intervalo";
-  const isArtistic = item.type === "artistica";
   const isClosing = item.type === "encerramento";
 
-  // ── Evento especial (intervalo / artística / encerramento) — linha discreta
-  if (isBreak || isArtistic || isClosing) {
+  // ── Evento especial (intervalo / encerramento) — linha discreta
+  if (isBreak || isClosing) {
     return (
       <motion.div
         initial={{ opacity: 0, x: -8 }}
@@ -465,8 +470,23 @@ function TimelineItem({
           </h3>
 
           {/* Descrição */}
-          {item.description && (
+          {item.description && item.type !== "artistica" && (
             <p className="text-xs leading-relaxed text-white/85">{item.description}</p>
+          )}
+
+          {/* Foto/Perfil da atração artística diretamente no corpo do card */}
+          {item.type === "artistica" && item.avatar && (
+            <div className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] mt-3.5 max-w-xs hover:bg-white/[0.04] transition-all duration-200">
+              <SpeakerAvatar name={item.description || item.title} avatar={item.avatar} accent={accent} />
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-white block leading-snug truncate">
+                  {item.description || "Atração Convidada"}
+                </span>
+                <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5">
+                  Apresentação Cultural
+                </span>
+              </div>
+            </div>
           )}
 
           {/* Palestrantes — expandível */}
@@ -476,30 +496,53 @@ function TimelineItem({
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <ul className="mt-4 space-y-3 pt-3 border-t border-white/8">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.05 } }
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/8"
+                >
                   {item.speakers!.map((s, si) => (
-                    <li key={si} className="flex items-start gap-2.5">
+                    <motion.div
+                      key={si}
+                      variants={{
+                        hidden: { opacity: 0, y: 8 },
+                        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+                      }}
+                      className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.04] transition-all duration-200"
+                    >
                       <SpeakerAvatar name={s.name} avatar={s.avatar} accent={accent} />
-                      <div>
-                        <span className="text-xs font-bold text-white block leading-tight">{s.name}</span>
-                        <span className="text-[10.5px] text-white/75 font-medium leading-tight block mt-0.5">{s.role}</span>
+                      <div className="min-w-0">
+                        <span className="text-xs font-bold text-white block leading-snug truncate">{s.name}</span>
+                        <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5 line-clamp-2">{s.role}</span>
                       </div>
-                    </li>
+                    </motion.div>
                   ))}
-                </ul>
+                </motion.div>
 
                 {/* Mediação */}
                 {item.mediator && (
-                  <div className="mt-3 flex items-start gap-2.5 pt-3 border-t border-white/8">
-                    <SpeakerAvatar name={item.mediator.name} avatar={item.mediator.avatar} accent={accent} />
-                    <div>
-                      <span className="text-[8px] font-black uppercase tracking-widest text-white/60 block mb-0.5">Mediação</span>
-                      <span className="text-xs font-bold text-white block">{item.mediator.name}</span>
-                      <span className="text-[10.5px] text-white/75 font-medium block mt-0.5">{item.mediator.role}</span>
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 100, damping: 15, delay: item.speakers!.length * 0.05 + 0.1 }}
+                    className="mt-4 pt-4 border-t border-white/8"
+                  >
+                    <span className="text-[8px] font-black uppercase tracking-widest text-white/60 block mb-2">Mediação</span>
+                    <div className="flex items-center gap-3.5 p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.04] max-w-sm hover:bg-white/[0.04] transition-all duration-200">
+                      <SpeakerAvatar name={item.mediator.name} avatar={item.mediator.avatar} accent={accent} />
+                      <div className="min-w-0">
+                        <span className="text-xs font-bold text-white block leading-snug truncate">{item.mediator.name}</span>
+                        <span className="text-[10px] text-white/60 font-medium leading-normal block mt-0.5 line-clamp-2">{item.mediator.role}</span>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </motion.div>
             )}
@@ -510,19 +553,52 @@ function TimelineItem({
         {hasSpeakers && (
           <button
             onClick={() => setOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-5 py-2.5 cursor-pointer transition-all duration-200"
+            className="w-full flex items-center justify-between px-5 py-3 cursor-pointer transition-all duration-300 group/btn hover:bg-white/[0.02]"
             style={{
               borderTop: "1px solid rgba(255,255,255,0.06)",
               background: open ? "rgba(255,255,255,0.03)" : "transparent",
             }}
           >
-            <span className="text-[8px] font-black uppercase tracking-[0.18em] text-white/70 group-hover:text-white/95 transition-colors">
-              {open ? "Ocultar" : `${item.speakers!.length} palestrantes`}
-            </span>
-            {open
-              ? <ChevronUp className="w-3.5 h-3.5 text-white/70" />
-              : <ChevronDown className="w-3.5 h-3.5 text-white/70" />
-            }
+            <div className="flex items-center gap-2">
+              {/* Stack de Avatares preview */}
+              <div className="flex -space-x-1.5 mr-1.5">
+                {item.speakers!.slice(0, 3).map((s, idx) => (
+                  <div
+                    key={idx}
+                    className="w-5.5 h-5.5 rounded-full border overflow-hidden shrink-0"
+                    style={{ borderColor: "#071828" }}
+                  >
+                    {s.avatar ? (
+                      <img src={s.avatar} alt={s.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-[6px] font-black text-white" style={{ background: accent }}>
+                        {s.name.split(" ").map(n => n[0]).slice(0,2).join("").toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {item.speakers!.length > 3 && (
+                  <div
+                    className="w-5.5 h-5.5 rounded-full border flex items-center justify-center text-[7px] font-black text-white bg-white/10 shrink-0"
+                    style={{ borderColor: "#071828" }}
+                  >
+                    +{item.speakers!.length - 3}
+                  </div>
+                )}
+              </div>
+
+              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-white/70 group-hover/btn:text-white transition-colors duration-200">
+                {open ? "Ocultar painelistas" : `Ver ${item.speakers!.length} painelistas`}
+              </span>
+            </div>
+
+            <motion.div
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="p-1 rounded-full bg-white/5 border border-white/10 group-hover/btn:border-white/20 group-hover/btn:bg-white/10 transition-all duration-200"
+            >
+              <ChevronDown className="w-3 h-3 text-white/70" />
+            </motion.div>
           </button>
         )}
       </div>
