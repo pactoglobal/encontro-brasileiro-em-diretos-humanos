@@ -119,14 +119,14 @@ export function About() {
                 <h3 className="text-xl sm:text-2xl font-display font-black mb-5 max-w-xl leading-snug" style={{ color: "#FFFFFF" }}>
                   Riscos sistêmicos e estratégias de resiliência corporativa no Brasil
                 </h3>
-                <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white/85">
+                <div className="space-y-4 text-sm sm:text-base leading-relaxed text-white">
                   <p>
                     Nos últimos anos, sucessivas crises globais têm interrompido e revertido avanços no
                     desenvolvimento sustentável. A pandemia, conflitos armados, mudanças climáticas e a
                     instrumentalização geopolítica da economia criaram um cenário de elevada incerteza e volatilidade.
                   </p>
                   <p>
-                    As empresas não operam em um vácuo. A capacidade de enfrentar riscos sistêmicos deixou de ser
+                    As empresas não operam em um vácuo. A capacidade de enfrentar risks sistêmicos deixou de ser
                     questão de conformidade ou reputação — passou a integrar estratégias de resiliência e
                     competitividade de longo prazo.
                   </p>
@@ -190,7 +190,7 @@ export function About() {
               <div className="p-6 flex flex-col justify-between flex-1">
                 <div>
                   <h4 className="text-lg font-display font-black leading-tight" style={{ color: "#E8187A" }}>Cinemateca Brasileira</h4>
-                  <p className="text-xs text-dhe-text-muted mt-1">
+                  <p className="text-xs text-dhe-navy font-medium mt-1">
                     Espaço histórico e cultural no coração de São Paulo, preparado para sediar as reflexões mais urgentes do ecossistema.
                   </p>
                 </div>
@@ -225,7 +225,7 @@ export function About() {
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-dhe-magenta mb-2 block">Público-Alvo</span>
                   <h3 className="text-2xl font-display font-black leading-snug mb-3" style={{ color: '#ffffff' }}>Quem participará do Encontro</h3>
-                  <p className="text-sm text-white/80 leading-relaxed">
+                  <p className="text-sm text-white font-medium leading-relaxed">
                     Uma coalizão diversa de atores estratégicos focados na construção de pontes e soluções viáveis.
                   </p>
                 </div>

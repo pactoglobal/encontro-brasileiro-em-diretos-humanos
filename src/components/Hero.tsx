@@ -219,7 +219,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.28, type: "spring", stiffness: 80 }}
-              className="text-base sm:text-lg text-white/75 leading-relaxed mb-6 max-w-xl"
+              className="text-base sm:text-lg text-white/95 leading-relaxed mb-6 max-w-xl"
             >
               O espaço nacional que conecta lideranças empresariais, sociedade civil,
               poder público e academia para debater Empresas e Direitos Humanos orientados à ação.
@@ -237,7 +237,7 @@ export function Hero() {
                 { icon: Clock, text: "9h às 19h30" },
                 { icon: MapPin, text: "Cinemateca Brasileira · SP" },
               ].map(({ icon: Icon, text }) => (
-                <span key={text} className="inline-flex items-center gap-2 text-sm font-semibold text-white/85 bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-full">
+                <span key={text} className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-full">
                   <Icon className="w-4 h-4 text-dhe-magenta shrink-0" strokeWidth={2} />
                   {text}
                 </span>
@@ -285,7 +285,7 @@ export function Hero() {
                 ].map(({ value, label, color, pl }) => (
                   <div key={label} className={`flex flex-col justify-center ${pl}`}>
                     <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
-                    <p className="text-[10px] sm:text-xs font-bold text-white/60 uppercase tracking-wider mt-2">{label}</p>
+                    <p className="text-[10px] sm:text-xs font-bold text-white/85 uppercase tracking-wider mt-2">{label}</p>
                   </div>
                 ))}
               </div>
@@ -348,7 +348,7 @@ export function Hero() {
                 transition={{ delay: 0.35, type: "spring", stiffness: 70 }}
                 className="w-full"
               >
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/65 mb-3 lg:text-right">
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/90 mb-3 lg:text-right">
                   Faltam para o evento
                 </p>
                 <div className="grid grid-cols-4 gap-2">
@@ -380,7 +380,7 @@ export function Hero() {
                           {String(val).padStart(2, "0")}
                         </motion.span>
                       </AnimatePresence>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/65 mt-2">{unit}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/85 mt-2">{unit}</span>
                     </div>
                   ))}
                 </div>
@@ -413,7 +413,7 @@ export function Hero() {
                       {SLIDES[current].caption}
                     </span>
                   </div>
-                  <p className="text-sm text-white/70 leading-relaxed">
+                  <p className="text-sm text-white/95 leading-relaxed">
                     {SLIDES[current].sub}
                   </p>
                 </motion.div>

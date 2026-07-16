@@ -124,15 +124,15 @@ export function Speakers() {
                 <span className="text-[10px] font-black uppercase text-dhe-magenta tracking-widest">Keynote</span>
               </div>
               <div className="my-8 relative z-10">
-                <p className="text-sm font-bold text-[#FAF9F6]/50 uppercase tracking-widest mb-1.5 font-display">Convidada Especial</p>
+                <p className="text-sm font-bold text-[#FAF9F6]/80 uppercase tracking-widest mb-1.5 font-display">Convidada Especial</p>
                 <h3 className="text-3xl font-display font-black text-white leading-[1.05] mb-3">Fernanda Hopenhaym</h3>
                 <p className="text-dhe-magenta font-black text-sm uppercase tracking-wider mb-2">Membro</p>
-                <p className="text-xs text-[#FAF9F6]/70 leading-relaxed max-w-sm">
+                <p className="text-xs text-[#FAF9F6] leading-relaxed max-w-sm">
                   Grupo de Trabalho da ONU sobre Empresas e Direitos Humanos. Liderança internacional na formulação de diretrizes para cadeias globais de valor.
                 </p>
               </div>
-              <div className="border-t border-[#FAF9F6]/10 pt-4 relative z-10 flex items-center justify-between">
-                <span className="text-[10px] font-black tracking-widest text-[#FAF9F6]/60 uppercase">ONU</span>
+              <div className="border-t border-[#FAF9F6]/15 pt-4 relative z-10 flex items-center justify-between">
+                <span className="text-[10px] font-black tracking-widest text-[#FAF9F6]/90 uppercase">ONU</span>
                 <div className="h-10 w-10 rounded-full bg-dhe-magenta/20 border border-dhe-magenta/40 flex items-center justify-center font-display font-black text-white text-xs">
                   FH
                 </div>
@@ -152,9 +152,9 @@ export function Speakers() {
                     className="p-6 rounded-[20px] bg-dhe-magenta text-white flex flex-col justify-between select-none relative overflow-hidden md:col-span-1 min-h-[180px] shadow-[0_12px_40px_rgba(232,24,122,0.25)]"
                   >
                     <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] opacity-70">Debate Nacional</p>
-                    <p className="text-xl font-display font-black uppercase leading-none tracking-tight my-4">Empresas & Direitos Humanos</p>
-                    <p className="text-[9px] font-black uppercase tracking-widest opacity-70">ADHE & Pacto Global</p>
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Debate Nacional</p>
+                    <p className="text-xl font-display font-black uppercase leading-none tracking-tight my-4">Empresas &amp; Direitos Humanos</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white">ADHE &amp; Pacto Global</p>
                   </motion.div>
                 );
               }
@@ -167,9 +167,9 @@ export function Speakers() {
                     className="p-6 rounded-[20px] bg-dhe-green text-white flex flex-col justify-between select-none relative overflow-hidden md:col-span-1 min-h-[180px] shadow-[0_12px_40px_rgba(74,140,63,0.25)]"
                   >
                     <div className="absolute inset-0 opacity-[0.08] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')]" />
-                    <p className="text-[9px] font-black uppercase tracking-[0.2em] opacity-70">Local do Evento</p>
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Local do Evento</p>
                     <p className="text-xl font-display font-black uppercase leading-none tracking-tight my-4">Cinemateca Brasileira, SP</p>
-                    <p className="text-[9px] font-black uppercase tracking-widest opacity-70">04 de Agosto, 2026</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white">04 de Agosto, 2026</p>
                   </motion.div>
                 );
               }
@@ -180,7 +180,7 @@ export function Speakers() {
           </motion.div>
         )}
 
-        <p className="mt-8 text-xs text-center text-dhe-text-muted/50">
+        <p className="mt-8 text-xs text-center text-dhe-text-muted">
           * Lista parcial. TBC = a confirmar.
         </p>
       </div>

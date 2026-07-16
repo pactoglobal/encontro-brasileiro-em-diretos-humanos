@@ -144,7 +144,7 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
             {attraction.theme}
           </span>
           {attraction.highlight && (
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/60">
+            <span className="text-[9px] font-black uppercase tracking-widest text-white/95">
               {attraction.highlight}
             </span>
           )}
@@ -166,11 +166,11 @@ function AttractionCard({ attraction, index }: { attraction: Attraction; index: 
           <p className="text-sm font-bold mb-1" style={{ color: attraction.themeColor }}>
             {attraction.role}
           </p>
-          <p className="text-xs text-white/70 leading-snug">{attraction.org}</p>
+          <p className="text-xs text-white/95 leading-snug">{attraction.org}</p>
 
           {/* Linha divisória */}
           <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-            <span className="text-[9px] font-black uppercase tracking-widest text-white/55">
+            <span className="text-[9px] font-black uppercase tracking-widest text-white/90">
               04 AGO 2026
             </span>
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: attraction.themeColor }} />
@@ -301,7 +301,7 @@ export function Attractions() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6 }}
-          className="text-xs text-center text-dhe-text-muted/50"
+          className="text-xs text-center text-dhe-text-muted"
         >
           * Lista parcial. Confirmações em andamento. TBC = a confirmar.
         </motion.p>

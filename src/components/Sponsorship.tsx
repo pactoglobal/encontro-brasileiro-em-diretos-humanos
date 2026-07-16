@@ -32,7 +32,7 @@ export function Sponsorship() {
             <h2 className="text-3xl sm:text-4xl font-display font-black leading-tight mb-6 text-white">
               Quer ser um patrocinador?
             </h2>
-            <p className="text-sm sm:text-base text-white/70 leading-relaxed mb-8 max-w-xl">
+            <p className="text-sm sm:text-base text-white/95 leading-relaxed mb-8 max-w-xl">
               Faça parte do I Encontro DH&E Brasil 2026. Apoiar a agenda de Empresas e Direitos Humanos é um posicionamento de liderança e responsabilidade socioambiental.
             </p>
 
@@ -46,7 +46,7 @@ export function Sponsorship() {
                     </div>
                     <div>
                       <p className="font-display font-black text-sm uppercase tracking-wide text-white">{title}</p>
-                      <p className="mt-1 text-sm text-white/85 leading-relaxed">{desc}</p>
+                      <p className="mt-1 text-sm text-white leading-relaxed">{desc}</p>
                     </div>
                   </div>
                 );
@@ -56,7 +56,7 @@ export function Sponsorship() {
 
           {/* Right Column: Contact Card */}
           <div className="flex flex-col gap-6 w-full">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 lg:text-right">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/70 lg:text-right">
               Parcerias & Cota Comercial
             </p>
 
@@ -79,7 +79,7 @@ export function Sponsorship() {
                 <h3 className="text-2xl font-display font-black leading-tight text-white mb-2">
                   Rafael Carmo
                 </h3>
-                <p className="text-sm text-white/85 leading-relaxed mb-6">
+                <p className="text-sm text-white/95 leading-relaxed mb-6">
                   Fale com o coordenador comercial para receber o portfólio de patrocínios, cotas de apoio e conhecer todas as contrapartidas estruturadas.
                 </p>
               </div>
@@ -91,7 +91,7 @@ export function Sponsorship() {
                 >
                   Falar com Rafael
                 </a>
-                <p className="mt-3.5 text-[10px] text-center font-bold text-white/40 tracking-wide uppercase">
+                <p className="mt-3.5 text-[10px] text-center font-bold text-white/70 tracking-wide uppercase">
                   rafael.carmo@pactoglobal.org.br
                 </p>
               </div>
@@ -99,7 +99,7 @@ export function Sponsorship() {
 
             <div className="bg-white/3 border border-white/5 rounded-2xl p-5 flex items-start gap-4">
               <Info size={16} className="text-[#E8187A] shrink-0 mt-0.5" />
-              <p className="text-xs leading-relaxed text-white/70">
+              <p className="text-xs leading-relaxed text-white/90">
                 Cada cota de patrocínio oferece contrapartidas exclusivas em exposição de marca na Cinemateca Brasileira, relacionamento institucional de alto nível e conteúdos conjuntos.
               </p>
             </div>
