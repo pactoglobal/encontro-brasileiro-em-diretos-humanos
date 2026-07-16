@@ -70,16 +70,7 @@ export function About() {
     <>
       {/* SEÇÃO 1: Sobre o Encontro & Local */}
       <section id="sobre" ref={ref1 as React.RefObject<HTMLDivElement>} className="dhe-section-light relative overflow-hidden bg-[#F1EFEA] py-20 lg:py-24">
-        {/* Decorative ribbon */}
-        <div
-          className="absolute top-0 right-0 w-64 h-full opacity-[0.03] pointer-events-none hidden lg:block"
-          style={{
-            backgroundImage: 'url("/identity/kv-sem-fundo.png")',
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right top",
-          }}
-        />
+
 
         <div className="dhe-container">
           {/* Section Header */}
@@ -253,16 +244,7 @@ export function About() {
 
       {/* SEÇÃO 2: Diretrizes & Objetivos Estratégicos */}
       <section id="diretrizes" ref={ref2 as React.RefObject<HTMLDivElement>} className="dhe-section-alt relative overflow-hidden bg-[#FAF9F6] border-t border-[#D8D4C7]/50 py-20 lg:py-24">
-        {/* Decorative ribbon */}
-        <div
-          className="absolute bottom-0 left-0 w-64 h-full opacity-[0.02] pointer-events-none hidden lg:block"
-          style={{
-            backgroundImage: 'url("/identity/kv-sem-fundo.png")',
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "left bottom",
-          }}
-        />
+
 
         <div className="dhe-container">
           {/* Section Header */}
@@ -296,15 +278,14 @@ export function About() {
               className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E8187A] to-[#B50B5B]"
               style={{ minHeight: "240px" }}
             >
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
               <div>
                 <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
                   1
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white mt-6 block">
-                  Geopolítica & Valor
+                <span className="inline-flex items-center mt-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-sm">
+                  Geopolítica &amp; Valor
                 </span>
-                <h3 className="text-lg font-display font-black leading-snug text-white mt-3">
+                <h3 className="text-lg font-display font-black leading-snug mt-3" style={{ color: '#ffffff' }}>
                   Analisar como transformações geopolíticas e econômicas globais incidem sobre empresas e cadeias de valor.
                 </h3>
               </div>
@@ -317,15 +298,14 @@ export function About() {
               className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#4A8C3F] to-[#3B7032]"
               style={{ minHeight: "240px" }}
             >
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
               <div>
                 <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
                   2
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white mt-6 block">
-                  Estratégia & Incerteza
+                <span className="inline-flex items-center mt-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-sm">
+                  Estratégia &amp; Incerteza
                 </span>
-                <h3 className="text-lg font-display font-black leading-snug text-white mt-3">
+                <h3 className="text-lg font-display font-black leading-snug mt-3" style={{ color: '#ffffff' }}>
                   Debater se, e por que, a agenda de Empresas e Direitos Humanos segue estratégica em um contexto de incerteza.
                 </h3>
               </div>
@@ -338,15 +318,14 @@ export function About() {
               className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#0C2540] to-[#061525]"
               style={{ minHeight: "240px" }}
             >
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
               <div>
                 <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
                   3
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white mt-6 block">
+                <span className="inline-flex items-center mt-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-sm">
                   Espaço Multiator
                 </span>
-                <h3 className="text-lg font-display font-black leading-snug text-white mt-3">
+                <h3 className="text-lg font-display font-black leading-snug mt-3" style={{ color: '#ffffff' }}>
                   Garantir um espaço multiator com participação efetiva de titulares de direitos, empresas, poder público, sociedade civil e academia.
                 </h3>
               </div>
@@ -359,15 +338,14 @@ export function About() {
               className="md:col-span-2 rounded-[28px] p-8 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#E05A3A] to-[#BF4A2E]"
               style={{ minHeight: "220px" }}
             >
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
               <div>
                 <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
                   4
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white mt-6 block">
-                  Transparência & Prática
+                <span className="inline-flex items-center mt-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-sm">
+                  Transparência &amp; Prática
                 </span>
-                <h3 className="text-xl sm:text-2xl font-display font-black leading-snug text-white mt-3">
+                <h3 className="text-xl sm:text-2xl font-display font-black leading-snug mt-3" style={{ color: '#ffffff' }}>
                   Superar abordagens baseadas apenas em boas práticas, incorporando lições aprendidas, dilemas e falhas reais.
                 </h3>
               </div>
@@ -380,15 +358,14 @@ export function About() {
               className="md:col-span-1 rounded-[28px] p-7 flex flex-col justify-between relative overflow-hidden border border-white/10 shadow-[0_12px_40px_rgba(12,37,64,0.08)] bg-gradient-to-br from-[#7B2D1E] to-[#5D2116]"
               style={{ minHeight: "220px" }}
             >
-              <div className="absolute inset-0 opacity-[0.06] bg-cover bg-center bg-[url('/identity/kv-sem-fundo.png')] pointer-events-none" />
               <div>
                 <div className="w-10 h-10 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white text-base font-black shadow-sm">
                   5
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-white mt-6 block">
-                  Legado & Contribuição
+                <span className="inline-flex items-center mt-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md border border-white/20 text-white shadow-sm">
+                  Legado &amp; Contribuição
                 </span>
-                <h3 className="text-base sm:text-lg font-display font-black leading-snug text-white mt-3">
+                <h3 className="text-base sm:text-lg font-display font-black leading-snug mt-3" style={{ color: '#ffffff' }}>
                   Produzir um documento com potencial de contribuição ao debate nacional e ao Fórum em Genebra.
                 </h3>
               </div>
