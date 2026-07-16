@@ -67,10 +67,10 @@ export function Organizers() {
                   </p>
                 </div>
 
-                {/* 2. CO-REALIZAÇÃO */}
+                {/* 2. CORREALIZAÇÃO */}
                 <div className="flex flex-col gap-3 pt-6 lg:pt-0 lg:px-8 lg:w-[38%]">
                   <span className="text-[9px] font-black uppercase tracking-[0.25em] text-dhe-green">
-                    Co-realização
+                    Correalização
                   </span>
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-5 mt-2">
                     <img

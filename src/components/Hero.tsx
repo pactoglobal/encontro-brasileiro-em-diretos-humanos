@@ -473,9 +473,9 @@ export function Hero() {
                     </div>
                   </div>
 
-                  {/* Co-realização - Spans full width for maximum space */}
+                  {/* Correalização - Spans full width for maximum space */}
                   <div className="flex flex-col gap-1.5 pb-3 border-b border-[#D8D4C7]/40 sm:col-span-2">
-                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-green">Co-realização</span>
+                    <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-green">Correalização</span>
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
                       <img src="/identity/logo-pacto-global.png" alt="Pacto Global" className="h-6 w-auto object-contain" />
                       <div className="flex items-center gap-1 h-6" title="Global Gateway">

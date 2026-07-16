@@ -1,239 +1,118 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "../hooks/useInView";
-import { CheckCircle } from "lucide-react";
+import { ArrowUpRight, CalendarDays, MapPin, Users, Sparkles } from "lucide-react";
+
+// ── URL da Landing Page de Inscrição ──────────────────────────────────────────
+// Substitua pela URL real quando a LP estiver no ar
+const LP_URL = "#";
 
 export function Contact() {
   const [ref, inView] = useInView();
-  
-  // Estados do formulário
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [empresa, setEmpresa] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [sucesso, setSucesso] = useState(false);
-  const [erro, setErro] = useState("");
-
-  // Handler de inscrição (também chamado via WebMCP)
-  const handleInscricao = (nomeVal: string, emailVal: string, empresaVal: string, cargoVal?: string) => {
-    if (!nomeVal || !emailVal || !empresaVal) {
-      setErro("Por favor, preencha todos os campos obrigatórios.");
-      return false;
-    }
-    
-    setNome(nomeVal);
-    setEmail(emailVal);
-    setEmpresa(empresaVal);
-    if (cargoVal) setCargo(cargoVal);
-    
-    setSucesso(true);
-    setErro("");
-    return true;
-  };
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleInscricao(nome, email, empresa, cargo);
-  };
-
-  // Integração Imperativa com WebMCP (Google Antigravity SDK - AI-Ready)
-  useEffect(() => {
-    // @ts-ignore
-    if (typeof window !== "undefined" && window.document && window.document.modelContext && typeof window.document.modelContext.registerTool === "function") {
-      try {
-        // @ts-ignore
-        const abortController = new AbortController();
-        // @ts-ignore
-        window.document.modelContext.registerTool({
-          name: "solicitar-inscricao",
-          description: "Registra uma solicitação de inscrição para o Fórum DH&E Brasil 2026. Abre confirmação de sucesso na tela para o usuário.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              nome: { type: "string", description: "Nome completo do participante" },
-              email: { type: "string", description: "Endereço de e-mail de contato" },
-              empresa: { type: "string", description: "Nome da empresa ou organização" },
-              cargo: { type: "string", description: "Cargo profissional do participante" }
-            },
-            required: ["nome", "email", "empresa"]
-          },
-          execute(args: { nome: string; email: string; empresa: string; cargo?: string }) {
-            const ok = handleInscricao(args.nome, args.email, args.empresa, args.cargo);
-            if (ok) {
-              return { status: "success", message: `Inscrição de ${args.nome} solicitada com sucesso.` };
-            } else {
-              return { status: "error", message: "Falha ao registrar inscrição por campos ausentes." };
-            }
-          }
-        }, { signal: abortController.signal });
-
-        return () => {
-          abortController.abort();
-        };
-      } catch (err) {
-        console.error("Falha ao registrar ferramenta WebMCP:", err);
-      }
-    }
-  }, []);
 
   return (
-    <section id="contato" className="dhe-section-light relative overflow-hidden">
-      {/* Ribbon decorativo */}
-      <div className="absolute inset-y-0 right-0 w-1/3 opacity-[0.04] pointer-events-none hidden lg:block" style={{ backgroundImage: 'url("/identity/kv-sem-fundo.png")', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }} />
+    <section
+      id="contato"
+      className="relative overflow-hidden py-20 lg:py-28"
+      style={{ background: "#0C2540" }}
+    >
+      {/* Gradientes atmosféricos */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full blur-[140px] opacity-25"
+          style={{ background: "radial-gradient(circle, #E8187A 0%, transparent 65%)" }}
+        />
+        <div
+          className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full blur-[120px] opacity-15"
+          style={{ background: "radial-gradient(circle, #4A8C3F 0%, transparent 65%)" }}
+        />
+        {/* Grade sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
 
       <div className="dhe-container relative z-10">
         <motion.div
           ref={ref as React.RefObject<HTMLDivElement>}
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ type: "spring", stiffness: 60, damping: 15 }}
-          className="max-w-4xl mx-auto text-center"
+          transition={{ type: "spring", stiffness: 55, damping: 15 }}
+          className="max-w-3xl mx-auto text-center"
         >
-          <p className="dhe-section-label text-center">Contato & Inscrições</p>
-          <div className="dhe-stripe-divider mx-auto justify-center">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
+          {/* Overline */}
+          <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40 mb-6">
+            Inscrições
+          </p>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-dhe-navy mb-4">
-            Participe do Encontro
+          {/* Título principal */}
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-[1.05] mb-6">
+            Participe do<br />
+            <span style={{ color: "#E8187A" }}>Encontro</span>
           </h2>
-          <p className="text-base leading-relaxed mb-12 text-dhe-text-muted">
-            O I Encontro DH&E Brasil 2026 é <strong className="text-dhe-navy font-extrabold">gratuito e credenciado</strong> para
+
+          {/* Descrição */}
+          <p className="text-base sm:text-lg text-white/60 leading-relaxed mb-10 max-w-xl mx-auto">
+            O I Encontro Brasileiro de Direitos Humanos e Empresas é{" "}
+            <strong className="text-white font-bold">gratuito e credenciado</strong> para
             empresas, movimentos sociais, poder público e academia.
           </p>
 
-          <div className="max-w-2xl mx-auto text-left mb-12">
-            <div className="dhe-card-editorial p-6 sm:p-8 bg-white/75 backdrop-blur-sm border-2 border-dhe-navy dhe-shadow-brutal relative">
-                
-                <AnimatePresence mode="wait">
-                  {!sucesso ? (
-                    <motion.form
-                      key="form-inscricao"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      onSubmit={onSubmit}
-                      className="space-y-4"
-                      // @ts-ignore WebMCP attributes
-                      toolname="solicitar-inscricao"
-                      tooldescription="Registra a solicitação de inscrição para o Fórum DH&E Brasil 2026"
-                    >
-                      {erro && (
-                        <div className="text-xs font-bold text-dhe-crimson bg-dhe-crimson/5 border border-dhe-crimson/20 p-3 rounded-lg">
-                          {erro}
-                        </div>
-                      )}
-                      
-                      <div>
-                        <label htmlFor="nome" className="block text-xs font-bold text-dhe-navy uppercase tracking-wider mb-1.5">
-                          Nome Completo *
-                        </label>
-                        <input
-                          id="nome"
-                          type="text"
-                          required
-                          value={nome}
-                          onChange={(e) => setNome(e.target.value)}
-                          placeholder="Seu nome"
-                          className="w-full text-sm bg-white border border-[#D8D4C7] rounded-xl px-4 py-3 text-dhe-navy focus:outline-none focus:border-dhe-magenta focus:ring-1 focus:ring-dhe-magenta"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="email" className="block text-xs font-bold text-dhe-navy uppercase tracking-wider mb-1.5">
-                          E-mail Corporativo / Contato *
-                        </label>
-                        <input
-                          id="email"
-                          type="email"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="seu.email@empresa.com"
-                          className="w-full text-sm bg-white border border-[#D8D4C7] rounded-xl px-4 py-3 text-dhe-navy focus:outline-none focus:border-dhe-magenta focus:ring-1 focus:ring-dhe-magenta"
-                        />
-                      </div>
-
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div>
-                          <label htmlFor="empresa" className="block text-xs font-bold text-dhe-navy uppercase tracking-wider mb-1.5">
-                            Organização / Empresa *
-                          </label>
-                          <input
-                            id="empresa"
-                            type="text"
-                            required
-                            value={empresa}
-                            onChange={(e) => setEmpresa(e.target.value)}
-                            placeholder="Nome da empresa"
-                            className="w-full text-sm bg-white border border-[#D8D4C7] rounded-xl px-4 py-3 text-dhe-navy focus:outline-none focus:border-dhe-magenta focus:ring-1 focus:ring-dhe-magenta"
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="cargo" className="block text-xs font-bold text-dhe-navy uppercase tracking-wider mb-1.5">
-                            Cargo / Função
-                          </label>
-                          <input
-                            id="cargo"
-                            type="text"
-                            value={cargo}
-                            onChange={(e) => setCargo(e.target.value)}
-                            placeholder="Seu cargo"
-                            className="w-full text-sm bg-white border border-[#D8D4C7] rounded-xl px-4 py-3 text-dhe-navy focus:outline-none focus:border-dhe-magenta focus:ring-1 focus:ring-dhe-magenta"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="pt-2">
-                        <button type="submit" className="dhe-btn-primary w-full sm:w-auto">
-                          Enviar Solicitação
-                        </button>
-                      </div>
-                    </motion.form>
-                  ) : (
-                    <motion.div
-                      key="sucesso-inscricao"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                      className="text-center py-8 space-y-4"
-                    >
-                      <div className="flex justify-center">
-                        <CheckCircle className="w-16 h-16 text-dhe-green" strokeWidth={1.5} />
-                      </div>
-                      <h3 className="text-xl font-bold text-dhe-navy">Solicitação Enviada!</h3>
-                      <p className="text-sm text-dhe-text-muted leading-relaxed max-w-sm mx-auto">
-                        Obrigado, <strong className="text-dhe-navy">{nome}</strong>. Sua solicitação de credenciamento
-                        para o Fórum foi enviada. Entraremos em contato no e-mail <span className="underline">{email}</span> para confirmação das credenciais.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => setSucesso(false)}
-                        className="dhe-btn-outline text-xs py-2.5 px-6"
-                      >
-                        Nova Inscrição
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-            </div>
-
-            {/* Informações adicionais de suporte */}
-            <div className="text-center mt-6">
-              <p className="text-xs text-dhe-text-muted">
-                Dúvidas ou suporte? Entre em contato pelo e-mail oficial:{" "}
-                <a
-                  href="mailto:contato@pactoglobal.org.br"
-                  className="font-bold text-dhe-navy hover:text-dhe-magenta transition-colors underline"
-                >
-                  contato@pactoglobal.org.br
-                </a>
-              </p>
-            </div>
+          {/* Pills de info */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+            {[
+              { Icon: CalendarDays, text: "04 de agosto de 2026" },
+              { Icon: MapPin,       text: "Cinemateca Brasileira — São Paulo" },
+              { Icon: Users,        text: "Entrada gratuita e credenciada" },
+              { Icon: Sparkles,     text: "30+ painelistas confirmados" },
+            ].map(({ Icon, text }) => (
+              <span
+                key={text}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-medium text-white/60 border border-white/10"
+                style={{ background: "rgba(255,255,255,0.05)" }}
+              >
+                <Icon className="w-3.5 h-3.5 text-white/30" />
+                {text}
+              </span>
+            ))}
           </div>
+
+          {/* CTA principal */}
+          <motion.a
+            href={LP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-display font-black text-base uppercase tracking-wide cursor-pointer transition-all duration-300"
+            style={{
+              background: "#E8187A",
+              color: "white",
+              boxShadow: "0 8px 32px rgba(232,24,122,0.35)",
+            }}
+            whileHover={{
+              scale: 1.04,
+              boxShadow: "0 16px 48px rgba(232,24,122,0.5)",
+            }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Quero me inscrever
+            <ArrowUpRight className="w-5 h-5" />
+          </motion.a>
+
+          {/* Nota secundária */}
+          <p className="text-xs text-white/25 mt-6 leading-relaxed">
+            As inscrições são realizadas em plataforma própria.
+            Dúvidas:{" "}
+            <a
+              href="mailto:ana.urquiza@pactoglobal.org.br"
+              className="text-white/40 hover:text-white/70 transition-colors underline underline-offset-2"
+            >
+              ana.urquiza@pactoglobal.org.br
+            </a>
+          </p>
         </motion.div>
       </div>
     </section>

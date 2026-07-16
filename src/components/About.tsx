@@ -196,7 +196,7 @@ export function About() {
                 </div>
                 <div className="mt-5 pt-4 border-t border-[#D8D4C7]/60 flex items-center justify-between">
                   <div>
-                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-dhe-text-muted">Co-realização e Apoio</p>
+                    <p className="text-[8px] font-black uppercase tracking-[0.2em] text-dhe-text-muted">Correalização e Apoio</p>
                     <p className="text-[10px] font-bold text-dhe-navy mt-0.5">Parceiro Oficial de Espaço</p>
                   </div>
                   <div className="p-2 bg-[#FAF9F6] border border-[#D8D4C7] rounded-xl flex items-center justify-center shadow-sm">
