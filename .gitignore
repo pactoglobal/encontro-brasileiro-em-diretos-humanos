@@ -15,6 +15,7 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.claude/launch.json
 .idea
 .DS_Store
 *.suo
@@ -24,10 +25,10 @@ dist-ssr
 *.sw?
 .vercel
 
-# Raw photo dumps (uncurated, full-resolution originals) — never commit these.
-# Curate + compress into src/assets/<pasta>/ under a proper filename instead.
-src/assets/hero/FOTOS DIÁLOGO NACIONAL/
-src/assets/hero/Fotos Diálogo Centro-oeste/
-src/assets/hero/Fotos Diálogo Norte/
-src/assets/hero/Fotos Diálogos Sudeste/
-src/assets/hero/Fotos Diálogos Sul/
+# Raw photo dumps (uncurated, full-resolution camera originals): never commit
+# these. Curate + compress into src/assets/<pasta>/ under a proper filename
+# instead. As of 2026-07-16 the raw Diálogos folders live one level above the
+# repo, in ../dialogos-fotos-originais-nao-usadas/ — this rule is a backstop
+# in case a similar raw dump ever lands inside src/assets/ again.
+src/assets/**/FOTOS*/
+src/assets/**/Fotos*/

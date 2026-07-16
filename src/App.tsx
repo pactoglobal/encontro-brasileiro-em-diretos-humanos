@@ -3,6 +3,7 @@ import { MotionConfig } from "framer-motion";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
+import { Dialogues } from "./components/Dialogues";
 import { Speakers } from "./components/Speakers";
 import { EntrepreneurArea } from "./components/EntrepreneurArea";
 import { Attractions } from "./components/Attractions";
@@ -69,6 +70,7 @@ function App() {
         {/* ATO 1 — A PROMESSA & APRESENTAÇÃO */}
         <Hero />
         <About />
+        <Dialogues />
 
         {/* ATO 2 — CRONOGRAMA & CONTEÚDO */}
         <Agenda />
