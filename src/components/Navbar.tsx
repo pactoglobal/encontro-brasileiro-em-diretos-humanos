@@ -175,19 +175,38 @@ export function Navbar() {
               Tenho interesse
             </button>
 
-            {/* Mobile Hamburger Button */}
-            <button
-              type="button"
-              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-full cursor-pointer transition-all duration-300 focus:outline-none"
-              style={{
-                background: scrolled ? "rgba(12,37,64,0.06)" : "rgba(255,255,255,0.12)",
-                color: scrolled ? "#0C2540" : "#FFFFFF",
-              }}
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* Mobile: CTA + Hamburger */}
+            <div className="lg:hidden flex items-center gap-2">
+              {/* CTA Mobile */}
+              <button
+                onClick={() => scrollTo("contato")}
+                className="inline-flex items-center justify-center text-[9px] font-sans font-extrabold uppercase tracking-[0.1em] rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
+                style={{
+                  padding: "8px 14px",
+                  background: scrolled ? "#E8187A" : "#FFFFFF",
+                  color: scrolled ? "#FFFFFF" : "#0C2540",
+                  boxShadow: scrolled
+                    ? "0 4px 14px rgba(232,24,122,0.25)"
+                    : "0 4px 14px rgba(255,255,255,0.15)",
+                }}
+              >
+                Tenho interesse
+              </button>
+
+              {/* Hamburger */}
+              <button
+                type="button"
+                className="flex items-center justify-center w-11 h-11 rounded-full cursor-pointer transition-all duration-300 focus:outline-none"
+                style={{
+                  background: scrolled ? "rgba(12,37,64,0.06)" : "rgba(255,255,255,0.12)",
+                  color: scrolled ? "#0C2540" : "#FFFFFF",
+                }}
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              >
+                {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </motion.div>
         </nav>
       </motion.header>
