@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useInView } from "../hooks/useInView";
@@ -70,7 +70,11 @@ import ne8 from "../assets/dialogos/nordeste/foto-8.jpg";
 import ne9 from "../assets/dialogos/nordeste/foto-9.jpg";
 import ne10 from "../assets/dialogos/nordeste/foto-10.jpg";
 import forumRegionalImg from "../assets/dialogos/forum-regional.jpg";
+import forumRegional2Img from "../assets/dialogos/forum-regional-2.jpg";
 import forumGlobalImg from "../assets/dialogos/forum-global.jpg";
+import forumGlobal2Img from "../assets/dialogos/forum-global-2.jpg";
+import forumGlobal3Img from "../assets/dialogos/forum-global-3.jpg";
+import forumGlobal4Img from "../assets/dialogos/forum-global-4.jpg";
 
 type Region = {
   key: string;
@@ -136,7 +140,7 @@ const REGIONS: Region[] = [
     city: "São Paulo (2025)",
     tag: "Articulação Regional",
     note: "O principal espaço latino-americano de conduta empresarial responsável, co-realizado por ACNUDH, OIT e OCDE para estabelecer diálogos multiatores.",
-    photos: [forumRegionalImg],
+    photos: [forumRegionalImg, forumRegional2Img],
   },
   {
     key: "forum-global",
@@ -144,7 +148,7 @@ const REGIONS: Region[] = [
     city: "Genebra, Suíça",
     tag: "Conexão Internacional",
     note: "O maior encontro mundial sobre Empresas e Direitos Humanos na sede das Nações Unidas, onde as contribuições brasileiras serão compartilhadas globalmente.",
-    photos: [forumGlobalImg],
+    photos: [forumGlobalImg, forumGlobal2Img, forumGlobal3Img, forumGlobal4Img],
   },
 ];
 
@@ -251,15 +255,12 @@ function Lightbox({
 export function Dialogues() {
   const [ref, inView] = useInView();
   const [activeKey, setActiveKey] = useState(REGIONS[0].key);
-  const [featured, setFeatured] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const active = REGIONS.find((r) => r.key === activeKey) ?? REGIONS[0];
 
   const selectRegion = useCallback((key: string) => {
     setActiveKey(key);
-    setFeatured(0);
   }, []);
 
   const navLightbox = useCallback(
@@ -407,59 +408,73 @@ export function Dialogues() {
               </p>
             </div>
 
-            {/* Fotos — quadro horizontal, sem cortes */}
+            {/* Bento Grid de Fotos */}
             <div className="w-full">
-              {/* Foto em destaque */}
-              <button
-                type="button"
-                onClick={() => setLightbox(featured)}
-                className="group relative w-full block rounded-[20px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-black/20"
-                aria-label="Ampliar foto"
-              >
-                <div className="aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9] w-full">
-                  <motion.img
-                    key={active.photos[featured]}
-                    src={active.photos[featured]}
-                    alt={`Diálogo ${active.label} — ${active.city}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07182a]/70 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/15 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <Maximize2 className="w-4 h-4" />
-                </span>
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 auto-rows-[200px] sm:auto-rows-[240px]">
+                {active.photos.map((photo, index) => {
+                  if (index >= 5) return null;
 
-              {/* Miniaturas — mostra todas as fotos da etapa */}
-              {active.photos.length > 1 && (
-                <div 
-                  ref={scrollRef}
-                  className="flex gap-3 mt-4 overflow-x-auto pb-1 dhe-scroll-snap scroll-smooth scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-start sm:justify-center"
-                >
-                  {active.photos.map((p, i) => {
-                    const isSel = i === featured;
-                    return (
-                      <button
-                        key={p}
-                        type="button"
-                        onClick={() => setFeatured(i)}
-                        className={`relative shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                          isSel ? "border-dhe-magenta" : "border-transparent opacity-60 hover:opacity-100"
-                        }`}
-                        aria-label={`Ver foto ${i + 1} de ${active.label}`}
-                        aria-pressed={isSel}
-                      >
-                        <div className="aspect-[3/2]">
-                          <img src={p} alt="" className="w-full h-full object-cover" />
+                  let gridClass = "";
+                  if (active.photos.length === 1) {
+                    gridClass = "col-span-3 row-span-2";
+                  } else if (active.photos.length === 2) {
+                    if (index === 0) gridClass = "col-span-2 row-span-2";
+                    if (index === 1) gridClass = "col-span-1 row-span-2";
+                  } else if (active.photos.length === 3) {
+                    if (index === 0) gridClass = "col-span-2 row-span-2";
+                    if (index === 1) gridClass = "col-span-1 row-span-1";
+                    if (index === 2) gridClass = "col-span-1 row-span-1";
+                  } else if (active.photos.length === 4) {
+                    if (index === 0) gridClass = "col-span-2 row-span-2";
+                    if (index === 1) gridClass = "col-span-1 row-span-1";
+                    if (index === 2) gridClass = "col-span-1 row-span-1";
+                    if (index === 3) gridClass = "col-span-3 row-span-1";
+                  } else { // 5 ou mais
+                    if (index === 0) gridClass = "col-span-2 row-span-2";
+                    if (index === 1) gridClass = "col-span-1 row-span-1";
+                    if (index === 2) gridClass = "col-span-1 row-span-1";
+                    if (index === 3) gridClass = "col-span-1 row-span-1";
+                    if (index === 4) gridClass = "col-span-2 row-span-1";
+                  }
+
+                  const isLastWithMore = index === 4 && active.photos.length > 5;
+
+                  return (
+                    <button
+                      key={photo}
+                      type="button"
+                      onClick={() => setLightbox(index)}
+                      className={`${gridClass} group relative w-full h-full rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm shadow-xl cursor-pointer focus:outline-none transition-all duration-300 hover:border-white/20`}
+                      aria-label={`Ampliar foto ${index + 1}`}
+                    >
+                      <img
+                        src={photo}
+                        alt={`Diálogo ${active.label} — ${active.city} (${index + 1})`}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      {/* Efeito Glassmorphism overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#07182a]/70 via-transparent to-transparent opacity-65 group-hover:opacity-85 transition-opacity duration-300 pointer-events-none" />
+                      
+                      {/* Borda interna refinada */}
+                      <div className="absolute inset-0 border border-white/5 rounded-3xl group-hover:border-white/15 transition-all duration-300 pointer-events-none" />
+
+                      {!isLastWithMore && (
+                        <span className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center bg-black/45 backdrop-blur-md border border-white/15 text-white opacity-0 group-hover:opacity-100 transition-all duration-200">
+                          <Maximize2 className="w-4 h-4" />
+                        </span>
+                      )}
+
+                      {isLastWithMore && (
+                        <div className="absolute inset-0 bg-black/80 backdrop-blur-[3px] flex flex-col items-center justify-center text-white transition-colors duration-300 group-hover:bg-black/75">
+                          <span className="text-3xl font-display font-black">+{active.photos.length - 5}</span>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-white/70 mt-1">Fotos</span>
                         </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
         </div>
