@@ -69,6 +69,8 @@ import ne7 from "../assets/dialogos/nordeste/foto-7.jpg";
 import ne8 from "../assets/dialogos/nordeste/foto-8.jpg";
 import ne9 from "../assets/dialogos/nordeste/foto-9.jpg";
 import ne10 from "../assets/dialogos/nordeste/foto-10.jpg";
+import forumRegionalImg from "../assets/dialogos/forum-regional.jpg";
+import forumGlobalImg from "../assets/dialogos/forum-global.jpg";
 
 type Region = {
   key: string;
@@ -134,7 +136,7 @@ const REGIONS: Region[] = [
     city: "São Paulo (2025)",
     tag: "Articulação Regional",
     note: "O principal espaço latino-americano de conduta empresarial responsável, co-realizado por ACNUDH, OIT e OCDE para estabelecer diálogos multiatores.",
-    photos: [nac5, se8, co3, sul5, nor2],
+    photos: [forumRegionalImg],
   },
   {
     key: "forum-global",
@@ -142,7 +144,7 @@ const REGIONS: Region[] = [
     city: "Genebra, Suíça",
     tag: "Conexão Internacional",
     note: "O maior encontro mundial sobre Empresas e Direitos Humanos na sede das Nações Unidas, onde as contribuições brasileiras serão compartilhadas globalmente.",
-    photos: [nac7, sul6, nor7, ne4, se2],
+    photos: [forumGlobalImg],
   },
 ];
 
