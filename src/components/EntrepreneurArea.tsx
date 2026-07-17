@@ -244,10 +244,10 @@ export function EntrepreneurArea() {
                     key={ini.name}
                     variants={cardVariants}
                     whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                    className="snap-start shrink-0 w-[290px] sm:w-[340px] md:w-[380px] rounded-[32px] p-7 border border-white/20 bg-gradient-to-b from-[#050505]/95 to-[#050505]/80 backdrop-blur-2xl flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(0,255,65,0.12)] hover:border-[#00FF41]/30 transition-all duration-500 select-none group relative overflow-hidden"
+                    className="snap-start shrink-0 w-[290px] sm:w-[340px] md:w-[380px] rounded-[32px] p-7 border border-white/20 bg-gradient-to-b from-[#7B2D1E]/95 to-[#7B2D1E]/80 backdrop-blur-2xl flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(123,45,30,0.3)] hover:border-[#FFD700]/30 transition-all duration-500 select-none group relative overflow-hidden"
                   >
                     {/* Subtle KV Neon glow inside */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0047FF]/5 group-hover:to-[#0047FF]/20 transition-all duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#FFD700]/5 group-hover:to-[#FFD700]/15 transition-all duration-500 pointer-events-none" />
                     
                     <div className="relative z-10">
                       {/* Top Row: Avatar Photo + Info next to it */}
@@ -266,7 +266,7 @@ export function EntrepreneurArea() {
                           <p className="text-sm font-bold text-white truncate">
                             {ini.org}
                           </p>
-                          <p className="text-[10px] font-black uppercase tracking-wider truncate" style={{ color: ini.color }}>
+                          <p className="text-[10px] font-black uppercase tracking-wider truncate text-white/90">
                             {ini.category}
                           </p>
                           {ini.partner && (
@@ -293,8 +293,7 @@ export function EntrepreneurArea() {
                           href={ini.instagram} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider hover:underline mb-4 transition-colors"
-                          style={{ color: ini.color }}
+                          className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-white hover:text-white/80 hover:underline mb-4 transition-colors"
                         >
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -305,24 +304,24 @@ export function EntrepreneurArea() {
                     </div>
 
                     {/* Footer Row: ODS + Location */}
-                    <div className="relative z-10 pt-5 border-t border-white/10 flex items-center justify-between gap-2 mt-auto">
-                      <div className="flex items-center gap-2 min-w-0">
+                    <div className="relative z-10 pt-5 border-t border-white/10 flex flex-col gap-3 mt-auto">
+                      <div className="flex items-center gap-2">
                         {ini.odsLogo && (
-                          <div className="bg-white/90 p-0.5 rounded-md shrink-0">
+                          <div className="bg-white p-0.5 rounded-md shrink-0">
                             <img 
                               src={ini.odsLogo} 
                               alt={ini.ods} 
-                              className="w-7 h-7 object-contain" 
+                              className="w-8 h-8 object-contain" 
                             />
                           </div>
                         )}
-                        <span className="text-[10px] font-bold text-white/80 truncate">
+                        <span className="text-[11px] font-bold text-white leading-tight">
                           {ini.ods}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1 shrink-0 text-white/60 bg-white/10 rounded-full px-2.5 py-1 border border-white/5 backdrop-blur-sm">
-                        <MapPin className="w-3 h-3 text-[#FFD700]" />
-                        <span className="text-[9px] font-black uppercase tracking-wider text-white">
+                      <div className="flex items-center gap-1 shrink-0 text-white/90 bg-white/10 self-start rounded-full px-3 py-1.5 border border-white/10 backdrop-blur-sm">
+                        <MapPin className="w-3.5 h-3.5 text-white" />
+                        <span className="text-[10px] font-black uppercase tracking-wider text-white">
                           {ini.location}
                         </span>
                       </div>
