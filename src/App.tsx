@@ -70,20 +70,18 @@ function App() {
         {/* ATO 1 — A PROMESSA & APRESENTAÇÃO */}
         <Hero />
         <About />
+        <Agenda />
         <Dialogues />
 
-        {/* ATO 2 — CRONOGRAMA & CONTEÚDO */}
-        <Agenda />
-
-        {/* ATO 3 — QUEM FAZ ACONTECER */}
+        {/* ATO 2 — QUEM FAZ ACONTECER */}
         <Speakers />
         <EntrepreneurArea />
 
-        {/* ATO 4 — VIVENCIAL & ATRAÇÕES */}
+        {/* ATO 3 — VIVENCIAL & ATRAÇÕES */}
         <Venue />
         <Attractions />
 
-        {/* ATO 5 — APOIO & CONVERSÃO */}
+        {/* ATO 4 — APOIO & CONVERSÃO */}
         <Organizers />
         <Sponsorship />
         <Contact />

@@ -33,6 +33,11 @@ import pIrina from "../assets/painelistas/irina-bacci.jpg";
 import pMarcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import pJoao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
 
+// Atrações Artísticas e Culturais
+import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
+import pShambuyi from "../assets/empreendedores/shambuyiwetu.jpg";
+import pFilme from "../assets/atracoes/a-melhor-mae-do-mundo.jpg";
+
 // Normaliza nomes (minúsculo, sem acentos, espaços colapsados) para casar
 // variações de grafia entre a agenda e os nomes de arquivo.
 function normalizeName(name: string): string {
@@ -101,6 +106,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     title: "Atração Artística",
     description: "Banda dos Curumins",
     type: "artistica",
+    avatar: pCurumins,
   },
   {
     time: "09h15",
@@ -164,8 +170,9 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h00",
     title: "Intervenção Artística",
-    description: "Intervenção Artística Especial",
+    description: "Shambuyi Wetu",
     type: "artistica",
+    avatar: pShambuyi,
   },
   {
     time: "14h15",
@@ -257,6 +264,7 @@ const ENCERRAMENTO: AgendaItem[] = [
     title: "Exibição do Filme",
     description: '"A Melhor Mãe do Mundo"',
     type: "filme",
+    avatar: pFilme,
   },
   {
     time: "19h20 – 20h00",
