@@ -70,7 +70,6 @@ import ne8 from "../assets/dialogos/nordeste/foto-8.jpg";
 import ne9 from "../assets/dialogos/nordeste/foto-9.jpg";
 import ne10 from "../assets/dialogos/nordeste/foto-10.jpg";
 import forumRegionalImg from "../assets/dialogos/forum-regional.jpg";
-import forumRegional2Img from "../assets/dialogos/forum-regional-2.jpg";
 import forumGlobalImg from "../assets/dialogos/forum-global.jpg";
 import forumGlobal2Img from "../assets/dialogos/forum-global-2.jpg";
 import forumGlobal3Img from "../assets/dialogos/forum-global-3.jpg";
@@ -140,7 +139,7 @@ const REGIONS: Region[] = [
     city: "São Paulo (2025)",
     tag: "Articulação Regional",
     note: "O principal espaço latino-americano de conduta empresarial responsável, co-realizado por ACNUDH, OIT e OCDE para estabelecer diálogos multiatores.",
-    photos: [forumRegionalImg, forumRegional2Img],
+    photos: [forumRegionalImg],
   },
   {
     key: "forum-global",
