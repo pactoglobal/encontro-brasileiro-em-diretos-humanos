@@ -310,7 +310,7 @@ export function EntrepreneurArea() {
                           <img 
                             src={ini.odsLogo} 
                             alt={ini.ods} 
-                            className="w-8 h-8 object-contain rounded-md shrink-0" 
+                            className="w-8 h-8 shrink-0" 
                           />
                         )}
                         <span className="text-[11px] font-bold text-white leading-tight">
