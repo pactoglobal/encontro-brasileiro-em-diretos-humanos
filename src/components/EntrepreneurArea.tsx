@@ -222,19 +222,15 @@ export function EntrepreneurArea() {
 
         {/* ── Carrossel Horizontal de Iniciativas ── */}
         {inView && (
-          <div className="relative w-full overflow-hidden">
-            {/* Sombras de fade nas laterais para indicar continuidade no desktop */}
-            <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#FAF9F6] to-transparent z-10 pointer-events-none hidden md:block" />
-            <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#FAF9F6] to-transparent z-10 pointer-events-none hidden md:block" />
-            
+          <div className="relative w-full overflow-hidden -mx-4 md:-mx-[calc((100vw-100%)/2)] px-4 md:px-[calc((100vw-100%)/2)]">
             <motion.div
               ref={carouselRef}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth scrollbar-thin scrollbar-thumb-dhe-navy/10 scrollbar-track-transparent"
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scroll-smooth scrollbar-none"
               style={{
-                scrollbarWidth: "thin",
+                scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
