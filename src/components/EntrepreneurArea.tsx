@@ -243,12 +243,15 @@ export function EntrepreneurArea() {
                   <motion.div
                     key={ini.name}
                     variants={cardVariants}
-                    whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                    className="snap-start shrink-0 w-[290px] sm:w-[340px] md:w-[380px] rounded-[24px] p-6 border border-[#D8D4C7]/65 flex flex-col justify-between dhe-glow-hover bg-white select-none shadow-sm"
+                    whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                    className="snap-start shrink-0 w-[290px] sm:w-[340px] md:w-[380px] rounded-[32px] p-7 border border-white/20 bg-gradient-to-b from-[#050505]/95 to-[#050505]/80 backdrop-blur-2xl flex flex-col justify-between shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_rgba(0,255,65,0.12)] hover:border-[#00FF41]/30 transition-all duration-500 select-none group relative overflow-hidden"
                   >
-                    <div>
+                    {/* Subtle KV Neon glow inside */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0047FF]/5 group-hover:to-[#0047FF]/20 transition-all duration-500 pointer-events-none" />
+                    
+                    <div className="relative z-10">
                       {/* Top Row: Avatar Photo + Info next to it */}
-                      <div className="flex gap-4 items-center mb-5">
+                      <div className="flex gap-4 items-center mb-6">
                         <div 
                           className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 shadow-sm"
                           style={{ borderColor: ini.color }}
@@ -260,14 +263,14 @@ export function EntrepreneurArea() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-bold text-dhe-navy truncate">
+                          <p className="text-sm font-bold text-white truncate">
                             {ini.org}
                           </p>
                           <p className="text-[10px] font-black uppercase tracking-wider truncate" style={{ color: ini.color }}>
                             {ini.category}
                           </p>
                           {ini.partner && (
-                            <span className="inline-block text-[8px] font-black uppercase bg-[#0C2540]/5 text-dhe-navy px-1.5 py-0.5 rounded mt-1 border border-[#0C2540]/10">
+                            <span className="inline-block text-[8px] font-black uppercase bg-white/10 text-white px-2 py-0.5 rounded-full mt-1 border border-white/10">
                               {ini.partner}
                             </span>
                           )}
@@ -275,12 +278,12 @@ export function EntrepreneurArea() {
                       </div>
 
                       {/* Brand Title / Name */}
-                      <h3 className="text-lg font-display font-black text-dhe-navy mb-2">
+                      <h3 className="text-xl font-display font-black text-white mb-3">
                         {ini.name}
                       </h3>
 
-                      {/* Description */}
-                      <p className="text-xs text-dhe-text-muted leading-relaxed mb-4 font-medium h-[72px] overflow-hidden line-clamp-4">
+                      {/* Description - Fixed clipping by removing fixed height */}
+                      <p className="text-[13px] text-white/70 leading-relaxed mb-6 font-medium">
                         {ini.description}
                       </p>
                       
@@ -302,22 +305,24 @@ export function EntrepreneurArea() {
                     </div>
 
                     {/* Footer Row: ODS + Location */}
-                    <div className="pt-4 border-t border-[#D8D4C7]/45 flex items-center justify-between gap-2">
+                    <div className="relative z-10 pt-5 border-t border-white/10 flex items-center justify-between gap-2 mt-auto">
                       <div className="flex items-center gap-2 min-w-0">
                         {ini.odsLogo && (
-                          <img 
-                            src={ini.odsLogo} 
-                            alt={ini.ods} 
-                            className="w-9 h-9 object-contain shrink-0 shadow-sm" 
-                          />
+                          <div className="bg-white/90 p-0.5 rounded-md shrink-0">
+                            <img 
+                              src={ini.odsLogo} 
+                              alt={ini.ods} 
+                              className="w-7 h-7 object-contain" 
+                            />
+                          </div>
                         )}
-                        <span className="text-[9px] font-bold text-dhe-text-muted truncate">
+                        <span className="text-[10px] font-bold text-white/80 truncate">
                           {ini.ods}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1 shrink-0 text-white/50 bg-[#0C2540]/5 rounded px-2 py-0.5 border border-[#0C2540]/10">
-                        <MapPin className="w-2.5 h-2.5 text-[#0C2540]/60" />
-                        <span className="text-[8px] font-black uppercase text-[#0C2540]/75">
+                      <div className="flex items-center gap-1 shrink-0 text-white/60 bg-white/10 rounded-full px-2.5 py-1 border border-white/5 backdrop-blur-sm">
+                        <MapPin className="w-3 h-3 text-[#FFD700]" />
+                        <span className="text-[9px] font-black uppercase tracking-wider text-white">
                           {ini.location}
                         </span>
                       </div>
