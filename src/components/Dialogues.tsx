@@ -62,6 +62,13 @@ import nor10 from "../assets/dialogos/norte/foto-10.jpg";
 import ne1 from "../assets/dialogos/nordeste/foto-1.jpg";
 import ne2 from "../assets/dialogos/nordeste/foto-2.jpg";
 import ne3 from "../assets/dialogos/nordeste/foto-3.jpg";
+import ne4 from "../assets/dialogos/nordeste/foto-4.jpg";
+import ne5 from "../assets/dialogos/nordeste/foto-5.jpg";
+import ne6 from "../assets/dialogos/nordeste/foto-6.jpg";
+import ne7 from "../assets/dialogos/nordeste/foto-7.jpg";
+import ne8 from "../assets/dialogos/nordeste/foto-8.jpg";
+import ne9 from "../assets/dialogos/nordeste/foto-9.jpg";
+import ne10 from "../assets/dialogos/nordeste/foto-10.jpg";
 
 type Region = {
   key: string;
@@ -119,7 +126,7 @@ const REGIONS: Region[] = [
     city: "Recife",
     tag: "Etapa regional",
     note: "O encontro que fechou o ciclo das cinco regiões.",
-    photos: [ne1, ne2, ne3],
+    photos: [ne1, ne2, ne3, ne4, ne5, ne6, ne7, ne8, ne9, ne10],
   },
 ];
 
@@ -369,10 +376,10 @@ export function Dialogues() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 items-start"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
           >
             {/* Meta da etapa */}
-            <div className="lg:pt-2">
+            <div className="lg:col-span-4 lg:pt-2">
               <h3 className="text-2xl font-display font-black leading-tight" style={{ color: "#FFFFFF" }}>{active.label}</h3>
               <div className="flex items-center gap-1.5 text-dhe-magenta mt-1.5">
                 <MapPin className="w-3.5 h-3.5" />
@@ -382,7 +389,7 @@ export function Dialogues() {
             </div>
 
             {/* Fotos — quadro horizontal, sem cortes */}
-            <div>
+            <div className="lg:col-span-8">
               {/* Foto em destaque */}
               <button
                 type="button"
