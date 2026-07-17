@@ -370,34 +370,35 @@ export function Dialogues() {
         </motion.div>
 
         {/* ── Galeria da etapa ativa ──────────────────────────── */}
-        <div className="mt-6">
+        <div className="mt-8">
           <motion.div
             key={active.key}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+            className="flex flex-col gap-6 max-w-5xl mx-auto"
           >
             {/* Meta da etapa */}
-            <div className="lg:col-span-4 lg:pt-2">
-              <h3 className="text-2xl font-display font-black leading-tight" style={{ color: "#FFFFFF" }}>{active.label}</h3>
-              <div className="flex items-center gap-1.5 text-dhe-magenta mt-1.5">
-                <MapPin className="w-3.5 h-3.5" />
-                <span className="text-xs font-black uppercase tracking-widest">{active.city}</span>
-              </div>
-              <p className="text-sm text-white/65 leading-relaxed mt-4 max-w-xs">{active.note}</p>
+            <div className="text-left border-l-4 border-dhe-magenta pl-4 py-1">
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-dhe-magenta">
+                <MapPin className="w-3 h-3" />
+                {active.city} · {active.label}
+              </span>
+              <p className="text-base text-white/85 leading-relaxed mt-2 max-w-3xl">
+                {active.note}
+              </p>
             </div>
 
             {/* Fotos — quadro horizontal, sem cortes */}
-            <div className="lg:col-span-8">
+            <div className="w-full">
               {/* Foto em destaque */}
               <button
                 type="button"
                 onClick={() => setLightbox(featured)}
-                className="group relative w-full block rounded-[20px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                className="group relative w-full block rounded-[20px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-black/20"
                 aria-label="Ampliar foto"
               >
-                <div className="aspect-[3/2] bg-black/40">
+                <div className="aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9] w-full">
                   <motion.img
                     key={active.photos[featured]}
                     src={active.photos[featured]}
@@ -405,7 +406,7 @@ export function Dialogues() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07182a]/70 via-transparent to-transparent pointer-events-none" />
@@ -414,11 +415,11 @@ export function Dialogues() {
                 </span>
               </button>
 
-              {/* Miniaturas — mostra todas as fotos da etapa em quadro cheio */}
+              {/* Miniaturas — mostra todas as fotos da etapa */}
               {active.photos.length > 1 && (
                 <div 
                   ref={scrollRef}
-                  className="flex gap-3 mt-3 overflow-x-auto pb-1 dhe-scroll-snap scroll-smooth scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+                  className="flex gap-3 mt-4 overflow-x-auto pb-1 dhe-scroll-snap scroll-smooth scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-start sm:justify-center"
                 >
                   {active.photos.map((p, i) => {
                     const isSel = i === featured;
@@ -427,7 +428,7 @@ export function Dialogues() {
                         key={p}
                         type="button"
                         onClick={() => setFeatured(i)}
-                        className={`relative shrink-0 w-28 sm:w-32 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                        className={`relative shrink-0 w-24 sm:w-28 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                           isSel ? "border-dhe-magenta" : "border-transparent opacity-60 hover:opacity-100"
                         }`}
                         aria-label={`Ver foto ${i + 1} de ${active.label}`}
