@@ -34,9 +34,9 @@ import pMarcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import pJoao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
 import pHeloisa from "../assets/painelistas/heloisa-perisse.png";
 import pSeuJorge from "../assets/painelistas/seu-jorge.jpg";
+import pVictoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
-import pShambuyi from "../assets/empreendedores/shambuyiwetu.jpg";
 import pFilme from "../assets/atracoes/a-melhor-mae-do-mundo.jpg";
 
 // Normaliza nomes (minúsculo, sem acentos, espaços colapsados) para casar
@@ -68,6 +68,8 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "joao marcos pires camargo": pJoao,
   "heloisa perisse": pHeloisa,
   "seu jorge": pSeuJorge,
+  "victoriana leonora": pVictoriana,
+  "victoriana leonora c gonzaga": pVictoriana,
 };
 
 function photoFor(name: string): string | undefined {
@@ -133,12 +135,14 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
       { name: "Adriana Marcolino", role: "DIEESE" },
       { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT" },
     ],
+    mediator: { name: "Edilene Lopes", role: "Jornalista CNN" },
   },
   {
     time: "11h15",
     title: "O que a agenda significa hoje, para quem faz sentido e como vem sendo implementada",
     type: "painel",
     speakers: [
+      { name: "Victoriana Leonora", role: "Diretora Executiva — ESG Novas Gerações" },
       { name: "Sue Wolter", role: "Petrobras" },
       { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional" },
       { name: "Julia Neiva", role: "Conectas" },
@@ -174,9 +178,9 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h00",
     title: "Intervenção Artística",
-    description: "Shambuyi Wetu / Heloísa Perissé (TBC)",
+    description: "Heloísa Perissé (TBC)",
     type: "artistica",
-    avatar: pShambuyi,
+    avatar: pHeloisa,
   },
   {
     time: "14h15",
@@ -221,6 +225,7 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Andrea Bolzon", role: "PNUD" },
       { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE" },
       { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis" },
+      { name: "Representante Globo", role: "Globo" },
     ],
     mediator: { name: "Flávia Scabin", role: "FGV" },
   },
@@ -232,6 +237,7 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Gabriel Bezerra", role: "Presidente da CONTAR" },
       { name: "Irina Bacci", role: "PADF" },
       { name: "Marcos Antônio Matos", role: "Diretor Cecafe" },
+      { name: "Danielle Pamplona", role: "Professora e Pesquisadora" },
     ],
     mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global" },
   },
@@ -538,6 +544,21 @@ function TimelineItem({
           <h3 className="text-sm font-display font-black leading-snug mb-2" style={{ color: "#ffffff" }}>
             {item.title}
           </h3>
+          
+          {/* Mediação Rápida (Sempre Visível) */}
+          {item.mediator && (
+            <div className="flex items-center flex-wrap gap-1.5 mb-3 mt-1.5">
+              <span className="text-[8px] font-black uppercase tracking-[0.15em] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white/90">
+                🎤 Mediação
+              </span>
+              <span className="text-xs font-bold text-white leading-none">
+                {item.mediator.name}
+              </span>
+              <span className="text-[10px] text-white/55 truncate">
+                ({item.mediator.role})
+              </span>
+            </div>
+          )}
 
           {/* Descrição */}
           {item.description && item.type !== "artistica" && item.type !== "filme" && (

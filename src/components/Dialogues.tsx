@@ -128,12 +128,28 @@ const REGIONS: Region[] = [
     note: "O encontro que fechou o ciclo das cinco regiões.",
     photos: [ne1, ne2, ne3, ne4, ne5, ne6, ne7, ne8, ne9, ne10],
   },
+  {
+    key: "forum-regional",
+    label: "Fórum Regional",
+    city: "São Paulo (2025)",
+    tag: "Articulação Regional",
+    note: "O principal espaço latino-americano de conduta empresarial responsável, co-realizado por ACNUDH, OIT e OCDE para estabelecer diálogos multiatores.",
+    photos: [nac5, se8, co3, sul5, nor2],
+  },
+  {
+    key: "forum-global",
+    label: "Fórum Global da ONU",
+    city: "Genebra, Suíça",
+    tag: "Conexão Internacional",
+    note: "O maior encontro mundial sobre Empresas e Direitos Humanos na sede das Nações Unidas, onde as contribuições brasileiras serão compartilhadas globalmente.",
+    photos: [nac7, sul6, nor7, ne4, se2],
+  },
 ];
 
 const STATS = [
-  { value: "6", label: "encontros" },
-  { value: "5", label: "regiões" },
-  { value: "World café", label: "formato" },
+  { value: "8", label: "etapas e fóruns" },
+  { value: "5", label: "regiões do brasil" },
+  { value: "Genebra", label: "conexão global" },
   { value: "2030", label: "horizonte" },
 ];
 
@@ -281,7 +297,7 @@ export function Dialogues() {
             <span /><span /><span /><span />
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black leading-[1.05] max-w-3xl mb-8" style={{ color: "#FFFFFF" }}>
-            Antes do Encontro:<br className="hidden sm:block" /> os Diálogos de DH e DEI
+            Nossa Trajetória e<br className="hidden sm:block" /> Conexão Internacional
           </h2>
 
           {/* Bento Grid layout de informações */}
@@ -291,10 +307,10 @@ export function Dialogues() {
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#E8187A] mb-3">A Jornada</p>
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed font-light">
-                  Com início na <strong className="text-white font-bold">69ª CSW da ONU</strong> em Nova York, a Rede Brasil do Pacto Global percorreu o país para desenhar estratégias robustas de Direitos Humanos sob a lente de Diversidade, Equidade e Inclusão.
+                  Com início na <strong className="text-white font-bold">69ª CSW da ONU</strong> em Nova York, a Rede Brasil do Pacto Global percorreu o país para desenhar estratégias robustas de Direitos Humanos sob a lente de Diversidade, Equidade e Inclusão, culminando em importantes marcos e fóruns internacionais.
                 </p>
                 <p className="text-sm text-white/70 leading-relaxed mt-4">
-                  Foram cinco encontros regionais em formato <em className="text-white">world café</em>, além do grande encontro de síntese nacional realizado em São Paulo.
+                  Foram cinco encontros regionais (World Café) e a síntese nacional, conectados ao Fórum Regional de Empresas e DH (co-realizado por OIT, ACNUDH e OCDE) e ao Fórum Global de Empresas e DH da ONU em Genebra.
                 </p>
               </div>
             </div>

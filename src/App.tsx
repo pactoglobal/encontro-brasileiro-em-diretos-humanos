@@ -71,11 +71,11 @@ function App() {
         <Hero />
         <About />
         <Agenda />
-        <Dialogues />
 
         {/* ATO 2 — QUEM FAZ ACONTECER */}
         <Speakers />
         <EntrepreneurArea />
+        <Dialogues />
 
         {/* ATO 3 — VIVENCIAL & ATRAÇÕES */}
         <Venue />
