@@ -3,7 +3,7 @@ import { Check, Mail, Info } from "lucide-react";
 
 const BENEFITS = [
   "Visibilidade de Marca: Posicionamento estratégico em ambiente de alto nível institucional liderado pela ONU.",
-  "Relacionamento: Acesso qualificado a lideranças do setor privado, governamental, sociedade civil e academia.",
+  "Relacionamento: Acesso qualificado a lideranças do setor privado, governamental, sociedade civil, academia e titulares de direitos.",
   "Associação de Impacto: Posicionar sua marca na vanguarda da agenda de Direitos Humanos e Empresas no Brasil.",
   "Rede de Contatos: Fortalecimento de parcerias e networking com empresas comprometidas com a Agenda 2030.",
 ];

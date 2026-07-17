@@ -263,7 +263,7 @@ export function EntrepreneurArea() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-bold text-white truncate">
+                          <p className="text-sm font-bold text-white truncate" style={{ color: "#ffffff" }}>
                             {ini.org}
                           </p>
                           <p className="text-[10px] font-black uppercase tracking-wider truncate text-white/90">
@@ -278,7 +278,7 @@ export function EntrepreneurArea() {
                       </div>
 
                       {/* Brand Title / Name */}
-                      <h3 className="text-xl font-display font-black text-white mb-3">
+                      <h3 className="text-xl font-display font-black text-white mb-3" style={{ color: "#ffffff" }}>
                         {ini.name}
                       </h3>
 
@@ -307,13 +307,11 @@ export function EntrepreneurArea() {
                     <div className="relative z-10 pt-5 border-t border-white/10 flex flex-col gap-3 mt-auto">
                       <div className="flex items-center gap-2">
                         {ini.odsLogo && (
-                          <div className="bg-white p-0.5 rounded-md shrink-0">
-                            <img 
-                              src={ini.odsLogo} 
-                              alt={ini.ods} 
-                              className="w-8 h-8 object-contain" 
-                            />
-                          </div>
+                          <img 
+                            src={ini.odsLogo} 
+                            alt={ini.ods} 
+                            className="w-8 h-8 object-contain rounded-md shrink-0" 
+                          />
                         )}
                         <span className="text-[11px] font-bold text-white leading-tight">
                           {ini.ods}

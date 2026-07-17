@@ -122,7 +122,7 @@ export function Speakers() {
             Vozes que fazem a agenda
           </h2>
           <p className="text-base text-dhe-text-muted">
-            Lideranças do setor privado, organismos internacionais, sociedade civil e academia
+            Lideranças do setor privado, organismos internacionais, sociedade civil, academia e titulares de direitos
           </p>
         </motion.div>
 

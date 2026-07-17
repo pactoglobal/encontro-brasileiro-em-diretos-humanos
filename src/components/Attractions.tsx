@@ -160,7 +160,7 @@ export function Attractions() {
               Quem já confirmou presença
             </h2>
             <p className="text-base text-dhe-text-muted mt-2 max-w-lg">
-              Lideranças do setor privado, poder público, sociedade civil e organismos internacionais que sobem ao palco em 04 de agosto.
+              Lideranças do setor privado, poder público, sociedade civil, organismos internacionais e titulares de direitos que sobem ao palco em 04 de agosto.
             </p>
           </div>
 
