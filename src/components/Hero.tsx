@@ -238,7 +238,7 @@ export function Hero() {
             >
               {[
                 { icon: Calendar, text: "04 de Agosto de 2026" },
-                { icon: Clock, text: "09h00 às 19h30" },
+                { icon: Clock, text: "09h00 às 20h00" },
                 { icon: MapPin, text: "Cinemateca Brasileira · SP" },
               ].map(({ icon: Icon, text }) => (
                 <span key={text} className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-full">
