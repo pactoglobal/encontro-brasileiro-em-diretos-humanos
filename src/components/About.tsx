@@ -100,7 +100,7 @@ export function About() {
             <motion.div
               variants={itemVariants}
               whileHover={hoverStyle}
-              className="group relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between border border-white/20"
+              className="group md:col-span-2 relative overflow-hidden rounded-3xl p-8 flex flex-col justify-between border border-white/20"
               style={{ minHeight: "340px" }}
             >
               {/* Background image */}
