@@ -32,7 +32,8 @@ import pGabriel from "../assets/painelistas/gabriel-bezerra.jpg";
 import pIrina from "../assets/painelistas/irina-bacci.jpg";
 import pMarcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import pJoao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
-
+import pHeloisa from "../assets/painelistas/heloisa-perisse.png";
+import pSeuJorge from "../assets/painelistas/seu-jorge.jpg";
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
 import pShambuyi from "../assets/empreendedores/shambuyiwetu.jpg";
@@ -65,6 +66,8 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "irina bacci": pIrina,
   "marcos antonio matos": pMarcos,
   "joao marcos pires camargo": pJoao,
+  "heloisa perisse": pHeloisa,
+  "seu jorge": pSeuJorge,
 };
 
 function photoFor(name: string): string | undefined {
@@ -139,6 +142,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
       { name: "Sue Wolter", role: "Petrobras" },
       { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional" },
       { name: "Julia Neiva", role: "Conectas" },
+      { name: "Leticia Pantoja", role: "MDH (TBC)" },
     ],
     mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
   },
@@ -170,7 +174,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h00",
     title: "Intervenção Artística",
-    description: "Shambuyi Wetu",
+    description: "Shambuyi Wetu / Heloísa Perissé (TBC)",
     type: "artistica",
     avatar: pShambuyi,
   },
@@ -195,6 +199,8 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
       { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)" },
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
       { name: "Gilson Camboim", role: "Presidente da Coogavepe" },
+      { name: "Natalia Souza", role: "CEERT (TBC)" },
+      { name: "Christianne Canavero", role: "Head Global de Sustentabilidade da CBMN (TBC)" },
       { name: "Miguel Castro-Riberos", role: "OCDE" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
@@ -271,6 +277,13 @@ const ENCERRAMENTO: AgendaItem[] = [
     title: "Bate Papo: Economia Circular, Direitos Humanos e Autonomia das Mulheres",
     description: "Construindo cadeias produtivas livres de violência e exclusão",
     type: "batepapo",
+    speakers: [
+      { name: "José Alves Cardoso", role: "Head de Sustentabilidade do Banco do Brasil" },
+      { name: "Seu Jorge", role: "Cantor, ator e produtor cultural (TBC)" },
+      { name: "Dona Carmen Silva", role: "Liderança do MSTC (TBC)" },
+      { name: "Shirley Cruz", role: "Artista e liderança (TBC)" },
+    ],
+    mediator: { name: "Paulo Vieira", role: "Mediação (TBC)" },
   },
 ];
 

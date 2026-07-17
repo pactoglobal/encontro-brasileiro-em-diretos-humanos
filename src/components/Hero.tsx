@@ -196,12 +196,12 @@ export function Hero() {
               transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
               className="flex flex-wrap gap-2 mb-8 lg:mb-6"
             >
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
-                <span className="w-2 h-2 rounded-full bg-dhe-magenta animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-center">
+                <span className="w-2 h-2 rounded-full shrink-0 bg-dhe-magenta animate-pulse" />
                 I Fórum Brasileiro
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white">
-                <span className="w-2 h-2 rounded-full bg-dhe-green" />
+              <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-center">
+                <span className="w-2 h-2 rounded-full shrink-0 bg-dhe-green" />
                 Exclusivo para Convidados
               </span>
             </motion.div>
