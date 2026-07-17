@@ -9,30 +9,55 @@ import nac2 from "../assets/dialogos/nacional/foto-2.jpg";
 import nac3 from "../assets/dialogos/nacional/foto-3.jpg";
 import nac4 from "../assets/dialogos/nacional/foto-4.jpg";
 import nac5 from "../assets/dialogos/nacional/foto-5.jpg";
+import nac6 from "../assets/dialogos/nacional/foto-6.jpg";
+import nac7 from "../assets/dialogos/nacional/foto-7.jpg";
+import nac8 from "../assets/dialogos/nacional/foto-8.jpg";
+import nac9 from "../assets/dialogos/nacional/foto-9.jpg";
+import nac10 from "../assets/dialogos/nacional/foto-10.jpg";
 // Sudeste
 import se1 from "../assets/dialogos/sudeste/foto-1.jpg";
 import se2 from "../assets/dialogos/sudeste/foto-2.jpg";
 import se3 from "../assets/dialogos/sudeste/foto-3.jpg";
 import se4 from "../assets/dialogos/sudeste/foto-4.jpg";
 import se5 from "../assets/dialogos/sudeste/foto-5.jpg";
+import se6 from "../assets/dialogos/sudeste/foto-6.jpg";
+import se7 from "../assets/dialogos/sudeste/foto-7.jpg";
+import se8 from "../assets/dialogos/sudeste/foto-8.jpg";
+import se9 from "../assets/dialogos/sudeste/foto-9.jpg";
+import se10 from "../assets/dialogos/sudeste/foto-10.jpg";
 // Centro-Oeste
 import co1 from "../assets/dialogos/centro-oeste/foto-1.jpg";
 import co2 from "../assets/dialogos/centro-oeste/foto-2.jpg";
 import co3 from "../assets/dialogos/centro-oeste/foto-3.jpg";
 import co4 from "../assets/dialogos/centro-oeste/foto-4.jpg";
 import co5 from "../assets/dialogos/centro-oeste/foto-5.jpg";
+import co6 from "../assets/dialogos/centro-oeste/foto-6.jpg";
+import co7 from "../assets/dialogos/centro-oeste/foto-7.jpg";
+import co8 from "../assets/dialogos/centro-oeste/foto-8.jpg";
+import co9 from "../assets/dialogos/centro-oeste/foto-9.jpg";
+import co10 from "../assets/dialogos/centro-oeste/foto-10.jpg";
 // Sul
 import sul1 from "../assets/dialogos/sul/foto-1.jpg";
 import sul2 from "../assets/dialogos/sul/foto-2.jpg";
 import sul3 from "../assets/dialogos/sul/foto-3.jpg";
 import sul4 from "../assets/dialogos/sul/foto-4.jpg";
 import sul5 from "../assets/dialogos/sul/foto-5.jpg";
+import sul6 from "../assets/dialogos/sul/foto-6.jpg";
+import sul7 from "../assets/dialogos/sul/foto-7.jpg";
+import sul8 from "../assets/dialogos/sul/foto-8.jpg";
+import sul9 from "../assets/dialogos/sul/foto-9.jpg";
+import sul10 from "../assets/dialogos/sul/foto-10.jpg";
 // Norte
 import nor1 from "../assets/dialogos/norte/foto-1.jpg";
 import nor2 from "../assets/dialogos/norte/foto-2.jpg";
 import nor3 from "../assets/dialogos/norte/foto-3.jpg";
 import nor4 from "../assets/dialogos/norte/foto-4.jpg";
 import nor5 from "../assets/dialogos/norte/foto-5.jpg";
+import nor6 from "../assets/dialogos/norte/foto-6.jpg";
+import nor7 from "../assets/dialogos/norte/foto-7.jpg";
+import nor8 from "../assets/dialogos/norte/foto-8.jpg";
+import nor9 from "../assets/dialogos/norte/foto-9.jpg";
+import nor10 from "../assets/dialogos/norte/foto-10.jpg";
 // Nordeste
 import ne1 from "../assets/dialogos/nordeste/foto-1.jpg";
 import ne2 from "../assets/dialogos/nordeste/foto-2.jpg";
@@ -54,7 +79,7 @@ const REGIONS: Region[] = [
     city: "São Paulo",
     tag: "Síntese nacional",
     note: "A rodada que reuniu as contribuições das cinco regiões em um só palco.",
-    photos: [nac1, nac2, nac3, nac4, nac5],
+    photos: [nac1, nac2, nac3, nac4, nac5, nac6, nac7, nac8, nac9, nac10],
   },
   {
     key: "sudeste",
@@ -62,7 +87,7 @@ const REGIONS: Region[] = [
     city: "São Paulo",
     tag: "Etapa regional",
     note: "Profissionais de DH e DEI em mesas de trabalho no formato world café.",
-    photos: [se1, se2, se3, se4, se5],
+    photos: [se1, se2, se3, se4, se5, se6, se7, se8, se9, se10],
   },
   {
     key: "centro-oeste",
@@ -70,7 +95,7 @@ const REGIONS: Region[] = [
     city: "Brasília",
     tag: "Etapa regional",
     note: "Empresas, poder público e sociedade civil construindo estratégias juntos.",
-    photos: [co1, co2, co3, co4, co5],
+    photos: [co1, co2, co3, co4, co5, co6, co7, co8, co9, co10],
   },
   {
     key: "sul",
@@ -78,7 +103,7 @@ const REGIONS: Region[] = [
     city: "Curitiba",
     tag: "Etapa regional",
     note: "Discussões temáticas conectando a agenda de DH & DEI aos ODS.",
-    photos: [sul1, sul2, sul3, sul4, sul5],
+    photos: [sul1, sul2, sul3, sul4, sul5, sul6, sul7, sul8, sul9, sul10],
   },
   {
     key: "norte",
@@ -86,7 +111,7 @@ const REGIONS: Region[] = [
     city: "Manaus",
     tag: "Etapa regional",
     note: "Diálogo sobre justiça climática e bioeconomia no coração da Amazônia.",
-    photos: [nor1, nor2, nor3, nor4, nor5],
+    photos: [nor1, nor2, nor3, nor4, nor5, nor6, nor7, nor8, nor9, nor10],
   },
   {
     key: "nordeste",
