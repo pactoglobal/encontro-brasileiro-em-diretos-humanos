@@ -190,7 +190,7 @@ export function EntrepreneurArea() {
               Conheça os empreendedores de Impacto
             </h2>
             <p className="text-base text-dhe-text-muted leading-relaxed">
-              A Área de Empreendedores reúne 9 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
+              A Área de Empreendedores reúne 7 iniciativas que transformam propósito em impacto, apresentando produtos e negócios comprometidos com a inclusão e o desenvolvimento sustentável. Conheça cada empreendimento, inspire-se com suas histórias e apoie quem gera valor social por meio do empreendedorismo.
             </p>
           </motion.div>
           
