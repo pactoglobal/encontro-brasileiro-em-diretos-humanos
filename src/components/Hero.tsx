@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
-import heroSlide1 from "../assets/hero/hero-slide-1.jpg";
 import heroSlide2 from "../assets/hero/hero-slide-2.jpg";
 import heroSlide3 from "../assets/hero/hero-slide-3.jpg";
 
@@ -10,7 +9,7 @@ import heroSlide3 from "../assets/hero/hero-slide-3.jpg";
 // usadas para transmitir a trajetória da área antes do Encontro de 2026.
 const SLIDES = [
   {
-    src: heroSlide1,
+    src: "/identity/hero-slide-1.jpg",
     caption: "Diálogo Multiator",
     sub: "Empresas, sociedade civil e academia em torno de uma agenda comum",
   },
