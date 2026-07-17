@@ -12,10 +12,8 @@ import esmatImg from "../assets/empreendedores/esmatwear.jpg";
 import perfumesImg from "../assets/empreendedores/perfumesaldomari.jpg";
 import renabesImg from "../assets/empreendedores/renabesartes.jpg";
 import downliciaImg from "../assets/empreendedores/downlicia_oficial.jpg";
-import gleiceImg from "../assets/empreendedores/gleicemirandaaromas.jpg";
 import ninaImg from "../assets/empreendedores/ninabarbosamacrame.jpg";
 import santaImg from "../assets/empreendedores/santatherezadesign.jpg";
-import veganoImg from "../assets/empreendedores/veganoeh.jpg";
 
 type Initiative = {
   name: string;
@@ -103,20 +101,7 @@ const INITIATIVES: Initiative[] = [
     image: downliciaImg,
     partner: "Empreendedor"
   },
-  {
-    name: "Gleice Aromas",
-    org: "Gleice Soares Miranda",
-    category: "Aromas Artesanais",
-    description: "Velas aromáticas e aromatizadores de ambientes produzidos de forma artesanal com cera vegetal e essências finas, promovendo bem-estar e aconchego.",
-    ods: "ODS 12 · Produção Sustentável",
-    odsLogo: "/ods/ods-12.jpg",
-    location: "São Paulo, SP",
-    color: "#4A8C3F",
-    bg: "rgba(74, 140, 63, 0.06)",
-    instagram: "https://www.instagram.com/gleicemirandaaromas/",
-    image: gleiceImg,
-    partner: "RME"
-  },
+
   {
     name: "Nina Barbosa Macramê",
     org: "Nina Barbosa",
@@ -145,20 +130,6 @@ const INITIATIVES: Initiative[] = [
     image: santaImg,
     partner: "RME"
   },
-  {
-    name: "É vegano?",
-    org: "Araci Pereira Santos",
-    category: "Alimentação Saudável",
-    description: "Queijos, pastas e doces 100% à base de plantas e artesanais, preparados com receitas exclusivas para alimentar com saúde, sabor e ética.",
-    ods: "ODS 12 · Consumo Responsável",
-    odsLogo: "/ods/ods-12.jpg",
-    location: "São Paulo, SP",
-    color: "#7B2D1E",
-    bg: "rgba(123, 45, 30, 0.06)",
-    instagram: "https://www.instagram.com/veganoeh/",
-    image: veganoImg,
-    partner: "RME"
-  }
 ];
 
 const containerVariants = {
