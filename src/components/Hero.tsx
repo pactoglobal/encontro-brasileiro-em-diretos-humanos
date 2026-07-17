@@ -161,23 +161,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Setas prev/next — só desktop; 44px (mínimo recomendado de área de toque) */}
-      <button
-        type="button"
-        onClick={prev}
-        className="hidden lg:flex absolute left-4 sm:left-6 top-[46vh] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white transition-all duration-200 focus:outline-none"
-        aria-label="Slide anterior"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        type="button"
-        onClick={next}
-        className="hidden lg:flex absolute right-14 sm:right-16 top-[46vh] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 items-center justify-center text-white transition-all duration-200 focus:outline-none"
-        aria-label="Próximo slide"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+
 
       {/* ═══════════════════════════════════════════════════════
           CONTEÚDO PRINCIPAL
@@ -292,10 +276,30 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* Marcadores de Slide alinhados exatamente aos limites dos dados acima */}
-            <div className="mt-5 flex items-center justify-between w-full">
+            {/* Controles de Slide e Progresso */}
+            <div className="mt-6 flex items-center gap-4 w-full">
+              {/* Setas Prev/Next - Inline */}
+              <div className="hidden lg:flex gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={prev}
+                  className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 focus:outline-none cursor-pointer"
+                  aria-label="Slide anterior"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 focus:outline-none cursor-pointer"
+                  aria-label="Próximo slide"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
               {/* Número do slide */}
-              <div className="flex items-baseline gap-1.5 shrink-0">
+              <div className="flex items-baseline gap-1.5 shrink-0 lg:ml-2">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={current}
@@ -312,7 +316,7 @@ export function Hero() {
               </div>
 
               {/* Barra de progresso horizontal que termina no limite de 'Gratuito' */}
-              <div className="flex-1 ml-6 flex gap-1.5">
+              <div className="flex-1 ml-4 flex gap-1.5">
                 {SLIDES.map((_, i) => (
                   <button
                     key={i}
