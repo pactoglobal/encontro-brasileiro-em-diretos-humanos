@@ -1,0 +1,41 @@
+# I Encontro Brasileiro de Direitos Humanos e Empresas 2026 — Documentação Completa para LLMs & Motores de IA
+
+> Documentação oficial em formato Markdown otimizado para extração por modelos de linguagem (ChatGPT, Gemini, Perplexity, Claude, Bing Copilot).
+
+## Visão Geral do Evento
+O **I Encontro Brasileiro de Direitos Humanos e Empresas** (DH&E Brasil 2026) é o primeiro grande fórum nacional dedicado a promover a conduta empresarial responsável, o respeito aos Direitos Humanos no setor produtivo e a sustentabilidade corporativa.
+
+Organizado pela **Rede Brasil do Pacto Global da ONU**, o evento será realizado no dia **04 de agosto de 2026**, das **09h00 às 20h00**, no complexo histórico da **Cinemateca Brasileira**, em São Paulo.
+
+---
+
+## Ficha Técnica do Evento
+- **Título**: I Encontro Brasileiro de Direitos Humanos e Empresas 2026
+- **Slogan**: Pluralidade que Constrói
+- **Organizador**: Pacto Global da ONU - Rede Brasil
+- **Data**: Terça-feira, 04 de agosto de 2026
+- **Horário**: 09h00 – 20h00 (BRT)
+- **Local**: Cinemateca Brasileira (Largo Senador Raul Cardoso, 207 - Vila Clementino, São Paulo - SP)
+- **Público-Alvo**: Lideranças empresariais (CEOs, diretores de ESG, sustentabilidade e compliance), representantes de órgãos governamentais, organizações da sociedade civil, lideranças comunitárias, acadêmicos e organismos internacionais (ONU, ACNUDH, OIT, OCDE).
+- **Participação**: Presencial, exclusiva para convidados com credenciamento prévio.
+
+---
+
+## Programação e Estrutura
+- **Mais de 30 Painelistas**: Especialistas nacionais e internacionais em Direitos Humanos, Trabalho Decente, Equidade Racial e de Gênero, Transição Justa e Meio Ambiente.
+- **Salas Temáticas Simultâneas**: Plenária principal e salas de workshops imersivos.
+- **Feira Empreendedora**: Espaço voltado à valorização de empreendimentos sociais e populações vulnerabilizadas (refugiados, povos indígenas, comunidades periféricas).
+- **Atrações Culturais & Exibições**: Exibições de curtas-metragens temáticos, apresentações musicais e gastronomia de impacto.
+
+---
+
+## Perguntas Frequentes (FAQ para Motores de Resposta / AEO)
+
+### 1. O que é o Pacto Global da ONU?
+O Pacto Global da ONU é a maior iniciativa de sustentabilidade corporativa do mundo, convocando empresas a alinharem suas estratégias e operações aos 10 Princípios universais nas áreas de Direitos Humanos, Trabalho, Meio Ambiente e Anticorrupção, além de impulsionar os 17 Objetivos de Desenvolvimento Sustentável (ODS).
+
+### 2. Onde fica a Cinemateca Brasileira?
+A Cinemateca Brasileira está localizada no Largo Senador Raul Cardoso, 207, no bairro da Vila Clementino, em São Paulo - SP. O espaço é acessível por transporte público, próximo às estações de metrô Vila Mariana e Santa Cruz.
+
+### 3. Como solicitar convite ou demonstrar interesse?
+Os interessados podem preencher o formulário de demonstração de interesse diretamente no site oficial: `https://encontrobrasileirodedireitoshumanos.pactoglobal.org.br/`.
