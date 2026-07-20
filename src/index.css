@@ -317,11 +317,17 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
-/* Ocultar widgets genéricos injetados por terceiros para priorizar o design nativo unificado */
+/* Ocultar visualmente o widget padrão do GoAdopt mantendo execução e disparo de consentimento para o painel be.lgpd */
 #adopt-website-id,
 .adopt-injector-container,
 div[id*="goadopt"],
 iframe[src*="goadopt"] {
-  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  z-index: -9999 !important;
 }
 

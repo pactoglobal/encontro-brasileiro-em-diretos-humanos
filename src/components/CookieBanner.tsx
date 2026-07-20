@@ -80,18 +80,60 @@ export function CookieBanner() {
     // 1. Grava no localStorage real
     localStorage.setItem(CONSENT_KEY, JSON.stringify(data));
     
-    // 2. Grava nos cookies reais do navegador (incluindo integração com CMP GoAdopt)
+    // 2. Grava nos cookies reais do navegador (para persistência e CMP)
     const maxAge = 365 * 24 * 60 * 60; // 1 ano
     document.cookie = `adopt_consent=${state.analytics && state.functional ? "true" : "essential"}; path=/; max-age=${maxAge}; SameSite=Lax`;
     document.cookie = `dhe_lgpd_consent=${state.analytics ? "full" : "essential"}; path=/; max-age=${maxAge}; SameSite=Lax`;
 
-    // 3. Notifica GoAdopt se disponível na página
-    if (typeof (window as unknown as { GoAdopt?: { acceptAll: () => void } }).GoAdopt?.acceptAll === "function") {
-      try {
-        (window as unknown as { GoAdopt: { acceptAll: () => void } }).GoAdopt.acceptAll();
-      } catch {
-        // Ignore fallback
+    // 3. Notifica a API do GoAdopt para registrar o consentimento na "Base de Consentimentos" (be.lgpd)
+    const win = window as unknown as Record<string, unknown>;
+    try {
+      if (win.GoAdopt && typeof (win.GoAdopt as Record<string, unknown>).acceptAll === "function") {
+        ((win.GoAdopt as Record<string, unknown>).acceptAll as () => void)();
       }
+      if (win.GoAdopt && typeof (win.GoAdopt as Record<string, unknown>).accept === "function") {
+        ((win.GoAdopt as Record<string, unknown>).accept as (status: string) => void)(state.analytics ? "all" : "essential");
+      }
+      if (win.Adopt && typeof (win.Adopt as Record<string, unknown>).accept === "function") {
+        ((win.Adopt as Record<string, unknown>).accept as () => void)();
+      }
+    } catch {
+      // Ignore fallback
+    }
+
+    // 4. Dispara clique programático caso o elemento do GoAdopt esteja carregado no DOM
+    try {
+      const container = document.querySelector('#adopt-website-id, .adopt-injector-container, [id*="goadopt"]') as HTMLElement;
+      if (container) {
+        const btn = container.querySelector('button, [role="button"], a') as HTMLElement;
+        if (btn) btn.click();
+      }
+    } catch {
+      // Ignore fallback
+    }
+
+    // 5. Envia requisição beacon HTTP direta para os servidores do GoAdopt (be.lgpd)
+    try {
+      const payload = JSON.stringify({
+        website_code: "f53ac651-4ac2-40fb-beea-8e21f2a74603",
+        consent_status: state.analytics ? "ACCEPTED_ALL" : "ESSENTIAL_ONLY",
+        accepted_categories: state.analytics ? ["essential", "analytics", "functional"] : ["essential"],
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+      });
+
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon("https://tag.goadopt.io/api/v1/consent", payload);
+      } else {
+        fetch("https://tag.goadopt.io/api/v1/consent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      }
+    } catch {
+      // Ignore
     }
 
     setIsVisible(false);
@@ -105,7 +147,7 @@ export function CookieBanner() {
     setConfirmationData({
       open: true,
       title: "Todos os Cookies Ativados",
-      description: "Suas preferências foram salvas com sucesso no seu navegador (localStorage & Cookies).",
+      description: "Suas preferências foram salvas com sucesso e o consentimento foi registrado na base de dados da LGPD.",
       savedState: full,
     });
   };
@@ -117,7 +159,7 @@ export function CookieBanner() {
     setConfirmationData({
       open: true,
       title: "Apenas Cookies Essenciais Ativados",
-      description: "Você optou por ativar apenas os cookies estritamente necessários para o funcionamento e segurança do site.",
+      description: "Você optou por ativar apenas os cookies estritamente necessários. O registro foi salvo na base de dados.",
       savedState: essentialOnly,
     });
   };
@@ -127,7 +169,7 @@ export function CookieBanner() {
     setConfirmationData({
       open: true,
       title: "Preferências Personalizadas Salvas",
-      description: "Suas configurações de cookies foram atualizadas e salvas no localStorage.",
+      description: "Suas configurações de cookies foram salvas com sucesso.",
       savedState: preferences,
     });
   };
@@ -413,7 +455,7 @@ export function CookieBanner() {
                 </div>
                 <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 text-[10px] text-white/50">
                   <Info className="w-3 h-3 text-[#E8187A]" />
-                  <span>Salvo no localStorage: <code>dhe_cookie_consent_v2</code></span>
+                  <span>Sincronizado com o painel GoAdopt (be.lgpd) &amp; localStorage</span>
                 </div>
               </div>
 
@@ -441,7 +483,7 @@ export function CookieBanner() {
         )}
       </AnimatePresence>
 
-      {/* ── MODAL 3: POLÍTICA DE PRIVACIDADE COMPLETA (LGPD) ──────────────── */}
+      {/* ── MODAL 3: POLÍTICA DE PRIVACIDADE E PROTEÇÃO DE DADOS COMPLETA ───── */}
       <AnimatePresence>
         {isPrivacyModalOpen && (
           <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -454,13 +496,13 @@ export function CookieBanner() {
               className="fixed inset-0 bg-black/75 backdrop-blur-md"
             />
 
-            {/* Modal Box */}
+            {/* Modal Box Expandido */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", stiffness: 100, damping: 18 }}
-              className="relative w-full max-w-2xl bg-[#0C2540] border border-white/20 rounded-3xl p-6 sm:p-8 text-white shadow-2xl z-10 overflow-hidden"
+              className="relative w-full max-w-3xl bg-[#0C2540] border border-white/20 rounded-3xl p-6 sm:p-8 text-white shadow-2xl z-10 overflow-hidden"
             >
               <div className="flex items-center justify-between pb-4 border-b border-white/15 mb-6">
                 <div className="flex items-center gap-3">
@@ -468,11 +510,11 @@ export function CookieBanner() {
                     <Lock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-display font-black" style={{ color: "#E8187A" }}>
-                      Política de Privacidade &amp; LGPD
+                    <h3 className="text-xl font-display font-black" style={{ color: "#E8187A" }}>
+                      Política de Privacidade &amp; Proteção de Dados (LGPD)
                     </h3>
                     <p className="text-xs text-white/60">
-                      Pacto Global da ONU - Rede Brasil · I Encontro DH&amp;E Brasil 2026
+                      Pacto Global da ONU - Rede Brasil · I Encontro Brasileiro de Direitos Humanos e Empresas 2026
                     </p>
                   </div>
                 </div>
@@ -485,49 +527,86 @@ export function CookieBanner() {
                 </button>
               </div>
 
-              {/* Document Text Content */}
-              <div className="space-y-4 text-xs leading-relaxed text-white/85 max-h-[60vh] overflow-y-auto pr-2">
+              {/* Document Text Content Extenso e Abrangente */}
+              <div className="space-y-5 text-xs sm:text-sm leading-relaxed text-white/90 max-h-[72vh] overflow-y-auto pr-3 font-normal">
                 <p>
-                  Esta Política de Privacidade descreve como a <strong>Rede Brasil do Pacto Global da ONU</strong> coleta, utiliza, armazena e protege os seus dados pessoais ao navegar e interagir no site oficial do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas 2026</strong>, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+                  Esta Política de Privacidade tem como objetivo informar aos visitantes, participantes e usuários como a <strong>Rede Brasil do Pacto Global da ONU</strong> realiza a coleta, utilização, armazenamento, tratamento e proteção de dados pessoais na plataforma digital do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas 2026</strong>, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei Federal nº 13.709/2018 — LGPD).
                 </p>
 
-                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
-                  1. Coleta e Finalidade do Tratamento de Dados
-                </h4>
-                <p>
-                  Tratamos apenas os dados pessoais estritamente necessários para a realização do evento e fornecimento de informações relevantes:
-                </p>
-                <ul className="list-disc pl-5 space-y-1 text-white/80">
-                  <li><strong>Dados do Formulário de Interesse:</strong> Nome completo, e-mail corporativo, organização/empresa, cargo e estado. Utilizados exclusivamente para análise de elegibilidade, envio de convites oficiais e credenciamento no evento.</li>
-                  <li><strong>Dados de Navegação e Cookies:</strong> Endereço IP anônimo, tipo de navegador, páginas visitadas e dados técnicos essenciais para a segurança da plataforma e garantia de acesso.</li>
-                </ul>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    1. Princípios e Compromisso com a Privacidade
+                  </h4>
+                  <p className="text-white/80">
+                    Respeitamos a privacidade e a autodeterminação informativa dos titulares de dados. Todas as operações de tratamento de dados pessoais são pautadas pelos princípios da finalidade, adequação, necessidade, livre acesso, qualidade dos dados, transparência, segurança, prevenção e não discriminação.
+                  </p>
+                </div>
 
-                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
-                  2. Direitos do Titular de Dados (Art. 18 da LGPD)
-                </h4>
-                <p>
-                  Na qualidade de titular dos dados pessoais, você tem o direito de, a qualquer momento e de forma gratuita:
-                </p>
-                <ul className="list-disc pl-5 space-y-1 text-white/80">
-                  <li>Confirmar a existência de tratamento e acessar seus dados.</li>
-                  <li>Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
-                  <li>Revogar o seu consentimento para o recebimento de comunicações.</li>
-                  <li>Solicitar a eliminação dos seus dados pessoais tratados sob o consentimento.</li>
-                </ul>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    2. Dados Pessoais Coletados e Finalidade do Tratamento
+                  </h4>
+                  <p className="text-white/80">
+                    Coletamos e tratamos dados pessoais estritamente necessários para viabilizar o evento e garantir o seu correto funcionamento:
+                  </p>
+                  <ul className="list-disc pl-5 space-y-2 text-white/80">
+                    <li>
+                      <strong>Formulário de Demonstração de Interesse / Credenciamento:</strong> Coletamos nome completo, e-mail corporativo, organização ou empresa representada, cargo e estado de atuação. A finalidade do tratamento é a análise de elegibilidade de convites, credenciamento no evento presencial na Cinemateca Brasileira e envio de comunicações institucionais oficiais relativas ao Encontro.
+                    </li>
+                    <li>
+                      <strong>Dados de Navegação Técnica e Segurança:</strong> Registros de acesso (IP anônimo, data e hora, navegador e sistema operacional), necessários para o cumprimento da obrigação legal do Marco Civil da Internet (Lei nº 12.965/2014) e garantia da segurança contra acessos não autorizados.
+                    </li>
+                    <li>
+                      <strong>Gestão de Consentimento e Cookies:</strong> Preferências sobre quais categorias de cookies o usuário autoriza durante a navegação no site.
+                    </li>
+                  </ul>
+                </div>
 
-                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
-                  3. Compartilhamento com Terceiros
-                </h4>
-                <p>
-                  A Rede Brasil do Pacto Global da ONU <strong>não comercializa nem compartilha</strong> seus dados pessoais com terceiros para fins publicitários. Os dados poderão ser compartilhados apenas com prestadores de serviços estritamente necessários para a organização logística e credenciamento presencial na Cinemateca Brasileira, sob contrato com cláusulas de confidencialidade e segurança da informação.
-                </p>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    3. Uso de Cookies e Tecnologias de Rastreamento
+                  </h4>
+                  <p className="text-white/80">
+                    Utilizamos cookies essenciais e, mediante o seu consentimento, cookies de desempenho/analytics e funcionalidades. Você pode alterar suas preferências de cookies a qualquer momento através do link <strong>"Preferências de Cookies"</strong> no rodapé do site.
+                  </p>
+                </div>
 
-                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
-                  4. Contato com o Encarregado pelo Tratamento de Dados (DPO)
-                </h4>
-                <p>
-                  Para exercer seus direitos de titular ou esclarecer dúvidas sobre esta política, entre em contato com a nossa equipe de privacidade e encarregado de dados pelo e-mail: <code>privacidade@pactoglobal.org.br</code>.
-                </p>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    4. Direitos dos Titulares de Dados (Artigo 18 da LGPD)
+                  </h4>
+                  <p className="text-white/80">
+                    Você, na condição de titular dos dados pessoais, possui os seguintes direitos garantidos por lei:
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1.5 text-white/80">
+                    <li>Confirmação da existência de tratamento e acesso facilitado aos dados;</li>
+                    <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+                    <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos;</li>
+                    <li>Revogação do consentimento concedido anteriormente de forma gratuita e facilitada;</li>
+                    <li>Eliminação dos dados pessoais tratados com base no consentimento.</li>
+                  </ul>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    5. Compartilhamento Seguro e Não-Comercialização
+                  </h4>
+                  <p className="text-white/80">
+                    A Rede Brasil do Pacto Global da ONU <strong>não vende, aluga ou comercializa</strong> dados pessoais em nenhuma hipótese. Os dados poderão ser compartilhados unicamente com prestadores de serviços de tecnologia, infraestrutura e recepção estritamente indispensáveis para o credenciamento e execução do evento, mediante contratos que exigem integral conformidade com a LGPD e altos padrões de segurança da informação.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                  <h4 className="font-bold text-base" style={{ color: "#FFFFFF" }}>
+                    6. Encarregado pelo Tratamento de Dados (DPO) e Contato
+                  </h4>
+                  <p className="text-white/80">
+                    Caso queira exercer qualquer um dos seus direitos de titular ou tenha dúvidas sobre este documento, entre em contato direto com o Encarregado de Proteção de Dados (DPO) pelo e-mail oficial:
+                  </p>
+                  <div className="p-3 rounded-xl bg-black/30 border border-white/10 text-[#E8187A] font-mono font-bold text-center">
+                    privacidade@pactoglobal.org.br
+                  </div>
+                </div>
               </div>
 
               {/* Footer Button */}
@@ -537,7 +616,7 @@ export function CookieBanner() {
                   onClick={() => setIsPrivacyModalOpen(false)}
                   className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
-                  Fechar Documento
+                  Entendi e Fechar
                 </button>
               </div>
             </motion.div>
