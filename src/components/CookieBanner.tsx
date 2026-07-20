@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Cookie, X, Settings, Check, Info } from "lucide-react";
+import { ShieldCheck, Cookie, X, Settings, Check, Info, FileText, Lock } from "lucide-react";
 
 type ConsentState = {
   essential: boolean; // Always true
@@ -13,6 +13,7 @@ const CONSENT_KEY = "dhe_cookie_consent_v2";
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [confirmationData, setConfirmationData] = useState<{
     open: boolean;
     title: string;
@@ -48,18 +49,26 @@ export function CookieBanner() {
           });
         }
       } catch {
-        // Fallback for simple values
+        // Fallback
       }
     }
   }, []);
 
-  // Listen for global open event (e.g. from footer link "Preferências de Cookies")
+  // Listen for global open events (from footer links)
   useEffect(() => {
-    const handleOpen = () => {
+    const handleOpenPreferences = () => {
       setIsModalOpen(true);
     };
-    window.addEventListener("dhe:open-cookie-preferences", handleOpen);
-    return () => window.removeEventListener("dhe:open-cookie-preferences", handleOpen);
+    const handleOpenPrivacy = () => {
+      setIsPrivacyModalOpen(true);
+    };
+
+    window.addEventListener("dhe:open-cookie-preferences", handleOpenPreferences);
+    window.addEventListener("dhe:open-privacy-policy", handleOpenPrivacy);
+    return () => {
+      window.removeEventListener("dhe:open-cookie-preferences", handleOpenPreferences);
+      window.removeEventListener("dhe:open-privacy-policy", handleOpenPrivacy);
+    };
   }, []);
 
   const saveConsent = (state: ConsentState) => {
@@ -127,7 +136,7 @@ export function CookieBanner() {
     <>
       {/* ── BANNER POP-UP INICIAL ────────────────────────────────────────── */}
       <AnimatePresence>
-        {isVisible && !isModalOpen && !confirmationData.open && (
+        {isVisible && !isModalOpen && !isPrivacyModalOpen && !confirmationData.open && (
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -165,12 +174,24 @@ export function CookieBanner() {
               </div>
 
               {/* Description */}
-              <p className="text-xs text-white/85 leading-relaxed mb-5 font-normal">
-                Utilizamos cookies e tecnologias semelhantes para garantir o funcionamento seguro, navegação adequada e aprimoramento da sua experiência no site do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas</strong>, em conformidade com a LGPD.
+              <p className="text-xs text-white/85 leading-relaxed mb-4 font-normal">
+                Utilizamos cookies e tecnologias semelhantes para garantir o funcionamento seguro e aprimoramento da sua experiência no site do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas</strong>, em conformidade com a LGPD.
               </p>
 
+              {/* Policy Link */}
+              <div className="mb-5">
+                <button
+                  type="button"
+                  onClick={() => setIsPrivacyModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs text-[#E8187A] hover:underline font-bold cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  Ler Política de Privacidade completa
+                </button>
+              </div>
+
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2 border-t border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 pt-3 border-t border-white/10">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
@@ -311,21 +332,30 @@ export function CookieBanner() {
               </div>
 
               {/* Modal Controls */}
-              <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-white/15">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/15">
                 <button
                   type="button"
-                  onClick={handleSavePreferences}
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-xs font-bold uppercase tracking-wider text-white transition-all text-center cursor-pointer"
+                  onClick={() => setIsPrivacyModalOpen(true)}
+                  className="text-xs text-white/70 hover:text-white underline cursor-pointer"
                 >
-                  Salvar Escolhas
+                  Ver Política de Privacidade
                 </button>
-                <button
-                  type="button"
-                  onClick={handleAcceptAll}
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer"
-                >
-                  Aceitar Todos
-                </button>
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                  <button
+                    type="button"
+                    onClick={handleSavePreferences}
+                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-xs font-bold uppercase tracking-wider text-white transition-all text-center cursor-pointer"
+                  >
+                    Salvar Escolhas
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleAcceptAll}
+                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer"
+                  >
+                    Aceitar Todos
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -404,6 +434,110 @@ export function CookieBanner() {
                   className="flex-1 py-2.5 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
                   Entendido
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── MODAL 3: POLÍTICA DE PRIVACIDADE COMPLETA (LGPD) ──────────────── */}
+      <AnimatePresence>
+        {isPrivacyModalOpen && (
+          <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsPrivacyModalOpen(false)}
+              className="fixed inset-0 bg-black/75 backdrop-blur-md"
+            />
+
+            {/* Modal Box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", stiffness: 100, damping: 18 }}
+              className="relative w-full max-w-2xl bg-[#0C2540] border border-white/20 rounded-3xl p-6 sm:p-8 text-white shadow-2xl z-10 overflow-hidden"
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-white/15 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#E8187A]/15 border border-[#E8187A]/30 flex items-center justify-center text-[#E8187A]">
+                    <Lock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-display font-black" style={{ color: "#E8187A" }}>
+                      Política de Privacidade &amp; LGPD
+                    </h3>
+                    <p className="text-xs text-white/60">
+                      Pacto Global da ONU - Rede Brasil · I Encontro DH&amp;E Brasil 2026
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsPrivacyModalOpen(false)}
+                  className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-white/70 hover:text-white transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Document Text Content */}
+              <div className="space-y-4 text-xs leading-relaxed text-white/85 max-h-[60vh] overflow-y-auto pr-2">
+                <p>
+                  Esta Política de Privacidade descreve como a <strong>Rede Brasil do Pacto Global da ONU</strong> coleta, utiliza, armazena e protege os seus dados pessoais ao navegar e interagir no site oficial do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas 2026</strong>, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+                </p>
+
+                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
+                  1. Coleta e Finalidade do Tratamento de Dados
+                </h4>
+                <p>
+                  Tratamos apenas os dados pessoais estritamente necessários para a realização do evento e fornecimento de informações relevantes:
+                </p>
+                <ul className="list-disc pl-5 space-y-1 text-white/80">
+                  <li><strong>Dados do Formulário de Interesse:</strong> Nome completo, e-mail corporativo, organização/empresa, cargo e estado. Utilizados exclusivamente para análise de elegibilidade, envio de convites oficiais e credenciamento no evento.</li>
+                  <li><strong>Dados de Navegação e Cookies:</strong> Endereço IP anônimo, tipo de navegador, páginas visitadas e dados técnicos essenciais para a segurança da plataforma e garantia de acesso.</li>
+                </ul>
+
+                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
+                  2. Direitos do Titular de Dados (Art. 18 da LGPD)
+                </h4>
+                <p>
+                  Na qualidade de titular dos dados pessoais, você tem o direito de, a qualquer momento e de forma gratuita:
+                </p>
+                <ul className="list-disc pl-5 space-y-1 text-white/80">
+                  <li>Confirmar a existência de tratamento e acessar seus dados.</li>
+                  <li>Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
+                  <li>Revogar o seu consentimento para o recebimento de comunicações.</li>
+                  <li>Solicitar a eliminação dos seus dados pessoais tratados sob o consentimento.</li>
+                </ul>
+
+                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
+                  3. Compartilhamento com Terceiros
+                </h4>
+                <p>
+                  A Rede Brasil do Pacto Global da ONU <strong>não comercializa nem compartilha</strong> seus dados pessoais com terceiros para fins publicitários. Os dados poderão ser compartilhados apenas com prestadores de serviços estritamente necessários para a organização logística e credenciamento presencial na Cinemateca Brasileira, sob contrato com cláusulas de confidencialidade e segurança da informação.
+                </p>
+
+                <h4 className="font-bold text-sm text-white pt-2 border-t border-white/10" style={{ color: "#FFFFFF" }}>
+                  4. Contato com o Encarregado pelo Tratamento de Dados (DPO)
+                </h4>
+                <p>
+                  Para exercer seus direitos de titular ou esclarecer dúvidas sobre esta política, entre em contato com a nossa equipe de privacidade e encarregado de dados pelo e-mail: <code>privacidade@pactoglobal.org.br</code>.
+                </p>
+              </div>
+
+              {/* Footer Button */}
+              <div className="pt-4 border-t border-white/15 mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setIsPrivacyModalOpen(false)}
+                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  Fechar Documento
                 </button>
               </div>
             </motion.div>

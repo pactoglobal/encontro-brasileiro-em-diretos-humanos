@@ -42,6 +42,13 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-4">
             <button
               type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("dhe:open-privacy-policy"))}
+              className="transition-colors hover:text-white underline cursor-pointer"
+            >
+              Política de Privacidade
+            </button>
+            <button
+              type="button"
               onClick={() => window.dispatchEvent(new CustomEvent("dhe:open-cookie-preferences"))}
               className="transition-colors hover:text-white underline cursor-pointer"
             >
