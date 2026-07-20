@@ -146,7 +146,7 @@ export function CookieBanner() {
                     <Cookie className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-base font-display font-black text-[#E8187A] leading-tight">
+                    <h4 className="text-base font-display font-black leading-tight" style={{ color: "#E8187A" }}>
                       Privacidade &amp; Cookies
                     </h4>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-white/60">
@@ -230,7 +230,7 @@ export function CookieBanner() {
                     <Settings className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-display font-black text-[#E8187A]">
+                    <h3 className="text-lg font-display font-black" style={{ color: "#E8187A" }}>
                       Personalizar Preferências
                     </h3>
                     <p className="text-xs text-white/60">
@@ -355,7 +355,7 @@ export function CookieBanner() {
                 <Check className="w-6 h-6" />
               </div>
 
-              <h3 className="text-xl font-display font-black text-white mb-2">
+              <h3 className="text-xl font-display font-black mb-2" style={{ color: "#FFFFFF" }}>
                 {confirmationData.title}
               </h3>
               
