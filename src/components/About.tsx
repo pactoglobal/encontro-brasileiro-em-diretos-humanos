@@ -22,6 +22,7 @@ const PUBLICO_TAGS = [
   "Lideranças Corporativas",
   "Poder Público",
   "Sociedade Civil",
+  "Titulares de Direitos",
   "Academia",
   "Organismos Internacionais",
 ];
