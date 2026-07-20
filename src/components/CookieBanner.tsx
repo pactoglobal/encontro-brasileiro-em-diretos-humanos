@@ -46,7 +46,7 @@ export function CookieBanner() {
                   <Cookie className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-base font-display font-black text-white leading-tight">
+                  <h4 className="text-base font-display font-black text-[#E8187A] leading-tight">
                     Privacidade &amp; Cookies
                   </h4>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-white/60">
