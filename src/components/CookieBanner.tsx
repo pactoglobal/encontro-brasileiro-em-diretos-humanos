@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Cookie, X, Settings, Check } from "lucide-react";
+import { ShieldCheck, Cookie, X, Settings, Check, Info } from "lucide-react";
 
 type ConsentState = {
   essential: boolean; // Always true
@@ -13,6 +13,18 @@ const CONSENT_KEY = "dhe_cookie_consent_v2";
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmationData, setConfirmationData] = useState<{
+    open: boolean;
+    title: string;
+    description: string;
+    savedState: ConsentState;
+  }>({
+    open: false,
+    title: "",
+    description: "",
+    savedState: { essential: true, analytics: false, functional: false },
+  });
+
   const [preferences, setPreferences] = useState<ConsentState>({
     essential: true,
     analytics: true,
@@ -20,7 +32,7 @@ export function CookieBanner() {
   });
 
   useEffect(() => {
-    // Check stored consent
+    // Check stored consent on initial load
     const stored = localStorage.getItem(CONSENT_KEY);
     if (!stored) {
       const timer = setTimeout(() => setIsVisible(true), 1000);
@@ -36,12 +48,12 @@ export function CookieBanner() {
           });
         }
       } catch {
-        // Fallback for string states
+        // Fallback for simple values
       }
     }
   }, []);
 
-  // Listen for global open event (e.g. from footer link)
+  // Listen for global open event (e.g. from footer link "Preferências de Cookies")
   useEffect(() => {
     const handleOpen = () => {
       setIsModalOpen(true);
@@ -55,19 +67,21 @@ export function CookieBanner() {
       ...state,
       timestamp: new Date().toISOString(),
     };
+
+    // 1. Grava no localStorage real
     localStorage.setItem(CONSENT_KEY, JSON.stringify(data));
     
-    // Set actual cookies for browser & CMP integration
-    const maxAge = 365 * 24 * 60 * 60; // 1 year
+    // 2. Grava nos cookies reais do navegador (incluindo integração com CMP GoAdopt)
+    const maxAge = 365 * 24 * 60 * 60; // 1 ano
     document.cookie = `adopt_consent=${state.analytics && state.functional ? "true" : "essential"}; path=/; max-age=${maxAge}; SameSite=Lax`;
     document.cookie = `dhe_lgpd_consent=${state.analytics ? "full" : "essential"}; path=/; max-age=${maxAge}; SameSite=Lax`;
 
-    // Try calling GoAdopt API if injected
+    // 3. Notifica GoAdopt se disponível na página
     if (typeof (window as unknown as { GoAdopt?: { acceptAll: () => void } }).GoAdopt?.acceptAll === "function") {
       try {
         (window as unknown as { GoAdopt: { acceptAll: () => void } }).GoAdopt.acceptAll();
       } catch {
-        // Ignore iframe fallback
+        // Ignore fallback
       }
     }
 
@@ -79,23 +93,41 @@ export function CookieBanner() {
     const full: ConsentState = { essential: true, analytics: true, functional: true };
     setPreferences(full);
     saveConsent(full);
+    setConfirmationData({
+      open: true,
+      title: "Todos os Cookies Ativados",
+      description: "Suas preferências foram salvas com sucesso no seu navegador (localStorage & Cookies).",
+      savedState: full,
+    });
   };
 
   const handleAcceptEssential = () => {
     const essentialOnly: ConsentState = { essential: true, analytics: false, functional: false };
     setPreferences(essentialOnly);
     saveConsent(essentialOnly);
+    setConfirmationData({
+      open: true,
+      title: "Apenas Cookies Essenciais Ativados",
+      description: "Você optou por ativar apenas os cookies estritamente necessários para o funcionamento e segurança do site.",
+      savedState: essentialOnly,
+    });
   };
 
   const handleSavePreferences = () => {
     saveConsent(preferences);
+    setConfirmationData({
+      open: true,
+      title: "Preferências Personalizadas Salvas",
+      description: "Suas configurações de cookies foram atualizadas e salvas no localStorage.",
+      savedState: preferences,
+    });
   };
 
   return (
     <>
       {/* ── BANNER POP-UP INICIAL ────────────────────────────────────────── */}
       <AnimatePresence>
-        {isVisible && !isModalOpen && (
+        {isVisible && !isModalOpen && !confirmationData.open && (
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -134,7 +166,7 @@ export function CookieBanner() {
 
               {/* Description */}
               <p className="text-xs text-white/85 leading-relaxed mb-5 font-normal">
-                Utilizamos cookies e tecnologias semelhantes para garantir o funcionamento seguro, navegação adequada e aprimoramento da sua experiência no site do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas</strong>, em conformidade com a LGPD (Lei Geral de Proteção de Dados).
+                Utilizamos cookies e tecnologias semelhantes para garantir o funcionamento seguro, navegação adequada e aprimoramento da sua experiência no site do <strong>I Encontro Brasileiro de Direitos Humanos e Empresas</strong>, em conformidade com a LGPD.
               </p>
 
               {/* Action Buttons */}
@@ -171,7 +203,7 @@ export function CookieBanner() {
         )}
       </AnimatePresence>
 
-      {/* ── MODAL DE PREFERÊNCIAS E PERSONALIZAÇÃO ───────────────────────── */}
+      {/* ── MODAL 1: PERSONALIZAR PREFERÊNCIAS ─────────────────────────────── */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -198,11 +230,11 @@ export function CookieBanner() {
                     <Settings className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-display font-black text-white">
-                      Preferências de Privacidade
+                    <h3 className="text-lg font-display font-black text-[#E8187A]">
+                      Personalizar Preferências
                     </h3>
                     <p className="text-xs text-white/60">
-                      Gerencie suas escolhas de cookies (LGPD)
+                      Escolha quais cookies autorizar no seu navegador (LGPD)
                     </p>
                   </div>
                 </div>
@@ -223,7 +255,7 @@ export function CookieBanner() {
                     <span className="text-sm font-bold text-white flex items-center gap-2">
                       Cookies Essenciais
                       <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#4A8C3F]/30 text-[#4A8C3F] border border-[#4A8C3F]/40">
-                        Obrigatório
+                        Sempre Ativo
                       </span>
                     </span>
                     <div className="w-5 h-5 rounded-full bg-[#4A8C3F] flex items-center justify-center text-white">
@@ -285,7 +317,7 @@ export function CookieBanner() {
                   onClick={handleSavePreferences}
                   className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-xs font-bold uppercase tracking-wider text-white transition-all text-center cursor-pointer"
                 >
-                  Salvar Minhas Escolhas
+                  Salvar Escolhas
                 </button>
                 <button
                   type="button"
@@ -293,6 +325,85 @@ export function CookieBanner() {
                   className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer"
                 >
                   Aceitar Todos
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── MODAL 2: CONFIRMAÇÃO DE SALVAMENTO NO LOCALSTORAGE ────────────── */}
+      <AnimatePresence>
+        {confirmationData.open && (
+          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setConfirmationData((prev) => ({ ...prev, open: false }))}
+              className="fixed inset-0 bg-black/70 backdrop-blur-md"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", stiffness: 110, damping: 18 }}
+              className="relative w-full max-w-md bg-[#0C2540] border border-white/20 rounded-3xl p-6 text-white shadow-2xl z-10 overflow-hidden text-center"
+            >
+              <div className="w-12 h-12 rounded-full bg-[#4A8C3F]/20 border border-[#4A8C3F]/40 text-[#4A8C3F] flex items-center justify-center mx-auto mb-4">
+                <Check className="w-6 h-6" />
+              </div>
+
+              <h3 className="text-xl font-display font-black text-white mb-2">
+                {confirmationData.title}
+              </h3>
+              
+              <p className="text-xs text-white/80 leading-relaxed mb-6">
+                {confirmationData.description}
+              </p>
+
+              {/* Status do localStorage em tempo real */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-left text-xs mb-6 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-white/60">Essenciais (Navegação):</span>
+                  <span className="font-bold text-[#4A8C3F]">Ativo</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/60">Analytics &amp; Desempenho:</span>
+                  <span className={`font-bold ${confirmationData.savedState.analytics ? "text-[#4A8C3F]" : "text-white/40"}`}>
+                    {confirmationData.savedState.analytics ? "Ativo" : "Desativado"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/60">Funcionalidade:</span>
+                  <span className={`font-bold ${confirmationData.savedState.functional ? "text-[#4A8C3F]" : "text-white/40"}`}>
+                    {confirmationData.savedState.functional ? "Ativo" : "Desativado"}
+                  </span>
+                </div>
+                <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 text-[10px] text-white/50">
+                  <Info className="w-3 h-3 text-[#E8187A]" />
+                  <span>Salvo no localStorage: <code>dhe_cookie_consent_v2</code></span>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setConfirmationData((prev) => ({ ...prev, open: false }));
+                    setIsModalOpen(true);
+                  }}
+                  className="flex-1 py-2.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-xs font-bold text-white transition-all cursor-pointer"
+                >
+                  Alterar Escolhas
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmationData((prev) => ({ ...prev, open: false }))}
+                  className="flex-1 py-2.5 rounded-full bg-gradient-to-r from-[#E8187A] to-[#E05A3A] text-xs font-bold uppercase tracking-wider text-white shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  Entendido
                 </button>
               </div>
             </motion.div>
