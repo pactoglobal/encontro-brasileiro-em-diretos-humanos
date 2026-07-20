@@ -1,40 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
-import heroSlide2 from "../assets/hero/hero-slide-2.jpg";
-import heroSlide3 from "../assets/hero/hero-slide-3.jpg";
 
-// Slides com imagem + caption temático
-// Fotos reais dos Diálogos de Direitos Humanos e DEI (Diálogo Nacional),
-// usadas para transmitir a trajetória da área antes do Encontro de 2026.
+// Slides com atmosferas de cor do KV + caption temático
+// Substituídas fotos por transições de cores e gradientes da marca
 const SLIDES = [
   {
-    src: "/identity/hero-slide-1.jpg",
+    gradient: "from-[#0C2540] via-[#071828] to-[#190B24]",
+    accentGlow1: "#E8187A", // Magenta KV
+    accentGlow2: "#4A8C3F", // Verde KV
     caption: "Diálogo Multiator",
-    sub: "Empresas, sociedade civil e academia em torno de uma agenda comum",
+    sub: "Empresas, sociedade civil, academia e titulares de direitos em torno de uma agenda comum",
   },
   {
-    src: heroSlide3,
+    gradient: "from-[#071828] via-[#3B1417] to-[#0C2540]",
+    accentGlow1: "#7B2D1E", // Marrom KV
+    accentGlow2: "#FFD700", // Amarelo ODS
     caption: "Sustentabilidade em Ação",
     sub: "Práticas responsáveis que transformam negócios e comunidades",
   },
   {
-    src: heroSlide2,
+    gradient: "from-[#0C2540] via-[#071828] to-[#401817]",
+    accentGlow1: "#E05A3A", // Coral KV
+    accentGlow2: "#E8187A", // Magenta KV
     caption: "Pluralidade que Constrói",
     sub: "Espaço de escuta, debate e construção coletiva de soluções",
   },
 ];
 
 const TARGET_DATE = new Date("2026-08-04T09:00:00-03:00");
-
-// Ken Burns: animação mais cinematográfica e ampla
-const SLIDE_ANIMATIONS = [
-  { initial: { scale: 1.15, x: "2%" },  animate: { scale: 1.0, x: "0%" } },
-  { initial: { scale: 1.12, x: "-2%" }, animate: { scale: 1.0, x: "0%" } },
-  { initial: { scale: 1.15, y: "2%" },  animate: { scale: 1.0, y: "0%" } },
-];
-
-
 
 export function Hero() {
   const [current, setCurrent] = useState(0);
@@ -78,44 +72,44 @@ export function Hero() {
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
   }, []);
 
-  const slideAnim = SLIDE_ANIMATIONS[current];
-
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden flex flex-col">
+    <section id="hero" className="relative min-h-screen overflow-hidden flex flex-col bg-[#071828]">
 
       {/* ═══════════════════════════════════════════════════════
-          BACKGROUND SLIDESHOW — fullscreen cinematográfico
+          BACKGROUND SLIDESHOW — Cores e Gradientes do KV
       ═══════════════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="sync">
           <motion.div
             key={current}
-            className="absolute inset-0"
+            className={`absolute inset-0 bg-gradient-to-br ${SLIDES[current].gradient}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.4, ease: "easeInOut" }}
           >
-            {/* Ken Burns na imagem */}
+            {/* Esfera de brilho KV 1 */}
             <motion.div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${SLIDES[current].src})` }}
-              initial={slideAnim.initial}
-              animate={slideAnim.animate}
-              transition={{ duration: 7.5, ease: "linear" }}
+              className="absolute -top-32 -left-20 w-[650px] h-[650px] rounded-full blur-[130px] opacity-40 pointer-events-none"
+              style={{ backgroundColor: SLIDES[current].accentGlow1 }}
+              initial={{ scale: 0.8, x: -30, y: -20 }}
+              animate={{ scale: 1.15, x: 25, y: 30 }}
+              transition={{ duration: 6, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+            />
+            {/* Esfera de brilho KV 2 */}
+            <motion.div
+              className="absolute -bottom-40 -right-20 w-[650px] h-[650px] rounded-full blur-[150px] opacity-35 pointer-events-none"
+              style={{ backgroundColor: SLIDES[current].accentGlow2 }}
+              initial={{ scale: 1.1, x: 30, y: 20 }}
+              animate={{ scale: 0.85, x: -25, y: -30 }}
+              transition={{ duration: 6, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Overlay em camadas: preserva cor do KV embaixo + escurecimento dramático */}
-        {/* Camada 1: escurecimento geral */}
-        <div className="absolute inset-0 bg-[#0C2540]/65" />
-        {/* Camada 2: gradiente de baixo (onde fica o conteúdo principal) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0C2540]/90 via-[#0C2540]/40 to-transparent" />
-        {/* Camada 3: gradiente lateral esquerdo para texto */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0C2540]/70 via-transparent to-transparent" />
-        {/* Camada 4: tint de cor do KV — magenta sutil no topo direito */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-[#E8187A]/12 via-transparent to-transparent" />
+        {/* Textura sutil em gradiente de profundidade */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(7,24,40,0.65)_100%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C2540]/90 via-transparent to-[#071828]/60 pointer-events-none" />
       </div>
 
       {/* ═══════════════════════════════════════════════════════
