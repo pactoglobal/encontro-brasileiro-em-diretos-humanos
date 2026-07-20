@@ -254,17 +254,17 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, type: "spring", stiffness: 70 }}
-              className="w-full rounded-2xl p-6 shadow-lg dhe-glass"
+              className="w-full rounded-2xl p-4 sm:p-6 shadow-lg dhe-glass"
             >
-              <div className="grid grid-cols-3 gap-3 sm:gap-6 text-center sm:text-left divide-x divide-white/10">
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-6 text-center sm:text-left divide-x divide-white/10">
                 {[
                   { value: "30+", label: "Painelistas", color: "#E8187A", pl: "pl-0" },
-                  { value: "10h+", label: "De Conteúdo", color: "#4A8C3F", pl: "pl-3 sm:pl-6" },
-                  { value: "Exclusivo", label: "Para Convidados", color: "#E05A3A", pl: "pl-3 sm:pl-6" },
+                  { value: "10h+", label: "De Conteúdo", color: "#4A8C3F", pl: "pl-1.5 sm:pl-6" },
+                  { value: "Exclusivo", label: "Para Convidados", color: "#E05A3A", pl: "pl-1.5 sm:pl-6" },
                 ].map(({ value, label, color, pl }) => (
-                  <div key={label} className={`flex flex-col justify-center ${pl}`}>
-                    <p className="text-3xl sm:text-4xl font-display font-black leading-none" style={{ color }}>{value}</p>
-                    <p className="text-[10px] sm:text-xs font-bold text-white/85 uppercase tracking-wider mt-2">{label}</p>
+                  <div key={label} className={`flex flex-col justify-center min-w-0 ${pl}`}>
+                    <p className="text-lg min-[380px]:text-2xl sm:text-4xl font-display font-black leading-none tracking-tight truncate sm:whitespace-normal" style={{ color }}>{value}</p>
+                    <p className="text-[9px] min-[380px]:text-[10px] sm:text-xs font-bold text-white/85 uppercase tracking-wider mt-2">{label}</p>
                   </div>
                 ))}
               </div>
