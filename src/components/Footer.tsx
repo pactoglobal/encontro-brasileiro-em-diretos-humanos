@@ -39,14 +39,23 @@ export function Footer() {
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-dhe-green)]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-dhe-coral)]" />
           </div>
-          <a
-            href="https://www.pactoglobal.org.br"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-white"
-          >
-            pactoglobal.org.br
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("dhe:open-cookie-preferences"))}
+              className="transition-colors hover:text-white underline cursor-pointer"
+            >
+              Preferências de Cookies
+            </button>
+            <a
+              href="https://www.pactoglobal.org.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-white"
+            >
+              pactoglobal.org.br
+            </a>
+          </div>
         </div>
       </div>
     </footer>

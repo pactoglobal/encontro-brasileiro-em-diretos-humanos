@@ -316,3 +316,12 @@ h1, h2, h3, h4, h5, h6 {
   filter: grayscale(0%) opacity(1);
   transform: scale(1.05);
 }
+
+/* Ocultar widgets genéricos injetados por terceiros para priorizar o design nativo unificado */
+#adopt-website-id,
+.adopt-injector-container,
+div[id*="goadopt"],
+iframe[src*="goadopt"] {
+  display: none !important;
+}
+
