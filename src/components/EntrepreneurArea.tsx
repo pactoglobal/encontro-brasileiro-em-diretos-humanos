@@ -222,13 +222,13 @@ export function EntrepreneurArea() {
 
         {/* ── Carrossel Horizontal de Iniciativas ── */}
         {inView && (
-          <div className="relative w-full overflow-hidden -mx-4 md:-mx-[calc((100vw-100%)/2)] px-4 md:px-[calc((100vw-100%)/2)]">
+          <div className="relative w-full">
             <motion.div
               ref={carouselRef}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scroll-smooth scrollbar-none"
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 scroll-smooth scrollbar-none pr-6 sm:pr-12"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
