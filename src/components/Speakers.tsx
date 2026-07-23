@@ -6,7 +6,7 @@ import jandyraImg from "../assets/painelistas/jandyra-uehara.jpg";
 import luizImg from "../assets/painelistas/luiz-henrique-ramos.jpg";
 import josefaImg from "../assets/painelistas/josefa-camara.jpg";
 import gilsonImg from "../assets/painelistas/gilson-camboim.jpg";
-import larissaImg from "../assets/painelistas/larissa-rodrigues.jpg";
+import gabrielaImg from "../assets/painelistas/gabriela-almeida.jpg";
 import thalitaImg from "../assets/painelistas/thalita-silva.jpg";
 
 type Speaker = {
@@ -27,10 +27,9 @@ const SPEAKERS: Speaker[] = [
   { name: "Juliana Neiva", role: "Especialista", org: "Conectas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
   { name: "Andrea Bolzon", role: "Especialista", org: "PNUD", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
   { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho", org: "Ministério do Trabalho", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: luizImg },
-  { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global – Rede Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
+  { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global – Rede Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: gabrielaImg },
   { name: "Josefa Camara", role: "Representante", org: "Conselho Ribeirinho", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: josefaImg },
   { name: "Gilson Camboim", role: "Presidente", org: "Coogavepe", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: gilsonImg },
-  { name: "Larissa Rodrigues", role: "Especialista", org: "Instituto Escolhas", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: larissaImg },
   { name: "Miguel Castro-Riberos", role: "Especialista", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
   { name: "Hernan Coronado", role: "Especialista de normas da AL", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
   { name: "Thalita Silva", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: thalitaImg },

@@ -18,7 +18,6 @@ import gabriel from "../assets/painelistas/gabriel-bezerra.jpg";
 import irina from "../assets/painelistas/irina-bacci.jpg";
 import marcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import joao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
-import larissa from "../assets/painelistas/larissa-rodrigues.jpg";
 import victoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
 
 type Confirmado = {
@@ -44,7 +43,6 @@ const CONFIRMADOS: Confirmado[] = [
   { name: "Uine Lopes", role: "Pescador e Professor", org: "Mov. dos Pescadores e Pescadoras Artesanais", photo: uine, accent: MAGENTA },
   { name: "Josefa Camara", role: "Educadora Popular Beiradeira", org: "Conselho Ribeirinho", photo: josefa, accent: GREEN },
   { name: "Simone Rocha", role: "Sócia — Direitos Humanos e Impacto Social", org: "ERM América Latina", photo: simone, accent: CORAL },
-  { name: "Larissa Rodrigues", role: "Diretora de Pesquisa", org: "Instituto Escolhas", photo: larissa, accent: BLUE },
   { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social", org: "Axia Energia", photo: pedro, accent: MAGENTA },
   { name: "Thalita Silva", role: "Defensora Pública", org: "Defensoria Pública do Estado de SP", photo: thalita, accent: GREEN },
   { name: "Gilson Camboim", role: "Coordenador Nacional do Cooperativismo", org: "Fecomin", photo: gilson, accent: CORAL },
