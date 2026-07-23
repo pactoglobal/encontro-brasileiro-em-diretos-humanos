@@ -8,6 +8,11 @@ import josefaImg from "../assets/painelistas/josefa-camara.jpg";
 import gilsonImg from "../assets/painelistas/gilson-camboim.jpg";
 import gabrielaImg from "../assets/painelistas/gabriela-almeida.jpg";
 import thalitaImg from "../assets/painelistas/thalita-silva.jpg";
+import adrianaImg from "../assets/painelistas/adriana-marcolino.jpg";
+import hernanImg from "../assets/painelistas/hernan-coronado.jpg";
+import reinaldoImg from "../assets/painelistas/reinaldo-bulgarelli.jpg";
+import margarethImg from "../assets/painelistas/margareth-goldenberg.jpg";
+import sueImg from "../assets/painelistas/sue-wolter-vianna.jpg";
 
 type Speaker = {
   name: string;
@@ -21,7 +26,7 @@ type Speaker = {
 const SPEAKERS: Speaker[] = [
   { name: "Fernanda Hopenhaym", role: "Membro", org: "UN Working Group on Business and Human Rights", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
   { name: "Vinicius Pinheiro", role: "Diretor", org: "OIT no Brasil", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
-  { name: "Adriana Marcolino", role: "Especialista", org: "DIEESE", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
+  { name: "Adriana Marcolino", role: "Diretora Técnica", org: "DIEESE", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: adrianaImg },
   { name: "Camila Zelezoglo", role: "Representante", org: "ABIT", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: camilaImg },
   { name: "Jandyra Uehara", role: "Representante", org: "CUT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: jandyraImg },
   { name: "Juliana Neiva", role: "Especialista", org: "Conectas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
@@ -31,8 +36,11 @@ const SPEAKERS: Speaker[] = [
   { name: "Josefa Camara", role: "Representante", org: "Conselho Ribeirinho", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: josefaImg },
   { name: "Gilson Camboim", role: "Presidente", org: "Coogavepe", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: gilsonImg },
   { name: "Miguel Castro-Riberos", role: "Especialista", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
-  { name: "Hernan Coronado", role: "Especialista de normas da AL", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
+  { name: "Hernán Coronado", role: "Especialista de normas da AL", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: hernanImg },
   { name: "Thalita Silva", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: thalitaImg },
+  { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: reinaldoImg },
+  { name: "Margareth Goldenberg", role: "Diretora Executiva", org: "Movimento Mulher 360", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: margarethImg },
+  { name: "Sue Wolter Vianna", role: "Gerente de Riscos Sociais e DH", org: "Petrobras", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: sueImg },
   { name: "Flávia Scabin", role: "Professora e Pesquisadora", org: "FGV", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
 ];
 

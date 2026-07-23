@@ -20,6 +20,11 @@ import marcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import joao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
 import victoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
 import gabriela from "../assets/painelistas/gabriela-almeida.jpg";
+import adriana from "../assets/painelistas/adriana-marcolino.jpg";
+import hernan from "../assets/painelistas/hernan-coronado.jpg";
+import reinaldo from "../assets/painelistas/reinaldo-bulgarelli.jpg";
+import margareth from "../assets/painelistas/margareth-goldenberg.jpg";
+import sue from "../assets/painelistas/sue-wolter-vianna.jpg";
 
 type Confirmado = {
   name: string;
@@ -54,6 +59,11 @@ const CONFIRMADOS: Confirmado[] = [
   { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral", org: "Ministério de Minas e Energia", photo: joao, accent: BLUE },
   { name: "Victoriana Leonora C. Gonzaga", role: "Diretora Executiva", org: "ESG Novas Gerações", photo: victoriana, accent: MAGENTA },
   { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global da ONU — Rede Brasil", photo: gabriela, accent: GREEN },
+  { name: "Adriana Marcolino", role: "Diretora Técnica", org: "DIEESE", photo: adriana, accent: CORAL },
+  { name: "Hernán Coronado", role: "Especialista Regional Pueblos Indígenas", org: "OIT", photo: hernan, accent: BLUE },
+  { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", photo: reinaldo, accent: MAGENTA },
+  { name: "Margareth Goldenberg", role: "Diretora Executiva", org: "Movimento Mulher 360", photo: margareth, accent: GREEN },
+  { name: "Sue Wolter Vianna", role: "Gerente de Riscos Sociais e Direitos Humanos", org: "Petrobras", photo: sue, accent: CORAL },
 ];
 
 function ConfirmadoCard({ person, index }: { person: Confirmado; index: number }) {
