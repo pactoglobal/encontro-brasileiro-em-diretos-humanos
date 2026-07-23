@@ -42,17 +42,26 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-4">
             <button
               type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("dhe:open-privacy-policy"))}
+              onClick={() => {
+                const win = window as unknown as Record<string, unknown>;
+                try {
+                  if (win.GoAdopt && typeof (win.GoAdopt as Record<string, unknown>).open === "function") {
+                    ((win.GoAdopt as Record<string, unknown>).open as () => void)();
+                    return;
+                  }
+                  if (win.Adopt && typeof (win.Adopt as Record<string, unknown>).open === "function") {
+                    ((win.Adopt as Record<string, unknown>).open as () => void)();
+                    return;
+                  }
+                } catch {
+                  // Fallback
+                }
+                const btn = document.querySelector('#adopt-website-id, .adopt-injector-container, [id*="goadopt"]') as HTMLElement;
+                if (btn) btn.click();
+              }}
               className="transition-colors hover:text-white underline cursor-pointer"
             >
-              Política de Privacidade
-            </button>
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("dhe:open-cookie-preferences"))}
-              className="transition-colors hover:text-white underline cursor-pointer"
-            >
-              Preferências de Cookies
+              Política de Privacidade &amp; Cookies
             </button>
             <a
               href="https://www.pactoglobal.org.br"

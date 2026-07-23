@@ -13,7 +13,6 @@ import { Organizers } from "./components/Organizers";
 import { Sponsorship } from "./components/Sponsorship";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
-import { CookieBanner } from "./components/CookieBanner";
 
 // Robust routing support for hash URLs on initial load (like /#/sobre)
 function useHashScroll() {
@@ -88,7 +87,6 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      <CookieBanner />
     </MotionConfig>
   );
 }
