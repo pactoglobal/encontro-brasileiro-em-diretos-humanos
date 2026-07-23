@@ -19,6 +19,7 @@ import irina from "../assets/painelistas/irina-bacci.jpg";
 import marcos from "../assets/painelistas/marcos-antonio-matos.jpg";
 import joao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
 import victoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
+import gabriela from "../assets/painelistas/gabriela-almeida.jpg";
 
 type Confirmado = {
   name: string;
@@ -52,6 +53,7 @@ const CONFIRMADOS: Confirmado[] = [
   { name: "Marcos Matos", role: "Diretor Geral", org: "CECAFÉ", photo: marcos, accent: CORAL },
   { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral", org: "Ministério de Minas e Energia", photo: joao, accent: BLUE },
   { name: "Victoriana Leonora C. Gonzaga", role: "Diretora Executiva", org: "ESG Novas Gerações", photo: victoriana, accent: MAGENTA },
+  { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global da ONU — Rede Brasil", photo: gabriela, accent: GREEN },
 ];
 
 function ConfirmadoCard({ person, index }: { person: Confirmado; index: number }) {
