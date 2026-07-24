@@ -7,13 +7,14 @@ import {
   MapPin
 } from "lucide-react";
 
-import shambuyiImg from "../assets/empreendedores/shambuyiwetu.jpg";
 import esmatImg from "../assets/empreendedores/esmatwear.jpg";
 import perfumesImg from "../assets/empreendedores/perfumesaldomari.jpg";
 import renabesImg from "../assets/empreendedores/renabesartes.jpg";
 import downliciaImg from "../assets/empreendedores/downlicia_oficial.jpg";
 import ninaImg from "../assets/empreendedores/ninabarbosamacrame.jpg";
 import santaImg from "../assets/empreendedores/santatherezadesign.jpg";
+import bacurauImg from "../assets/empreendedores/bacurautupinamba.jpg";
+import harpiaImg from "../assets/empreendedores/harpiaartescultural.jpg";
 
 type Initiative = {
   name: string;
@@ -32,18 +33,32 @@ type Initiative = {
 
 const INITIATIVES: Initiative[] = [
   {
-    name: "Shambuyi Wetu",
-    org: "Shambuyi Wetu",
-    category: "Artista Plástico",
-    description: "Artista plástico congolês radicado em São Paulo, cuja produção artística e performances dialogam com a memória, a ancestralidade e a diáspora africana.",
+    name: "Bacurau Tupinambá",
+    org: "Bacurau (Tupinambá de Olivença)",
+    category: "Artefatos & Artesanato Indígena",
+    description: "Trabalho manual, artefatos e artesanatos indígenas tradicionais, preservando saberes ancestrais e promovendo a rica cultura do povo Tupinambá há mais de 25 anos.",
+    ods: "ODS 10 · Redução das Desigualdades",
+    odsLogo: "/ods/ods-10.jpg",
+    location: "Olivença, BA",
+    color: "#7B2D1E",
+    bg: "rgba(123, 45, 30, 0.06)",
+    instagram: "https://www.instagram.com/artesanatobacurautupinamba/",
+    image: bacurauImg,
+    partner: "Empreendedor"
+  },
+  {
+    name: "Harpia Artes Cultural",
+    org: "Roseli Augusto (Coä Pataxó)",
+    category: "Artesanato Ancestral Pataxó",
+    description: "Saberes ancestrais transformados em arte. Peças autênticas com história, alma e a profunda identidade cultural do povo Pataxó.",
     ods: "ODS 10 · Redução das Desigualdades",
     odsLogo: "/ods/ods-10.jpg",
     location: "São Paulo, SP",
-    color: "#E8187A",
-    bg: "rgba(232, 24, 122, 0.06)",
-    instagram: "https://www.instagram.com/shambuyiwetu/",
-    image: shambuyiImg,
-    partner: "ACNUR"
+    color: "#E05A3A",
+    bg: "rgba(224, 90, 58, 0.06)",
+    instagram: "https://www.instagram.com/_harpia.artes.cultural/",
+    image: harpiaImg,
+    partner: "Empreendedor"
   },
   {
     name: "Esmat Wear",
@@ -101,7 +116,6 @@ const INITIATIVES: Initiative[] = [
     image: downliciaImg,
     partner: "Empreendedor"
   },
-
   {
     name: "Nina Barbosa Macramê",
     org: "Nina Barbosa",
