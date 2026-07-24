@@ -112,25 +112,32 @@ export function CookieBanner() {
       // Ignore fallback
     }
 
-    // 5. Envia requisição beacon HTTP direta para os servidores do GoAdopt (be.lgpd)
+    // 5. Envia requisição direta aos endpoints de API do GoAdopt (disclaimer-api & axeptio-api)
     try {
-      const payload = JSON.stringify({
+      const adoptPayload = JSON.stringify({
+        websiteID: "f53ac651-4ac2-40fb-beea-8e21f2a74603",
         website_code: "f53ac651-4ac2-40fb-beea-8e21f2a74603",
-        consent_status: state.analytics ? "ACCEPTED_ALL" : "ESSENTIAL_ONLY",
-        accepted_categories: state.analytics ? ["essential", "analytics", "functional"] : ["essential"],
+        optInTags: state.analytics ? ["essential", "analytics", "functional"] : ["essential"],
+        optOutTags: state.analytics ? [] : ["analytics", "functional"],
+        consentTTL: 60,
+        consentVersion: 1,
+        allowTPCookies: true,
+        eventType: state.analytics ? "ACCEPT_ALL" : "ESSENTIAL_ONLY",
         timestamp: new Date().toISOString(),
         url: window.location.href,
       });
 
+      // Dispara via fetch para disclaimer-api e tag.goadopt.io
+      fetch("https://disclaimer-api.goadopt.io/api/tag/update-consent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: adoptPayload,
+        mode: "cors",
+        keepalive: true,
+      }).catch(() => {});
+
       if (navigator.sendBeacon) {
-        navigator.sendBeacon("https://tag.goadopt.io/api/v1/consent", payload);
-      } else {
-        fetch("https://tag.goadopt.io/api/v1/consent", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-          keepalive: true,
-        }).catch(() => {});
+        navigator.sendBeacon("https://tag.goadopt.io/api/v1/consent", adoptPayload);
       }
     } catch {
       // Ignore
