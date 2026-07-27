@@ -177,11 +177,6 @@ const MANHA_FOYER: AgendaItem[] = [
     description:
       "O que as experiências e perspectivas de povos indígenas e comunidades tradicionais nos ensinam sobre resiliência e ações de enfrentamento à crise climática de forma justa e equitativa?",
     type: "roda",
-    speakers: [
-      { name: "Lucimara Patte", role: "Convidada (TBC)" },
-      { name: "Carolina Ignarra", role: "Convidada (TBC)" },
-    ],
-    mediator: { name: "Bekoy Tupinambá", role: "Comitê Consultivo do Raça é Prioridade (TBC)" },
   },
 ];
 
@@ -189,16 +184,14 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h00",
     title: "Intervenção Artística",
-    description: "Heloísa Perissé (TBC)",
+    description: "Apresentação Cultural",
     type: "artistica",
-    avatar: pHeloisa,
   },
   {
     time: "14h15",
     title: "Consentimento Livre, Prévio e Informado (CLPI) na prática",
     type: "painel",
     speakers: [
-      { name: "Diogo Cabral", role: "Set Setting (10 min - TBC)" },
       { name: "Hernan Coronado", role: "Especialista Regional Pueblos Indígenas — OIT" },
       { name: "Uine Lopes", role: "Pescador e Professor — Movimento dos Pescadores Artesanais" },
       { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social — Axia Energia" },
@@ -215,9 +208,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
       { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)" },
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
       { name: "Gilson Camboim", role: "Coordenador Nacional de Cooperativismo Mineral OCB / Presidente Fecomin-MT" },
-      { name: "Andreia Louback", role: "Centro Brasileiro de Justiça Climática — CBJC (TBC)" },
       { name: "Miguel Castro-Riberos", role: "OCDE" },
-      { name: "Ana Cunha", role: "Diretora de Assuntos Corporativos e Sustentabilidade — Anglo American (TBC)" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
   },
@@ -237,7 +228,6 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Andrea Bolzon", role: "Especialista de Programa — PNUD Brasil" },
       { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE" },
       { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis" },
-      { name: "Ana Paula Brasil", role: "Gerente de Valor Social — Globo (TBC)" },
     ],
     mediator: { name: "Flávia Scabin", role: "FGV" },
   },
@@ -265,9 +255,6 @@ const TARDE_FOYER: AgendaItem[] = [
     time: "13h00 – 13h50",
     title: "Para além do Discurso: Como evitar o Washing?",
     type: "roda",
-    speakers: [
-      { name: "Mariana Bruno", role: "Convidada (TBC)" },
-    ],
     mediator: { name: "Patrícia Cortez", role: "Mediação" },
   },
   {
@@ -278,7 +265,6 @@ const TARDE_FOYER: AgendaItem[] = [
     type: "roda",
     speakers: [
       { name: "Mariana Mechi", role: "Diretora do Laboratório Alana" },
-      { name: "Representante Fundação Vidigal", role: "Fundação Maria Cecilia Souto Vidigal (TBD)" },
     ],
     mediator: { name: "Andrea Rissardo", role: "Carlotas" },
   },
@@ -288,10 +274,6 @@ const TARDE_FOYER: AgendaItem[] = [
     description:
       "Como garantir que a inovação em inteligência artificial seja compatível com a proteção e promoção dos direitos humanos?",
     type: "roda",
-    speakers: [
-      { name: "Tarcísio Silva", role: "Pesquisador e Doutor em Tecnologia (TBC)" },
-    ],
-    mediator: { name: "Isabela Cristina", role: "UNICEF (TBC)" },
   },
 ];
 
@@ -310,12 +292,10 @@ const ENCERRAMENTO: AgendaItem[] = [
     type: "batepapo",
     speakers: [
       { name: "José Alves Cardoso", role: "Head de Sustentabilidade do Banco do Brasil" },
-      { name: "Seu Jorge", role: "Cantor, ator e produtor cultural (TBC)" },
       { name: "Dona Carmen Silva", role: "Liderança do MSTC, Ocupação 9 de Julho e Casa Verbo" },
       { name: "Shirley Cruz", role: "Artista e liderança" },
       { name: "Gabriela Otero", role: "Especialista em Água, Oceano e Resíduos" },
     ],
-    mediator: { name: "Luna Vitrolina", role: "Mediação (TBC)" },
   },
 ];
 
