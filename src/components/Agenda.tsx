@@ -132,7 +132,7 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     speakers: [
       { name: "Fernanda Hopenhaym", role: "Membro do UN Working Group on Business and Human Rights (Vídeo)" },
       { name: "Flavia Scabin", role: "Diretora do FGV CeDHE" },
-      { name: "Adriana Marcolino", role: "DIEESE" },
+      { name: "Adriana Marcolino", role: "Diretora Técnica do DIEESE" },
       { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT" },
     ],
     mediator: { name: "Edilene Lopes", role: "Jornalista CNN" },
@@ -143,10 +143,10 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     type: "painel",
     speakers: [
       { name: "Victoriana Leonora", role: "Diretora Executiva — ESG Novas Gerações" },
-      { name: "Sue Wolter", role: "Petrobras" },
+      { name: "Sue Wolter", role: "Gerente de Riscos Sociais e DH — Petrobras" },
       { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional" },
       { name: "Julia Neiva", role: "Conectas" },
-      { name: "Leticia Pantoja", role: "MDH" },
+      { name: "Leticia Pantoja", role: "MDHC" },
     ],
     mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
   },
@@ -164,6 +164,12 @@ const MANHA_FOYER: AgendaItem[] = [
     description:
       "O futuro da agenda de DEI no Brasil: desaceleração ou transformação em um novo contexto geopolítico?",
     type: "roda",
+    speakers: [
+      { name: "Reinaldo Bulgarelli", role: "Secretário Executivo — Fórum de Empresas e Direitos LGBTI+" },
+      { name: "Margareth Goldenberg", role: "Diretora Executiva — Movimento Mulher 360" },
+      { name: "Lygia Anthero", role: "Sistema B" },
+    ],
+    mediator: { name: "Bia Vianna & Luiz Gustavo Lo-Buono", role: "Ecos Consultoria" },
   },
   {
     time: "11h10 – 12h00",
@@ -171,6 +177,11 @@ const MANHA_FOYER: AgendaItem[] = [
     description:
       "O que as experiências e perspectivas de povos indígenas e comunidades tradicionais nos ensinam sobre resiliência e ações de enfrentamento à crise climática de forma justa e equitativa?",
     type: "roda",
+    speakers: [
+      { name: "Lucimara Patte", role: "Convidada (TBC)" },
+      { name: "Carolina Ignarra", role: "Convidada (TBC)" },
+    ],
+    mediator: { name: "Bekoy Tupinambá", role: "Comitê Consultivo do Raça é Prioridade (TBC)" },
   },
 ];
 
@@ -178,7 +189,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
   {
     time: "14h00",
     title: "Intervenção Artística",
-    description: "Heloísa Perissé",
+    description: "Heloísa Perissé (TBC)",
     type: "artistica",
     avatar: pHeloisa,
   },
@@ -187,13 +198,14 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     title: "Consentimento Livre, Prévio e Informado (CLPI) na prática",
     type: "painel",
     speakers: [
+      { name: "Diogo Cabral", role: "Set Setting (10 min - TBC)" },
       { name: "Hernan Coronado", role: "Especialista Regional Pueblos Indígenas — OIT" },
       { name: "Uine Lopes", role: "Pescador e Professor — Movimento dos Pescadores Artesanais" },
       { name: "Pedro Villela", role: "Gerente Executivo de Impacto Social — Axia Energia" },
       { name: "Thalita Silva", role: "Defensora Pública do Estado de São Paulo" },
       { name: "Josefa Camara", role: "Educadora Popular Beiradeira — Conselho Ribeirinho" },
     ],
-    mediator: { name: "Ângela Pires", role: "ACNUDH" },
+    mediator: { name: "Rodrigo Deodato", role: "Mediação" },
   },
   {
     time: "15h30",
@@ -202,10 +214,10 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
     speakers: [
       { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)" },
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
-      { name: "Gilson Camboim", role: "Presidente da Coogavepe" },
-      { name: "Natalia Souza", role: "CEERT" },
-      { name: "Christianne Canavero", role: "Head Global de Sustentabilidade da CBMN" },
+      { name: "Gilson Camboim", role: "Coordenador Nacional de Cooperativismo Mineral OCB / Presidente Fecomin-MT" },
+      { name: "Andreia Louback", role: "Centro Brasileiro de Justiça Climática — CBJC (TBC)" },
       { name: "Miguel Castro-Riberos", role: "OCDE" },
+      { name: "Ana Cunha", role: "Diretora de Assuntos Corporativos e Sustentabilidade — Anglo American (TBC)" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
   },
@@ -222,10 +234,10 @@ const TARDE_OSCARITO: AgendaItem[] = [
     title: "Com quais instrumentos a agenda responde (ou não) ao contexto atual?",
     type: "painel",
     speakers: [
-      { name: "Andrea Bolzon", role: "PNUD" },
+      { name: "Andrea Bolzon", role: "Especialista de Programa — PNUD Brasil" },
       { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE" },
       { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis" },
-      { name: "Representante Globo", role: "Globo" },
+      { name: "Ana Paula Brasil", role: "Gerente de Valor Social — Globo (TBC)" },
     ],
     mediator: { name: "Flávia Scabin", role: "FGV" },
   },
@@ -235,11 +247,11 @@ const TARDE_OSCARITO: AgendaItem[] = [
     type: "painel",
     speakers: [
       { name: "Gabriel Bezerra", role: "Presidente da CONTAR" },
-      { name: "Irina Bacci", role: "PADF" },
-      { name: "Marcos Antônio Matos", role: "Diretor Cecafe" },
-      { name: "Danielle Pamplona", role: "Professora e Pesquisadora" },
+      { name: "Irina Bacci", role: "Diretora Técnica — PADF" },
+      { name: "Marcos Antônio Matos", role: "Diretor Geral — CECAFÉ" },
+      { name: "Danielle Anne Pamplona", role: "Co-Presidente da Global Business and Human Rights Scholars Association — PUCPR" },
     ],
-    mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de Ação pelos DH do Pacto Global" },
+    mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de DH do Pacto Global" },
   },
   {
     time: "17h00",
@@ -253,6 +265,10 @@ const TARDE_FOYER: AgendaItem[] = [
     time: "13h00 – 13h50",
     title: "Para além do Discurso: Como evitar o Washing?",
     type: "roda",
+    speakers: [
+      { name: "Mariana Bruno", role: "Convidada (TBC)" },
+    ],
+    mediator: { name: "Patrícia Cortez", role: "Mediação" },
   },
   {
     time: "14h30 – 15h10",
@@ -260,6 +276,11 @@ const TARDE_FOYER: AgendaItem[] = [
     description:
       "Como as empresas podem contribuir para o desenvolvimento integral de crianças, adolescentes e jovens, gerando impactos positivos para as famílias, comunidades e para o futuro do trabalho?",
     type: "roda",
+    speakers: [
+      { name: "Mariana Mechi", role: "Diretora do Laboratório Alana" },
+      { name: "Representante Fundação Vidigal", role: "Fundação Maria Cecilia Souto Vidigal (TBD)" },
+    ],
+    mediator: { name: "Andrea Rissardo", role: "Carlotas" },
   },
   {
     time: "15h30 – 16h20",
@@ -267,6 +288,10 @@ const TARDE_FOYER: AgendaItem[] = [
     description:
       "Como garantir que a inovação em inteligência artificial seja compatível com a proteção e promoção dos direitos humanos?",
     type: "roda",
+    speakers: [
+      { name: "Tarcísio Silva", role: "Pesquisador e Doutor em Tecnologia (TBC)" },
+    ],
+    mediator: { name: "Isabela Cristina", role: "UNICEF (TBC)" },
   },
 ];
 
@@ -285,11 +310,12 @@ const ENCERRAMENTO: AgendaItem[] = [
     type: "batepapo",
     speakers: [
       { name: "José Alves Cardoso", role: "Head de Sustentabilidade do Banco do Brasil" },
-      { name: "Seu Jorge", role: "Cantor, ator e produtor cultural" },
-      { name: "Dona Carmen Silva", role: "Liderança do MSTC" },
+      { name: "Seu Jorge", role: "Cantor, ator e produtor cultural (TBC)" },
+      { name: "Dona Carmen Silva", role: "Liderança do MSTC, Ocupação 9 de Julho e Casa Verbo" },
       { name: "Shirley Cruz", role: "Artista e liderança" },
+      { name: "Gabriela Otero", role: "Especialista em Água, Oceano e Resíduos" },
     ],
-    mediator: { name: "Paulo Vieira", role: "Mediação" },
+    mediator: { name: "Luna Vitrolina", role: "Mediação (TBC)" },
   },
 ];
 
