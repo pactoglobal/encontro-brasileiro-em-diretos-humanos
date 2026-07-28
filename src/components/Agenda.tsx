@@ -35,6 +35,13 @@ import pJoao from "../assets/painelistas/joao-marcos-pires-camargo.jpg";
 import pHeloisa from "../assets/painelistas/heloisa-perisse.png";
 import pSeuJorge from "../assets/painelistas/seu-jorge.jpg";
 import pVictoriana from "../assets/painelistas/victoriana-leonora-c-gonzaga.jpg";
+import pSue from "../assets/painelistas/sue-wolter-vianna.jpg";
+import pAdriana from "../assets/painelistas/adriana-marcolino.jpg";
+import pReinaldo from "../assets/painelistas/reinaldo-bulgarelli.jpg";
+import pMargareth from "../assets/painelistas/margareth-goldenberg.jpg";
+import pHernan from "../assets/painelistas/hernan-coronado.jpg";
+import pGabriela from "../assets/painelistas/gabriela-almeida.jpg";
+
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
 import pFilme from "../assets/atracoes/a-melhor-mae-do-mundo.jpg";
@@ -70,6 +77,13 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "seu jorge": pSeuJorge,
   "victoriana leonora": pVictoriana,
   "victoriana leonora c gonzaga": pVictoriana,
+  "sue wolter": pSue,
+  "sue wolter vianna": pSue,
+  "adriana marcolino": pAdriana,
+  "reinaldo bulgarelli": pReinaldo,
+  "margareth goldenberg": pMargareth,
+  "hernan coronado": pHernan,
+  "gabriela almeida": pGabriela,
 };
 
 function photoFor(name: string): string | undefined {
