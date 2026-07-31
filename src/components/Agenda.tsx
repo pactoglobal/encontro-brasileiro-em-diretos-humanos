@@ -41,6 +41,7 @@ import pReinaldo from "../assets/painelistas/reinaldo-bulgarelli.jpg";
 import pMargareth from "../assets/painelistas/margareth-goldenberg.jpg";
 import pHernan from "../assets/painelistas/hernan-coronado.jpg";
 import pGabriela from "../assets/painelistas/gabriela-almeida.jpg";
+import pMiguel from "../assets/painelistas/miguel-castro.jpg";
 
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
@@ -84,6 +85,9 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "margareth goldenberg": pMargareth,
   "hernan coronado": pHernan,
   "gabriela almeida": pGabriela,
+  "miguel castro": pMiguel,
+  "miguel castro riberos": pMiguel,
+  "miguel castro-riberos": pMiguel,
 };
 
 function photoFor(name: string): string | undefined {

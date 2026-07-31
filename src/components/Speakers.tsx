@@ -13,6 +13,7 @@ import hernanImg from "../assets/painelistas/hernan-coronado.jpg";
 import reinaldoImg from "../assets/painelistas/reinaldo-bulgarelli.jpg";
 import margarethImg from "../assets/painelistas/margareth-goldenberg.jpg";
 import sueImg from "../assets/painelistas/sue-wolter-vianna.jpg";
+import miguelImg from "../assets/painelistas/miguel-castro.jpg";
 
 type Speaker = {
   name: string;
@@ -35,7 +36,7 @@ const SPEAKERS: Speaker[] = [
   { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global – Rede Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: gabrielaImg },
   { name: "Josefa Camara", role: "Representante", org: "Conselho Ribeirinho", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: josefaImg },
   { name: "Gilson Camboim", role: "Presidente", org: "Coogavepe", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: gilsonImg },
-  { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam — Centro CER", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
+  { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam — Centro CER", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: miguelImg },
   { name: "Hernán Coronado", role: "Especialista de normas da AL", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: hernanImg },
   { name: "Thalita Silva", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: thalitaImg },
   { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: reinaldoImg },
