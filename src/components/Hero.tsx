@@ -472,8 +472,9 @@ export function Hero() {
                   {/* Patrocínio */}
                   <div className="flex flex-col gap-1 pb-3 border-b border-[#D8D4C7]/40 sm:border-b-0 sm:pb-0">
                     <span className="text-[7.5px] font-black uppercase tracking-wider text-dhe-navy">Patrocínio</span>
-                    <div className="flex items-center h-8 mt-1">
-                      <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-6 w-auto object-contain" />
+                    <div className="flex items-center gap-3 h-8 mt-1">
+                      <img src="/identity/petrobras-logo-new.png" alt="Petrobras" className="h-5.5 sm:h-6 w-auto object-contain" />
+                      <img src="/identity/globo-logo.png" alt="Globo" className="h-5 sm:h-5.5 w-auto object-contain" />
                     </div>
                   </div>
 

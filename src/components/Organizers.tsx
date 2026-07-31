@@ -97,15 +97,20 @@ export function Organizers() {
                 </div>
 
                 {/* 3. PATROCÍNIO */}
-                <div className="flex flex-col gap-3 pt-6 lg:pt-0 lg:px-8 lg:w-[15%]">
+                <div className="flex flex-col gap-3 pt-6 lg:pt-0 lg:px-8 lg:w-[22%]">
                   <span className="text-[9px] font-black uppercase tracking-[0.25em] text-dhe-navy">
                     Patrocínio
                   </span>
-                  <div className="h-12 flex items-center justify-start mt-2">
+                  <div className="h-12 flex items-center justify-start gap-4 mt-2">
                     <img
                       src="/identity/petrobras-logo-new.png"
                       alt="Petrobras"
-                      className="h-8 w-auto object-contain"
+                      className="h-7 sm:h-8 w-auto object-contain"
+                    />
+                    <img
+                      src="/identity/globo-logo.png"
+                      alt="Globo"
+                      className="h-6 sm:h-7 w-auto object-contain"
                     />
                   </div>
                 </div>
