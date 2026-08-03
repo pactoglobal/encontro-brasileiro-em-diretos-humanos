@@ -136,10 +136,10 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     title: "Abertura Institucional e Boas-vindas",
     type: "abertura",
     speakers: [
-      { name: "Guilherme Xavier", role: "Diretor Executivo — Pacto Global Rede Brasil" },
-      { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
-      { name: "Ângela Pires", role: "ACNUDH" },
+      { name: "Guilherme Xavier", role: "Diretor Executivo — Pacto Global - Rede Brasil" },
       { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam, Centro CER — OCDE" },
+      { name: "Paula Berrutti", role: "ACNUDH (vídeo)" },
+      { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
       { name: "Igor Garafulic", role: "Coordenador Residente da ONU no Brasil (vídeo)" },
     ],
   },
@@ -163,8 +163,8 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
       { name: "Victoriana Leonora", role: "Diretora Executiva — ESG Novas Gerações" },
       { name: "Sue Wolter", role: "Gerente de Riscos Sociais e DH — Petrobras" },
       { name: "Jandyra Uehara", role: "Secretária de Políticas Sociais e Direitos Humanos — CUT Nacional" },
-      { name: "Julia Neiva", role: "Conectas" },
-      { name: "Leticia Pantoja", role: "MDHC" },
+      { name: "Julia Neiva", role: "Diretora de Fortalecimento do Movimento de DH — Conectas" },
+      { name: "Fernanda Becker", role: "Coordenadora-Geral de Promoção dos Direitos das Pessoas Migrantes, Refugiadas e Apátridas — MDHC" },
     ],
     mediator: { name: "Vinicius Pinheiro", role: "Diretor da OIT no Brasil" },
   },
@@ -180,14 +180,15 @@ const MANHA_FOYER: AgendaItem[] = [
     time: "10h00 – 10h50",
     title: "Diversidade, Equidade e Inclusão (DEI)",
     description:
-      "O futuro da agenda de DEI no Brasil: desaceleração ou transformação em um novo contexto geopolítico?",
+      "O futuro da agenda de Diversidade, Equidade e Inclusão no Brasil: desaceleração ou transformação em um novo contexto geopolítico?",
     type: "roda",
     speakers: [
       { name: "Reinaldo Bulgarelli", role: "Secretário Executivo — Fórum de Empresas e Direitos LGBTI+" },
       { name: "Margareth Goldenberg", role: "Diretora Executiva — Movimento Mulher 360" },
-      { name: "Lygia Anthero", role: "Sistema B" },
+      { name: "Lygia Anthero", role: "Gerente de Crescimento e Advocacy — Sistema B Brasil" },
+      { name: "Júlia Rosemberg", role: "Especialista em Relações Raciais — CEERT" },
     ],
-    mediator: { name: "Bia Vianna & Luiz Gustavo Lo-Buono", role: "Ecos Consultoria" },
+    mediator: { name: "Bia Vianna & Luiz Gustavo Lo-Buono", role: "Ecos Consultoria / Sócio-Diretor" },
   },
   {
     time: "11h10 – 12h00",
@@ -195,6 +196,11 @@ const MANHA_FOYER: AgendaItem[] = [
     description:
       "O que as experiências e perspectivas de povos indígenas e comunidades tradicionais nos ensinam sobre resiliência e ações de enfrentamento à crise climática de forma justa e equitativa?",
     type: "roda",
+    speakers: [
+      { name: "Lucimara Patte", role: "Assessora Técnica da Deputada Federal Sonia Guajajara" },
+      { name: "Carolina Ignarra", role: "CEO e Fundadora — Talento Incluir" },
+    ],
+    mediator: { name: "Jennyffer Bekoy Tupinambá", role: "Co-fundadora e Estrategista — Bnd Digital" },
   },
 ];
 
@@ -216,16 +222,17 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
       { name: "Thalita Silva", role: "Defensora Pública do Estado de São Paulo" },
       { name: "Josefa Camara", role: "Educadora Popular Beiradeira — Conselho Ribeirinho" },
     ],
-    mediator: { name: "Rodrigo Deodato", role: "Mediação" },
+    mediator: { name: "Rodrigo Deodato", role: "ACNUDH" },
   },
   {
     time: "15h30",
     title: "Mineração para a transição energética: terras raras, minerais críticos e responsabilidade",
     type: "painel",
     speakers: [
-      { name: "Maryellen Crisóstomo", role: "CONAQ — Set Setting (10 min)" },
+      { name: "Maryellen Crisóstomo", role: "Coletivo de Mulheres Quilombolas — CONAQ (Set Setting)" },
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
       { name: "Gilson Camboim", role: "Coordenador Nacional de Cooperativismo Mineral OCB / Presidente Fecomin-MT" },
+      { name: "Andreia Louback", role: "CBJC — Centro Brasileiro de Justiça Climática" },
       { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam, Centro CER — OCDE" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
@@ -246,20 +253,21 @@ const TARDE_OSCARITO: AgendaItem[] = [
       { name: "Andrea Bolzon", role: "Especialista de Programa — PNUD Brasil" },
       { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho — MTE" },
       { name: "Gabriela Almeida", role: "Pacto Global da ONU – Rede Brasil / BHR Gap Analysis" },
+      { name: "Ana Paula Brasil", role: "Gerente de Valor Social — Globo" },
     ],
-    mediator: { name: "Flávia Scabin", role: "FGV" },
+    mediator: { name: "Flávia Scabin", role: "Professora e Diretora do FGV CeDHE" },
   },
   {
     time: "15h30",
     title: "Agroindústria, direitos humanos e cadeias de valor: responsabilidade e desafios",
     type: "painel",
     speakers: [
-      { name: "Gabriel Bezerra", role: "Presidente da CONTAR" },
+      { name: "Gabriel Bezerra", role: "Presidente da CONTAR (Set Setting)" },
       { name: "Irina Bacci", role: "Diretora Técnica — PADF" },
       { name: "Marcos Antônio Matos", role: "Diretor Geral — CECAFÉ" },
       { name: "Danielle Anne Pamplona", role: "Co-Presidente da Global Business and Human Rights Scholars Association — PUCPR" },
     ],
-    mediator: { name: "Juliana Ramalho", role: "Mattos Filho — Coordenadora da Plataforma de DH do Pacto Global" },
+    mediator: { name: "Juliana Ramalho", role: "Mattos Filho / Pacto Global da ONU - Rede Brasil" },
   },
   {
     time: "17h00",
@@ -271,8 +279,14 @@ const TARDE_OSCARITO: AgendaItem[] = [
 const TARDE_FOYER: AgendaItem[] = [
   {
     time: "13h00 – 13h50",
-    title: "Para além do Discurso: Como evitar o Washing?",
+    title: "Para além do Discurso: Como evitar o Social Washing?",
     type: "roda",
+    speakers: [
+      { name: "Mariana Bruno", role: "Gerente Sênior de Diversidade e Inclusão — Globo" },
+      { name: "Juliana Nobre", role: "Gerente de Sustentabilidade Sênior — Pluxee" },
+      { name: "Fernanda Monteiro", role: "Diretora de Operações — Ecomunica" },
+      { name: "Laíssa Shimabucoro Furilli", role: "Assessora Jurídica — CONAR" },
+    ],
     mediator: { name: "Patrícia Cortez", role: "Mediação" },
   },
   {
@@ -282,9 +296,10 @@ const TARDE_FOYER: AgendaItem[] = [
       "Como as empresas podem contribuir para o desenvolvimento integral de crianças, adolescentes e jovens, gerando impactos positivos para as famílias, comunidades e para o futuro do trabalho?",
     type: "roda",
     speakers: [
-      { name: "Mariana Mechi", role: "Diretora do Laboratório Alana" },
+      { name: "Andrea Rissardo", role: "Carlotas" },
+      { name: "Daniela Rey", role: "Globo" },
     ],
-    mediator: { name: "Andrea Rissardo", role: "Carlotas" },
+    mediator: { name: "Mariana Mecchi", role: "Diretora do Laboratório Alana" },
   },
   {
     time: "15h30 – 16h20",
@@ -292,6 +307,10 @@ const TARDE_FOYER: AgendaItem[] = [
     description:
       "Como garantir que a inovação em inteligência artificial seja compatível com a proteção e promoção dos direitos humanos?",
     type: "roda",
+    speakers: [
+      { name: "Márcio Rufino", role: "Gerente de Sistemas e Dados — Pacto Global da ONU - Rede Brasil" },
+    ],
+    mediator: { name: "Isabelle Christina", role: "UNICEF" },
   },
 ];
 
@@ -312,8 +331,8 @@ const ENCERRAMENTO: AgendaItem[] = [
       { name: "José Alves Cardoso", role: "Head de Sustentabilidade do Banco do Brasil" },
       { name: "Dona Carmen Silva", role: "Liderança do MSTC, Ocupação 9 de Julho e Casa Verbo" },
       { name: "Shirley Cruz", role: "Artista e liderança" },
-      { name: "Gabriela Otero", role: "Especialista em Água, Oceano e Resíduos" },
     ],
+    mediator: { name: "Luna Vitrolira", role: "Artista" },
   },
 ];
 
