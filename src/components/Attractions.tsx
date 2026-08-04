@@ -27,6 +27,24 @@ import margareth from "../assets/painelistas/margareth-goldenberg.jpg";
 import sue from "../assets/painelistas/sue-wolter-vianna.jpg";
 import marcio from "../assets/painelistas/marcio-rufino.jpg";
 import mariana from "../assets/painelistas/mariana-rocha.jpg";
+import flavia from "../assets/painelistas/flavia-scabin.jpg";
+import fernandaBecker from "../assets/painelistas/fernanda-becker.jpg";
+import daniellePamplona from "../assets/painelistas/danielle-pamplona.jpg";
+import carolinaIgnarra from "../assets/painelistas/carolina-ignarra.jpg";
+import lygiaAnthero from "../assets/painelistas/lygia-anthero.jpg";
+import marianaBruno from "../assets/painelistas/mariana-bruno.jpg";
+import joseAlves from "../assets/painelistas/jose-alves.jpg";
+import julianaNobre from "../assets/painelistas/juliana-nobre.jpg";
+import laissaFurilli from "../assets/painelistas/laissa-furilli.jpg";
+import lunaVitrolira from "../assets/painelistas/luna-vitrolira.jpg";
+import andreaRissardo from "../assets/painelistas/andrea-rissardo.jpg";
+import fernandaMonteiro from "../assets/painelistas/fernanda-monteiro.jpg";
+import isabelleChristina from "../assets/painelistas/isabelle-christina.jpg";
+import biaVianna from "../assets/painelistas/bia-vianna.jpg";
+import danielaRey from "../assets/painelistas/daniela-rey.jpg";
+import luizGustavo from "../assets/painelistas/luiz-gustavo-lo-buono.jpg";
+import juliaRosemberg from "../assets/painelistas/julia-rosemberg.jpg";
+import jennyfferTupinamba from "../assets/painelistas/jennyffer-tupinamba.jpg";
 
 type Confirmado = {
   name: string;
@@ -68,6 +86,24 @@ const CONFIRMADOS: Confirmado[] = [
   { name: "Sue Wolter Vianna", role: "Gerente de Riscos Sociais e Direitos Humanos", org: "Petrobras", photo: sue, accent: CORAL },
   { name: "Mariana Rocha", role: "Representante", org: "Vale", photo: mariana, accent: MAGENTA },
   { name: "Márcio Rufino", role: "Gerente de Sistemas e Dados", org: "Pacto Global da ONU — Rede Brasil", photo: marcio, accent: BLUE },
+  { name: "Flávia Scabin", role: "Professora e Diretora", org: "FGV CeDHE", photo: flavia, accent: GREEN },
+  { name: "Fernanda Becker", role: "Coordenadora-Geral", org: "MDHC", photo: fernandaBecker, accent: CORAL },
+  { name: "Danielle Anne Pamplona", role: "Co-Presidente", org: "GBHRA / PUCPR", photo: daniellePamplona, accent: BLUE },
+  { name: "Carolina Ignarra", role: "CEO e Fundadora", org: "Talento Incluir", photo: carolinaIgnarra, accent: MAGENTA },
+  { name: "Lygia Anthero", role: "Gerente de Crescimento e Advocacy", org: "Sistema B Brasil", photo: lygiaAnthero, accent: GREEN },
+  { name: "Mariana Bruno", role: "Gerente Sênior D&I", org: "Globo", photo: marianaBruno, accent: CORAL },
+  { name: "José Alves Cardoso", role: "Head de Sustentabilidade", org: "Banco do Brasil", photo: joseAlves, accent: BLUE },
+  { name: "Juliana Nobre", role: "Gerente de Sustentabilidade Sênior", org: "Pluxee", photo: julianaNobre, accent: MAGENTA },
+  { name: "Laíssa Shimabucoro Furilli", role: "Assessora Jurídica", org: "CONAR", photo: laissaFurilli, accent: GREEN },
+  { name: "Luna Vitrolira", role: "Multiartista", org: "Mulheres de Repente", photo: lunaVitrolira, accent: CORAL },
+  { name: "Andréa P. Rissardo", role: "Sócia", org: "Carlotas", photo: andreaRissardo, accent: BLUE },
+  { name: "Fernanda Monteiro", role: "Diretora de Operações", org: "Ecomunica", photo: fernandaMonteiro, accent: MAGENTA },
+  { name: "Isabelle Christina", role: "Oficial de Educação e IA", org: "UNICEF", photo: isabelleChristina, accent: GREEN },
+  { name: "Bia Vianna", role: "Diretora Executiva", org: "ECOS", photo: biaVianna, accent: CORAL },
+  { name: "Daniela Rey", role: "Analista Sênior de Valor Social", org: "Globo", photo: danielaRey, accent: BLUE },
+  { name: "Luiz Gustavo Lo-Buono", role: "Sócio-diretor", org: "ECOS", photo: luizGustavo, accent: MAGENTA },
+  { name: "Júlia Rosemberg", role: "Especialista em Relações Raciais", org: "CEERT", photo: juliaRosemberg, accent: GREEN },
+  { name: "Jennyffer Bekoy Tupinambá", role: "Co-fundadora", org: "Bnd Digital", photo: jennyfferTupinamba, accent: CORAL },
 ];
 
 function ConfirmadoCard({ person, index }: { person: Confirmado; index: number }) {

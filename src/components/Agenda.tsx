@@ -44,6 +44,24 @@ import pGabriela from "../assets/painelistas/gabriela-almeida.jpg";
 import pMiguel from "../assets/painelistas/miguel-castro.jpg";
 import pMarcio from "../assets/painelistas/marcio-rufino.jpg";
 import pMariana from "../assets/painelistas/mariana-rocha.jpg";
+import pLuizGustavo from "../assets/painelistas/luiz-gustavo-lo-buono.jpg";
+import pDaniellePamplona from "../assets/painelistas/danielle-pamplona.jpg";
+import pFlaviaScabin from "../assets/painelistas/flavia-scabin.jpg";
+import pJennyfferTupinamba from "../assets/painelistas/jennyffer-tupinamba.jpg";
+import pFernandaBecker from "../assets/painelistas/fernanda-becker.jpg";
+import pJuliaRosemberg from "../assets/painelistas/julia-rosemberg.jpg";
+import pCarolinaIgnarra from "../assets/painelistas/carolina-ignarra.jpg";
+import pLygiaAnthero from "../assets/painelistas/lygia-anthero.jpg";
+import pMarianaBruno from "../assets/painelistas/mariana-bruno.jpg";
+import pJoseAlves from "../assets/painelistas/jose-alves.jpg";
+import pJulianaNobre from "../assets/painelistas/juliana-nobre.jpg";
+import pLaissaFurilli from "../assets/painelistas/laissa-furilli.jpg";
+import pLunaVitrolira from "../assets/painelistas/luna-vitrolira.jpg";
+import pAndreaRissardo from "../assets/painelistas/andrea-rissardo.jpg";
+import pFernandaMonteiro from "../assets/painelistas/fernanda-monteiro.jpg";
+import pIsabelleChristina from "../assets/painelistas/isabelle-christina.jpg";
+import pBiaVianna from "../assets/painelistas/bia-vianna.jpg";
+import pDanielaRey from "../assets/painelistas/daniela-rey.jpg";
 
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
@@ -92,6 +110,30 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "miguel castro-riberos": pMiguel,
   "marcio rufino": pMarcio,
   "mariana rocha": pMariana,
+  "luiz gustavo lo-buono": pLuizGustavo,
+  "luiz gustavo lo buono": pLuizGustavo,
+  "danielle anne pamplona": pDaniellePamplona,
+  "danielle pamplona": pDaniellePamplona,
+  "flavia scabin": pFlaviaScabin,
+  "jennyffer bekoy tupinamba": pJennyfferTupinamba,
+  "jennyffer tupinamba": pJennyfferTupinamba,
+  "fernanda becker": pFernandaBecker,
+  "julia rosemberg": pJuliaRosemberg,
+  "carolina ignarra": pCarolinaIgnarra,
+  "lygia anthero": pLygiaAnthero,
+  "mariana bruno": pMarianaBruno,
+  "jose alves": pJoseAlves,
+  "jose alves cardoso": pJoseAlves,
+  "juliana nobre": pJulianaNobre,
+  "laissa shimabucoro furilli": pLaissaFurilli,
+  "laissa furilli": pLaissaFurilli,
+  "luna vitrolira": pLunaVitrolira,
+  "andrea rissardo": pAndreaRissardo,
+  "andrea p rissardo": pAndreaRissardo,
+  "fernanda monteiro": pFernandaMonteiro,
+  "isabelle christina": pIsabelleChristina,
+  "bia vianna": pBiaVianna,
+  "daniela rey": pDanielaRey,
 };
 
 function photoFor(name: string): string | undefined {

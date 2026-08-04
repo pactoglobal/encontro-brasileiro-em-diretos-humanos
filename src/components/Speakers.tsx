@@ -16,6 +16,24 @@ import sueImg from "../assets/painelistas/sue-wolter-vianna.jpg";
 import miguelImg from "../assets/painelistas/miguel-castro.jpg";
 import marcioImg from "../assets/painelistas/marcio-rufino.jpg";
 import marianaImg from "../assets/painelistas/mariana-rocha.jpg";
+import flaviaImg from "../assets/painelistas/flavia-scabin.jpg";
+import fernandaBeckerImg from "../assets/painelistas/fernanda-becker.jpg";
+import daniellePamplonaImg from "../assets/painelistas/danielle-pamplona.jpg";
+import carolinaIgnarraImg from "../assets/painelistas/carolina-ignarra.jpg";
+import lygiaAntheroImg from "../assets/painelistas/lygia-anthero.jpg";
+import marianaBrunoImg from "../assets/painelistas/mariana-bruno.jpg";
+import joseAlvesImg from "../assets/painelistas/jose-alves.jpg";
+import julianaNobreImg from "../assets/painelistas/juliana-nobre.jpg";
+import laissaFurilliImg from "../assets/painelistas/laissa-furilli.jpg";
+import lunaVitroliraImg from "../assets/painelistas/luna-vitrolira.jpg";
+import andreaRissardoImg from "../assets/painelistas/andrea-rissardo.jpg";
+import fernandaMonteiroImg from "../assets/painelistas/fernanda-monteiro.jpg";
+import isabelleChristinaImg from "../assets/painelistas/isabelle-christina.jpg";
+import biaViannaImg from "../assets/painelistas/bia-vianna.jpg";
+import danielaReyImg from "../assets/painelistas/daniela-rey.jpg";
+import luizGustavoImg from "../assets/painelistas/luiz-gustavo-lo-buono.jpg";
+import juliaRosembergImg from "../assets/painelistas/julia-rosemberg.jpg";
+import jennyfferTupinambaImg from "../assets/painelistas/jennyffer-tupinamba.jpg";
 
 type Speaker = {
   name: string;
@@ -34,7 +52,7 @@ const SPEAKERS: Speaker[] = [
   { name: "Camila Zelezoglo", role: "Representante", org: "ABIT", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: camilaImg },
   { name: "Jandyra Uehara", role: "Representante", org: "CUT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: jandyraImg },
   { name: "Julia Neiva", role: "Diretora", org: "Conectas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
-  { name: "Fernanda Becker", role: "Coordenadora-Geral", org: "MDHC", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
+  { name: "Fernanda Becker", role: "Coordenadora-Geral", org: "MDHC", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: fernandaBeckerImg },
   { name: "Andrea Bolzon", role: "Especialista", org: "PNUD", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
   { name: "Luiz Henrique Ramos", role: "Secretário de Inspeção do Trabalho", org: "Ministério do Trabalho", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: luizImg },
   { name: "Gabriela Almeida", role: "Gerente", org: "Pacto Global – Rede Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: gabrielaImg },
@@ -50,7 +68,23 @@ const SPEAKERS: Speaker[] = [
   { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: reinaldoImg },
   { name: "Margareth Goldenberg", role: "Diretora Executiva", org: "Movimento Mulher 360", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: margarethImg },
   { name: "Sue Wolter Vianna", role: "Gerente de Riscos Sociais e DH", org: "Petrobras", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: sueImg },
-  { name: "Flávia Scabin", role: "Professora e Diretora", org: "FGV CeDHE", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
+  { name: "Flávia Scabin", role: "Professora e Diretora", org: "FGV CeDHE", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: flaviaImg },
+  { name: "Danielle Anne Pamplona", role: "Co-Presidente", org: "GBHRA / PUCPR", accent: "#38BDF8", bg: "rgba(56,189,248,0.06)", photo: daniellePamplonaImg },
+  { name: "Carolina Ignarra", role: "CEO e Fundadora", org: "Talento Incluir", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: carolinaIgnarraImg },
+  { name: "Lygia Anthero", role: "Gerente de Crescimento e Advocacy", org: "Sistema B Brasil", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: lygiaAntheroImg },
+  { name: "Mariana Bruno", role: "Gerente Sênior D&I", org: "Globo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: marianaBrunoImg },
+  { name: "José Alves Cardoso", role: "Head de Sustentabilidade", org: "Banco do Brasil", accent: "#38BDF8", bg: "rgba(56,189,248,0.06)", photo: joseAlvesImg },
+  { name: "Juliana Nobre", role: "Gerente de Sustentabilidade Sênior", org: "Pluxee", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: julianaNobreImg },
+  { name: "Laíssa Shimabucoro Furilli", role: "Assessora Jurídica", org: "CONAR", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: laissaFurilliImg },
+  { name: "Luna Vitrolira", role: "Multiartista", org: "Mulheres de Repente", accent: "#E05A3A", bg: "rgba(224,90,58,0.06)", photo: lunaVitroliraImg },
+  { name: "Andréa P. Rissardo", role: "Sócia", org: "Carlotas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: andreaRissardoImg },
+  { name: "Fernanda Monteiro", role: "Diretora de Operações", org: "Ecomunica", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: fernandaMonteiroImg },
+  { name: "Isabelle Christina", role: "Oficial de Educação e IA", org: "UNICEF", accent: "#38BDF8", bg: "rgba(56,189,248,0.06)", photo: isabelleChristinaImg },
+  { name: "Bia Vianna", role: "Diretora Executiva", org: "ECOS", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: biaViannaImg },
+  { name: "Daniela Rey", role: "Analista Sênior de Valor Social", org: "Globo", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: danielaReyImg },
+  { name: "Luiz Gustavo Lo-Buono", role: "Sócio-diretor", org: "ECOS", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: luizGustavoImg },
+  { name: "Júlia Rosemberg", role: "Especialista em Relações Raciais", org: "CEERT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: juliaRosembergImg },
+  { name: "Jennyffer Bekoy Tupinambá", role: "Co-fundadora", org: "Bnd Digital", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: jennyfferTupinambaImg },
 ];
 
 const containerVariants = {
