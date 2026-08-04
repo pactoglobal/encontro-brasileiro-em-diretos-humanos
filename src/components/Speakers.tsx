@@ -14,6 +14,8 @@ import reinaldoImg from "../assets/painelistas/reinaldo-bulgarelli.jpg";
 import margarethImg from "../assets/painelistas/margareth-goldenberg.jpg";
 import sueImg from "../assets/painelistas/sue-wolter-vianna.jpg";
 import miguelImg from "../assets/painelistas/miguel-castro.jpg";
+import marcioImg from "../assets/painelistas/marcio-rufino.jpg";
+import marianaImg from "../assets/painelistas/mariana-rocha.jpg";
 
 type Speaker = {
   name: string;
@@ -42,6 +44,8 @@ const SPEAKERS: Speaker[] = [
   { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam — Centro CER", org: "OCDE", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: miguelImg },
   { name: "Hernán Coronado", role: "Especialista Regional", org: "OIT", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)", photo: hernanImg },
   { name: "Andreia Louback", role: "Representante", org: "CBJC", accent: "#CC2222", bg: "rgba(204,34,34,0.06)" },
+  { name: "Mariana Rocha", role: "Representante", org: "Vale", accent: "#E05A3A", bg: "rgba(224,90,58,0.06)", photo: marianaImg },
+  { name: "Márcio Rufino", role: "Gerente de Sistemas e Dados", org: "Pacto Global – Rede Brasil", accent: "#38BDF8", bg: "rgba(56,189,248,0.06)", photo: marcioImg },
   { name: "Thalita Silva", role: "Defensora Pública", org: "Estado de São Paulo", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: thalitaImg },
   { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: reinaldoImg },
   { name: "Margareth Goldenberg", role: "Diretora Executiva", org: "Movimento Mulher 360", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: margarethImg },

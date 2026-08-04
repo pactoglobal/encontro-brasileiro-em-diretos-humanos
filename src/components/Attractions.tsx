@@ -25,6 +25,8 @@ import hernan from "../assets/painelistas/hernan-coronado.jpg";
 import reinaldo from "../assets/painelistas/reinaldo-bulgarelli.jpg";
 import margareth from "../assets/painelistas/margareth-goldenberg.jpg";
 import sue from "../assets/painelistas/sue-wolter-vianna.jpg";
+import marcio from "../assets/painelistas/marcio-rufino.jpg";
+import mariana from "../assets/painelistas/mariana-rocha.jpg";
 
 type Confirmado = {
   name: string;
@@ -64,6 +66,8 @@ const CONFIRMADOS: Confirmado[] = [
   { name: "Reinaldo Bulgarelli", role: "Secretário Executivo", org: "Fórum de Empresas e Direitos LGBTI+", photo: reinaldo, accent: MAGENTA },
   { name: "Margareth Goldenberg", role: "Diretora Executiva", org: "Movimento Mulher 360", photo: margareth, accent: GREEN },
   { name: "Sue Wolter Vianna", role: "Gerente de Riscos Sociais e Direitos Humanos", org: "Petrobras", photo: sue, accent: CORAL },
+  { name: "Mariana Rocha", role: "Representante", org: "Vale", photo: mariana, accent: MAGENTA },
+  { name: "Márcio Rufino", role: "Gerente de Sistemas e Dados", org: "Pacto Global da ONU — Rede Brasil", photo: marcio, accent: BLUE },
 ];
 
 function ConfirmadoCard({ person, index }: { person: Confirmado; index: number }) {

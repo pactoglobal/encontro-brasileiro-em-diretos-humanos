@@ -42,6 +42,8 @@ import pMargareth from "../assets/painelistas/margareth-goldenberg.jpg";
 import pHernan from "../assets/painelistas/hernan-coronado.jpg";
 import pGabriela from "../assets/painelistas/gabriela-almeida.jpg";
 import pMiguel from "../assets/painelistas/miguel-castro.jpg";
+import pMarcio from "../assets/painelistas/marcio-rufino.jpg";
+import pMariana from "../assets/painelistas/mariana-rocha.jpg";
 
 // Atrações Artísticas e Culturais
 import pCurumins from "../assets/atracoes/banda-dos-curumins.jpg";
@@ -88,6 +90,8 @@ const SPEAKER_PHOTOS: Record<string, string> = {
   "miguel castro": pMiguel,
   "miguel castro riberos": pMiguel,
   "miguel castro-riberos": pMiguel,
+  "marcio rufino": pMarcio,
+  "mariana rocha": pMariana,
 };
 
 function photoFor(name: string): string | undefined {
@@ -233,6 +237,7 @@ const TARDE_GRANDE_OTELO: AgendaItem[] = [
       { name: "João Marcos Pires Camargo", role: "Diretor de Política e Planejamento Mineral — MME" },
       { name: "Gilson Camboim", role: "Coordenador Nacional de Cooperativismo Mineral OCB / Presidente Fecomin-MT" },
       { name: "Andreia Louback", role: "CBJC — Centro Brasileiro de Justiça Climática" },
+      { name: "Mariana Rocha", role: "Vale" },
       { name: "Miguel Castro-Riberos", role: "Ponto Focal Latam, Centro CER — OCDE" },
     ],
     mediator: { name: "Simone Rocha", role: "Sócia da ERM América Latina — Direitos Humanos e Impacto Social" },
