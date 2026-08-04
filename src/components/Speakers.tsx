@@ -8,7 +8,6 @@ import josefaImg from "../assets/painelistas/josefa-camara.jpg";
 import gilsonImg from "../assets/painelistas/gilson-camboim.jpg";
 import gabrielaImg from "../assets/painelistas/gabriela-almeida.jpg";
 import thalitaImg from "../assets/painelistas/thalita-silva.jpg";
-import adrianaImg from "../assets/painelistas/adriana-marcolino.jpg";
 import hernanImg from "../assets/painelistas/hernan-coronado.jpg";
 import reinaldoImg from "../assets/painelistas/reinaldo-bulgarelli.jpg";
 import margarethImg from "../assets/painelistas/margareth-goldenberg.jpg";
@@ -48,7 +47,6 @@ const SPEAKERS: Speaker[] = [
   { name: "Fernanda Hopenhaym", role: "Membro", org: "UN Working Group on Business and Human Rights", accent: "#E8187A", bg: "rgba(232,24,122,0.06)" },
   { name: "Vinicius Pinheiro", role: "Diretor", org: "OIT no Brasil", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },
   { name: "Paula Berrutti", role: "Representante", org: "ACNUDH", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)" },
-  { name: "Adriana Marcolino", role: "Diretora Técnica", org: "DIEESE", accent: "#7B2D1E", bg: "rgba(123,45,30,0.06)", photo: adrianaImg },
   { name: "Camila Zelezoglo", role: "Representante", org: "ABIT", accent: "#CC2222", bg: "rgba(204,34,34,0.06)", photo: camilaImg },
   { name: "Jandyra Uehara", role: "Representante", org: "CUT", accent: "#E8187A", bg: "rgba(232,24,122,0.06)", photo: jandyraImg },
   { name: "Julia Neiva", role: "Diretora", org: "Conectas", accent: "#4A8C3F", bg: "rgba(74,140,63,0.06)" },

@@ -196,7 +196,6 @@ const MANHA_GRANDE_OTELO: AgendaItem[] = [
     speakers: [
       { name: "Fernanda Hopenhaym", role: "Membro do UN Working Group on Business and Human Rights (Vídeo)" },
       { name: "Flavia Scabin", role: "Diretora do FGV CeDHE" },
-      { name: "Adriana Marcolino", role: "Diretora Técnica do DIEESE" },
       { name: "Camila Zelezoglo", role: "Gerente de Sustentabilidade e Inovação — ABIT" },
     ],
     mediator: { name: "Edilene Lopes", role: "Jornalista CNN" },
